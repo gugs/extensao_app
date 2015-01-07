@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="app_name">MeuRebanho</string>
+    
+    <string name="app_full_name">com.timsoft.meurebanho</string>
+    
+    <string name="btn_fazendas">Fazendas</string>
+    <string name="btn_salvar">Salvar</string>
+    <string name="fazenda_hint">Nome da Fazenda</string>
+    
+    <color name="background">#FFFFFF</color>
+    <string name="action_settings">Configurações</string>
+    <string name="menu_settings">Configurações</string>
+
+</resources>

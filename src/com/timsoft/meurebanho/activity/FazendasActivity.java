@@ -45,10 +45,10 @@ public class FazendasActivity extends Activity {
     	
     	fazendaDatasource.open();
     	int id = input.getText().toString().toUpperCase(Locale.US).hashCode();
-    	if(fazendaDatasource.getFazenda(id) != null) {
+    	if(fazendaDatasource.get(id) != null) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		builder.setTitle("Erro");
-            builder.setMessage("JÃ¡ existe fazenda com este nome!");
+            builder.setMessage("Já existe fazenda com este nome!");
 			builder.setPositiveButton("Ok",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface arg0, int arg1) {
@@ -60,7 +60,7 @@ public class FazendasActivity extends Activity {
 	        alerta.show();
     	} else {
         	Fazenda f = new Fazenda(id, input.getText().toString());
-    		fazendaDatasource.createFazenda(f);
+    		fazendaDatasource.create(f);
     	}
 		fazendaDatasource.close();
     }

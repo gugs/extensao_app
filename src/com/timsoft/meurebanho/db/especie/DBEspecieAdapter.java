@@ -10,9 +10,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.timsoft.meurebanho.db.DBAdapterInterface;
 import com.timsoft.meurebanho.model.Especie;
 
-public class DBEspecieAdapter {
+public class DBEspecieAdapter implements DBAdapterInterface<Especie> {
 	
 	private static final String LOG_TAG = "DBEspecieAdapter";
 	
@@ -40,44 +41,44 @@ public class DBEspecieAdapter {
 		dbEspecieHelper.close();
 	}
 
-	public Especie createEspecie(Especie Especie) {
+	public Especie create(Especie Especie) {
 		Log.d(LOG_TAG, "Incluindo Especie: " + Especie.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBEspecieHelper.ID, Especie.getId());
 		values.put(DBEspecieHelper.DESCRICAO, Especie.getDescricao());
 		database.insert(DBEspecieHelper.TABLE_NAME, null, values);
 
-		return getEspecie(Especie.getId());
+		return get(Especie.getId());
 	}
 
-	public void deleteEspecie(int idEspecie) {
+	public void delete(int idEspecie) {
 		Log.d(LOG_TAG, "Excluindo Especie: " + idEspecie);
 		database.delete(DBEspecieHelper.TABLE_NAME, DBEspecieHelper.ID + " = " + idEspecie, null);
 	}
 	
-	public void deleteEspecies() {
+	public void clear() {
 		Log.d(LOG_TAG, "Excluindo todas Especies");
 		database.delete(DBEspecieHelper.TABLE_NAME, null, null);
 	}
 
-	private Especie cursorToEspecie(Cursor cursor) {
+	public Especie cursorTo(Cursor cursor) {
 		Especie Especie = new Especie(cursor.getLong(0), cursor.getString(1));
 		return Especie;
 	}
 	
-	public List<Especie> getEspecies() {
+	public List<Especie> list() {
 		Log.d(LOG_TAG, "Obtendo Especies");
 		List<Especie> listaEspecie = new ArrayList<Especie>();
 		Cursor cursor = database.rawQuery("select * from " + DBEspecieHelper.TABLE_NAME + " order by " + DBEspecieHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
-	        	listaEspecie.add(cursorToEspecie(cursor));
+	        	listaEspecie.add(cursorTo(cursor));
 	        } while (cursor.moveToNext());
 		}
 		return listaEspecie;
 	}
 
-	public Especie getEspecie(long idEspecie) {
+	public Especie get(long idEspecie) {
 		Log.d(LOG_TAG, "Obtendo Especie: " + idEspecie);
 		String query = "select " +
 				DBEspecieHelper.TABLE_NAME + "." + DBEspecieHelper.ID + ", " +
@@ -93,7 +94,7 @@ public class DBEspecieAdapter {
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {
-			return cursorToEspecie(cursor);
+			return cursorTo(cursor);
 		}
 		return null;
 	}

@@ -10,9 +10,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.timsoft.meurebanho.db.DBAdapterInterface;
 import com.timsoft.meurebanho.model.Pasto;
 
-public class DBPastoAdapter {
+public class DBPastoAdapter implements DBAdapterInterface<Pasto> {
 	
 	private static final String LOG_TAG = "DBPastoAdapter";
 	
@@ -40,44 +41,44 @@ public class DBPastoAdapter {
 		dbPastoHelper.close();
 	}
 
-	public Pasto createPasto(Pasto pasto) {
+	public Pasto create(Pasto pasto) {
 		Log.d(LOG_TAG, "Incluindo Pasto: " + pasto.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBPastoHelper.ID, pasto.getId());
 		values.put(DBPastoHelper.DESCRICAO, pasto.getDescricao());
 		database.insert(DBPastoHelper.TABLE_NAME, null, values);
 
-		return getPasto(pasto.getId());
+		return get(pasto.getId());
 	}
 
-	public void deletePasto(int idPasto) {
+	public void delete(int idPasto) {
 		Log.d(LOG_TAG, "Excluindo Pasto: " + idPasto);
 		database.delete(DBPastoHelper.TABLE_NAME, DBPastoHelper.ID + " = " + idPasto, null);
 	}
 	
-	public void deletePastos() {
+	public void clear() {
 		Log.d(LOG_TAG, "Excluindo todas Pastos");
 		database.delete(DBPastoHelper.TABLE_NAME, null, null);
 	}
 
-	private Pasto cursorToPasto(Cursor cursor) {
+	public Pasto cursorTo(Cursor cursor) {
 		Pasto pasto = new Pasto(cursor.getLong(0), cursor.getString(1));
 		return pasto;
 	}
 	
-	public List<Pasto> getPastos() {
+	public List<Pasto> list() {
 		Log.d(LOG_TAG, "Obtendo Pastos");
 		List<Pasto> listaPasto = new ArrayList<Pasto>();
 		Cursor cursor = database.rawQuery("select * from " + DBPastoHelper.TABLE_NAME + " order by " + DBPastoHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
-	        	listaPasto.add(cursorToPasto(cursor));
+	        	listaPasto.add(cursorTo(cursor));
 	        } while (cursor.moveToNext());
 		}
 		return listaPasto;
 	}
 
-	public Pasto getPasto(long idPasto) {
+	public Pasto get(long idPasto) {
 		Log.d(LOG_TAG, "Obtendo Pasto: " + idPasto);
 		String query = "select " +
 				DBPastoHelper.TABLE_NAME + "." + DBPastoHelper.ID + ", " +
@@ -93,7 +94,7 @@ public class DBPastoAdapter {
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {
-			return cursorToPasto(cursor);
+			return cursorTo(cursor);
 		}
 		return null;
 	}

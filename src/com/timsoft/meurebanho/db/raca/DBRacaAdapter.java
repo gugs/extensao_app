@@ -10,9 +10,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.timsoft.meurebanho.db.DBAdapterInterface;
 import com.timsoft.meurebanho.model.Raca;
 
-public class DBRacaAdapter {
+public class DBRacaAdapter implements DBAdapterInterface<Raca> {
 	
 	private static final String LOG_TAG = "DBRacaAdapter";
 	
@@ -40,44 +41,44 @@ public class DBRacaAdapter {
 		dbRacaHelper.close();
 	}
 
-	public Raca createRaca(Raca raca) {
+	public Raca create(Raca raca) {
 		Log.d(LOG_TAG, "Incluindo Raca: " + raca.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBRacaHelper.ID, raca.getId());
 		values.put(DBRacaHelper.DESCRICAO, raca.getDescricao());
 		database.insert(DBRacaHelper.TABLE_NAME, null, values);
 
-		return getRaca(raca.getId());
+		return get(raca.getId());
 	}
 
-	public void deleteRaca(int idRaca) {
+	public void delete(int idRaca) {
 		Log.d(LOG_TAG, "Excluindo Raca: " + idRaca);
 		database.delete(DBRacaHelper.TABLE_NAME, DBRacaHelper.ID + " = " + idRaca, null);
 	}
 	
-	public void deleteRacas() {
+	public void clear() {
 		Log.d(LOG_TAG, "Excluindo todas Racas");
 		database.delete(DBRacaHelper.TABLE_NAME, null, null);
 	}
 
-	private Raca cursorToRaca(Cursor cursor) {
+	public Raca cursorTo(Cursor cursor) {
 		Raca raca = new Raca(cursor.getLong(0), cursor.getString(1));
 		return raca;
 	}
 	
-	public List<Raca> getRacas() {
+	public List<Raca> list() {
 		Log.d(LOG_TAG, "Obtendo Racas");
 		List<Raca> listaRaca = new ArrayList<Raca>();
 		Cursor cursor = database.rawQuery("select * from " + DBRacaHelper.TABLE_NAME + " order by " + DBRacaHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
-	        	listaRaca.add(cursorToRaca(cursor));
+	        	listaRaca.add(cursorTo(cursor));
 	        } while (cursor.moveToNext());
 		}
 		return listaRaca;
 	}
 
-	public Raca getRaca(long idRaca) {
+	public Raca get(long idRaca) {
 		Log.d(LOG_TAG, "Obtendo Raca: " + idRaca);
 		String query = "select " +
 				DBRacaHelper.TABLE_NAME + "." + DBRacaHelper.ID + ", " +
@@ -93,7 +94,7 @@ public class DBRacaAdapter {
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {
-			return cursorToRaca(cursor);
+			return cursorTo(cursor);
 		}
 		return null;
 	}

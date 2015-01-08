@@ -10,9 +10,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.timsoft.meurebanho.db.DBAdapterInterface;
 import com.timsoft.meurebanho.model.Fazenda;
 
-public class DBFazendaAdapter {
+public class DBFazendaAdapter implements DBAdapterInterface<Fazenda>{
 	
 	private static final String LOG_TAG = "DBFazendaAdapter";
 	
@@ -48,44 +49,44 @@ public class DBFazendaAdapter {
 		dbFazendaHelper.close();
 	}
 
-	public Fazenda createFazenda(Fazenda fazenda) {
+	public Fazenda create(Fazenda fazenda) {
 		Log.d(LOG_TAG, "Incluindo fazenda: " + fazenda.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBFazendaHelper.ID, fazenda.getId());
 		values.put(DBFazendaHelper.DESCRICAO, fazenda.getDescricao());
 		database.insert(DBFazendaHelper.TABLE_NAME, null, values);
 
-		return getFazenda(fazenda.getId());
+		return get(fazenda.getId());
 	}
 
-	public void deleteFazenda(int idFazenda) {
+	public void delete(int idFazenda) {
 		Log.d(LOG_TAG, "Excluindo fazenda: " + idFazenda);
 		database.delete(DBFazendaHelper.TABLE_NAME, DBFazendaHelper.ID + " = " + idFazenda, null);
 	}
 	
-	public void deleteFazendas() {
+	public void clear() {
 		Log.d(LOG_TAG, "Excluindo todas fazendas");
 		database.delete(DBFazendaHelper.TABLE_NAME, null, null);
 	}
 
-	private Fazenda cursorToFazenda(Cursor cursor) {
+	public Fazenda cursorTo(Cursor cursor) {
 		Fazenda fazenda = new Fazenda(cursor.getLong(0), cursor.getString(1));
 		return fazenda;
 	}
 	
-	public List<Fazenda> getFazendas() {
+	public List<Fazenda> list() {
 		Log.d(LOG_TAG, "Obtendo fazendas");
 		List<Fazenda> listaFazenda = new ArrayList<Fazenda>();
 		Cursor cursor = database.rawQuery("select * from " + DBFazendaHelper.TABLE_NAME + " order by " + DBFazendaHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
-	        	listaFazenda.add(cursorToFazenda(cursor));
+	        	listaFazenda.add(cursorTo(cursor));
 	        } while (cursor.moveToNext());
 		}
 		return listaFazenda;
 	}
 
-	public Fazenda getFazenda(long idFazenda) {
+	public Fazenda get(long idFazenda) {
 		Log.d(LOG_TAG, "Obtendo fazenda: " + idFazenda);
 		String query = "select " +
 				DBFazendaHelper.TABLE_NAME + "." + DBFazendaHelper.ID + ", " +
@@ -101,13 +102,13 @@ public class DBFazendaAdapter {
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {
-			return cursorToFazenda(cursor);
+			return cursorTo(cursor);
 		}
 		return null;
 	}
 	
 	public void forceDrop(){
-		Log.d(LOG_TAG, "ForÃ§ando Drop");
+		Log.d(LOG_TAG, "Forçando Drop");
 		database.execSQL("DROP TABLE IF EXISTS " + DBFazendaHelper.TABLE_NAME);
 	}
 }

@@ -10,9 +10,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.timsoft.meurebanho.db.DBAdapterInterface;
 import com.timsoft.meurebanho.model.Lote;
 
-public class DBLoteAdapter {
+public class DBLoteAdapter implements DBAdapterInterface<Lote> {
 	
 	private static final String LOG_TAG = "DBLoteAdapter";
 	
@@ -40,44 +41,44 @@ public class DBLoteAdapter {
 		dbLoteHelper.close();
 	}
 
-	public Lote createLote(Lote lote) {
+	public Lote create(Lote lote) {
 		Log.d(LOG_TAG, "Incluindo Lote: " + lote.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBLoteHelper.ID, lote.getId());
 		values.put(DBLoteHelper.DESCRICAO, lote.getDescricao());
 		database.insert(DBLoteHelper.TABLE_NAME, null, values);
 
-		return getLote(lote.getId());
+		return get(lote.getId());
 	}
 
-	public void deleteLote(int idLote) {
+	public void delete(int idLote) {
 		Log.d(LOG_TAG, "Excluindo Lote: " + idLote);
 		database.delete(DBLoteHelper.TABLE_NAME, DBLoteHelper.ID + " = " + idLote, null);
 	}
 	
-	public void deleteLotes() {
+	public void clear() {
 		Log.d(LOG_TAG, "Excluindo todas Lotes");
 		database.delete(DBLoteHelper.TABLE_NAME, null, null);
 	}
 
-	private Lote cursorToLote(Cursor cursor) {
+	public Lote cursorTo(Cursor cursor) {
 		Lote Lote = new Lote(cursor.getLong(0), cursor.getString(1));
 		return Lote;
 	}
 	
-	public List<Lote> getLotes() {
+	public List<Lote> list() {
 		Log.d(LOG_TAG, "Obtendo Lotes");
 		List<Lote> listaLote = new ArrayList<Lote>();
 		Cursor cursor = database.rawQuery("select * from " + DBLoteHelper.TABLE_NAME + " order by " + DBLoteHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
-	        	listaLote.add(cursorToLote(cursor));
+	        	listaLote.add(cursorTo(cursor));
 	        } while (cursor.moveToNext());
 		}
 		return listaLote;
 	}
 
-	public Lote getLote(long idLote) {
+	public Lote get(long idLote) {
 		Log.d(LOG_TAG, "Obtendo Lote: " + idLote);
 		String query = "select " +
 				DBLoteHelper.TABLE_NAME + "." + DBLoteHelper.ID + ", " +
@@ -93,7 +94,7 @@ public class DBLoteAdapter {
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {
-			return cursorToLote(cursor);
+			return cursorTo(cursor);
 		}
 		return null;
 	}

@@ -3,9 +3,9 @@ package com.timsoft.meurebanho.db.raca;
 import android.content.Context;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBMeuRebanhoHelper;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 
-public class DBRacaHelper extends DBMeuRebanhoHelper{
+public class DBRacaHelper extends DBMeuRebanhoHelperAbstract{
 	
 	private static final String LOG_TAG = "DBRacaHelper";
 	
@@ -21,6 +21,16 @@ public class DBRacaHelper extends DBMeuRebanhoHelper{
 	public DBRacaHelper(Context context) {
 		super(context);
 		Log.d(LOG_TAG, "Construindo DBRacaHelper");
+	}
+	
+	@Override
+	public String getTableCreateSQL() {
+		return TABLE_CREATE;
+	}
+	
+	@Override
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 
 }

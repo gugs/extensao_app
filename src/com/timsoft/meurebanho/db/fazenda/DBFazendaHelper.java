@@ -3,9 +3,9 @@ package com.timsoft.meurebanho.db.fazenda;
 import android.content.Context;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBMeuRebanhoHelper;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 
-public class DBFazendaHelper extends DBMeuRebanhoHelper{
+public class DBFazendaHelper extends DBMeuRebanhoHelperAbstract{
 	
 	private static final String LOG_TAG = "DBFazendaHelper";
 	
@@ -21,6 +21,16 @@ public class DBFazendaHelper extends DBMeuRebanhoHelper{
 	public DBFazendaHelper(Context context) {
 		super(context);
 		Log.d(LOG_TAG, "Construindo DBFazendaHelper");
+	}
+	
+	@Override
+	public String getTableCreateSQL() {
+		return TABLE_CREATE;
+	}
+	
+	@Override
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 
 }

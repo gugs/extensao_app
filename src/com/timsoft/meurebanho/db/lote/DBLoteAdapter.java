@@ -6,18 +6,15 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBAdapterInterface;
+import com.timsoft.meurebanho.db.DBAdapterAbstract;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 import com.timsoft.meurebanho.model.Lote;
 
-public class DBLoteAdapter implements DBAdapterInterface<Lote> {
+public class DBLoteAdapter extends DBAdapterAbstract<Lote> {
 	
 	private static final String LOG_TAG = "DBLoteAdapter";
-	
-	protected static SQLiteDatabase database;
 	
 	private static DBLoteHelper dbLoteHelper;
 	private static DBLoteAdapter mInstance;
@@ -31,14 +28,6 @@ public class DBLoteAdapter implements DBAdapterInterface<Lote> {
 			mInstance = new DBLoteAdapter(context);
 		}
 		return mInstance;
-	}
-
-	public void open() throws SQLException {
-		database = dbLoteHelper.getWritableDatabase();
-	}
-
-	public void close() {
-		dbLoteHelper.close();
 	}
 
 	public Lote create(Lote lote) {
@@ -56,13 +45,8 @@ public class DBLoteAdapter implements DBAdapterInterface<Lote> {
 		database.delete(DBLoteHelper.TABLE_NAME, DBLoteHelper.ID + " = " + idLote, null);
 	}
 	
-	public void clear() {
-		Log.d(LOG_TAG, "Excluindo todas Lotes");
-		database.delete(DBLoteHelper.TABLE_NAME, null, null);
-	}
-
 	public Lote cursorTo(Cursor cursor) {
-		Lote Lote = new Lote(cursor.getLong(0), cursor.getString(1));
+		Lote Lote = new Lote(cursor.getInt(0), cursor.getString(1));
 		return Lote;
 	}
 	
@@ -89,8 +73,6 @@ public class DBLoteAdapter implements DBAdapterInterface<Lote> {
 				" where " +
 				DBLoteHelper.TABLE_NAME + "." + DBLoteHelper.ID + " = " + idLote;
 				
-//		Log.d(LOG_TAG, "Query: " + query);
-		
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {
@@ -99,8 +81,8 @@ public class DBLoteAdapter implements DBAdapterInterface<Lote> {
 		return null;
 	}
 	
-	public void forceDrop(){
-		Log.d(LOG_TAG, "ForÃ§ando Drop");
-		database.execSQL("DROP TABLE IF EXISTS " + DBLoteHelper.TABLE_NAME);
+	@Override
+	protected DBMeuRebanhoHelperAbstract getHelper() {
+		return dbLoteHelper;
 	}
 }

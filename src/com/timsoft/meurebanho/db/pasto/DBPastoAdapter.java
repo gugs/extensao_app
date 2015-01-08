@@ -6,18 +6,15 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBAdapterInterface;
+import com.timsoft.meurebanho.db.DBAdapterAbstract;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 import com.timsoft.meurebanho.model.Pasto;
 
-public class DBPastoAdapter implements DBAdapterInterface<Pasto> {
+public class DBPastoAdapter extends DBAdapterAbstract<Pasto> {
 	
 	private static final String LOG_TAG = "DBPastoAdapter";
-	
-	protected static SQLiteDatabase database;
 	
 	private static DBPastoHelper dbPastoHelper;
 	private static DBPastoAdapter mInstance;
@@ -31,14 +28,6 @@ public class DBPastoAdapter implements DBAdapterInterface<Pasto> {
 			mInstance = new DBPastoAdapter(context);
 		}
 		return mInstance;
-	}
-
-	public void open() throws SQLException {
-		database = dbPastoHelper.getWritableDatabase();
-	}
-
-	public void close() {
-		dbPastoHelper.close();
 	}
 
 	public Pasto create(Pasto pasto) {
@@ -56,13 +45,8 @@ public class DBPastoAdapter implements DBAdapterInterface<Pasto> {
 		database.delete(DBPastoHelper.TABLE_NAME, DBPastoHelper.ID + " = " + idPasto, null);
 	}
 	
-	public void clear() {
-		Log.d(LOG_TAG, "Excluindo todas Pastos");
-		database.delete(DBPastoHelper.TABLE_NAME, null, null);
-	}
-
 	public Pasto cursorTo(Cursor cursor) {
-		Pasto pasto = new Pasto(cursor.getLong(0), cursor.getString(1));
+		Pasto pasto = new Pasto(cursor.getInt(0), cursor.getString(1));
 		return pasto;
 	}
 	
@@ -99,8 +83,8 @@ public class DBPastoAdapter implements DBAdapterInterface<Pasto> {
 		return null;
 	}
 	
-	public void forceDrop(){
-		Log.d(LOG_TAG, "ForÃ§ando Drop");
-		database.execSQL("DROP TABLE IF EXISTS " + DBPastoHelper.TABLE_NAME);
+	@Override
+	protected DBMeuRebanhoHelperAbstract getHelper() {
+		return dbPastoHelper;
 	}
 }

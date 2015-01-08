@@ -12,15 +12,18 @@ import android.widget.Button;
 
 import com.timsoft.meurebanho.BuildConfig;
 import com.timsoft.meurebanho.R;
-import com.timsoft.meurebanho.db.DBAdapterInterface;
+import com.timsoft.meurebanho.db.DBAdapterAbstract;
 import com.timsoft.meurebanho.db.especie.DBEspecieAdapter;
 import com.timsoft.meurebanho.db.fazenda.DBFazendaAdapter;
 import com.timsoft.meurebanho.db.lote.DBLoteAdapter;
 import com.timsoft.meurebanho.db.pasto.DBPastoAdapter;
 import com.timsoft.meurebanho.db.raca.DBRacaAdapter;
 import com.timsoft.meurebanho.model.Especie;
+import com.timsoft.meurebanho.model.Lote;
+import com.timsoft.meurebanho.model.Pasto;
+import com.timsoft.meurebanho.model.Raca;
 
-public class InicioActivity extends Activity {
+public class MainActivity extends Activity {
 
 	@SuppressWarnings("unused")
 	private static final String LOG_TAG = "InicioActivity";
@@ -28,7 +31,7 @@ public class InicioActivity extends Activity {
 	private static final String FIRST_RUN = "firstRun";
 
 	@SuppressWarnings("rawtypes")
-	private List<DBAdapterInterface> dbAdapters;
+	private List<DBAdapterAbstract> dbAdapters;
 	
 	private DBEspecieAdapter especieDatasource;
 	private DBFazendaAdapter fazendaDatasource;
@@ -50,7 +53,7 @@ public class InicioActivity extends Activity {
 		pastoDatasource = DBPastoAdapter.getInstance(this);
 		racaDatasource = DBRacaAdapter.getInstance(this);
 		
-		dbAdapters = new ArrayList<DBAdapterInterface>();
+		dbAdapters = new ArrayList<DBAdapterAbstract>();
 		dbAdapters.add(especieDatasource);
 		dbAdapters.add(fazendaDatasource);
 		dbAdapters.add(loteDatasource);
@@ -59,7 +62,8 @@ public class InicioActivity extends Activity {
 		
 		//Limpa as bases se estiver em modo DEBUG
 		if(BuildConfig.DEBUG) {
-			for(DBAdapterInterface dbAdapter : dbAdapters) {
+			
+			for(DBAdapterAbstract dbAdapter : dbAdapters) {
 				dbAdapter.open();
 				dbAdapter.clear();
 				dbAdapter.close();
@@ -111,10 +115,24 @@ public class InicioActivity extends Activity {
 		
 		if(prefs.getBoolean(FIRST_RUN, true) || BuildConfig.DEBUG) {
 			especieDatasource.open();
-			for(String e : Especie.especiesDefault) {
-				especieDatasource.create(new Especie(e.hashCode(), e));
+			for(Especie e : Especie.getEspeciesDefault()) {
+				especieDatasource.create(e);
 			}
 			especieDatasource.close();
+			
+			loteDatasource.open();
+			loteDatasource.create(new Lote(1, "Lote1"));
+			loteDatasource.close();
+			
+			pastoDatasource.open();
+			pastoDatasource.create(new Pasto(1, "Pasto1"));
+			pastoDatasource.close();
+			
+			racaDatasource.open();
+			for(Raca r : Raca.getRacasDefault()) {
+				racaDatasource.create(r);
+			}
+			racaDatasource.close();
 			
 			//Carregar valores default em tabelas
 			prefs.edit().putBoolean(FIRST_RUN, false).commit();

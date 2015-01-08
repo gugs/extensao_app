@@ -3,9 +3,9 @@ package com.timsoft.meurebanho.db.lote;
 import android.content.Context;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBMeuRebanhoHelper;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 
-public class DBLoteHelper extends DBMeuRebanhoHelper{
+public class DBLoteHelper extends DBMeuRebanhoHelperAbstract{
 	
 	private static final String LOG_TAG = "DBLoteHelper";
 	
@@ -21,6 +21,16 @@ public class DBLoteHelper extends DBMeuRebanhoHelper{
 	public DBLoteHelper(Context context) {
 		super(context);
 		Log.d(LOG_TAG, "Construindo DBLoteHelper");
+	}
+	
+	@Override
+	public String getTableCreateSQL() {
+		return TABLE_CREATE;
+	}
+	
+	@Override
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 
 }

@@ -6,18 +6,15 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBAdapterInterface;
+import com.timsoft.meurebanho.db.DBAdapterAbstract;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 import com.timsoft.meurebanho.model.Raca;
 
-public class DBRacaAdapter implements DBAdapterInterface<Raca> {
+public class DBRacaAdapter extends DBAdapterAbstract<Raca> {
 	
 	private static final String LOG_TAG = "DBRacaAdapter";
-	
-	protected static SQLiteDatabase database;
 	
 	private static DBRacaHelper dbRacaHelper;
 	private static DBRacaAdapter mInstance;
@@ -31,14 +28,6 @@ public class DBRacaAdapter implements DBAdapterInterface<Raca> {
 			mInstance = new DBRacaAdapter(context);
 		}
 		return mInstance;
-	}
-
-	public void open() throws SQLException {
-		database = dbRacaHelper.getWritableDatabase();
-	}
-
-	public void close() {
-		dbRacaHelper.close();
 	}
 
 	public Raca create(Raca raca) {
@@ -56,13 +45,8 @@ public class DBRacaAdapter implements DBAdapterInterface<Raca> {
 		database.delete(DBRacaHelper.TABLE_NAME, DBRacaHelper.ID + " = " + idRaca, null);
 	}
 	
-	public void clear() {
-		Log.d(LOG_TAG, "Excluindo todas Racas");
-		database.delete(DBRacaHelper.TABLE_NAME, null, null);
-	}
-
 	public Raca cursorTo(Cursor cursor) {
-		Raca raca = new Raca(cursor.getLong(0), cursor.getString(1));
+		Raca raca = new Raca(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
 		return raca;
 	}
 	
@@ -89,8 +73,6 @@ public class DBRacaAdapter implements DBAdapterInterface<Raca> {
 				" where " +
 				DBRacaHelper.TABLE_NAME + "." + DBRacaHelper.ID + " = " + idRaca;
 				
-//		Log.d(LOG_TAG, "Query: " + query);
-		
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {
@@ -99,8 +81,8 @@ public class DBRacaAdapter implements DBAdapterInterface<Raca> {
 		return null;
 	}
 	
-	public void forceDrop(){
-		Log.d(LOG_TAG, "ForÃ§ando Drop");
-		database.execSQL("DROP TABLE IF EXISTS " + DBRacaHelper.TABLE_NAME);
+	@Override
+	protected DBMeuRebanhoHelperAbstract getHelper() {
+		return dbRacaHelper;
 	}
 }

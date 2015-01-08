@@ -6,30 +6,19 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBAdapterInterface;
+import com.timsoft.meurebanho.db.DBAdapterAbstract;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 import com.timsoft.meurebanho.model.Fazenda;
 
-public class DBFazendaAdapter implements DBAdapterInterface<Fazenda>{
+public class DBFazendaAdapter extends DBAdapterAbstract<Fazenda>{
 	
 	private static final String LOG_TAG = "DBFazendaAdapter";
 	
-	private static SQLiteDatabase database;
 	private static DBFazendaHelper dbFazendaHelper;
 	private static DBFazendaAdapter mInstance;
 	
-//	private String[] allColumns = { 
-//			DBNoticiaHelper.ID, 
-//			DBNoticiaHelper.ID_CATEGORIA,
-//			DBNoticiaHelper.TITULO, 
-//			DBNoticiaHelper.LINK, 
-//			DBNoticiaHelper.DESCRICAO, 
-//			DBNoticiaHelper.ID_ORIGEM,
-//			DBNoticiaHelper.DATA_PUBLICACAO };
-
 	private DBFazendaAdapter(Context context) {
 		dbFazendaHelper = new DBFazendaHelper(context);
 	}
@@ -39,14 +28,6 @@ public class DBFazendaAdapter implements DBAdapterInterface<Fazenda>{
 			mInstance = new DBFazendaAdapter(context);
 		}
 		return mInstance;
-	}
-
-	public void open() throws SQLException {
-		database = dbFazendaHelper.getWritableDatabase();
-	}
-
-	public void close() {
-		dbFazendaHelper.close();
 	}
 
 	public Fazenda create(Fazenda fazenda) {
@@ -64,13 +45,8 @@ public class DBFazendaAdapter implements DBAdapterInterface<Fazenda>{
 		database.delete(DBFazendaHelper.TABLE_NAME, DBFazendaHelper.ID + " = " + idFazenda, null);
 	}
 	
-	public void clear() {
-		Log.d(LOG_TAG, "Excluindo todas fazendas");
-		database.delete(DBFazendaHelper.TABLE_NAME, null, null);
-	}
-
 	public Fazenda cursorTo(Cursor cursor) {
-		Fazenda fazenda = new Fazenda(cursor.getLong(0), cursor.getString(1));
+		Fazenda fazenda = new Fazenda(cursor.getInt(0), cursor.getString(1));
 		return fazenda;
 	}
 	
@@ -106,9 +82,9 @@ public class DBFazendaAdapter implements DBAdapterInterface<Fazenda>{
 		}
 		return null;
 	}
-	
-	public void forceDrop(){
-		Log.d(LOG_TAG, "Forçando Drop");
-		database.execSQL("DROP TABLE IF EXISTS " + DBFazendaHelper.TABLE_NAME);
+
+	@Override
+	protected DBMeuRebanhoHelperAbstract getHelper() {
+		return dbFazendaHelper;
 	}
 }

@@ -1,22 +1,22 @@
 package com.timsoft.meurebanho.model;
 
 public class IDDescricao {
-	private long id;
+	private int id;
 	private String descricao;
 	
 	public IDDescricao () {
 	}
 	
-	public IDDescricao (long id, String descricao) {
+	public IDDescricao (int id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

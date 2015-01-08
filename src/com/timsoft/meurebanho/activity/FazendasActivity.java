@@ -18,7 +18,9 @@ import com.timsoft.meurebanho.model.Fazenda;
 public class FazendasActivity extends Activity {
 
 	private static final String LOG_TAG = "FazendasActivity";
+	
 	private DBFazendaAdapter fazendaDatasource;
+	
 	private EditText input;
 	private AlertDialog alerta;
 

@@ -3,9 +3,9 @@ package com.timsoft.meurebanho.db.especie;
 import android.content.Context;
 import android.util.Log;
 
-import com.timsoft.meurebanho.db.DBMeuRebanhoHelper;
+import com.timsoft.meurebanho.db.DBMeuRebanhoHelperAbstract;
 
-public class DBEspecieHelper extends DBMeuRebanhoHelper{
+public class DBEspecieHelper extends DBMeuRebanhoHelperAbstract{
 	
 	private static final String LOG_TAG = "DBEspecieHelper";
 	
@@ -23,4 +23,13 @@ public class DBEspecieHelper extends DBMeuRebanhoHelper{
 		Log.d(LOG_TAG, "Construindo DBEspecieHelper");
 	}
 
+	@Override
+	public String getTableCreateSQL() {
+		return TABLE_CREATE;
+	}
+
+	@Override
+	public String getTableName() {
+		return TABLE_NAME;
+	}
 }

@@ -6,11 +6,11 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_event"
-        android:title="@string/events"/>
+        android:title="@string/eventos"/>
     
     <item
         android:id="@+id/action_fazendas"
-        android:title="@string/farms"
+        android:title="@string/fazendas"
         app:showAsAction="never"/>
 
 </menu>

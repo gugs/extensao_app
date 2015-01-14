@@ -30,6 +30,7 @@ public class DBPastoAdapter extends DBAdapterAbstract<Pasto> {
 		return mInstance;
 	}
 
+	@Override
 	public Pasto create(Pasto pasto) {
 		Log.d(LOG_TAG, "Incluindo Pasto: " + pasto.toString());
 		ContentValues values = new ContentValues();
@@ -40,16 +41,19 @@ public class DBPastoAdapter extends DBAdapterAbstract<Pasto> {
 		return get(pasto.getId());
 	}
 
-	public void delete(int idPasto) {
-		Log.d(LOG_TAG, "Excluindo Pasto: " + idPasto);
-		database.delete(DBPastoHelper.TABLE_NAME, DBPastoHelper.ID + " = " + idPasto, null);
+	@Override
+	public void delete(Pasto p) {
+		Log.d(LOG_TAG, "Excluindo Pasto: " + p.getId());
+		database.delete(DBPastoHelper.TABLE_NAME, DBPastoHelper.ID + " = " + p.getId(), null);
 	}
 	
+	@Override
 	public Pasto cursorTo(Cursor cursor) {
 		Pasto pasto = new Pasto(cursor.getInt(0), cursor.getString(1));
 		return pasto;
 	}
 	
+	@Override
 	public List<Pasto> list() {
 		Log.d(LOG_TAG, "Obtendo Pastos");
 		List<Pasto> listaPasto = new ArrayList<Pasto>();
@@ -62,7 +66,8 @@ public class DBPastoAdapter extends DBAdapterAbstract<Pasto> {
 		return listaPasto;
 	}
 
-	public Pasto get(long idPasto) {
+	@Override
+	public Pasto get(int idPasto) {
 		Log.d(LOG_TAG, "Obtendo Pasto: " + idPasto);
 		String query = "select " +
 				DBPastoHelper.TABLE_NAME + "." + DBPastoHelper.ID + ", " +

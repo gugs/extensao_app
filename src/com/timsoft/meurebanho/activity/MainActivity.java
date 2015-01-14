@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.timsoft.meurebanho.BuildConfig;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.db.DBAdapterAbstract;
 import com.timsoft.meurebanho.db.especie.DBEspecieAdapter;
@@ -127,7 +126,7 @@ public class MainActivity extends ActionBarActivity {
 //            }
 //        });
 		
-		final ImageButton button = (ImageButton) findViewById(R.id.button_add_cattle);
+		final ImageButton button = (ImageButton) findViewById(R.id.btn_adicionar_semovente);
 	    button.setOnClickListener(new View.OnClickListener() {
 	        public void onClick(View v) {
 	        	incluirFazenda();

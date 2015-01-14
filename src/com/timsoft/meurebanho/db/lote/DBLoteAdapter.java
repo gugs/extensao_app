@@ -30,6 +30,7 @@ public class DBLoteAdapter extends DBAdapterAbstract<Lote> {
 		return mInstance;
 	}
 
+	@Override
 	public Lote create(Lote lote) {
 		Log.d(LOG_TAG, "Incluindo Lote: " + lote.toString());
 		ContentValues values = new ContentValues();
@@ -40,16 +41,19 @@ public class DBLoteAdapter extends DBAdapterAbstract<Lote> {
 		return get(lote.getId());
 	}
 
-	public void delete(int idLote) {
-		Log.d(LOG_TAG, "Excluindo Lote: " + idLote);
-		database.delete(DBLoteHelper.TABLE_NAME, DBLoteHelper.ID + " = " + idLote, null);
+	@Override
+	public void delete(Lote l) {
+		Log.d(LOG_TAG, "Excluindo Lote: " + l.getId());
+		database.delete(DBLoteHelper.TABLE_NAME, DBLoteHelper.ID + " = " + l.getId(), null);
 	}
 	
+	@Override
 	public Lote cursorTo(Cursor cursor) {
 		Lote Lote = new Lote(cursor.getInt(0), cursor.getString(1));
 		return Lote;
 	}
 	
+	@Override
 	public List<Lote> list() {
 		Log.d(LOG_TAG, "Obtendo Lotes");
 		List<Lote> listaLote = new ArrayList<Lote>();
@@ -62,7 +66,8 @@ public class DBLoteAdapter extends DBAdapterAbstract<Lote> {
 		return listaLote;
 	}
 
-	public Lote get(long idLote) {
+	@Override
+	public Lote get(int idLote) {
 		Log.d(LOG_TAG, "Obtendo Lote: " + idLote);
 		String query = "select " +
 				DBLoteHelper.TABLE_NAME + "." + DBLoteHelper.ID + ", " +

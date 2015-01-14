@@ -30,6 +30,7 @@ public class DBFazendaAdapter extends DBAdapterAbstract<Fazenda>{
 		return mInstance;
 	}
 
+	@Override
 	public Fazenda create(Fazenda fazenda) {
 		Log.d(LOG_TAG, "Incluindo fazenda: " + fazenda.toString());
 		ContentValues values = new ContentValues();
@@ -40,16 +41,19 @@ public class DBFazendaAdapter extends DBAdapterAbstract<Fazenda>{
 		return get(fazenda.getId());
 	}
 
-	public void delete(int idFazenda) {
-		Log.d(LOG_TAG, "Excluindo fazenda: " + idFazenda);
-		database.delete(DBFazendaHelper.TABLE_NAME, DBFazendaHelper.ID + " = " + idFazenda, null);
+	@Override
+	public void delete(Fazenda f) {
+		Log.d(LOG_TAG, "Excluindo fazenda: " + f.getId());
+		database.delete(DBFazendaHelper.TABLE_NAME, DBFazendaHelper.ID + " = " + f.getId(), null);
 	}
 	
+	@Override
 	public Fazenda cursorTo(Cursor cursor) {
 		Fazenda fazenda = new Fazenda(cursor.getInt(0), cursor.getString(1));
 		return fazenda;
 	}
 	
+	@Override
 	public List<Fazenda> list() {
 		Log.d(LOG_TAG, "Obtendo fazendas");
 		List<Fazenda> listaFazenda = new ArrayList<Fazenda>();
@@ -62,7 +66,8 @@ public class DBFazendaAdapter extends DBAdapterAbstract<Fazenda>{
 		return listaFazenda;
 	}
 
-	public Fazenda get(long idFazenda) {
+	@Override
+	public Fazenda get(int idFazenda) {
 		Log.d(LOG_TAG, "Obtendo fazenda: " + idFazenda);
 		String query = "select " +
 				DBFazendaHelper.TABLE_NAME + "." + DBFazendaHelper.ID + ", " +
@@ -73,8 +78,6 @@ public class DBFazendaAdapter extends DBAdapterAbstract<Fazenda>{
 				" where " +
 				DBFazendaHelper.TABLE_NAME + "." + DBFazendaHelper.ID + " = " + idFazenda;
 				
-//		Log.d(LOG_TAG, "Query: " + query);
-		
 		Cursor cursor = database.rawQuery(query, null);
 		
 		if (cursor != null && cursor.moveToFirst()) {

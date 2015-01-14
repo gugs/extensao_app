@@ -30,6 +30,7 @@ public class DBRacaAdapter extends DBAdapterAbstract<Raca> {
 		return mInstance;
 	}
 
+	@Override
 	public Raca create(Raca raca) {
 		Log.d(LOG_TAG, "Incluindo Raca: " + raca.toString());
 		ContentValues values = new ContentValues();
@@ -41,16 +42,19 @@ public class DBRacaAdapter extends DBAdapterAbstract<Raca> {
 		return get(raca.getId());
 	}
 
-	public void delete(int idRaca) {
-		Log.d(LOG_TAG, "Excluindo Raca: " + idRaca);
-		database.delete(DBRacaHelper.TABLE_NAME, DBRacaHelper.ID + " = " + idRaca, null);
+	@Override
+	public void delete(Raca r) {
+		Log.d(LOG_TAG, "Excluindo Raca: " + r.getId());
+		database.delete(DBRacaHelper.TABLE_NAME, DBRacaHelper.ID + " = " + r.getId(), null);
 	}
 	
+	@Override
 	public Raca cursorTo(Cursor cursor) {
 		Raca raca = new Raca(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
 		return raca;
 	}
 	
+	@Override
 	public List<Raca> list() {
 		Log.d(LOG_TAG, "Obtendo Racas");
 		List<Raca> listaRaca = new ArrayList<Raca>();
@@ -63,7 +67,8 @@ public class DBRacaAdapter extends DBAdapterAbstract<Raca> {
 		return listaRaca;
 	}
 
-	public Raca get(long idRaca) {
+	@Override
+	public Raca get(int idRaca) {
 		Log.d(LOG_TAG, "Obtendo Raca: " + idRaca);
 		String query = "select " +
 				DBRacaHelper.TABLE_NAME + "." + DBRacaHelper.ID + ", " +

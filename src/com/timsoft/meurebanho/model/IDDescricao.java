@@ -1,6 +1,9 @@
 package com.timsoft.meurebanho.model;
 
-public class IDDescricao {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class IDDescricao implements Parcelable{
 	private int id;
 	private String descricao;
 	
@@ -10,6 +13,14 @@ public class IDDescricao {
 	public IDDescricao (int id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
+	}
+	
+	public IDDescricao(Parcel in) {
+		String[] data = new String[2];
+
+		in.readStringArray(data);
+		setId(Integer.parseInt(data[0]));
+		setDescricao(data[1]);
 	}
 
 	public int getId() {
@@ -26,6 +37,17 @@ public class IDDescricao {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeStringArray(new String[] { Integer.toString(getId()),
+				getDescricao() });
 	}
 
 	@Override

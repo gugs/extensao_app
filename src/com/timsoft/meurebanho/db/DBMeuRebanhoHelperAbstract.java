@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.timsoft.meurebanho.BuildConfig;
-
 public abstract class DBMeuRebanhoHelperAbstract extends SQLiteOpenHelper {
 
 	private static final String LOG_TAG = "DBMeuRebanhoHelper";

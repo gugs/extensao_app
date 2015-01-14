@@ -30,6 +30,7 @@ public class DBEspecieAdapter extends DBAdapterAbstract<Especie> {
 		return mInstance;
 	}
 
+	@Override
 	public Especie create(Especie Especie) {
 		Log.d(LOG_TAG, "Incluindo Especie: " + Especie.toString());
 		ContentValues values = new ContentValues();
@@ -40,16 +41,19 @@ public class DBEspecieAdapter extends DBAdapterAbstract<Especie> {
 		return get(Especie.getId());
 	}
 
-	public void delete(int idEspecie) {
-		Log.d(LOG_TAG, "Excluindo Especie: " + idEspecie);
-		database.delete(DBEspecieHelper.TABLE_NAME, DBEspecieHelper.ID + " = " + idEspecie, null);
+	@Override
+	public void delete(Especie e) {
+		Log.d(LOG_TAG, "Excluindo Especie: " + e.getId());
+		database.delete(DBEspecieHelper.TABLE_NAME, DBEspecieHelper.ID + " = " + e.getId(), null);
 	}
 	
+	@Override
 	public Especie cursorTo(Cursor cursor) {
 		Especie Especie = new Especie(cursor.getInt(0), cursor.getString(1));
 		return Especie;
 	}
 	
+	@Override
 	public List<Especie> list() {
 		Log.d(LOG_TAG, "Obtendo Especies");
 		List<Especie> listaEspecie = new ArrayList<Especie>();
@@ -62,7 +66,8 @@ public class DBEspecieAdapter extends DBAdapterAbstract<Especie> {
 		return listaEspecie;
 	}
 
-	public Especie get(long idEspecie) {
+	@Override
+	public Especie get(int idEspecie) {
 		Log.d(LOG_TAG, "Obtendo Especie: " + idEspecie);
 		String query = "select " +
 				DBEspecieHelper.TABLE_NAME + "." + DBEspecieHelper.ID + ", " +

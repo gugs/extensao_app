@@ -11,10 +11,10 @@ public abstract class DBAdapterAbstract<T> {
 	protected static SQLiteDatabase database;
 	
 	public abstract T create(T t);
-	public abstract void delete(int id);
+	public abstract void delete(T t);
 	public abstract T cursorTo(Cursor cursor);
 	public abstract List<T> list();
-	public abstract T get(long id);
+	public abstract T get(int id);
 	
 	protected abstract DBMeuRebanhoHelperAbstract getHelper();
 	
@@ -32,5 +32,10 @@ public abstract class DBAdapterAbstract<T> {
 	
 	public final void clear() {
 		database.delete(getHelper().getTableName(), null, null);
+	}
+	
+	public void update(T t) {
+		delete(t);
+		create(t);
 	}
 }

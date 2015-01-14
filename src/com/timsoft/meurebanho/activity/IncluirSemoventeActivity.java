@@ -31,7 +31,7 @@ public class IncluirSemoventeActivity extends ActionBarActivity {
 		
 		fazendaDatasource = DBFazendaAdapter.getInstance(this);
 		
-		final Button button = (Button) findViewById(R.id.button_save_farm);
+		final Button button = (Button) findViewById(R.id.btn_salvar_inclusao_fazenda);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	salvar();
@@ -40,7 +40,7 @@ public class IncluirSemoventeActivity extends ActionBarActivity {
 	}
 	
     private void salvar() {
-    	input = (EditText) findViewById(R.id.inputFazenda);
+    	input = (EditText) findViewById(R.id.input_incluir_fazenda);
     	
     	fazendaDatasource.open();
     	int id = input.getText().toString().toUpperCase(Locale.US).hashCode();

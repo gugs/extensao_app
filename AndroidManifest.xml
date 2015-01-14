@@ -23,7 +23,7 @@
         </activity>
 		<activity
             android:name="com.timsoft.meurebanho.activity.FazendasActivity"
-            android:label="@string/farms" 
+            android:label="@string/fazendas" 
             android:parentActivityName="com.timsoft.meurebanho.activity.MainActivity" >
             <!-- Parent activity meta-data to support API level 7+ -->
         	<meta-data
@@ -32,7 +32,16 @@
         </activity>
 		<activity
             android:name="com.timsoft.meurebanho.activity.IncluirFazendaActivity"
-            android:label="@string/add_farm" 
+            android:label="@string/incluir_fazenda" 
+            android:parentActivityName="com.timsoft.meurebanho.activity.FazendasActivity" >
+            <!-- Parent activity meta-data to support API level 7+ -->
+        	<meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.timsoft.meurebanho.activity.FazendasActivity" />
+        </activity>
+		<activity
+            android:name="com.timsoft.meurebanho.activity.EditarFazendaActivity"
+            android:label="@string/editar_fazenda" 
             android:parentActivityName="com.timsoft.meurebanho.activity.FazendasActivity" >
             <!-- Parent activity meta-data to support API level 7+ -->
         	<meta-data

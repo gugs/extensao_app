@@ -1,9 +1,6 @@
 package com.timsoft.meurebanho.activity;
 
-import java.util.Locale;
-
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -37,7 +34,7 @@ public class IncluirFazendaActivity extends ActionBarActivity {
 		
 		fazendaDatasource = DBFazendaAdapter.getInstance(this);
 		
-		final ImageButton button = (ImageButton) findViewById(R.id.button_save_farm);
+		final ImageButton button = (ImageButton) findViewById(R.id.btn_salvar_inclusao_fazenda);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	salvar();
@@ -46,7 +43,13 @@ public class IncluirFazendaActivity extends ActionBarActivity {
 	}
 	
     private void salvar() {
-    	input = (EditText) findViewById(R.id.inputFazenda);
+    	String nomeFazenda;
+    	input = (EditText) findViewById(R.id.input_incluir_fazenda);
+    	nomeFazenda = input.getText().toString().trim();
+    	if("".equals(nomeFazenda)) {
+    		input.setError(getResources().getString(R.string.alerta_preencher_nome_fazenda));
+    		return;
+    	}
     	
     	fazendaDatasource.open();
     	int id = 0;
@@ -72,12 +75,13 @@ public class IncluirFazendaActivity extends ActionBarActivity {
 //    		fazendaDatasource.create(f);
 //    	}
     	
-    	Fazenda f = new Fazenda(id, input.getText().toString());
+    	Fazenda f = new Fazenda(id, nomeFazenda);
 		fazendaDatasource.create(f);
 		fazendaDatasource.close();
 		
 		Intent intent = new Intent(this, FazendasActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(intent);
+		finish();
     }
 }

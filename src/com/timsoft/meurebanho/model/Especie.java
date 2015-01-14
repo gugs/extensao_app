@@ -3,7 +3,6 @@ package com.timsoft.meurebanho.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Especie extends IDDescricao {
 	public Especie(int id, String descricao) {
 		super(id, descricao); 

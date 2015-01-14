@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/input_incluir_fazenda"
+        android:id="@+id/input_editar_fazenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -21,11 +21,18 @@
         android:gravity="center" >
 
         <ImageButton
-            android:id="@+id/btn_salvar_inclusao_fazenda"
+            android:id="@+id/btn_salvar_edicao_fazenda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/save"
             android:src="@drawable/checkmark" />
+
+        <ImageButton
+            android:id="@+id/btn_excluir_fazenda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/delete"
+            android:src="@drawable/delete" />
     </TableRow>
 
 </LinearLayout>

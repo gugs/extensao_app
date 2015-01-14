@@ -10,13 +10,21 @@
     <string name="action_settings">Configurações</string>
     <string name="menu_settings">Configurações</string>
     
-    <string name="events">Eventos</string>
-    <string name="add_event">Incluir Evento</string>
+    <string name="eventos">Eventos</string>
+    <string name="incluir_evento">Incluir Evento</string>
+    <string name="editar_evento">Editar Evento</string>
     
-    <string name="farms">Fazendas</string>
-    <string name="add_farm">Incluir Fazenda</string>
+    <string name="fazendas">Fazendas</string>
+    <string name="incluir_fazenda">Incluir Fazenda</string>
+    <string name="editar_fazenda">Alterar Fazenda</string>
+    <string name="alerta_preencher_nome_fazenda">Nome da Fazenda deve ser preenchido!</string>
+    <string name="confirma_exclusao_fazenda">Confirma a exclusão da fazenda?</string>
     
+    <string name="confirmacao_de_exclusao">Confirmação de Exclusão</string>
     <string name="save">Salvar</string>
     <string name="add">Incluir</string>
+    <string name="delete">Excluir</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
 </resources>

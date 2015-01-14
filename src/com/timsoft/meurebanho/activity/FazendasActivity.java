@@ -1,69 +1,87 @@
 package com.timsoft.meurebanho.activity;
 
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.List;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.db.fazenda.DBFazendaAdapter;
 import com.timsoft.meurebanho.model.Fazenda;
 
-public class FazendasActivity extends Activity {
+public class FazendasActivity extends ActionBarActivity {
 
 	private static final String LOG_TAG = "FazendasActivity";
-	
 	private DBFazendaAdapter fazendaDatasource;
 	
-	private EditText input;
-	private AlertDialog alerta;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		setContentView(R.layout.fazendas_activity);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+		getSupportActionBar().setIcon(R.drawable.ic_launcher);
+		 
 		Log.d(LOG_TAG, "onCreate");
 		
-		fazendaDatasource = DBFazendaAdapter.getInstance(this);
-		
-		setContentView(R.layout.activity_fazendas);
-		
-		final Button button = (Button) findViewById(R.id.button_salvar);
+		final ImageButton button = (ImageButton) findViewById(R.id.button_add_farm);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	salvar();
+            	incluirFazenda();
             }
         });
+        
+        fazendaDatasource = DBFazendaAdapter.getInstance(this);
+        
+        fazendaDatasource.open();
+        List<Fazenda> fazendas = fazendaDatasource.list();
+        fazendaDatasource.close();
+        
+        final ListView listview = (ListView) findViewById(R.id.list_view_farms);
+        
+		final StableArrayAdapter adapter = new StableArrayAdapter(this,
+				android.R.layout.simple_list_item_1, fazendas);
+		
+		listview.setAdapter(adapter);
+
 	}
 	
-    private void salvar() {
-    	input = (EditText) findViewById(R.id.inputFazenda);
-    	
-    	fazendaDatasource.open();
-    	int id = input.getText().toString().toUpperCase(Locale.US).hashCode();
-    	if(fazendaDatasource.get(id) != null) {
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setTitle("Erro");
-            builder.setMessage("Já existe fazenda com este nome!");
-			builder.setPositiveButton("Ok",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface arg0, int arg1) {
-							alerta.dismiss();
-						}
-					}
-			);
-			alerta = builder.create();
-	        alerta.show();
-    	} else {
-        	Fazenda f = new Fazenda(id, input.getText().toString());
-    		fazendaDatasource.create(f);
-    	}
-		fazendaDatasource.close();
-    }
+	private void incluirFazenda() {
+		Intent intent = new Intent(this, IncluirFazendaActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		startActivity(intent);
+	}
+	
+	private class StableArrayAdapter extends ArrayAdapter<Fazenda> {
+
+		HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+		public StableArrayAdapter(Context context, int textViewResourceId,
+				List<Fazenda> objects) {
+			super(context, textViewResourceId, objects);
+			for (int i = 0; i < objects.size(); ++i) {
+				mIdMap.put(objects.get(i).getDescricao(), i);
+			}
+		}
+
+		@Override
+		public long getItemId(int position) {
+			String item = getItem(position).getDescricao();
+			return mIdMap.get(item);
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return true;
+		}
+
+	}
 }

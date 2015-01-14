@@ -4,12 +4,19 @@
     
     <string name="app_full_name">com.timsoft.meurebanho</string>
     
-    <string name="btn_fazendas">Fazendas</string>
-    <string name="btn_salvar">Salvar</string>
-    <string name="fazenda_hint">Nome da Fazenda</string>
+    <string name="nome_fazenda_hint">Nome da Fazenda</string>
     
     <color name="background">#FFFFFF</color>
     <string name="action_settings">Configurações</string>
     <string name="menu_settings">Configurações</string>
+    
+    <string name="events">Eventos</string>
+    <string name="add_event">Incluir Evento</string>
+    
+    <string name="farms">Fazendas</string>
+    <string name="add_farm">Incluir Fazenda</string>
+    
+    <string name="save">Salvar</string>
+    <string name="add">Incluir</string>
 
 </resources>

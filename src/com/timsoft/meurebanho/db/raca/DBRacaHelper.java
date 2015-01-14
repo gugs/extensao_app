@@ -13,10 +13,12 @@ public class DBRacaHelper extends DBMeuRebanhoHelperAbstract{
 	
 	public static final String ID = "id";
 	public static final String DESCRICAO = "descricao";
+	public static final String ID_ESPECIE = "id_especie";
 
 	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
 			+ ID + " integer primary key, "
-			+ DESCRICAO + " text not null);";
+			+ DESCRICAO + " text not null, " 
+			+ ID_ESPECIE + " integer not null)";
 
 	public DBRacaHelper(Context context) {
 		super(context);

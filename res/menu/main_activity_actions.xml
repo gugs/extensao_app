@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_eventos"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_event"
+        android:title="@string/events"/>
+    
+    <item
+        android:id="@+id/action_fazendas"
+        android:title="@string/farms"
+        app:showAsAction="never"/>
+
+</menu>

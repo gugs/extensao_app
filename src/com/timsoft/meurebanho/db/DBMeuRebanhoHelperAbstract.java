@@ -22,9 +22,9 @@ public abstract class DBMeuRebanhoHelperAbstract extends SQLiteOpenHelper {
 	@Override
 	public void onOpen(SQLiteDatabase db) {
 		//Força um update para regerar as tabelas
-		if(BuildConfig.DEBUG){
-			onUpgrade(db, 0, 0);
-		}
+//		if(BuildConfig.DEBUG){
+//			onUpgrade(db, 0, 0);
+//		}
 	}
 
 	@Override

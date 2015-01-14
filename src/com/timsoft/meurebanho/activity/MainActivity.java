@@ -3,12 +3,17 @@ package com.timsoft.meurebanho.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.timsoft.meurebanho.BuildConfig;
 import com.timsoft.meurebanho.R;
@@ -23,9 +28,8 @@ import com.timsoft.meurebanho.model.Lote;
 import com.timsoft.meurebanho.model.Pasto;
 import com.timsoft.meurebanho.model.Raca;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
-	@SuppressWarnings("unused")
 	private static final String LOG_TAG = "InicioActivity";
 	
 	private static final String FIRST_RUN = "firstRun";
@@ -45,7 +49,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_inicio);
+		setContentView(R.layout.main_activity);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+		getSupportActionBar().setIcon(R.drawable.ic_launcher);
+		
+		Log.d(LOG_TAG, "onCreate");
 		
 		especieDatasource = DBEspecieAdapter.getInstance(this);
 		fazendaDatasource = DBFazendaAdapter.getInstance(this);
@@ -61,14 +69,14 @@ public class MainActivity extends Activity {
 		dbAdapters.add(racaDatasource);
 		
 		//Limpa as bases se estiver em modo DEBUG
-		if(BuildConfig.DEBUG) {
-			
-			for(DBAdapterAbstract dbAdapter : dbAdapters) {
-				dbAdapter.open();
-				dbAdapter.clear();
-				dbAdapter.close();
-			}
-		}
+//		if(BuildConfig.DEBUG) {
+//			
+//			for(DBAdapterAbstract dbAdapter : dbAdapters) {
+//				dbAdapter.open();
+//				dbAdapter.clear();
+//				dbAdapter.close();
+//			}
+//		}
 		
 //			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //			builder.setTitle("Mensagem");
@@ -83,37 +91,11 @@ public class MainActivity extends Activity {
 //			alerta = builder.create();
 //	        alerta.show();
 		
-		fazendaDatasource.open();
-		int qtdFazendas = fazendaDatasource.list().size();
-		fazendaDatasource.close();
-		
 		prefs = getSharedPreferences(getString(R.string.app_full_name), MODE_PRIVATE);
 		
-		//popular com dados básicos
-		
-		//Direciona para a tela de cadastro de fazendas caso não haja uma fazenda
-		if(qtdFazendas == 0) {
-			navegaFazendas();
-		} else {
-			final Button button = (Button) findViewById(R.id.button_fazendas);
-	        button.setOnClickListener(new View.OnClickListener() {
-	            public void onClick(View v) {
-	            	navegaFazendas();
-	            }
-	        });
-		}
-	}
-	
-    public void navegaFazendas() {
-    	Intent intent = new Intent(this, FazendasActivity.class);
-		startActivity(intent);
-    }
-    
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
-		if(prefs.getBoolean(FIRST_RUN, true) || BuildConfig.DEBUG) {
+		//Dados default
+//		if(prefs.getBoolean(FIRST_RUN, true) || BuildConfig.DEBUG) {
+		if(prefs.getBoolean(FIRST_RUN, true)) {
 			especieDatasource.open();
 			for(Especie e : Especie.getEspeciesDefault()) {
 				especieDatasource.create(e);
@@ -137,5 +119,73 @@ public class MainActivity extends Activity {
 			//Carregar valores default em tabelas
 			prefs.edit().putBoolean(FIRST_RUN, false).commit();
 		};
+		
+//		final Button button = (Button) findViewById(R.id.button_fazendas);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//            	navegaFazendas();
+//            }
+//        });
+		
+		final ImageButton button = (ImageButton) findViewById(R.id.button_add_cattle);
+	    button.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	        	incluirFazenda();
+	        }
+
+	    });
 	}
+	
+    public void incluirFazenda() {
+    	Intent intent = new Intent(this, IncluirFazendaActivity.class);
+    	intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		startActivity(intent);
+    }
+    
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		//Direciona para a tela de cadastro de fazendas caso não haja uma fazenda
+//		fazendaDatasource.open();
+//		int qtdFazendas = fazendaDatasource.list().size();
+//		fazendaDatasource.close();
+//		
+//		if(qtdFazendas == 0) {
+//			incluirFazenda();
+//		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_activity_actions, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		// action with ID action_refresh was selected
+		case R.id.action_eventos:
+			Toast.makeText(this, "Eventos Selecionado", Toast.LENGTH_SHORT).show();
+			break;
+		// action with ID action_settings was selected
+		case R.id.action_fazendas:
+//			Toast.makeText(this, "Fazendas Selecionado", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(this, FazendasActivity.class);
+			startActivity(intent);
+			break;
+		default:
+			break;
+		}
+
+		return true;
+	}
+	
+	private void incluirSemovente() {
+		Intent intent = new Intent(this, IncluirSemoventeActivity.class);
+		startActivity(intent);
+	}
+
 }

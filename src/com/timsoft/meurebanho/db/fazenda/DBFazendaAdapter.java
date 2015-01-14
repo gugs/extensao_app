@@ -53,7 +53,7 @@ public class DBFazendaAdapter extends DBAdapterAbstract<Fazenda>{
 	public List<Fazenda> list() {
 		Log.d(LOG_TAG, "Obtendo fazendas");
 		List<Fazenda> listaFazenda = new ArrayList<Fazenda>();
-		Cursor cursor = database.rawQuery("select * from " + DBFazendaHelper.TABLE_NAME + " order by " + DBFazendaHelper.ID, null);
+		Cursor cursor = database.rawQuery("select * from " + DBFazendaHelper.TABLE_NAME + " order by " + DBFazendaHelper.DESCRICAO, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
 	        	listaFazenda.add(cursorTo(cursor));

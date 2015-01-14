@@ -6,24 +6,31 @@
     android:scrollbars="vertical" >
 
     <LinearLayout
-        android:id="@+id/conteudoInicio"
+        android:id="@+id/conteudoIncluirFazenda"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
         android:gravity="top"
         android:orientation="vertical" >
 
-        <Spinner
-            android:id="@+id/spinnerFazendas"
+        <EditText
+            android:id="@+id/inputFazenda"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/button_fazendas"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_fazendas" />
+            android:ems="10"
+            android:hint="@string/nome_fazenda_hint"
+    		android:inputType="text">
 
+            <requestFocus />
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/button_save_farm"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:src="@drawable/checkmark"
+		    android:contentDescription="@string/save"
+		    />
     </LinearLayout>
 
 </ScrollView>

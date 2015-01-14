@@ -35,6 +35,7 @@ public class DBRacaAdapter extends DBAdapterAbstract<Raca> {
 		ContentValues values = new ContentValues();
 		values.put(DBRacaHelper.ID, raca.getId());
 		values.put(DBRacaHelper.DESCRICAO, raca.getDescricao());
+		values.put(DBRacaHelper.ID_ESPECIE, raca.getIdEspecie());
 		database.insert(DBRacaHelper.TABLE_NAME, null, values);
 
 		return get(raca.getId());
@@ -66,7 +67,8 @@ public class DBRacaAdapter extends DBAdapterAbstract<Raca> {
 		Log.d(LOG_TAG, "Obtendo Raca: " + idRaca);
 		String query = "select " +
 				DBRacaHelper.TABLE_NAME + "." + DBRacaHelper.ID + ", " +
-				DBRacaHelper.TABLE_NAME + "." + DBRacaHelper.DESCRICAO + 
+				DBRacaHelper.TABLE_NAME + "." + DBRacaHelper.DESCRICAO + ", " +
+				DBRacaHelper.TABLE_NAME + "." + DBRacaHelper.ID_ESPECIE + 
 				
 				" from " + DBRacaHelper.TABLE_NAME + 
 				

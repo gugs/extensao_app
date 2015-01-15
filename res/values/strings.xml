@@ -1,30 +1,38 @@
 <resources>
-
-    <string name="app_name">Meu Rebanho</string>
-    
-    <string name="app_full_name">com.timsoft.meurebanho</string>
-    
-    <string name="nome_fazenda_hint">Nome da Fazenda</string>
-    
+	<!-- Generic messages -->
+	
+	<string name="app_name">Meu Rebanho</string>
+	<string name="app_full_name">com.timsoft.meurebanho</string>
+	
+    <string name="exclusion_confirmation">Confirmação de Exclusão</string>
+    <string name="save">Salvar</string>
+    <string name="add">Incluir</string>
+    <string name="delete">Excluir</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
     <color name="background">#FFFFFF</color>
     <string name="action_settings">Configurações</string>
     <string name="menu_settings">Configurações</string>
     
-    <string name="eventos">Eventos</string>
-    <string name="incluir_evento">Incluir Evento</string>
-    <string name="editar_evento">Editar Evento</string>
+    <!-- Animal related messages -->
+    <string name="animals">Animais</string>
+    <string name="animal_name_hint">Nome do Animal</string>
+    <string name="add_animal">Incluir Animal</string>
+    <string name="edit_animal">Alterar Animal</string>
+    <string name="alert_fill_animal_name">Nome do animal deve ser preenchido!</string>
+    <string name="confirm_animal_exclusion">Confirma a exclusão do animal?</string>
     
-    <string name="fazendas">Fazendas</string>
-    <string name="incluir_fazenda">Incluir Fazenda</string>
-    <string name="editar_fazenda">Alterar Fazenda</string>
-    <string name="alerta_preencher_nome_fazenda">Nome da Fazenda deve ser preenchido!</string>
-    <string name="confirma_exclusao_fazenda">Confirma a exclusão da fazenda?</string>
+    <!-- Event related messages -->
+    <string name="events">Eventos</string>
+    <string name="add_event">Incluir Evento</string>
+    <string name="edit_event">Editar Evento</string>
     
-    <string name="confirmacao_de_exclusao">Confirmação de Exclusão</string>
-    <string name="save">Salvar</string>
-    <string name="add">Incluir</string>
-    <string name="delete">Excluir</string>
-    <string name="sim">Sim</string>
-    <string name="nao">Não</string>
+    <!-- Farm related messages -->
+    <string name="farms">Fazendas</string>
+    <string name="farm_name_hint">Nome da Fazenda</string>
+    <string name="add_farm">Incluir Fazenda</string>
+    <string name="edit_farm">Alterar Fazenda</string>
+    <string name="alert_fill_farm_name">Nome da Fazenda deve ser preenchido!</string>
+    <string name="confirm_farm_exclusion">Confirma a exclusão da fazenda?</string>
 
 </resources>

@@ -5,22 +5,23 @@
     android:orientation="vertical" >
 
     <ListView
-        android:id="@+id/list_animal"
+        android:id="@+id/list_farms"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
+    </ListView>
 
     <TableRow
+        android:id="@+id/table_row_farms"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center" >
-        
-		<ImageButton
-            android:id="@+id/btn_adicionar_semovente"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:src="@drawable/plus"
-		    android:contentDescription="@string/add"
-		    />
+
+        <ImageButton
+            android:id="@+id/btn_add_farm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add"
+            android:src="@drawable/plus" />
 
     </TableRow>
 

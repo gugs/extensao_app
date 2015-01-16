@@ -16,11 +16,11 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	
 	private static final String LOG_TAG = "DBEspecieAdapter";
 	
-	private static DBEspecieHelper dbEspecieHelper;
+	private static DBSpecieHelper dbEspecieHelper;
 	private static DBSpecieAdapter mInstance;
 	
 	private DBSpecieAdapter(Context context) {
-		dbEspecieHelper = new DBEspecieHelper(context);
+		dbEspecieHelper = new DBSpecieHelper(context);
 	}
 	
 	public static DBSpecieAdapter getInstance(Context context){
@@ -34,9 +34,9 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	public Specie create(Specie Especie) {
 		Log.d(LOG_TAG, "Incluindo Especie: " + Especie.toString());
 		ContentValues values = new ContentValues();
-		values.put(DBEspecieHelper.ID, Especie.getId());
-		values.put(DBEspecieHelper.DESCRICAO, Especie.getDescription());
-		database.insert(DBEspecieHelper.TABLE_NAME, null, values);
+		values.put(DBSpecieHelper.ID, Especie.getId());
+		values.put(DBSpecieHelper.DESCRIPTION, Especie.getDescription());
+		database.insert(DBSpecieHelper.TABLE_NAME, null, values);
 
 		return get(Especie.getId());
 	}
@@ -44,7 +44,7 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	@Override
 	public void delete(Specie e) {
 		Log.d(LOG_TAG, "Excluindo Especie: " + e.getId());
-		database.delete(DBEspecieHelper.TABLE_NAME, DBEspecieHelper.ID + " = " + e.getId(), null);
+		database.delete(DBSpecieHelper.TABLE_NAME, DBSpecieHelper.ID + " = " + e.getId(), null);
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	public List<Specie> list() {
 		Log.d(LOG_TAG, "Obtendo Especies");
 		List<Specie> listaEspecie = new ArrayList<Specie>();
-		Cursor cursor = database.rawQuery("select * from " + DBEspecieHelper.TABLE_NAME + " order by " + DBEspecieHelper.ID, null);
+		Cursor cursor = database.rawQuery("select * from " + DBSpecieHelper.TABLE_NAME + " order by " + DBSpecieHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
 	        	listaEspecie.add(cursorTo(cursor));
@@ -70,13 +70,13 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	public Specie get(int idEspecie) {
 		Log.d(LOG_TAG, "Obtendo Especie: " + idEspecie);
 		String query = "select " +
-				DBEspecieHelper.TABLE_NAME + "." + DBEspecieHelper.ID + ", " +
-				DBEspecieHelper.TABLE_NAME + "." + DBEspecieHelper.DESCRICAO + 
+				DBSpecieHelper.TABLE_NAME + "." + DBSpecieHelper.ID + ", " +
+				DBSpecieHelper.TABLE_NAME + "." + DBSpecieHelper.DESCRIPTION + 
 				
-				" from " + DBEspecieHelper.TABLE_NAME + 
+				" from " + DBSpecieHelper.TABLE_NAME + 
 				
 				" where " +
-				DBEspecieHelper.TABLE_NAME + "." + DBEspecieHelper.ID + " = " + idEspecie;
+				DBSpecieHelper.TABLE_NAME + "." + DBSpecieHelper.ID + " = " + idEspecie;
 				
 		Cursor cursor = database.rawQuery(query, null);
 		

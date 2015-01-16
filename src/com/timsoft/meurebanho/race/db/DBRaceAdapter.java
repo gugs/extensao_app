@@ -31,20 +31,20 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 	}
 
 	@Override
-	public Race create(Race raca) {
-		Log.d(LOG_TAG, "Incluindo Raca: " + raca.toString());
+	public Race create(Race race) {
+		Log.d(LOG_TAG, "Including Race: " + race.toString());
 		ContentValues values = new ContentValues();
-		values.put(DBRaceHelper.ID, raca.getId());
-		values.put(DBRaceHelper.DESCRICAO, raca.getDescription());
-		values.put(DBRaceHelper.ID_ESPECIE, raca.getIdSpecie());
+		values.put(DBRaceHelper.ID, race.getId());
+		values.put(DBRaceHelper.DESCRIPTION, race.getDescription());
+		values.put(DBRaceHelper.ID_SPECIE, race.getIdSpecie());
 		database.insert(DBRaceHelper.TABLE_NAME, null, values);
 
-		return get(raca.getId());
+		return get(race.getId());
 	}
 
 	@Override
 	public void delete(Race r) {
-		Log.d(LOG_TAG, "Excluindo Raca: " + r.getId());
+		Log.d(LOG_TAG, "Excluiding Race: " + r.getId());
 		database.delete(DBRaceHelper.TABLE_NAME, DBRaceHelper.ID + " = " + r.getId(), null);
 	}
 	
@@ -56,7 +56,7 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 	
 	@Override
 	public List<Race> list() {
-		Log.d(LOG_TAG, "Obtendo Racas");
+		Log.d(LOG_TAG, "Listing Races");
 		List<Race> listaRaca = new ArrayList<Race>();
 		Cursor cursor = database.rawQuery("select * from " + DBRaceHelper.TABLE_NAME + " order by " + DBRaceHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
@@ -69,11 +69,11 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 
 	@Override
 	public Race get(int idRaca) {
-		Log.d(LOG_TAG, "Obtendo Raca: " + idRaca);
+		Log.d(LOG_TAG, "Getting Race: " + idRaca);
 		String query = "select " +
 				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.ID + ", " +
-				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.DESCRICAO + ", " +
-				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.ID_ESPECIE + 
+				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.DESCRIPTION + ", " +
+				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.ID_SPECIE + 
 				
 				" from " + DBRaceHelper.TABLE_NAME + 
 				

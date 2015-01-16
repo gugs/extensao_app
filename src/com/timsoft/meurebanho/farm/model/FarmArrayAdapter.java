@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.timsoft.meurebanho.R;
 
 public class FarmArrayAdapter extends ArrayAdapter<Farm> {
+	//FIXME: Utilizar a solução do SpecieArrayAdapter
+	
 	private final Context context;
 	private final List<Farm> values;
 

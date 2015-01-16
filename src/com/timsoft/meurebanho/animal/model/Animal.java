@@ -11,14 +11,20 @@ public class Animal {
 	private int id;
 	private int specieId;
 	private int raceId;
+	
+	private String sex;
 	private String name;
 	private String earTag;
+	
 	private Date birthDate;
 	private Date aquisitionDate;
 	private Date sellDate;
 	
 	private double aquisitionValue;
 	private double sellValue;
+	
+	private int fatherId;
+	private int motherId;
 	
 	private List<Bitmap> pictures;
 	
@@ -27,11 +33,16 @@ public class Animal {
 	public Animal() {
 	}
 	
-	public Animal(int id, int specieId, int raceId, String name, String earTag, Date birthDate, 
-			Date aquisitionDate, Date sellDate, double aquisitionValue, double sellValue) {
+	public Animal(	int id, int specieId, int raceId, 
+					String sex, String name, String earTag, 
+					Date birthDate, Date aquisitionDate, Date sellDate, 
+					double aquisitionValue, double sellValue, 
+					int fatherId, int motherId) {
+		
 		this.id = id;
 		this.specieId = specieId;
 		this.raceId = raceId;
+		this.sex = sex;
 		this.name = name;
 		this.earTag = earTag;
 		this.birthDate = birthDate;
@@ -39,6 +50,8 @@ public class Animal {
 		this.sellDate = sellDate;
 		this.aquisitionValue = aquisitionValue;
 		this.sellValue = sellValue;
+		this.fatherId = fatherId;
+		this.motherId = motherId;
 	}
 
 	public int getId() {
@@ -137,14 +150,39 @@ public class Animal {
 		this.events = events;
 	}
 	
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public int getFatherId() {
+		return fatherId;
+	}
+
+	public void setFatherId(int fatherId) {
+		this.fatherId = fatherId;
+	}
+
+	public int getMotherId() {
+		return motherId;
+	}
+
+	public void setMotherId(int motherId) {
+		this.motherId = motherId;
+	}
+
 	@Override
 	public String toString() {
-		return "Animal [id=" + id + ", raceId=" + raceId + ", specieId="
-				+ specieId + ", name=" + name + ", earTag=" + earTag
-				+ ", birthDate=" + birthDate + ", aquisitionDate="
+		return "Animal [id=" + id + ", specieId=" + specieId + ", raceId="
+				+ raceId + ", sex=" + sex + ", name=" + name + ", earTag="
+				+ earTag + ", birthDate=" + birthDate + ", aquisitionDate="
 				+ aquisitionDate + ", sellDate=" + sellDate
 				+ ", aquisitionValue=" + aquisitionValue + ", sellValue="
-				+ sellValue + ", pictures=" + pictures + ", events=" + events
+				+ sellValue + ", fatherId=" + fatherId + ", motherId="
+				+ motherId + ", pictures=" + pictures + ", events=" + events
 				+ "]";
 	}
 

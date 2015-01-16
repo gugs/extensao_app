@@ -85,9 +85,11 @@ public class MainActivity extends ActionBarActivity {
 		//Load default data
 		if(prefs.getBoolean(FIRST_RUN, true)) {
 			specieDatasource.open();
-			for(Specie e : Specie.getDefaultSpecies()) {
-				specieDatasource.create(e);
-			}
+			specieDatasource.create(new Specie(1, getResources().getString(R.string.specie_bovine)));
+			specieDatasource.create(new Specie(2, getResources().getString(R.string.specie_caprine)));
+			specieDatasource.create(new Specie(3, getResources().getString(R.string.specie_equine)));
+			specieDatasource.create(new Specie(4, getResources().getString(R.string.specie_ovine)));
+			specieDatasource.create(new Specie(5, getResources().getString(R.string.specie_swine)));
 			specieDatasource.close();
 			
 			lotDatasource.open();

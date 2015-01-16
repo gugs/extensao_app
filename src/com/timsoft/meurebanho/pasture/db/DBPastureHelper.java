@@ -1,26 +1,26 @@
-package com.timsoft.meurebanho.lot.db;
+package com.timsoft.meurebanho.pasture.db;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
 
-public class DBLoteHelper extends DBMeuRebanhoHelperAbstract{
+public class DBPastureHelper extends DBMeuRebanhoHelperAbstract{
 	
-	private static final String LOG_TAG = "DBLoteHelper";
+	private static final String LOG_TAG = "DBPastureHelper";
 	
-	public static final String TABLE_NAME = "lote";
+	public static final String TABLE_NAME = "pasture";
 	
 	public static final String ID = "id";
-	public static final String DESCRICAO = "descricao";
+	public static final String DESCRIPTION = "description";
 
 	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
 			+ ID + " integer primary key, "
-			+ DESCRICAO + " text not null);";
+			+ DESCRIPTION + " text not null);";
 
-	public DBLoteHelper(Context context) {
+	public DBPastureHelper(Context context) {
 		super(context);
-		Log.d(LOG_TAG, "Construindo DBLoteHelper");
+		Log.d(LOG_TAG, "Constructing DBPastureHelper");
 	}
 	
 	@Override

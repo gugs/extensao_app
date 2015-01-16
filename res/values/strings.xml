@@ -3,6 +3,7 @@
 	
 	<string name="app_name">Meu Rebanho</string>
 	<string name="app_full_name">com.timsoft.meurebanho</string>
+    <string name="raw_base_path">/res/raw</string>
 	
     <string name="exclusion_confirmation">Confirmação de Exclusão</string>
     <string name="save">Salvar</string>
@@ -17,13 +18,52 @@
     
     <!-- Animal related messages -->
     <string name="animals">Animais</string>
-    <string name="animal_id_label">Código do Animal:</string>
-    <string name="animal_name_label">Nome do Animal:</string>
-    <string name="animal_name_hint">Nome do Animal</string>
+    
+    <string name="animal_id_label">Número de Identificação:</string>
+    <string name="animal_id_hint">Número de Identificação</string>
+    
+    <string name="animal_specie_label">Espécie:</string>
+    
+    <string name="animal_race_label">Raça:</string>
+    
+    <string name="animal_sex_label">Sexo:</string>
+    <string name="animal_male_label">Macho</string>
+    <string name="animal_female_label">Fêmea</string>
+    
+    <string name="animal_name_label">Nome:</string>
+    <string name="animal_name_hint">Nome</string>
+    
+    <string name="animal_ear_tag_label">Brinco/Número de Controle:</string>
+    <string name="animal_ear_tag_hint">Brinco/Número de Controle</string>
+    
+    <string name="animal_birth_date_label">Data de nascimento:</string>
+    <string name="animal_birth_date_hint">Data de nascimento</string>
+    
+    <string name="animal_aquisition_date_label">Data de aquisição:</string>
+    <string name="animal_aquisition_date_hint">Data de aquisição</string>
+    
+    <string name="animal_sell_date_label">Data da venda:</string>
+    <string name="animal_sell_date_hint">Data da venda</string>
+    
+    <string name="animal_aquisition_value_label">Valor de aquisição:</string>
+    <string name="animal_aquisition_value_hint">Valor de aquisição</string>
+    
+    <string name="animal_sell_value_label">Valor de venda:</string>
+    <string name="animal_sell_value_hint">Valor de venda</string>
+    
+    <string name="animal_father_label">Pai:</string>
+    <string name="animal_father_hint">Pai</string>
+    
+    <string name="animal_mother_label">Mãe:</string>
+    <string name="animal_mother_hint">Mãe</string>
+    
     <string name="add_animal">Incluir Animal</string>
     <string name="edit_animal">Alterar Animal</string>
     <string name="alert_fill_animal_name">Nome do animal deve ser preenchido!</string>
     <string name="confirm_animal_exclusion">Confirma a exclusão do animal?</string>
+    
+    <!-- Species related messages -->
+    <string name="specie_image">Imagem da Espécie</string>
     
     <!-- Event related messages -->
     <string name="events">Eventos</string>
@@ -37,5 +77,12 @@
     <string name="edit_farm">Alterar Fazenda</string>
     <string name="alert_fill_farm_name">Nome da Fazenda deve ser preenchido!</string>
     <string name="confirm_farm_exclusion">Confirma a exclusão da fazenda?</string>
+    
+    <!-- Default Species -->
+    <string name="specie_bovine">Bovino</string>
+    <string name="specie_caprine">Caprino</string>
+    <string name="specie_equine">Equino</string>
+    <string name="specie_ovine">Ovino</string>
+    <string name="specie_swine">Suíno</string>
 
 </resources>

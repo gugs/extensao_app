@@ -1,26 +1,26 @@
-package com.timsoft.meurebanho.pasture.db;
+package com.timsoft.meurebanho.lot.db;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
 
-public class DBPastoHelper extends DBMeuRebanhoHelperAbstract{
+public class DBLotHelper extends DBMeuRebanhoHelperAbstract{
 	
-	private static final String LOG_TAG = "DBPastoHelper";
+	private static final String LOG_TAG = "DBLotHelper";
 	
-	public static final String TABLE_NAME = "pasto";
+	public static final String TABLE_NAME = "lot";
 	
 	public static final String ID = "id";
-	public static final String DESCRICAO = "descricao";
+	public static final String DESCRIPTION = "description";
 
 	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
 			+ ID + " integer primary key, "
-			+ DESCRICAO + " text not null);";
+			+ DESCRIPTION + " text not null);";
 
-	public DBPastoHelper(Context context) {
+	public DBLotHelper(Context context) {
 		super(context);
-		Log.d(LOG_TAG, "Construindo DBRacaHelper");
+		Log.d(LOG_TAG, "Constructing DBLotHelper");
 	}
 	
 	@Override

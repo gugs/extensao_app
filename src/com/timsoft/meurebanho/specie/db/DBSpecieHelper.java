@@ -5,22 +5,22 @@ import android.util.Log;
 
 import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
 
-public class DBEspecieHelper extends DBMeuRebanhoHelperAbstract{
+public class DBSpecieHelper extends DBMeuRebanhoHelperAbstract{
 	
-	private static final String LOG_TAG = "DBEspecieHelper";
+	private static final String LOG_TAG = "DBSpecieHelper";
 	
-	public static final String TABLE_NAME = "especie";
+	public static final String TABLE_NAME = "specie";
 	
 	public static final String ID = "id";
-	public static final String DESCRICAO = "descricao";
+	public static final String DESCRIPTION = "description";
 
 	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
 			+ ID + " integer primary key, "
-			+ DESCRICAO + " text not null);";
+			+ DESCRIPTION + " text not null);";
 
-	public DBEspecieHelper(Context context) {
+	public DBSpecieHelper(Context context) {
 		super(context);
-		Log.d(LOG_TAG, "Construindo DBEspecieHelper");
+		Log.d(LOG_TAG, "Constructing DBSpecieHelper");
 	}
 
 	@Override

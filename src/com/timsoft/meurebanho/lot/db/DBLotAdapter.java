@@ -16,11 +16,11 @@ public class DBLotAdapter extends DBAdapterAbstract<Lot> {
 	
 	private static final String LOG_TAG = "DBLoteAdapter";
 	
-	private static DBLoteHelper dbLoteHelper;
+	private static DBLotHelper dbLoteHelper;
 	private static DBLotAdapter mInstance;
 	
 	private DBLotAdapter(Context context) {
-		dbLoteHelper = new DBLoteHelper(context);
+		dbLoteHelper = new DBLotHelper(context);
 	}
 	
 	public static DBLotAdapter getInstance(Context context){
@@ -34,9 +34,9 @@ public class DBLotAdapter extends DBAdapterAbstract<Lot> {
 	public Lot create(Lot lote) {
 		Log.d(LOG_TAG, "Incluindo Lote: " + lote.toString());
 		ContentValues values = new ContentValues();
-		values.put(DBLoteHelper.ID, lote.getId());
-		values.put(DBLoteHelper.DESCRICAO, lote.getDescription());
-		database.insert(DBLoteHelper.TABLE_NAME, null, values);
+		values.put(DBLotHelper.ID, lote.getId());
+		values.put(DBLotHelper.DESCRIPTION, lote.getDescription());
+		database.insert(DBLotHelper.TABLE_NAME, null, values);
 
 		return get(lote.getId());
 	}
@@ -44,7 +44,7 @@ public class DBLotAdapter extends DBAdapterAbstract<Lot> {
 	@Override
 	public void delete(Lot l) {
 		Log.d(LOG_TAG, "Excluindo Lote: " + l.getId());
-		database.delete(DBLoteHelper.TABLE_NAME, DBLoteHelper.ID + " = " + l.getId(), null);
+		database.delete(DBLotHelper.TABLE_NAME, DBLotHelper.ID + " = " + l.getId(), null);
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class DBLotAdapter extends DBAdapterAbstract<Lot> {
 	public List<Lot> list() {
 		Log.d(LOG_TAG, "Obtendo Lotes");
 		List<Lot> listaLote = new ArrayList<Lot>();
-		Cursor cursor = database.rawQuery("select * from " + DBLoteHelper.TABLE_NAME + " order by " + DBLoteHelper.ID, null);
+		Cursor cursor = database.rawQuery("select * from " + DBLotHelper.TABLE_NAME + " order by " + DBLotHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
 	        	listaLote.add(cursorTo(cursor));
@@ -70,13 +70,13 @@ public class DBLotAdapter extends DBAdapterAbstract<Lot> {
 	public Lot get(int idLote) {
 		Log.d(LOG_TAG, "Obtendo Lote: " + idLote);
 		String query = "select " +
-				DBLoteHelper.TABLE_NAME + "." + DBLoteHelper.ID + ", " +
-				DBLoteHelper.TABLE_NAME + "." + DBLoteHelper.DESCRICAO + 
+				DBLotHelper.TABLE_NAME + "." + DBLotHelper.ID + ", " +
+				DBLotHelper.TABLE_NAME + "." + DBLotHelper.DESCRIPTION + 
 				
-				" from " + DBLoteHelper.TABLE_NAME + 
+				" from " + DBLotHelper.TABLE_NAME + 
 				
 				" where " +
-				DBLoteHelper.TABLE_NAME + "." + DBLoteHelper.ID + " = " + idLote;
+				DBLotHelper.TABLE_NAME + "." + DBLotHelper.ID + " = " + idLote;
 				
 		Cursor cursor = database.rawQuery(query, null);
 		

@@ -4,7 +4,7 @@ import com.timsoft.meurebanho.infra.model.IDDescription;
 
 public class Pasture extends IDDescription {
 
-	public Pasture(int id, String descricao) {
-		super(id, descricao);
+	public Pasture(int id, String descritpion) {
+		super(id, descritpion);
 	}
 }

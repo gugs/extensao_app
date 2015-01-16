@@ -38,6 +38,8 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 		values.put(DBAnimalHelper.ID, animal.getId());
 		values.put(DBAnimalHelper.SPECIE_ID, animal.getSpecieId());
 		values.put(DBAnimalHelper.RACE_ID, animal.getRaceId());
+		
+		values.put(DBAnimalHelper.SEX, animal.getSex());
 		values.put(DBAnimalHelper.NAME, animal.getName());
 		values.put(DBAnimalHelper.EAR_TAG, animal.getEarTag());
 		
@@ -71,14 +73,20 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 				cursor.getInt(0),
 				cursor.getInt(1),
 				cursor.getInt(2),
+				
 				cursor.getString(3),
 				cursor.getString(4),
-				new Date(cursor.getLong(5)),
+				cursor.getString(5),
+				
 				new Date(cursor.getLong(6)),
 				new Date(cursor.getLong(7)),
-				cursor.getDouble(8),
-				cursor.getDouble(9)
-				);
+				new Date(cursor.getLong(8)),
+				
+				cursor.getDouble(9),
+				cursor.getDouble(10),
+				
+				cursor.getInt(11),
+				cursor.getInt(12));
 		return Animal;
 	}
 	

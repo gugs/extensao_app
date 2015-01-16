@@ -1,38 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:scrollbars="vertical" >
+    
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	
+	    <!-- id -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_id_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color"/>
+	
+	    <EditText
+	        android:id="@+id/input_add_animal_id"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10" 
+	        android:inputType="number">
+	        <requestFocus />
+		</EditText>
+	
+	    <!-- specie -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_specie_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <Spinner
+	        android:id="@+id/spinner_add_animal_specie"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <!-- race -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_race_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <Spinner
+	        android:id="@+id/spinner_add_animal_race"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+	
+	    <!-- sex -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_sex_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <RadioGroup
+	        android:id="@+id/radio_group_add_animal_sex"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	
+	        <RadioButton
+	            android:id="@+id/radio_add_animal_sex_male"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/animal_male_label" />
+	
+	        <RadioButton
+	            android:id="@+id/radio_add_animal_sex_female"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/animal_female_label" />
+	    </RadioGroup>
+	
+	    <!-- name -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_name_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <EditText
+	        android:id="@+id/input_add_animal_name"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textCapWords" >
+	    </EditText>
+	
+	    <!-- ear tag -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_ear_tag_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <EditText
+	        android:id="@+id/input_add_animal_ear_tag"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textCapWords" />
+	
+	    <!-- birth date -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_birth_date_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <EditText
+	        android:id="@+id/input_add_animal_birth_date"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="date" />
+	    
+	    <!-- aquisition date -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_aquisition_date_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <EditText
+	        android:id="@+id/input_add_animal_aquisition_date"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="date" />
+	    
+	    <!-- sell date -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_sell_date_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <EditText
+	        android:id="@+id/input_add_animal_sell_date"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="date" />
+	    
+	    <!-- aquisition value -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_aquisition_value_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/animal_name_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/label_color" />
+	    <EditText
+	        android:id="@+id/input_add_animal_aquisition_value"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="numberDecimal"/>
+	
+		<!-- sell value -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_sell_value_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
 
-    <EditText
-        android:id="@+id/input_add_animal_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/animal_name_hint"
-        android:inputType="textCapWords" >
-
-        <requestFocus />
-    </EditText>
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
-
-        <ImageButton
-            android:id="@+id/btn_save_add_animal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/save"
-            android:src="@drawable/checkmark" />
-    </TableRow>
-
-</LinearLayout>
+	    <EditText
+	        android:id="@+id/input_add_animal_sell_value"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="numberDecimal"/>
+	    
+	    <!-- buttons -->
+	    <TableRow
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center" >
+	
+	        <ImageButton
+	            android:id="@+id/btn_save_add_animal"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:contentDescription="@string/save"
+	            android:src="@drawable/checkmark" />
+	    </TableRow>
+	
+	</LinearLayout>
+</ScrollView>

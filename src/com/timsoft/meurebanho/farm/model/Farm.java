@@ -3,11 +3,11 @@ package com.timsoft.meurebanho.farm.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.timsoft.meurebanho.infra.model.IDDescricao;
+import com.timsoft.meurebanho.infra.model.IDDescription;
 
-public class Farm extends IDDescricao {
-	public Farm(int id, String descricao) {
-		super(id, descricao);
+public class Farm extends IDDescription {
+	public Farm(int id, String description) {
+		super(id, description);
 	}
 
 	public Farm(Parcel in) {

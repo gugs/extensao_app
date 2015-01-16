@@ -27,7 +27,7 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
 		View rowView = inflater.inflate(R.layout.animal_list, parent, false);
 		
 		TextView textViewId = (TextView) rowView.findViewById(R.id.animal_id);
-		textViewId.setText(values.get(position).getId());
+		textViewId.setText(String.format("%05d", values.get(position).getId()));
 		
 		TextView textViewName = (TextView) rowView.findViewById(R.id.animal_name);
 		textViewName.setText(values.get(position).getName());

@@ -35,7 +35,7 @@ public class DBFarmAdapter extends DBAdapterAbstract<Farm>{
 		Log.d(LOG_TAG, "Adding farm: " + farm.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBFarmHelper.ID, farm.getId());
-		values.put(DBFarmHelper.NAME, farm.getDescricao());
+		values.put(DBFarmHelper.NAME, farm.getDescription());
 		database.insert(DBFarmHelper.TABLE_NAME, null, values);
 
 		return get(farm.getId());

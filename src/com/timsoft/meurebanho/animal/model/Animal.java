@@ -24,6 +24,9 @@ public class Animal {
 	
 	private List<Evento> events;
 	
+	public Animal() {
+	}
+	
 	public Animal(int id, int specieId, int raceId, String name, String earTag, Date birthDate, 
 			Date aquisitionDate, Date sellDate, double aquisitionValue, double sellValue) {
 		this.id = id;

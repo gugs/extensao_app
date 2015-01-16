@@ -1,4 +1,4 @@
-package com.timsoft.meurebanho.pasto.db;
+package com.timsoft.meurebanho.pasture.db;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,53 +10,53 @@ import android.util.Log;
 
 import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
 import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
-import com.timsoft.meurebanho.pasto.model.Pasto;
+import com.timsoft.meurebanho.pasture.model.Pasture;
 
-public class DBPastoAdapter extends DBAdapterAbstract<Pasto> {
+public class DBPastureAdapter extends DBAdapterAbstract<Pasture> {
 	
 	private static final String LOG_TAG = "DBPastoAdapter";
 	
 	private static DBPastoHelper dbPastoHelper;
-	private static DBPastoAdapter mInstance;
+	private static DBPastureAdapter mInstance;
 	
-	private DBPastoAdapter(Context context) {
+	private DBPastureAdapter(Context context) {
 		dbPastoHelper = new DBPastoHelper(context);
 	}
 	
-	public static DBPastoAdapter getInstance(Context context){
+	public static DBPastureAdapter getInstance(Context context){
 		if(mInstance == null){
-			mInstance = new DBPastoAdapter(context);
+			mInstance = new DBPastureAdapter(context);
 		}
 		return mInstance;
 	}
 
 	@Override
-	public Pasto create(Pasto pasto) {
+	public Pasture create(Pasture pasto) {
 		Log.d(LOG_TAG, "Incluindo Pasto: " + pasto.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBPastoHelper.ID, pasto.getId());
-		values.put(DBPastoHelper.DESCRICAO, pasto.getDescricao());
+		values.put(DBPastoHelper.DESCRICAO, pasto.getDescription());
 		database.insert(DBPastoHelper.TABLE_NAME, null, values);
 
 		return get(pasto.getId());
 	}
 
 	@Override
-	public void delete(Pasto p) {
+	public void delete(Pasture p) {
 		Log.d(LOG_TAG, "Excluindo Pasto: " + p.getId());
 		database.delete(DBPastoHelper.TABLE_NAME, DBPastoHelper.ID + " = " + p.getId(), null);
 	}
 	
 	@Override
-	public Pasto cursorTo(Cursor cursor) {
-		Pasto pasto = new Pasto(cursor.getInt(0), cursor.getString(1));
+	public Pasture cursorTo(Cursor cursor) {
+		Pasture pasto = new Pasture(cursor.getInt(0), cursor.getString(1));
 		return pasto;
 	}
 	
 	@Override
-	public List<Pasto> list() {
+	public List<Pasture> list() {
 		Log.d(LOG_TAG, "Obtendo Pastos");
-		List<Pasto> listaPasto = new ArrayList<Pasto>();
+		List<Pasture> listaPasto = new ArrayList<Pasture>();
 		Cursor cursor = database.rawQuery("select * from " + DBPastoHelper.TABLE_NAME + " order by " + DBPastoHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
@@ -67,7 +67,7 @@ public class DBPastoAdapter extends DBAdapterAbstract<Pasto> {
 	}
 
 	@Override
-	public Pasto get(int idPasto) {
+	public Pasture get(int idPasto) {
 		Log.d(LOG_TAG, "Obtendo Pasto: " + idPasto);
 		String query = "select " +
 				DBPastoHelper.TABLE_NAME + "." + DBPastoHelper.ID + ", " +

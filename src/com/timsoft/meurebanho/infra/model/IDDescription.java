@@ -3,24 +3,24 @@ package com.timsoft.meurebanho.infra.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class IDDescricao implements Parcelable{
+public class IDDescription implements Parcelable{
 	private int id;
-	private String descricao;
+	private String description;
 	
-	public IDDescricao () {
+	public IDDescription () {
 	}
 	
-	public IDDescricao (int id, String descricao) {
+	public IDDescription (int id, String description) {
 		this.id = id;
-		this.descricao = descricao;
+		this.description = description;
 	}
 	
-	public IDDescricao(Parcel in) {
+	public IDDescription(Parcel in) {
 		String[] data = new String[2];
 
 		in.readStringArray(data);
 		setId(Integer.parseInt(data[0]));
-		setDescricao(data[1]);
+		setDescription(data[1]);
 	}
 
 	public int getId() {
@@ -31,12 +31,12 @@ public class IDDescricao implements Parcelable{
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String descricao) {
+		this.description = descricao;
 	}
 	
 	@Override
@@ -47,11 +47,11 @@ public class IDDescricao implements Parcelable{
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeStringArray(new String[] { Integer.toString(getId()),
-				getDescricao() });
+				getDescription() });
 	}
 
 	@Override
 	public String toString() {
-		return "IDDescricao [id=" + id + ", descricao=" + descricao + "]";
+		return "IDDescription [id=" + id + ", description=" + description + "]";
 	}
 }

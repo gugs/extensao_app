@@ -11,11 +11,14 @@
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <color name="background">#FFFFFF</color>
+    <color name="label_color">#000000</color>
     <string name="action_settings">Configurações</string>
     <string name="menu_settings">Configurações</string>
     
     <!-- Animal related messages -->
     <string name="animals">Animais</string>
+    <string name="animal_id_label">Código do Animal:</string>
+    <string name="animal_name_label">Nome do Animal:</string>
     <string name="animal_name_hint">Nome do Animal</string>
     <string name="add_animal">Incluir Animal</string>
     <string name="edit_animal">Alterar Animal</string>

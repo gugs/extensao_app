@@ -29,12 +29,12 @@ public class FarmAddActivity extends ActionBarActivity {
 		final ImageButton button = (ImageButton) findViewById(R.id.btn_save_add_farm);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	salvar();
+            	save();
             }
         });
 	}
 	
-    private void salvar() {
+    private void save() {
     	DBFarmAdapter farmDatasource = DBFarmAdapter.getInstance(this);
     	String farmName;
     	EditText input = (EditText) findViewById(R.id.input_add_farm);
@@ -48,7 +48,7 @@ public class FarmAddActivity extends ActionBarActivity {
     	
     	//Finding new id and saving
     	farmDatasource.open();
-    	int id = 0;
+    	int id = 1;
     	while(farmDatasource.get(id) != null) {
     		id++;
     	}

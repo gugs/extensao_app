@@ -1,4 +1,4 @@
-package com.timsoft.meurebanho.lote.db;
+package com.timsoft.meurebanho.lot.db;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,53 +10,53 @@ import android.util.Log;
 
 import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
 import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
-import com.timsoft.meurebanho.lote.model.Lote;
+import com.timsoft.meurebanho.lot.model.Lot;
 
-public class DBLoteAdapter extends DBAdapterAbstract<Lote> {
+public class DBLotAdapter extends DBAdapterAbstract<Lot> {
 	
 	private static final String LOG_TAG = "DBLoteAdapter";
 	
 	private static DBLoteHelper dbLoteHelper;
-	private static DBLoteAdapter mInstance;
+	private static DBLotAdapter mInstance;
 	
-	private DBLoteAdapter(Context context) {
+	private DBLotAdapter(Context context) {
 		dbLoteHelper = new DBLoteHelper(context);
 	}
 	
-	public static DBLoteAdapter getInstance(Context context){
+	public static DBLotAdapter getInstance(Context context){
 		if(mInstance == null){
-			mInstance = new DBLoteAdapter(context);
+			mInstance = new DBLotAdapter(context);
 		}
 		return mInstance;
 	}
 
 	@Override
-	public Lote create(Lote lote) {
+	public Lot create(Lot lote) {
 		Log.d(LOG_TAG, "Incluindo Lote: " + lote.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBLoteHelper.ID, lote.getId());
-		values.put(DBLoteHelper.DESCRICAO, lote.getDescricao());
+		values.put(DBLoteHelper.DESCRICAO, lote.getDescription());
 		database.insert(DBLoteHelper.TABLE_NAME, null, values);
 
 		return get(lote.getId());
 	}
 
 	@Override
-	public void delete(Lote l) {
+	public void delete(Lot l) {
 		Log.d(LOG_TAG, "Excluindo Lote: " + l.getId());
 		database.delete(DBLoteHelper.TABLE_NAME, DBLoteHelper.ID + " = " + l.getId(), null);
 	}
 	
 	@Override
-	public Lote cursorTo(Cursor cursor) {
-		Lote Lote = new Lote(cursor.getInt(0), cursor.getString(1));
+	public Lot cursorTo(Cursor cursor) {
+		Lot Lote = new Lot(cursor.getInt(0), cursor.getString(1));
 		return Lote;
 	}
 	
 	@Override
-	public List<Lote> list() {
+	public List<Lot> list() {
 		Log.d(LOG_TAG, "Obtendo Lotes");
-		List<Lote> listaLote = new ArrayList<Lote>();
+		List<Lot> listaLote = new ArrayList<Lot>();
 		Cursor cursor = database.rawQuery("select * from " + DBLoteHelper.TABLE_NAME + " order by " + DBLoteHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
@@ -67,7 +67,7 @@ public class DBLoteAdapter extends DBAdapterAbstract<Lote> {
 	}
 
 	@Override
-	public Lote get(int idLote) {
+	public Lot get(int idLote) {
 		Log.d(LOG_TAG, "Obtendo Lote: " + idLote);
 		String query = "select " +
 				DBLoteHelper.TABLE_NAME + "." + DBLoteHelper.ID + ", " +

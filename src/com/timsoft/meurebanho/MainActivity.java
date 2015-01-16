@@ -19,37 +19,37 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.timsoft.meurebanho.animal.activity.AnimalAddActivity;
+import com.timsoft.meurebanho.animal.activity.AnimalEditActivity;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.animal.model.AnimalArrayAdapter;
-import com.timsoft.meurebanho.farm.activity.FarmEditActivity;
 import com.timsoft.meurebanho.farm.activity.FarmsActivity;
 import com.timsoft.meurebanho.farm.db.DBFarmAdapter;
 import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
-import com.timsoft.meurebanho.lote.db.DBLoteAdapter;
-import com.timsoft.meurebanho.lote.model.Lote;
-import com.timsoft.meurebanho.pasto.db.DBPastoAdapter;
-import com.timsoft.meurebanho.pasto.model.Pasto;
-import com.timsoft.meurebanho.raca.db.DBRacaAdapter;
-import com.timsoft.meurebanho.raca.model.Raca;
-import com.timsoft.meurebanho.specie.db.DBEspecieAdapter;
-import com.timsoft.meurebanho.specie.model.Especie;
+import com.timsoft.meurebanho.lot.db.DBLotAdapter;
+import com.timsoft.meurebanho.lot.model.Lot;
+import com.timsoft.meurebanho.pasture.db.DBPastureAdapter;
+import com.timsoft.meurebanho.pasture.model.Pasture;
+import com.timsoft.meurebanho.race.db.DBRaceAdapter;
+import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
+import com.timsoft.meurebanho.specie.model.Specie;
 
 public class MainActivity extends ActionBarActivity {
 
 	private static final String LOG_TAG = "MainActivity";
 	
-	private static final String FIRST_RUN = "firstRun";
+	private static final String FIRST_RUN = "FIRST_RUN";
 
 	@SuppressWarnings("rawtypes")
 	private List<DBAdapterAbstract> dbAdapters;
 	
 	private DBAnimalAdapter animalDatasource;
-	private DBEspecieAdapter especieDatasource;
+	private DBSpecieAdapter specieDatasource;
 	private DBFarmAdapter farmDatasource;
-	private DBLoteAdapter loteDatasource;
-	private DBPastoAdapter pastoDatasource;
-	private DBRacaAdapter racaDatasource;
+	private DBLotAdapter lotDatasource;
+	private DBPastureAdapter pastureDatasource;
+	private DBRaceAdapter raceDatasource;
 	
 	private List<Animal> animals;
 	
@@ -66,49 +66,48 @@ public class MainActivity extends ActionBarActivity {
 		Log.d(LOG_TAG, "onCreate");
 		
 		animalDatasource = DBAnimalAdapter.getInstance(this);
-		especieDatasource = DBEspecieAdapter.getInstance(this);
 		farmDatasource = DBFarmAdapter.getInstance(this);
-		loteDatasource = DBLoteAdapter.getInstance(this);
-		pastoDatasource = DBPastoAdapter.getInstance(this);
-		racaDatasource = DBRacaAdapter.getInstance(this);
+		lotDatasource = DBLotAdapter.getInstance(this);
+		pastureDatasource = DBPastureAdapter.getInstance(this);
+		raceDatasource = DBRaceAdapter.getInstance(this);
+		specieDatasource = DBSpecieAdapter.getInstance(this);
 		
 		dbAdapters = new ArrayList<DBAdapterAbstract>();
 		dbAdapters.add(animalDatasource);
-		dbAdapters.add(especieDatasource);
 		dbAdapters.add(farmDatasource);
-		dbAdapters.add(loteDatasource);
-		dbAdapters.add(pastoDatasource);
-		dbAdapters.add(racaDatasource);
+		dbAdapters.add(lotDatasource);
+		dbAdapters.add(pastureDatasource);
+		dbAdapters.add(raceDatasource);
+		dbAdapters.add(specieDatasource);
 		
 		prefs = getSharedPreferences(getString(R.string.app_full_name), MODE_PRIVATE);
 		
-		//Carrega dados default
+		//Load default data
 		if(prefs.getBoolean(FIRST_RUN, true)) {
-			especieDatasource.open();
-			for(Especie e : Especie.getEspeciesDefault()) {
-				especieDatasource.create(e);
+			specieDatasource.open();
+			for(Specie e : Specie.getDefaultSpecies()) {
+				specieDatasource.create(e);
 			}
-			especieDatasource.close();
+			specieDatasource.close();
 			
-			loteDatasource.open();
-			loteDatasource.create(new Lote(1, "Lote1"));
-			loteDatasource.close();
+			lotDatasource.open();
+			lotDatasource.create(new Lot(1, "Lote1"));
+			lotDatasource.close();
 			
-			pastoDatasource.open();
-			pastoDatasource.create(new Pasto(1, "Pasto1"));
-			pastoDatasource.close();
+			pastureDatasource.open();
+			pastureDatasource.create(new Pasture(1, "Pasto1"));
+			pastureDatasource.close();
 			
-			racaDatasource.open();
-			for(Raca r : Raca.getRacasDefault()) {
-				racaDatasource.create(r);
+			raceDatasource.open();
+			for(Race r : Race.getDefaultRaces()) {
+				raceDatasource.create(r);
 			}
-			racaDatasource.close();
+			raceDatasource.close();
 			
-			//Carregar valores default em tabelas
 			prefs.edit().putBoolean(FIRST_RUN, false).commit();
 		};
 		
-		final ImageButton button = (ImageButton) findViewById(R.id.btn_adicionar_semovente);
+		final ImageButton button = (ImageButton) findViewById(R.id.btn_add_animal);
 	    button.setOnClickListener(new View.OnClickListener() {
 	        public void onClick(View v) {
 	        	Intent intent = new Intent(MainActivity.this, AnimalAddActivity.class);
@@ -140,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	protected void editAnimal(Animal a) {
-		Intent intent = new Intent(this, FarmEditActivity.class);
+		Intent intent = new Intent(this, AnimalEditActivity.class);
 		intent.putExtra("animal_id", a.getId());
 		startActivity(intent);
 	}
@@ -155,8 +154,8 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_eventos:
-			Toast.makeText(this, "Eventos Selecionado", Toast.LENGTH_SHORT).show();
+		case R.id.action_events:
+			Toast.makeText(this, "Event Selected", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.action_farms:
 			Intent intent = new Intent(this, FarmsActivity.class);

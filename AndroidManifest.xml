@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light" >
         
+		<!-- Main -->
         <activity
             android:name="com.timsoft.meurebanho.MainActivity"
             android:label="@string/app_name" >
@@ -21,6 +22,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- Animal -->
+        <activity
+            android:name="com.timsoft.meurebanho.animal.activity.AnimalAddActivity"
+            android:label="@string/animals" 
+            android:parentActivityName="com.timsoft.meurebanho.MainActivity" >
+        	<meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.timsoft.meurebanho.MainActivity" />
+        </activity>
+        
+		<activity
+            android:name="com.timsoft.meurebanho.animal.activity.AnimalEditActivity"
+            android:label="@string/animals" 
+            android:parentActivityName="com.timsoft.meurebanho.MainActivity" >
+        	<meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.timsoft.meurebanho.MainActivity" />
+        </activity>
+        
+        <!-- Farm -->
 		<activity
             android:name="com.timsoft.meurebanho.farm.activity.FarmsActivity"
             android:label="@string/farms" 

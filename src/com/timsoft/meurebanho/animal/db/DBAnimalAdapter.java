@@ -40,9 +40,19 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 		values.put(DBAnimalHelper.RACE_ID, animal.getRaceId());
 		values.put(DBAnimalHelper.NAME, animal.getName());
 		values.put(DBAnimalHelper.EAR_TAG, animal.getEarTag());
-		values.put(DBAnimalHelper.BIRTH_DATE, animal.getBirthDate().getTime());
-		values.put(DBAnimalHelper.AQUISITION_DATE, animal.getAquisitionDate().getTime());
-		values.put(DBAnimalHelper.SELL_DATE, animal.getSellDate().getTime());
+		
+		if(animal.getBirthDate() != null) {
+			values.put(DBAnimalHelper.BIRTH_DATE, animal.getBirthDate().getTime());
+		}
+		
+		if(animal.getAquisitionDate() != null) {
+			values.put(DBAnimalHelper.AQUISITION_DATE, animal.getAquisitionDate().getTime());
+		}
+		
+		if(animal.getSellDate() != null) {
+			values.put(DBAnimalHelper.SELL_DATE, animal.getSellDate().getTime());
+		}
+		
 		values.put(DBAnimalHelper.AQUISITION_VALUE, animal.getAquisitionValue());
 		values.put(DBAnimalHelper.SELL_VALUE, animal.getSellValue());
 		database.insert(DBAnimalHelper.TABLE_NAME, null, values);

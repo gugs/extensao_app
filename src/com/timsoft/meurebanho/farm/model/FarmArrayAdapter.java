@@ -26,7 +26,7 @@ public class FarmArrayAdapter extends ArrayAdapter<Farm> {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		View rowView = inflater.inflate(R.layout.farm_list, parent, false);
 		TextView textView = (TextView) rowView.findViewById(R.id.farm_name);
-		textView.setText(values.get(position).getDescricao());
+		textView.setText(values.get(position).getDescription());
 		
 		return rowView;
 	}

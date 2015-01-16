@@ -10,53 +10,53 @@ import android.util.Log;
 
 import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
 import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
-import com.timsoft.meurebanho.specie.model.Especie;
+import com.timsoft.meurebanho.specie.model.Specie;
 
-public class DBEspecieAdapter extends DBAdapterAbstract<Especie> {
+public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	
 	private static final String LOG_TAG = "DBEspecieAdapter";
 	
 	private static DBEspecieHelper dbEspecieHelper;
-	private static DBEspecieAdapter mInstance;
+	private static DBSpecieAdapter mInstance;
 	
-	private DBEspecieAdapter(Context context) {
+	private DBSpecieAdapter(Context context) {
 		dbEspecieHelper = new DBEspecieHelper(context);
 	}
 	
-	public static DBEspecieAdapter getInstance(Context context){
+	public static DBSpecieAdapter getInstance(Context context){
 		if(mInstance == null){
-			mInstance = new DBEspecieAdapter(context);
+			mInstance = new DBSpecieAdapter(context);
 		}
 		return mInstance;
 	}
 
 	@Override
-	public Especie create(Especie Especie) {
+	public Specie create(Specie Especie) {
 		Log.d(LOG_TAG, "Incluindo Especie: " + Especie.toString());
 		ContentValues values = new ContentValues();
 		values.put(DBEspecieHelper.ID, Especie.getId());
-		values.put(DBEspecieHelper.DESCRICAO, Especie.getDescricao());
+		values.put(DBEspecieHelper.DESCRICAO, Especie.getDescription());
 		database.insert(DBEspecieHelper.TABLE_NAME, null, values);
 
 		return get(Especie.getId());
 	}
 
 	@Override
-	public void delete(Especie e) {
+	public void delete(Specie e) {
 		Log.d(LOG_TAG, "Excluindo Especie: " + e.getId());
 		database.delete(DBEspecieHelper.TABLE_NAME, DBEspecieHelper.ID + " = " + e.getId(), null);
 	}
 	
 	@Override
-	public Especie cursorTo(Cursor cursor) {
-		Especie Especie = new Especie(cursor.getInt(0), cursor.getString(1));
+	public Specie cursorTo(Cursor cursor) {
+		Specie Especie = new Specie(cursor.getInt(0), cursor.getString(1));
 		return Especie;
 	}
 	
 	@Override
-	public List<Especie> list() {
+	public List<Specie> list() {
 		Log.d(LOG_TAG, "Obtendo Especies");
-		List<Especie> listaEspecie = new ArrayList<Especie>();
+		List<Specie> listaEspecie = new ArrayList<Specie>();
 		Cursor cursor = database.rawQuery("select * from " + DBEspecieHelper.TABLE_NAME + " order by " + DBEspecieHelper.ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
@@ -67,7 +67,7 @@ public class DBEspecieAdapter extends DBAdapterAbstract<Especie> {
 	}
 
 	@Override
-	public Especie get(int idEspecie) {
+	public Specie get(int idEspecie) {
 		Log.d(LOG_TAG, "Obtendo Especie: " + idEspecie);
 		String query = "select " +
 				DBEspecieHelper.TABLE_NAME + "." + DBEspecieHelper.ID + ", " +

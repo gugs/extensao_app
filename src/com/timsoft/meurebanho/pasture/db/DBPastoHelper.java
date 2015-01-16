@@ -1,26 +1,24 @@
-package com.timsoft.meurebanho.raca.db;
+package com.timsoft.meurebanho.pasture.db;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
 
-public class DBRacaHelper extends DBMeuRebanhoHelperAbstract{
+public class DBPastoHelper extends DBMeuRebanhoHelperAbstract{
 	
-	private static final String LOG_TAG = "DBRacaHelper";
+	private static final String LOG_TAG = "DBPastoHelper";
 	
-	public static final String TABLE_NAME = "raca";
+	public static final String TABLE_NAME = "pasto";
 	
 	public static final String ID = "id";
 	public static final String DESCRICAO = "descricao";
-	public static final String ID_ESPECIE = "id_especie";
 
 	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
 			+ ID + " integer primary key, "
-			+ DESCRICAO + " text not null, " 
-			+ ID_ESPECIE + " integer not null)";
+			+ DESCRICAO + " text not null);";
 
-	public DBRacaHelper(Context context) {
+	public DBPastoHelper(Context context) {
 		super(context);
 		Log.d(LOG_TAG, "Construindo DBRacaHelper");
 	}

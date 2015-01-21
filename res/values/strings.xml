@@ -1,4 +1,6 @@
 <resources>
+    <!-- FIXME: Apagar hints não utilizados -->
+    
 	<!-- Generic messages -->
 	
 	<string name="app_name">Meu Rebanho</string>
@@ -45,6 +47,10 @@
     <string name="animal_sell_date_label">Data da venda:</string>
     <string name="animal_sell_date_hint">Data da venda</string>
     
+    <string name="animal_death_date_label">Data da morte:</string>
+    
+    <string name="animal_death_reason_label">Motivo da morte:</string>
+
     <string name="animal_aquisition_value_label">Valor de aquisição:</string>
     <string name="animal_aquisition_value_hint">Valor de aquisição</string>
     

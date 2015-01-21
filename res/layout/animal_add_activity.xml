@@ -52,7 +52,7 @@
 	        android:id="@+id/spinner_add_animal_race"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content" />
-	
+	    
 	    <!-- sex -->
 	    <TextView
 	        android:layout_width="wrap_content"
@@ -118,14 +118,14 @@
 	        android:text="@string/animal_birth_date_label"
 	        android:textAppearance="?android:attr/textAppearanceSmall"
 	        android:textColor="@color/label_color" />
-	
-	    <EditText
+	    
+		<TextView
 	        android:id="@+id/input_add_animal_birth_date"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:ems="10"
-	        android:inputType="date" />
-	    
+	        android:layout_height="match_parent"
+	        android:padding="12dp"
+	        android:textSize="20sp" />
+		    
 	    <!-- aquisition date -->
 	    <TextView
 	        android:layout_width="wrap_content"
@@ -133,14 +133,14 @@
 	        android:text="@string/animal_aquisition_date_label"
 	        android:textAppearance="?android:attr/textAppearanceSmall"
 	        android:textColor="@color/label_color" />
-	
-	    <EditText
+	    
+		<TextView
 	        android:id="@+id/input_add_animal_aquisition_date"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:ems="10"
-	        android:inputType="date" />
-	    
+	        android:layout_height="match_parent"
+	        android:padding="12dp"
+	        android:textSize="20sp" />
+	
 	    <!-- sell date -->
 	    <TextView
 	        android:layout_width="wrap_content"
@@ -148,14 +148,44 @@
 	        android:text="@string/animal_sell_date_label"
 	        android:textAppearance="?android:attr/textAppearanceSmall"
 	        android:textColor="@color/label_color" />
-	
-	    <EditText
+	    
+		<TextView
 	        android:id="@+id/input_add_animal_sell_date"
 	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:padding="12dp"
+	        android:textSize="20sp" />
+
+		<!-- death date -->
+	    <TextView
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:ems="10"
-	        android:inputType="date" />
+	        android:text="@string/animal_death_date_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
 	    
+		<TextView
+	        android:id="@+id/input_add_animal_death_date"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:padding="12dp"
+	        android:textSize="20sp" />
+		
+		<!-- death reason -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_death_reason_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	
+	    <EditText
+	        android:id="@+id/input_add_animal_death_reason"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10">
+	    </EditText>
+	
 	    <!-- aquisition value -->
 	    <TextView
 	        android:layout_width="wrap_content"
@@ -163,15 +193,17 @@
 	        android:text="@string/animal_aquisition_value_label"
 	        android:textAppearance="?android:attr/textAppearanceSmall"
 	        android:textColor="@color/label_color" />
-
-	    <EditText
+	    
+		<EditText
 	        android:id="@+id/input_add_animal_aquisition_value"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
+	        android:digits="1234567890.,"
 	        android:inputType="numberDecimal"/>
-	
+
 		<!-- sell value -->
+		<!-- TODO: Mostrar somente se tiver preenchido data da venda -->
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -184,6 +216,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:ems="10"
+	        android:digits="1234567890.,"
 	        android:inputType="numberDecimal"/>
 	    
 	    <!-- buttons -->

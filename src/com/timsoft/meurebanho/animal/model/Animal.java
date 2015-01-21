@@ -20,6 +20,9 @@ public class Animal {
 	private Date aquisitionDate;
 	private Date sellDate;
 	
+	private Date deathDate;
+	private String deathReason;
+	
 	private double aquisitionValue;
 	private double sellValue;
 	
@@ -36,6 +39,7 @@ public class Animal {
 	public Animal(	int id, int specieId, int raceId, 
 					String sex, String name, String earTag, 
 					Date birthDate, Date aquisitionDate, Date sellDate, 
+					Date deathDate, String deathReason,
 					double aquisitionValue, double sellValue, 
 					int fatherId, int motherId) {
 		
@@ -45,11 +49,17 @@ public class Animal {
 		this.sex = sex;
 		this.name = name;
 		this.earTag = earTag;
+		
 		this.birthDate = birthDate;
 		this.aquisitionDate = aquisitionDate;
 		this.sellDate = sellDate;
+		
+		this.deathDate = deathDate;
+		this.deathReason = deathReason;
+		
 		this.aquisitionValue = aquisitionValue;
 		this.sellValue = sellValue;
+		
 		this.fatherId = fatherId;
 		this.motherId = motherId;
 	}
@@ -174,16 +184,32 @@ public class Animal {
 		this.motherId = motherId;
 	}
 
+	public Date getDeathDate() {
+		return deathDate;
+	}
+
+	public void setDeathDate(Date deathDate) {
+		this.deathDate = deathDate;
+	}
+
+	public String getDeathReason() {
+		return deathReason;
+	}
+
+	public void setDeathReason(String deathReason) {
+		this.deathReason = deathReason;
+	}
+
 	@Override
 	public String toString() {
 		return "Animal [id=" + id + ", specieId=" + specieId + ", raceId="
 				+ raceId + ", sex=" + sex + ", name=" + name + ", earTag="
 				+ earTag + ", birthDate=" + birthDate + ", aquisitionDate="
-				+ aquisitionDate + ", sellDate=" + sellDate
+				+ aquisitionDate + ", sellDate=" + sellDate + ", deathDate="
+				+ deathDate + ", deathReason=" + deathReason
 				+ ", aquisitionValue=" + aquisitionValue + ", sellValue="
 				+ sellValue + ", fatherId=" + fatherId + ", motherId="
 				+ motherId + ", pictures=" + pictures + ", events=" + events
 				+ "]";
 	}
-
 }

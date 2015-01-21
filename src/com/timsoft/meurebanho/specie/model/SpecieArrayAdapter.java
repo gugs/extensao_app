@@ -19,6 +19,7 @@ import com.timsoft.meurebanho.R;
 
 public class SpecieArrayAdapter extends ArrayAdapter<Specie> {
 	
+	@SuppressWarnings("unused")
 	private static final String LOG_TAG = "SpecieArrayAdapter";
 	
 	private static Map<Integer, Integer> resourceMap;

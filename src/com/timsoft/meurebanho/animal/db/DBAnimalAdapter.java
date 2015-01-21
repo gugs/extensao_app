@@ -55,6 +55,11 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 			values.put(DBAnimalHelper.SELL_DATE, animal.getSellDate().getTime());
 		}
 		
+		if(animal.getDeathDate() != null) {
+			values.put(DBAnimalHelper.DEATH_DATE, animal.getDeathDate().getTime());
+		}
+		values.put(DBAnimalHelper.DEATH_REASON, animal.getDeathReason());
+		
 		values.put(DBAnimalHelper.AQUISITION_VALUE, animal.getAquisitionValue());
 		values.put(DBAnimalHelper.SELL_VALUE, animal.getSellValue());
 		database.insert(DBAnimalHelper.TABLE_NAME, null, values);
@@ -82,11 +87,14 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 				new Date(cursor.getLong(7)),
 				new Date(cursor.getLong(8)),
 				
-				cursor.getDouble(9),
-				cursor.getDouble(10),
+				new Date(cursor.getLong(9)),
+				cursor.getString(10),
 				
-				cursor.getInt(11),
-				cursor.getInt(12));
+				cursor.getDouble(11),
+				cursor.getDouble(12),
+				
+				cursor.getInt(13),
+				cursor.getInt(14));
 		return Animal;
 	}
 	
@@ -122,5 +130,19 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 	@Override
 	protected DBMeuRebanhoHelperAbstract getHelper() {
 		return dbAnimalHelper;
+	}
+	
+	public int getNextId() {
+		String query = 	"select * from " 
+						+ DBAnimalHelper.TABLE_NAME
+						+ " order by " + DBAnimalHelper.ID + " desc";
+				
+		Cursor cursor = database.rawQuery(query, null);
+		
+		if (cursor != null && cursor.moveToFirst()) {
+			return cursorTo(cursor).getId() + 1;
+		} else {
+			return 1;
+		}
 	}
 }

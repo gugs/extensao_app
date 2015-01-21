@@ -23,6 +23,9 @@ public class DBAnimalHelper extends DBMeuRebanhoHelperAbstract{
 	public static final String AQUISITION_DATE = "aquisition_date";
 	public static final String SELL_DATE = "sell_date";
 	
+	public static final String DEATH_DATE = "death_date";
+	public static final String DEATH_REASON = "death_reason";
+	
 	public static final String AQUISITION_VALUE = "aquisition_value";
 	public static final String SELL_VALUE = "sell_value";
 	
@@ -41,6 +44,9 @@ public class DBAnimalHelper extends DBMeuRebanhoHelperAbstract{
 			+ BIRTH_DATE + " integer, "
 			+ AQUISITION_DATE + " integer, "
 			+ SELL_DATE + " integer, "
+			
+			+ DEATH_DATE + " integer, "
+			+ DEATH_REASON + " text, "
 			
 			+ AQUISITION_VALUE + " real, "
 			+ SELL_VALUE + " real, "

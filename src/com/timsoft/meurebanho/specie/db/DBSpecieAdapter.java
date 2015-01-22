@@ -8,19 +8,26 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
-import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
+import com.timsoft.meurebanho.infra.db.DBAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
-public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
+public class DBSpecieAdapter extends DBAdapter<Specie> {
 	
 	private static final String LOG_TAG = "DBEspecieAdapter";
 	
-	private static DBSpecieHelper dbEspecieHelper;
+	public static final String TABLE_NAME = "specie";
+	
+	public static final String ID = "id";
+	public static final String DESCRIPTION = "description";
+
+	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
+			+ ID + " integer primary key, "
+			+ DESCRIPTION + " text not null);";
+	
 	private static DBSpecieAdapter mInstance;
 	
 	private DBSpecieAdapter(Context context) {
-		dbEspecieHelper = new DBSpecieHelper(context);
+		super(context);
 	}
 	
 	public static DBSpecieAdapter getInstance(Context context){
@@ -34,9 +41,9 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	public Specie create(Specie Especie) {
 		Log.d(LOG_TAG, "Incluindo Especie: " + Especie.toString());
 		ContentValues values = new ContentValues();
-		values.put(DBSpecieHelper.ID, Especie.getId());
-		values.put(DBSpecieHelper.DESCRIPTION, Especie.getDescription());
-		database.insert(DBSpecieHelper.TABLE_NAME, null, values);
+		values.put(ID, Especie.getId());
+		values.put(DESCRIPTION, Especie.getDescription());
+		database.insert(TABLE_NAME, null, values);
 
 		return get(Especie.getId());
 	}
@@ -44,7 +51,7 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	@Override
 	public void delete(Specie e) {
 		Log.d(LOG_TAG, "Excluindo Especie: " + e.getId());
-		database.delete(DBSpecieHelper.TABLE_NAME, DBSpecieHelper.ID + " = " + e.getId(), null);
+		database.delete(TABLE_NAME, ID + " = " + e.getId(), null);
 	}
 	
 	@Override
@@ -57,7 +64,7 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	public List<Specie> list() {
 		Log.d(LOG_TAG, "Obtendo Especies");
 		List<Specie> listaEspecie = new ArrayList<Specie>();
-		Cursor cursor = database.rawQuery("select * from " + DBSpecieHelper.TABLE_NAME + " order by " + DBSpecieHelper.ID, null);
+		Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " order by " + ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
 	        	listaEspecie.add(cursorTo(cursor));
@@ -70,13 +77,13 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	public Specie get(int idEspecie) {
 		Log.d(LOG_TAG, "Obtendo Especie: " + idEspecie);
 		String query = "select " +
-				DBSpecieHelper.TABLE_NAME + "." + DBSpecieHelper.ID + ", " +
-				DBSpecieHelper.TABLE_NAME + "." + DBSpecieHelper.DESCRIPTION + 
+				TABLE_NAME + "." + ID + ", " +
+				TABLE_NAME + "." + DESCRIPTION + 
 				
-				" from " + DBSpecieHelper.TABLE_NAME + 
+				" from " + TABLE_NAME + 
 				
 				" where " +
-				DBSpecieHelper.TABLE_NAME + "." + DBSpecieHelper.ID + " = " + idEspecie;
+				TABLE_NAME + "." + ID + " = " + idEspecie;
 				
 		Cursor cursor = database.rawQuery(query, null);
 		
@@ -87,7 +94,7 @@ public class DBSpecieAdapter extends DBAdapterAbstract<Specie> {
 	}
 	
 	@Override
-	protected DBMeuRebanhoHelperAbstract getHelper() {
-		return dbEspecieHelper;
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 }

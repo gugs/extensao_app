@@ -9,18 +9,25 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.timsoft.meurebanho.farm.model.Farm;
-import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
-import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
+import com.timsoft.meurebanho.infra.db.DBAdapter;
 
-public class DBFarmAdapter extends DBAdapterAbstract<Farm>{
+public class DBFarmAdapter extends DBAdapter<Farm>{
 	
 	private static final String LOG_TAG = "DBFarmAdapter";
 	
-	private static DBFarmHelper dbFarmHelper;
+	public static final String TABLE_NAME = "farm";
+	
+	public static final String ID = "id";
+	public static final String NAME = "name";
+
+	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
+			+ ID + " integer primary key, "
+			+ NAME + " text not null);";
+	
 	private static DBFarmAdapter mInstance;
 	
 	private DBFarmAdapter(Context context) {
-		dbFarmHelper = new DBFarmHelper(context);
+		super(context);
 	}
 	
 	public static DBFarmAdapter getInstance(Context context){
@@ -34,9 +41,9 @@ public class DBFarmAdapter extends DBAdapterAbstract<Farm>{
 	public Farm create(Farm farm) {
 		Log.d(LOG_TAG, "Adding farm: " + farm.toString());
 		ContentValues values = new ContentValues();
-		values.put(DBFarmHelper.ID, farm.getId());
-		values.put(DBFarmHelper.NAME, farm.getDescription());
-		database.insert(DBFarmHelper.TABLE_NAME, null, values);
+		values.put(ID, farm.getId());
+		values.put(NAME, farm.getDescription());
+		database.insert(TABLE_NAME, null, values);
 
 		return get(farm.getId());
 	}
@@ -44,7 +51,7 @@ public class DBFarmAdapter extends DBAdapterAbstract<Farm>{
 	@Override
 	public void delete(Farm f) {
 		Log.d(LOG_TAG, "Deleting farm: " + f.getId());
-		database.delete(DBFarmHelper.TABLE_NAME, DBFarmHelper.ID + " = " + f.getId(), null);
+		database.delete(TABLE_NAME, ID + " = " + f.getId(), null);
 	}
 	
 	@Override
@@ -57,7 +64,7 @@ public class DBFarmAdapter extends DBAdapterAbstract<Farm>{
 	public List<Farm> list() {
 		Log.d(LOG_TAG, "Getting farms");
 		List<Farm> farmList = new ArrayList<Farm>();
-		Cursor cursor = database.rawQuery("select * from " + DBFarmHelper.TABLE_NAME + " order by " + DBFarmHelper.NAME, null);
+		Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " order by " + NAME, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
 	        	farmList.add(cursorTo(cursor));
@@ -70,13 +77,13 @@ public class DBFarmAdapter extends DBAdapterAbstract<Farm>{
 	public Farm get(int idFarm) {
 		Log.d(LOG_TAG, "Getting farm: " + idFarm);
 		String query = "select " +
-				DBFarmHelper.TABLE_NAME + "." + DBFarmHelper.ID + ", " +
-				DBFarmHelper.TABLE_NAME + "." + DBFarmHelper.NAME + 
+				TABLE_NAME + "." + ID + ", " +
+				TABLE_NAME + "." + NAME + 
 				
-				" from " + DBFarmHelper.TABLE_NAME + 
+				" from " + TABLE_NAME + 
 				
 				" where " +
-				DBFarmHelper.TABLE_NAME + "." + DBFarmHelper.ID + " = " + idFarm;
+				TABLE_NAME + "." + ID + " = " + idFarm;
 				
 		Cursor cursor = database.rawQuery(query, null);
 		
@@ -87,7 +94,7 @@ public class DBFarmAdapter extends DBAdapterAbstract<Farm>{
 	}
 
 	@Override
-	protected DBMeuRebanhoHelperAbstract getHelper() {
-		return dbFarmHelper;
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 }

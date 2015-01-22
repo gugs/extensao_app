@@ -1,11 +1,10 @@
 package com.timsoft.meurebanho.lot.db;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
+import com.timsoft.meurebanho.infra.db.DBHelper;
 
-public class DBLotHelper extends DBMeuRebanhoHelperAbstract{
+public class DBLotHelper extends DBHelper {
 	
 	private static final String LOG_TAG = "DBLotHelper";
 	
@@ -18,8 +17,7 @@ public class DBLotHelper extends DBMeuRebanhoHelperAbstract{
 			+ ID + " integer primary key, "
 			+ DESCRIPTION + " text not null);";
 
-	public DBLotHelper(Context context) {
-		super(context);
+	public DBLotHelper() {
 		Log.d(LOG_TAG, "Constructing DBLotHelper");
 	}
 	

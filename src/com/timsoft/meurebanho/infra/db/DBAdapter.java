@@ -2,13 +2,15 @@ package com.timsoft.meurebanho.infra.db;
 
 import java.util.List;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public abstract class DBAdapterAbstract<T> {
+public abstract class DBAdapter<T> {
 	
 	protected static SQLiteDatabase database;
+	private Context context;
 	
 	public abstract T create(T t);
 	public abstract void delete(T t);
@@ -16,26 +18,30 @@ public abstract class DBAdapterAbstract<T> {
 	public abstract List<T> list();
 	public abstract T get(int id);
 	
-	protected abstract DBMeuRebanhoHelperAbstract getHelper();
-	
-	public final void forceDrop(){
-		getHelper().forceDrop(database);
+	protected DBAdapter(Context context) {
+		this.context = context;
 	}
 	
 	public final void open() throws SQLException {
-		database = getHelper().getWritableDatabase();
+		database = getDBHandler().getWritableDatabase();
 	}
 	
 	public final void close() {
-		getHelper().close();
+		getDBHandler().close();
 	}
 	
 	public final void clear() {
-		database.delete(getHelper().getTableName(), null, null);
+		database.delete(getTableName(), null, null);
 	}
 	
 	public void update(T t) {
 		delete(t);
 		create(t);
 	}
+	
+	protected DBHandler getDBHandler() {
+		return DBHandler.getInstance(context);
+	}
+	
+	public abstract String getTableName();
 }

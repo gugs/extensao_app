@@ -8,19 +8,28 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
-import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
+import com.timsoft.meurebanho.infra.db.DBAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 
-public class DBRaceAdapter extends DBAdapterAbstract<Race> {
+public class DBRaceAdapter extends DBAdapter<Race> {
 	
 	private static final String LOG_TAG = "DBRacaAdapter";
 	
-	private static DBRaceHelper dbRacaHelper;
+	public static final String TABLE_NAME = "race";
+	
+	public static final String ID = "id";
+	public static final String DESCRIPTION = "description";
+	public static final String ID_SPECIE = "id_specie";
+
+	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
+			+ ID + " integer primary key, "
+			+ DESCRIPTION + " text not null, " 
+			+ ID_SPECIE + " integer not null)";
+	
 	private static DBRaceAdapter mInstance;
 	
 	private DBRaceAdapter(Context context) {
-		dbRacaHelper = new DBRaceHelper(context);
+		super(context);
 	}
 	
 	public static DBRaceAdapter getInstance(Context context){
@@ -34,10 +43,10 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 	public Race create(Race race) {
 		Log.d(LOG_TAG, "Including Race: " + race.toString());
 		ContentValues values = new ContentValues();
-		values.put(DBRaceHelper.ID, race.getId());
-		values.put(DBRaceHelper.DESCRIPTION, race.getDescription());
-		values.put(DBRaceHelper.ID_SPECIE, race.getIdSpecie());
-		database.insert(DBRaceHelper.TABLE_NAME, null, values);
+		values.put(ID, race.getId());
+		values.put(DESCRIPTION, race.getDescription());
+		values.put(ID_SPECIE, race.getIdSpecie());
+		database.insert(TABLE_NAME, null, values);
 
 		return get(race.getId());
 	}
@@ -45,7 +54,7 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 	@Override
 	public void delete(Race r) {
 		Log.d(LOG_TAG, "Excluiding Race: " + r.getId());
-		database.delete(DBRaceHelper.TABLE_NAME, DBRaceHelper.ID + " = " + r.getId(), null);
+		database.delete(TABLE_NAME, ID + " = " + r.getId(), null);
 	}
 	
 	@Override
@@ -58,7 +67,7 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 	public List<Race> list() {
 		Log.d(LOG_TAG, "Listing Races");
 		List<Race> listaRaca = new ArrayList<Race>();
-		Cursor cursor = database.rawQuery("select * from " + DBRaceHelper.TABLE_NAME + " order by " + DBRaceHelper.ID, null);
+		Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " order by " + ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
 	        	listaRaca.add(cursorTo(cursor));
@@ -71,14 +80,14 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 	public Race get(int idRaca) {
 		Log.d(LOG_TAG, "Getting Race: " + idRaca);
 		String query = "select " +
-				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.ID + ", " +
-				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.DESCRIPTION + ", " +
-				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.ID_SPECIE + 
+				TABLE_NAME + "." + ID + ", " +
+				TABLE_NAME + "." + DESCRIPTION + ", " +
+				TABLE_NAME + "." + ID_SPECIE + 
 				
-				" from " + DBRaceHelper.TABLE_NAME + 
+				" from " + TABLE_NAME + 
 				
 				" where " +
-				DBRaceHelper.TABLE_NAME + "." + DBRaceHelper.ID + " = " + idRaca;
+				TABLE_NAME + "." + ID + " = " + idRaca;
 				
 		Cursor cursor = database.rawQuery(query, null);
 		
@@ -87,9 +96,9 @@ public class DBRaceAdapter extends DBAdapterAbstract<Race> {
 		}
 		return null;
 	}
-	
+
 	@Override
-	protected DBMeuRebanhoHelperAbstract getHelper() {
-		return dbRacaHelper;
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 }

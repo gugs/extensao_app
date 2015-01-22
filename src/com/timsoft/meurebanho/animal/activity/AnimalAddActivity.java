@@ -8,7 +8,6 @@ import java.util.Locale;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.content.Intent;
 import android.net.ParseException;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -24,10 +23,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.animal.db.DBAnimalHelper;
 import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
@@ -56,8 +53,9 @@ public class AnimalAddActivity extends ActionBarActivity {
 		
 		//id
 		tvId = (TextView) findViewById(R.id.input_add_animal_id);
+		animalDatasource = DBAnimalAdapter.getInstance(this);
 		animalDatasource.open();
-		tvId.setText(animalDatasource.getNextId());
+		tvId.setText(Integer.toString(animalDatasource.getNextId()));
 		animalDatasource.close();
 		//
 		
@@ -269,6 +267,10 @@ public class AnimalAddActivity extends ActionBarActivity {
     		tvId.setError(getResources().getString(R.string.alert_id_already_used));
     		return;
     	}
+    	
+    	
+    	
+    	
     	
     	Animal a = new Animal();
     	a.setId(id);

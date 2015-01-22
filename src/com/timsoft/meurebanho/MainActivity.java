@@ -1,6 +1,5 @@
 package com.timsoft.meurebanho;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
@@ -24,12 +23,7 @@ import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.animal.model.AnimalArrayAdapter;
 import com.timsoft.meurebanho.farm.activity.FarmsActivity;
-import com.timsoft.meurebanho.farm.db.DBFarmAdapter;
-import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
-import com.timsoft.meurebanho.lot.db.DBLotAdapter;
-import com.timsoft.meurebanho.lot.model.Lot;
-import com.timsoft.meurebanho.pasture.db.DBPastureAdapter;
-import com.timsoft.meurebanho.pasture.model.Pasture;
+import com.timsoft.meurebanho.infra.db.DBHandler;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
@@ -41,21 +35,14 @@ public class MainActivity extends ActionBarActivity {
 	
 	private static final String FIRST_RUN = "FIRST_RUN";
 
-	@SuppressWarnings("rawtypes")
-	private List<DBAdapterAbstract> dbAdapters;
-	
 	private DBAnimalAdapter animalDatasource;
 	private DBSpecieAdapter specieDatasource;
-	private DBFarmAdapter farmDatasource;
-	private DBLotAdapter lotDatasource;
-	private DBPastureAdapter pastureDatasource;
 	private DBRaceAdapter raceDatasource;
 	
 	private List<Animal> animals;
 	
-	SharedPreferences prefs = null;
+	private SharedPreferences prefs = null;
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,47 +52,19 @@ public class MainActivity extends ActionBarActivity {
 		
 		Log.d(LOG_TAG, "onCreate");
 		
+		prefs = getSharedPreferences(getString(R.string.app_full_name), MODE_PRIVATE);
+		
+		if(BuildConfig.DEBUG) {
+			deleteDatabase(DBHandler.DATABASE_NAME);
+			prefs.edit().putBoolean(FIRST_RUN, true).commit();
+		}
+		
 		animalDatasource = DBAnimalAdapter.getInstance(this);
-		farmDatasource = DBFarmAdapter.getInstance(this);
-		lotDatasource = DBLotAdapter.getInstance(this);
-		pastureDatasource = DBPastureAdapter.getInstance(this);
 		raceDatasource = DBRaceAdapter.getInstance(this);
 		specieDatasource = DBSpecieAdapter.getInstance(this);
 		
-		dbAdapters = new ArrayList<DBAdapterAbstract>();
-		dbAdapters.add(animalDatasource);
-		dbAdapters.add(farmDatasource);
-		dbAdapters.add(lotDatasource);
-		dbAdapters.add(pastureDatasource);
-		dbAdapters.add(raceDatasource);
-		dbAdapters.add(specieDatasource);
-		
-		prefs = getSharedPreferences(getString(R.string.app_full_name), MODE_PRIVATE);
-		
-		//Load default data
 		if(prefs.getBoolean(FIRST_RUN, true)) {
-			specieDatasource.open();
-			specieDatasource.create(new Specie(1, getResources().getString(R.string.specie_bovine)));
-			specieDatasource.create(new Specie(2, getResources().getString(R.string.specie_caprine)));
-			specieDatasource.create(new Specie(3, getResources().getString(R.string.specie_equine)));
-			specieDatasource.create(new Specie(4, getResources().getString(R.string.specie_ovine)));
-			specieDatasource.create(new Specie(5, getResources().getString(R.string.specie_swine)));
-			specieDatasource.close();
-			
-			lotDatasource.open();
-			lotDatasource.create(new Lot(1, "Lote1"));
-			lotDatasource.close();
-			
-			pastureDatasource.open();
-			pastureDatasource.create(new Pasture(1, "Pasto1"));
-			pastureDatasource.close();
-			
-			raceDatasource.open();
-			for(Race r : Race.getDefaultRaces()) {
-				raceDatasource.create(r);
-			}
-			raceDatasource.close();
-			
+			populateDefaultData();
 			prefs.edit().putBoolean(FIRST_RUN, false).commit();
 		};
 		
@@ -168,5 +127,19 @@ public class MainActivity extends ActionBarActivity {
 		}
 
 		return true;
+	}
+	
+	private void populateDefaultData() {
+		specieDatasource.open();
+		for(Specie e : Specie.getDefaultSpecies(this)) {
+			specieDatasource.create(e);
+		}
+		specieDatasource.close();
+		
+		raceDatasource.open();
+		for(Race r : Race.getDefaultRaces()) {
+			raceDatasource.create(r);
+		}
+		raceDatasource.close();
 	}
 }

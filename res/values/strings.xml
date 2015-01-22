@@ -23,6 +23,8 @@
     
     <string name="animal_id_label">Número de Identificação:</string>
     <string name="animal_id_hint">Número de Identificação</string>
+    <string name="alert_invalid_id">Número de Identificação inválido</string>
+    <string name="alert_id_already_used">Número de Identificação já utilizado</string>
     
     <string name="animal_specie_label">Espécie:</string>
     

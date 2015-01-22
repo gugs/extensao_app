@@ -10,18 +10,63 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
-import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
+import com.timsoft.meurebanho.infra.db.DBAdapter;
 
-public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
+public class DBAnimalAdapter extends DBAdapter<Animal> {
 	
 	private static final String LOG_TAG = "DBAnimalAdapter";
 	
-	private static DBAnimalHelper dbAnimalHelper;
+	public static final String TABLE_NAME = "animal";
+	
+	public static final String ID = "id";
+	public static final String SPECIE_ID = "specie_id";
+	public static final String RACE_ID = "race_id";
+	
+	public static final String SEX = "sex";
+	public static final String NAME = "name";
+	public static final String EAR_TAG = "ear_tag";
+	
+	public static final String BIRTH_DATE = "birth_date";
+	public static final String AQUISITION_DATE = "aquisition_date";
+	public static final String SELL_DATE = "sell_date";
+	
+	public static final String DEATH_DATE = "death_date";
+	public static final String DEATH_REASON = "death_reason";
+	
+	public static final String AQUISITION_VALUE = "aquisition_value";
+	public static final String SELL_VALUE = "sell_value";
+	
+	public static final String FATHER_ID = "father_id";
+	public static final String MOTHER_ID = "mother_id";
+	
+	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
+			+ ID + " integer primary key, "
+			+ SPECIE_ID + " integer, "
+			+ RACE_ID + " integer, "
+			
+			+ SEX + " text, "
+			+ NAME + " text, "
+			+ EAR_TAG + " text, "
+			
+			+ BIRTH_DATE + " integer, "
+			+ AQUISITION_DATE + " integer, "
+			+ SELL_DATE + " integer, "
+			
+			+ DEATH_DATE + " integer, "
+			+ DEATH_REASON + " text, "
+			
+			+ AQUISITION_VALUE + " real, "
+			+ SELL_VALUE + " real, "
+			
+			+ FATHER_ID + " integer, "
+			+ MOTHER_ID + " integer "
+			
+			+ ");";
+	
 	private static DBAnimalAdapter mInstance;
 	
 	private DBAnimalAdapter(Context context) {
-		dbAnimalHelper = new DBAnimalHelper(context);
+		super(context);
 	}
 	
 	public static DBAnimalAdapter getInstance(Context context){
@@ -35,41 +80,41 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 	public Animal create(Animal animal) {
 		Log.d(LOG_TAG, "Including animal: " + animal.toString());
 		ContentValues values = new ContentValues();
-		values.put(DBAnimalHelper.ID, animal.getId());
-		values.put(DBAnimalHelper.SPECIE_ID, animal.getSpecieId());
-		values.put(DBAnimalHelper.RACE_ID, animal.getRaceId());
+		values.put(ID, animal.getId());
+		values.put(SPECIE_ID, animal.getSpecieId());
+		values.put(RACE_ID, animal.getRaceId());
 		
-		values.put(DBAnimalHelper.SEX, animal.getSex());
-		values.put(DBAnimalHelper.NAME, animal.getName());
-		values.put(DBAnimalHelper.EAR_TAG, animal.getEarTag());
+		values.put(SEX, animal.getSex());
+		values.put(NAME, animal.getName());
+		values.put(EAR_TAG, animal.getEarTag());
 		
 		if(animal.getBirthDate() != null) {
-			values.put(DBAnimalHelper.BIRTH_DATE, animal.getBirthDate().getTime());
+			values.put(BIRTH_DATE, animal.getBirthDate().getTime());
 		}
 		
 		if(animal.getAquisitionDate() != null) {
-			values.put(DBAnimalHelper.AQUISITION_DATE, animal.getAquisitionDate().getTime());
+			values.put(AQUISITION_DATE, animal.getAquisitionDate().getTime());
 		}
 		
 		if(animal.getSellDate() != null) {
-			values.put(DBAnimalHelper.SELL_DATE, animal.getSellDate().getTime());
+			values.put(SELL_DATE, animal.getSellDate().getTime());
 		}
 		
 		if(animal.getDeathDate() != null) {
-			values.put(DBAnimalHelper.DEATH_DATE, animal.getDeathDate().getTime());
+			values.put(DEATH_DATE, animal.getDeathDate().getTime());
 		}
-		values.put(DBAnimalHelper.DEATH_REASON, animal.getDeathReason());
+		values.put(DEATH_REASON, animal.getDeathReason());
 		
-		values.put(DBAnimalHelper.AQUISITION_VALUE, animal.getAquisitionValue());
-		values.put(DBAnimalHelper.SELL_VALUE, animal.getSellValue());
-		database.insert(DBAnimalHelper.TABLE_NAME, null, values);
+		values.put(AQUISITION_VALUE, animal.getAquisitionValue());
+		values.put(SELL_VALUE, animal.getSellValue());
+		database.insert(TABLE_NAME, null, values);
 		return get(animal.getId());
 	}
 
 	@Override
 	public void delete(Animal a) {
 		Log.d(LOG_TAG, "Excluindo animal: " + a.getId());
-		database.delete(DBAnimalHelper.TABLE_NAME, DBAnimalHelper.ID + " = " + a.getId(), null);
+		database.delete(TABLE_NAME, ID + " = " + a.getId(), null);
 	}
 	
 	@Override
@@ -102,7 +147,7 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 	public List<Animal> list() {
 		Log.d(LOG_TAG, "Obtendo Animals");
 		List<Animal> listaAnimal = new ArrayList<Animal>();
-		Cursor cursor = database.rawQuery("select * from " + DBAnimalHelper.TABLE_NAME + " order by " + DBAnimalHelper.ID, null);
+		Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " order by " + ID, null);
 		if (cursor != null && cursor.moveToFirst()) {
 	        do {
 	        	listaAnimal.add(cursorTo(cursor));
@@ -115,9 +160,9 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 	public Animal get(int idAnimal) {
 		Log.d(LOG_TAG, "Obtendo Animal: " + idAnimal);
 		String query = 	"select * from " 
-						+ DBAnimalHelper.TABLE_NAME
+						+ TABLE_NAME
 						+ " where " 
-						+ DBAnimalHelper.TABLE_NAME + "." + DBAnimalHelper.ID + " = " + idAnimal;
+						+ TABLE_NAME + "." + ID + " = " + idAnimal;
 				
 		Cursor cursor = database.rawQuery(query, null);
 		
@@ -127,15 +172,10 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 		return null;
 	}
 
-	@Override
-	protected DBMeuRebanhoHelperAbstract getHelper() {
-		return dbAnimalHelper;
-	}
-	
 	public int getNextId() {
 		String query = 	"select * from " 
-						+ DBAnimalHelper.TABLE_NAME
-						+ " order by " + DBAnimalHelper.ID + " desc";
+						+ TABLE_NAME
+						+ " order by " + ID + " desc";
 				
 		Cursor cursor = database.rawQuery(query, null);
 		
@@ -144,5 +184,10 @@ public class DBAnimalAdapter extends DBAdapterAbstract<Animal>{
 		} else {
 			return 1;
 		}
+	}
+
+	@Override
+	public String getTableName() {
+		return TABLE_NAME;
 	}
 }

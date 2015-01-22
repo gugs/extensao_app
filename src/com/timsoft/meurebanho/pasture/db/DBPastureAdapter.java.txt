@@ -8,11 +8,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.timsoft.meurebanho.infra.db.DBAdapterAbstract;
-import com.timsoft.meurebanho.infra.db.DBMeuRebanhoHelperAbstract;
+import com.timsoft.meurebanho.infra.db.DBAdapter;
+import com.timsoft.meurebanho.infra.db.DBHandler;
 import com.timsoft.meurebanho.pasture.model.Pasture;
 
-public class DBPastureAdapter extends DBAdapterAbstract<Pasture> {
+public class DBPastureAdapter extends DBAdapter<Pasture> {
 	
 	private static final String LOG_TAG = "DBPastoAdapter";
 	
@@ -89,7 +89,7 @@ public class DBPastureAdapter extends DBAdapterAbstract<Pasture> {
 	}
 	
 	@Override
-	protected DBMeuRebanhoHelperAbstract getHelper() {
+	protected DBHandler getHelper() {
 		return dbPastoHelper;
 	}
 }

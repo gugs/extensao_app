@@ -54,10 +54,10 @@ public class MainActivity extends ActionBarActivity {
 		
 		prefs = getSharedPreferences(getString(R.string.app_full_name), MODE_PRIVATE);
 		
-		if(BuildConfig.DEBUG) {
-			deleteDatabase(DBHandler.DATABASE_NAME);
-			prefs.edit().putBoolean(FIRST_RUN, true).commit();
-		}
+//		if(BuildConfig.DEBUG) {
+//			deleteDatabase(DBHandler.DATABASE_NAME);
+//			prefs.edit().putBoolean(FIRST_RUN, true).commit();
+//		}
 		
 		animalDatasource = DBAnimalAdapter.getInstance(this);
 		raceDatasource = DBRaceAdapter.getInstance(this);

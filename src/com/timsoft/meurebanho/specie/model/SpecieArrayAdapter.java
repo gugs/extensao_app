@@ -59,11 +59,11 @@ public class SpecieArrayAdapter extends ArrayAdapter<Specie> {
     private static int getResourceFomId(int id){
     	if(resourceMap == null) {
     		resourceMap = new HashMap<Integer, Integer>();
-    		resourceMap.put(1, R.raw.specie_11);
-    		resourceMap.put(2, R.raw.specie_21);
-    		resourceMap.put(3, R.raw.specie_31);
-    		resourceMap.put(4, R.raw.specie_41);
-    		resourceMap.put(5, R.raw.specie_51);
+    		resourceMap.put(1, R.raw.specie_1);
+    		resourceMap.put(2, R.raw.specie_2);
+    		resourceMap.put(3, R.raw.specie_3);
+    		resourceMap.put(4, R.raw.specie_4);
+    		resourceMap.put(5, R.raw.specie_5);
     	}
     	return resourceMap.get(id);
     }

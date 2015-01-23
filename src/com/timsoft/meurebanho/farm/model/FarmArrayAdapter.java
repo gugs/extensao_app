@@ -14,6 +14,7 @@ import com.timsoft.meurebanho.R;
 public class FarmArrayAdapter extends ArrayAdapter<Farm> {
 	//FIXME: Utilizar a solução do SpecieArrayAdapter
 	
+	@SuppressWarnings("unused")
 	private final Context context;
 	private final List<Farm> values;
 

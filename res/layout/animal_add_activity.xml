@@ -140,6 +140,23 @@
 	        android:layout_height="match_parent"
 	        android:padding="12dp"
 	        android:textSize="20sp" />
+		
+		<!-- aquisition value -->
+		<!-- TODO: Mostrar somente se tiver preenchido data da compra -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_aquisition_value_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	    
+		<EditText
+	        android:id="@+id/input_add_animal_aquisition_value"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:digits="1234567890.,"
+	        android:inputType="numberDecimal"/>
 	
 	    <!-- sell date -->
 	    <TextView
@@ -155,6 +172,23 @@
 	        android:layout_height="match_parent"
 	        android:padding="12dp"
 	        android:textSize="20sp" />
+		
+		<!-- sell value -->
+		<!-- TODO: Mostrar somente se tiver preenchido data da venda -->
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/animal_sell_value_label"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@color/label_color" />
+	    
+		<EditText
+	        android:id="@+id/input_add_animal_sell_value"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:digits="1234567890.,"
+	        android:inputType="numberDecimal"/>
 
 		<!-- death date -->
 	    <TextView
@@ -172,6 +206,7 @@
 	        android:textSize="20sp" />
 		
 		<!-- death reason -->
+		<!-- TODO: Mostrar somente se tiver preenchido data da morte -->
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -183,42 +218,10 @@
 	        android:id="@+id/input_add_animal_death_reason"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
+	        android:inputType="text"
 	        android:ems="10">
 	    </EditText>
 	
-	    <!-- aquisition value -->
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/animal_aquisition_value_label"
-	        android:textAppearance="?android:attr/textAppearanceSmall"
-	        android:textColor="@color/label_color" />
-	    
-		<EditText
-	        android:id="@+id/input_add_animal_aquisition_value"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:ems="10"
-	        android:digits="1234567890.,"
-	        android:inputType="numberDecimal"/>
-
-		<!-- sell value -->
-		<!-- TODO: Mostrar somente se tiver preenchido data da venda -->
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/animal_sell_value_label"
-	        android:textAppearance="?android:attr/textAppearanceSmall"
-	        android:textColor="@color/label_color" />
-
-	    <EditText
-	        android:id="@+id/input_add_animal_sell_value"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:ems="10"
-	        android:digits="1234567890.,"
-	        android:inputType="numberDecimal"/>
-	    
 	    <!-- buttons -->
 	    <TableRow
 	        android:layout_width="fill_parent"

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.timsoft.meurebanho.R;
 
 public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
+	@SuppressWarnings("unused")
 	private final Context context;
 	private final List<Animal> values;
 

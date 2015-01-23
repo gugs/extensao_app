@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
  
+	<!-- ID -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/animal_specie_label"
+        android:text="@string/animal_id_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/label_color" />
     <TextView
@@ -16,6 +17,7 @@
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
     
+    <!-- Name -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

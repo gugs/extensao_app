@@ -72,6 +72,25 @@
     
     <!-- Species related messages -->
     <string name="specie_image">Imagem da Espécie</string>
+    <string name="specie_not_selected">Espécie não selecionada</string>
+    
+    <!-- Races related messages -->
+    <string name="race_not_selected">Raça não selecionada</string>
+    
+    <!-- Sex related messages -->
+    <string name="sex_not_selected">Sexo não selecionado</string>
+    
+    <!-- Birth Date related messages -->
+    <string name="birth_date_invalid">Data de nascimento inválida</string>
+    
+    <!-- Aquisition Date related messages -->
+    <string name="aquisition_date_invalid">Data de nascimento inválida</string>
+    
+    <!-- Sell Date related messages -->
+    <string name="sell_date_invalid">Data de venda inválida</string>
+    
+    <!-- Death Date related messages -->
+    <string name="death_date_invalid">Data de morte inválida</string>
     
     <!-- Event related messages -->
     <string name="events">Eventos</string>

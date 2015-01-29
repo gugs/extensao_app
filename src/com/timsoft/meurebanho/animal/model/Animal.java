@@ -1,6 +1,8 @@
 package com.timsoft.meurebanho.animal.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.graphics.Bitmap;
@@ -8,6 +10,10 @@ import android.graphics.Bitmap;
 import com.timsoft.meurebanho.event.model.Evento;
 
 public class Animal {
+	public static final int STATUS_AVAILABLE = 0;
+	public static final int STATUS_SOLD = 1;
+	public static final int STATUS_DEAD = 2;
+	
 	private int id;
 	private int specieId;
 	private int raceId;
@@ -211,5 +217,34 @@ public class Animal {
 				+ sellValue + ", fatherId=" + fatherId + ", motherId="
 				+ motherId + ", pictures=" + pictures + ", events=" + events
 				+ "]";
+	}
+	
+	public boolean isAvailable() {
+		return !isSold() && !isDead();
+	}
+	
+	public boolean isSold() {
+		return getSellDate() != null;
+	}
+	
+	public boolean isDead() {
+		return getDeathDate() != null;
+	}
+
+	public int getAgeInMonths() {
+		if(getBirthDate() == null) {
+			return 0;
+		} else {
+			Calendar startCalendar = new GregorianCalendar();
+			startCalendar.setTime(getBirthDate());
+			Calendar endCalendar = new GregorianCalendar();
+			endCalendar.setTime(new Date());
+
+			int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+			int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+			
+			return diffMonth;
+		}
+		
 	}
 }

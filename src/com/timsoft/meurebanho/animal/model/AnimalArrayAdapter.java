@@ -25,13 +25,23 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
+		//FIXME: Warning abaixo
 		View rowView = inflater.inflate(R.layout.animal_list, parent, false);
+		Animal a = values.get(position);
 		
-		TextView textViewId = (TextView) rowView.findViewById(R.id.animal_id);
-		textViewId.setText(String.format("%05d", values.get(position).getId()));
+		((TextView) rowView.findViewById(R.id.animal_id))
+			.setText(String.format("%05d", a.getId()));
 		
-		TextView textViewName = (TextView) rowView.findViewById(R.id.animal_name);
-		textViewName.setText(values.get(position).getName());
+		((TextView) rowView.findViewById(R.id.animal_name))
+			.setText(a.getName());
+		
+		((TextView) rowView.findViewById(R.id.animal_sex))
+			.setText("F".equalsIgnoreCase(a.getSex()) ? 
+						context.getResources().getString(R.string.female) : 
+						context.getResources().getString(R.string.male));
+		
+		((TextView) rowView.findViewById(R.id.animal_sex))
+			.setText(a.getAgeInMonths() + " " + context.getResources().getString(R.string.months));
 		
 		return rowView;
 	}

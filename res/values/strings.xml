@@ -31,8 +31,8 @@
     <string name="animal_race_label">Raça:</string>
     
     <string name="animal_sex_label">Sexo:</string>
-    <string name="animal_male_label">Macho</string>
-    <string name="animal_female_label">Fêmea</string>
+    <string name="male">Macho</string>
+    <string name="female">Fêmea</string>
     
     <string name="animal_name_label">Nome:</string>
     <string name="animal_name_hint">Nome</string>
@@ -111,5 +111,12 @@
     <string name="specie_equine">Equino</string>
     <string name="specie_ovine">Ovino</string>
     <string name="specie_swine">Suíno</string>
+    
+    <!-- Main activity -->
+    <string name="animal_main_available_label">Disponíveis</string>
+    <string name="animal_main_sold_label">Vendidos</string>
+    <string name="animal_main_death_label">Mortos</string>
+    
+    <string name="months">Meses</string>
 
 </resources>

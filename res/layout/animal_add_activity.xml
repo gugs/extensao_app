@@ -71,13 +71,13 @@
 	            android:id="@+id/radio_add_animal_sex_male"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="@string/animal_male_label" />
+	            android:text="@string/male" />
 	
 	        <RadioButton
 	            android:id="@+id/radio_add_animal_sex_female"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="@string/animal_female_label" />
+	            android:text="@string/female" />
 	    </RadioGroup>
 	
 	    <!-- name -->

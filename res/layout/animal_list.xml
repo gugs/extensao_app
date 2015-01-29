@@ -6,12 +6,6 @@
  
 	<!-- ID -->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/animal_id_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/label_color" />
-    <TextView
         android:id="@+id/animal_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,13 +13,21 @@
     
     <!-- Name -->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/animal_name_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/label_color" />
-    <TextView
         android:id="@+id/animal_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+    
+    <!-- Sex -->
+    <TextView
+        android:id="@+id/animal_sex"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+    
+    <!-- Age -->
+    <TextView
+        android:id="@+id/animal_age"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceMedium"/>

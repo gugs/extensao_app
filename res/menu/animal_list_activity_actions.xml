@@ -2,13 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
 	<item
-        android:id="@+id/action_list_animals"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_favorite"
-        android:title="@string/events"/>
-
-	<item
         android:id="@+id/action_new_animal"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"

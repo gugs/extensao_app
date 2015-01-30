@@ -66,6 +66,7 @@
     <string name="animal_mother_hint">Mãe</string>
     
     <string name="add_animal">Incluir Animal</string>
+    <string name="detail_animal">Detalhar Animal</string>
     <string name="edit_animal">Alterar Animal</string>
     <string name="alert_fill_animal_name">Nome do animal deve ser preenchido!</string>
     <string name="confirm_animal_exclusion">Confirma a exclusão do animal?</string>

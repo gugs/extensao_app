@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -237,12 +236,8 @@ public class AnimalAddActivity extends ActionBarActivity {
 		updateDate(tvDeathDate, year, monthOfYear, dayOfMonth);
 	}
 	
-	private DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
-	}
-	
 	private void updateDate(TextView tv, int year, int monthOfYear, int dayOfMonth) {
-		DateFormat f = getDateFormat();
+		DateFormat f = MainActivity.getDateFormat();
 		Calendar c = Calendar.getInstance();
 		c.set(year, monthOfYear, dayOfMonth);
 		tv.setText(f.format(c.getTime()));
@@ -323,7 +318,7 @@ public class AnimalAddActivity extends ActionBarActivity {
     	
     	//Birth date
     	try {
-			a.setBirthDate(getDateFormat().parse(tvBirthDate.getText().toString()));
+			a.setBirthDate(MainActivity.getDateFormat().parse(tvBirthDate.getText().toString()));
 		} catch (java.text.ParseException e) {
 			Toast.makeText(this, R.string.birth_date_invalid, Toast.LENGTH_SHORT).show();
 			return;
@@ -333,7 +328,7 @@ public class AnimalAddActivity extends ActionBarActivity {
     	//Aquisition date
     	if(!"".equals(tvAquisitionDate.getText().toString().trim())){
 	    	try {
-				a.setAquisitionDate(getDateFormat().parse(tvAquisitionDate.getText().toString()));
+				a.setAquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
 			} catch (java.text.ParseException e) {
 				Toast.makeText(this, R.string.aquisition_date_invalid, Toast.LENGTH_SHORT).show();
 				return;
@@ -347,7 +342,7 @@ public class AnimalAddActivity extends ActionBarActivity {
     	//Sell date
     	if(!"".equals(tvSellDate.getText().toString())) {
 	    	try {
-				a.setSellDate(getDateFormat().parse(tvSellDate.getText().toString()));
+				a.setSellDate(MainActivity.getDateFormat().parse(tvSellDate.getText().toString()));
 			} catch (java.text.ParseException e) {
 				Toast.makeText(this, R.string.sell_date_invalid, Toast.LENGTH_SHORT).show();
 				return;
@@ -362,7 +357,7 @@ public class AnimalAddActivity extends ActionBarActivity {
     	//Death date
     	if(!"".equals(tvDeathDate.getText().toString())) {
 	    	try {
-				a.setSellDate(getDateFormat().parse(tvDeathDate.getText().toString()));
+				a.setSellDate(MainActivity.getDateFormat().parse(tvDeathDate.getText().toString()));
 			} catch (java.text.ParseException e) {
 				Toast.makeText(this, R.string.death_date_invalid, Toast.LENGTH_SHORT).show();
 				return;

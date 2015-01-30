@@ -4,9 +4,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.event.model.Evento;
 
 public class Animal {
@@ -72,6 +75,10 @@ public class Animal {
 
 	public int getId() {
 		return id;
+	}
+	
+	public String getIdToDisplay() {
+		return String.format(Locale.getDefault(), "%05d", getId());
 	}
 
 	public void setId(int id) {
@@ -169,6 +176,10 @@ public class Animal {
 	public String getSex() {
 		return sex;
 	}
+	
+	public String getSexToDisplay(Context context) {
+		return "F".equalsIgnoreCase(getSex()) ?  context.getResources().getString(R.string.female) : context.getResources().getString(R.string.male);
+	}
 
 	public void setSex(String sex) {
 		this.sex = sex;
@@ -245,6 +256,9 @@ public class Animal {
 			
 			return diffMonth;
 		}
-		
+	}
+	
+	public String getAgeInMonthsToDisplay(Context context) {
+		return getAgeInMonths() + " " + context.getResources().getString(R.string.months);
 	}
 }

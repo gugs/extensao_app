@@ -23,7 +23,7 @@
             android:id="@+id/button_add_event"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:src="@drawable/plus"
+		    android:src="@drawable/ic_action_new"
 		    android:contentDescription="@string/add"
 		    />
 

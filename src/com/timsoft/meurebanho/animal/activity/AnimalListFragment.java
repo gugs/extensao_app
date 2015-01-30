@@ -1,5 +1,6 @@
 package com.timsoft.meurebanho.animal.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -75,7 +76,7 @@ public class AnimalListFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				showAnimal(((Animal) parent.getItemAtPosition(position)));
+				detailAnimal(((Animal) parent.getItemAtPosition(position)));
 			}
 		});
 	}
@@ -86,7 +87,9 @@ public class AnimalListFragment extends Fragment {
 		updateView();
 	}
 	
-	private void showAnimal(Animal animal) {
-		System.out.println(animal.getId());
+	private void detailAnimal(Animal a) {
+		Intent intent = new Intent(activity, AnimalDetailActivity.class);
+		intent.putExtra("animal_id", a.getId());
+		startActivity(intent);
 	}
 }

@@ -26,39 +26,44 @@
         <!-- Animal -->
         <activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalListActivity"
-            android:label="@string/app_name" 
-            android:parentActivityName="com.timsoft.meurebanho.MainActivity" >
+            android:label="@string/app_name">
+        </activity>
+        
+        <activity
+            android:name="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity"
+            android:label="@string/add_animal" 
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
 	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="com.timsoft.meurebanho.MainActivity" />
+	            android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
         
         <activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalAddActivity"
             android:label="@string/add_animal" 
-            android:parentActivityName="com.timsoft.meurebanho.MainActivity" >
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
 	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="com.timsoft.meurebanho.MainActivity" />
+	            android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
         
 		<activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalEditActivity"
             android:label="@string/animals" 
-            android:parentActivityName="com.timsoft.meurebanho.MainActivity" >
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
 	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="com.timsoft.meurebanho.MainActivity" />
+	            android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
         
         <!-- Farm -->
 		<activity
             android:name="com.timsoft.meurebanho.farm.activity.FarmsActivity"
             android:label="@string/farms" 
-            android:parentActivityName="com.timsoft.meurebanho.MainActivity" >
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
 	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="com.timsoft.meurebanho.MainActivity" />
+	            android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
 		<activity
             android:name="com.timsoft.meurebanho.farm.activity.FarmAddActivity"

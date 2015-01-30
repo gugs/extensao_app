@@ -3,16 +3,22 @@ package com.timsoft.meurebanho.animal.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.farm.activity.FarmsActivity;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
@@ -32,8 +38,8 @@ public class AnimalListActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setIcon(R.drawable.ic_launcher);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+		getSupportActionBar().setIcon(R.drawable.ic_launcher);
 		
 		animalDatasource = DBAnimalAdapter.getInstance(this);
 		specieDatasource = DBSpecieAdapter.getInstance(this);
@@ -174,19 +180,37 @@ public class AnimalListActivity extends ActionBarActivity {
 		this.animals = animals;
 	}
 	
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//		case R.id.action_new_animal:
-//			break;
-//		case R.id.action_events:
-//			break;
-//		case R.id.action_farms:
-//			break;
-//		default:
-//			break;
-//		}
-//
-//		return true;
-//	}
+	private void actionNewAnimal() {
+		Intent intent = new Intent(this, AnimalAddActivity.class);
+		startActivity(intent);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.animal_list_activity_actions, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_new_animal:
+			actionNewAnimal();
+			break;
+			
+		case R.id.action_events:
+			Toast.makeText(this, "Event Selected", Toast.LENGTH_SHORT).show();
+			break;
+			
+		case R.id.action_farms:
+			Intent intent = new Intent(this, FarmsActivity.class);
+			startActivity(intent);
+			break;
+		default:
+			break;
+		}
+
+		return true;
+	}
 }

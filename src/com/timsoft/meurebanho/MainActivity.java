@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.timsoft.meurebanho.animal.activity.AnimalListActivity;
+import com.timsoft.meurebanho.infra.db.DBHandler;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
@@ -34,10 +35,10 @@ public class MainActivity extends ActionBarActivity {
 		SharedPreferences prefs = getSharedPreferences(getString(R.string.app_full_name),
 				MODE_PRIVATE);
 
-		// if(BuildConfig.DEBUG) {
-		// deleteDatabase(DBHandler.DATABASE_NAME);
-		// prefs.edit().putBoolean(FIRST_RUN, true).commit();
-		// }
+//		 if(BuildConfig.DEBUG) {
+//			 deleteDatabase(DBHandler.DATABASE_NAME);
+//			 prefs.edit().putBoolean(FIRST_RUN, true).commit();
+//		 }
 
 		if (prefs.getBoolean(FIRST_RUN, true)) {
 			populateDefaultData();

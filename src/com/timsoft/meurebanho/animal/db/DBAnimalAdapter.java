@@ -128,11 +128,11 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 				cursor.getString(4),
 				cursor.getString(5),
 				
-				new Date(cursor.getLong(6)),
-				new Date(cursor.getLong(7)),
-				new Date(cursor.getLong(8)),
+				longToDate(cursor, 6),
+				longToDate(cursor, 7),
+				longToDate(cursor, 8),
 				
-				new Date(cursor.getLong(9)),
+				longToDate(cursor, 9),
 				cursor.getString(10),
 				
 				cursor.getDouble(11),

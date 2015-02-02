@@ -1,5 +1,6 @@
 package com.timsoft.meurebanho.infra.db;
 
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -41,6 +42,14 @@ public abstract class DBAdapter<T> {
 	
 	protected DBHandler getDBHandler() {
 		return DBHandler.getInstance(context);
+	}
+	
+	protected Date longToDate(Cursor cursor, int columnIndex) {
+		if(cursor.isNull(columnIndex)) {
+			return null;
+		} else {
+			return new Date(cursor.getLong(columnIndex));
+		}
 	}
 	
 	public abstract String getTableName();

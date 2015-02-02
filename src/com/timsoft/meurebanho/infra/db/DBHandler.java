@@ -1,11 +1,13 @@
 package com.timsoft.meurebanho.infra.db;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
@@ -25,7 +27,23 @@ public class DBHandler extends SQLiteOpenHelper {
 	private List<String> listTableName;
 	
 	private DBHandler(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, context.getExternalFilesDir(null).getAbsolutePath() + "/" + DATABASE_NAME, null, DATABASE_VERSION);
+		
+		String state = Environment.getExternalStorageState();
+		File filesDir;
+
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+			System.out.println(">>>>>>>>>>>>>>>> ok");
+		    filesDir = context.getExternalFilesDir(null);
+		} else {
+		    // Load another directory, probably local memory
+			System.out.println(">>>>>>>>>>>>>>>> error");
+		    filesDir = context.getFilesDir();
+		}
+		
+		//FIXME: Voltar para linha de baixo para nao salvar na memória do aparelho e não no sdcard
+		//super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		listTableCreate = new ArrayList<String>();
 		listTableName = new ArrayList<String>();
 		

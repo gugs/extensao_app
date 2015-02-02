@@ -20,6 +20,11 @@ import com.timsoft.meurebanho.animal.model.AnimalArrayAdapter;
 public class AnimalListFragment extends Fragment {
 	private AnimalListActivity activity;
 	private int selectedStatus;
+	private int index;
+	
+	public AnimalListFragment(int index) {
+		this.index = index;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +76,7 @@ public class AnimalListFragment extends Fragment {
 	
 	private void updateView() {
 		ListView lv = (ListView) getView().findViewById(R.id.list_animal_list);
-		lv.setAdapter(new AnimalArrayAdapter(activity, activity.getAnimals(activity.getSelectedSpecieId(), selectedStatus)));
+		lv.setAdapter(new AnimalArrayAdapter(activity, activity.getAnimals(activity.getSpecies().get(index).getId(), selectedStatus)));
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,

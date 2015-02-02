@@ -5,8 +5,9 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
@@ -27,99 +28,87 @@ public class AnimalListActivity extends ActionBarActivity {
 	private int selectedSpecieId;
 	
 	private DBAnimalAdapter animalDatasource;
-	private DBSpecieAdapter specieDatasource;
-
 	private List<Animal> animals;
 
+	private DBSpecieAdapter specieDatasource;
 	private List<Specie> species;
+	
+	private ViewPager pager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		ActionBar actionBar = getSupportActionBar();
-		getSupportActionBar().setDisplayShowHomeEnabled(true);
-		getSupportActionBar().setIcon(R.drawable.ic_launcher);
-		
-		animalDatasource = DBAnimalAdapter.getInstance(this);
-		specieDatasource = DBSpecieAdapter.getInstance(this);
+		setContentView(R.layout.animal_list_activity);
+
+		// ActionBar
+		final ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setIcon(R.drawable.ic_launcher);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		//
 		
 		// Animals
+		animalDatasource = DBAnimalAdapter.getInstance(this);
 		animalDatasource.open();
 		animals = animalDatasource.list();
 		animalDatasource.close();
 		//
 		
 		// Species
-		DBSpecieAdapter specieDatasource = DBSpecieAdapter.getInstance(this);
+		specieDatasource = DBSpecieAdapter.getInstance(this);
 		specieDatasource.open();
 		species = specieDatasource.list();
 		specieDatasource.close();
 		//
 		
-		for(Specie s : species){
+		// Pager
+		pager = (ViewPager) findViewById(R.id.animal_list_pager);
+        FragmentManager fm = getSupportFragmentManager();
+ 
+        ViewPager.SimpleOnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                actionBar.setSelectedNavigationItem(position);
+            }
+        };
+ 
+        pager.setOnPageChangeListener(pageChangeListener);
+        AnimalListFragmentPagerAdapter fragmentPagerAdapter = new AnimalListFragmentPagerAdapter(fm, species.size());
+        pager.setAdapter(fragmentPagerAdapter);
+        //
+        
+        // Tabs
+        for(Specie s : species){
 			Tab tab = actionBar.newTab();   
 		    tab = actionBar.newTab();
 		    tab.setText(s.getDescription());
-		    AnimalListActivityTabListener<AnimalListFragment> tl = new AnimalListActivityTabListener<AnimalListFragment>(this, Integer.toString(s.getId()), AnimalListFragment.class);
-		    tab.setTabListener(tl);
+
+		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+	 
+	            @Override
+	            public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	            }
+	 
+	            @Override
+	            public void onTabSelected(Tab tab, FragmentTransaction ft) {
+	                pager.setCurrentItem(tab.getPosition());
+	            }
+	 
+	            @Override
+	            public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	            }
+	        };
+	        
+		    tab.setTabListener(tabListener);
 		    actionBar.addTab(tab);
 		}
-		
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        //
+        
 	    actionBar.show();
+	    
 	}
 	
-	private class AnimalListActivityTabListener<T extends Fragment> implements
-	    ActionBar.TabListener {
-	    private Fragment mFragment;
-	    private final ActionBarActivity mActivity;
-	    private final String mTag;
-	    private final Class<T> mClass;
-	
-	    /**
-	     * Constructor used each time a new tab is created.
-	     * 
-	     * @param activity
-	     *            The host Activity, used to instantiate the fragment
-	     * @param tag
-	     *            The identifier tag for the fragment
-	     * @param clz
-	     *            The fragment's Class, used to instantiate the fragment
-	     */
-	    public AnimalListActivityTabListener(ActionBarActivity activity, String tag, Class<T> clz) {
-	        mActivity = activity;
-	        mTag = tag;
-	        mClass = clz;
-	    }
-	
-	    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-	    	
-	    	((AnimalListActivity)mActivity).setSelectedSpecieId(Integer.parseInt(mTag));
-	    	
-	        mFragment = mActivity.getSupportFragmentManager().findFragmentByTag(mTag);
-	        // Check if the fragment is already initialized
-	        if (mFragment == null) {
-	            // If not, instantiate and add it to the activity
-	            mFragment = Fragment.instantiate(mActivity, mClass.getName());
-	            ft.add(android.R.id.content, mFragment, mTag);
-	        } else {
-	            // If it exists, simply attach it in order to show it
-	            ft.attach(mFragment);
-	        }
-	    }
-	
-	    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-	        if (mFragment != null) {
-	            // Detach the fragment, because another one is being attached
-	            ft.detach(mFragment);
-	        }
-	    }
-	
-	    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-	        // User selected the already selected tab. Usually do nothing.
-	    }
-	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -132,14 +121,6 @@ public class AnimalListActivity extends ActionBarActivity {
 		animalDatasource.close();
 	}
 	
-	public int getSelectedSpecieId() {
-		return selectedSpecieId;
-	}
-
-	public void setSelectedSpecieId(int selectedSpecieId) {
-		this.selectedSpecieId = selectedSpecieId;
-	}
-
 	public List<Animal> getAnimals() {
 		return animals;
 	}
@@ -149,7 +130,7 @@ public class AnimalListActivity extends ActionBarActivity {
 		boolean correctStatus = true;
 		
 		for (Animal a : animals) {
-			if (a.getSpecieId() == getSelectedSpecieId()) {
+			if (a.getSpecieId() == specieId) {
 				switch (status) {
 				case Animal.STATUS_AVAILABLE:
 					correctStatus = a.isAvailable(); 
@@ -212,5 +193,13 @@ public class AnimalListActivity extends ActionBarActivity {
 		}
 
 		return true;
+	}
+
+	public List<Specie> getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(List<Specie> species) {
+		this.species = species;
 	}
 }

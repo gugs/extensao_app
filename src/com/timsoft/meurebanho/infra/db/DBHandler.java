@@ -28,22 +28,9 @@ public class DBHandler extends SQLiteOpenHelper {
 	
 	private DBHandler(Context context) {
 		super(context, context.getExternalFilesDir(null).getAbsolutePath() + "/" + DATABASE_NAME, null, DATABASE_VERSION);
-		
-		String state = Environment.getExternalStorageState();
-		File filesDir;
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-			System.out.println(">>>>>>>>>>>>>>>> ok");
-		    filesDir = context.getExternalFilesDir(null);
-		} else {
-		    // Load another directory, probably local memory
-			System.out.println(">>>>>>>>>>>>>>>> error");
-		    filesDir = context.getFilesDir();
-		}
-		
 		//FIXME: Voltar para linha de baixo para nao salvar na memória do aparelho e não no sdcard
 		//super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		
 		listTableCreate = new ArrayList<String>();
 		listTableName = new ArrayList<String>();
 		

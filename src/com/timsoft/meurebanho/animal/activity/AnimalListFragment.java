@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -70,6 +71,15 @@ public class AnimalListFragment extends Fragment {
 	        }
 	    });
 	    //
+	    
+	    //buttons
+	    final ImageButton button = (ImageButton) v.findViewById(R.id.button_add_animal);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	activity.actionNewAnimal();
+            }
+        });
+        //
 	    
 		return v;
 	}

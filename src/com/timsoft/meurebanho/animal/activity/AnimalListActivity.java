@@ -161,7 +161,7 @@ public class AnimalListActivity extends ActionBarActivity {
 		this.animals = animals;
 	}
 	
-	private void actionNewAnimal() {
+	public void actionNewAnimal() {
 		Intent intent = new Intent(this, AnimalAddActivity.class);
 		Bundle bundle = new Bundle(); 
 		bundle.putParcelable(Specie.class.toString(), species.get(pager.getCurrentItem()));

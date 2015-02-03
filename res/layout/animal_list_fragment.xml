@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <!-- status radio selector -->
     <RadioGroup
         android:id="@+id/radio_group_animal_list_status"
         android:layout_width="fill_parent"
@@ -30,18 +31,25 @@
         
     </RadioGroup>
 
+    <!-- animal list -->
     <ListView
         android:id="@+id/list_animal_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     
-	<ImageButton
-		android:id="@+id/button_add_animal"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:src="@drawable/ic_action_new"
-	    android:contentDescription="@string/add"
-	    />
+	<!-- buttons -->
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
 
+        <ImageButton
+            android:id="@+id/button_add_animal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/save"
+            android:src="@drawable/ic_action_new" />
+    </TableRow>
+    
 </LinearLayout>
 

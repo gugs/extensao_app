@@ -49,6 +49,7 @@ public class IDDescription implements Parcelable{
 		dest.writeStringArray(new String[] { Integer.toString(getId()),
 				getDescription() });
 	}
+	
 
 	@Override
 	public String toString() {

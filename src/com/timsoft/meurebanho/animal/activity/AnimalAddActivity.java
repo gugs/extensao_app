@@ -1,7 +1,6 @@
 package com.timsoft.meurebanho.animal.activity;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -15,8 +14,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,18 +29,15 @@ import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.race.model.RaceArrayAdapter;
-import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
-import com.timsoft.meurebanho.specie.model.SpecieArrayAdapter;
 
 public class AnimalAddActivity extends ActionBarActivity {
 
 	@SuppressWarnings("unused")
 	private static final String LOG_TAG = "AnimalAddActivity";
 	
-	private List<Specie> species;
-	private List<Race> races;
-	private Spinner racesSpinner, speciesSpinner;
+	private Spinner racesSpinner;
+	private Specie specie;
 	private TextView tvId, tvBirthDate, tvAquisitionDate, tvSellDate, tvDeathDate, tvAquisitionValue, tvSellValue;
 	private double aquisitionValue, sellValue;
 	private DBAnimalAdapter animalDatasource;
@@ -62,36 +56,19 @@ public class AnimalAddActivity extends ActionBarActivity {
 		animalDatasource.close();
 		//
 		
-		//Species
-		DBSpecieAdapter specieDatasource = DBSpecieAdapter.getInstance(this);
-		specieDatasource.open();
-		species = specieDatasource.list();
-    	specieDatasource.close();
-
-    	speciesSpinner = (Spinner) findViewById(R.id.spinner_add_animal_specie);
-    	
-    	speciesSpinner.setAdapter(new SpecieArrayAdapter(this, species));
-    	
-    	speciesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            	updateRaces();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            	updateRaces();
-            }
-        });
-    	//
-    	
-    	//Race
+		//Specie
+		specie = (Specie)getIntent().getParcelableExtra(Specie.class.toString());
+		setTitle(getResources().getString(R.string.add) + " " + specie.getDescription());
+		//
+		
+    	//Races
 		DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance(this);
 		raceDatasource.open();
-		races = raceDatasource.list();
+		List<Race> races = raceDatasource.listBySpecieId(specie.getId());
 		raceDatasource.close();
 		
 		racesSpinner = (Spinner) findViewById(R.id.spinner_add_animal_race);
+    	racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
     	//
 		
 		//Birth Date
@@ -243,20 +220,6 @@ public class AnimalAddActivity extends ActionBarActivity {
 		tv.setText(f.format(c.getTime()));
 	}
 	
-	private void updateRaces() {
-		Specie selectedSpecie = (Specie) speciesSpinner.getSelectedItem();
-		List<Race> filteredRaces = new ArrayList<Race>();
-		if(selectedSpecie != null) {
-			for(Race r : races) {
-				if(r.getIdSpecie() == selectedSpecie.getId()) {
-					filteredRaces.add(r);
-				}
-			}
-		}
-		
-    	racesSpinner.setAdapter(new RaceArrayAdapter(this, filteredRaces));
-	}
-	
     private void save() {
     	DBAnimalAdapter animalDatasource = DBAnimalAdapter.getInstance(this);
     	Animal a = new Animal();
@@ -276,13 +239,7 @@ public class AnimalAddActivity extends ActionBarActivity {
     	//
     	
     	//specie
-    	Specie selectedSpecie = (Specie) speciesSpinner.getSelectedItem();
-    	if(selectedSpecie == null) {
-    		Toast.makeText(this, R.string.specie_not_selected, Toast.LENGTH_SHORT).show();
-    		return;
-    	} else {
-    		a.setSpecieId(selectedSpecie.getId());
-    	}
+    	a.setSpecieId(specie.getId());
     	//
     	
     	//race

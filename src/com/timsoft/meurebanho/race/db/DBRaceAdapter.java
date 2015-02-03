@@ -19,12 +19,13 @@ public class DBRaceAdapter extends DBAdapter<Race> {
 	
 	public static final String ID = "id";
 	public static final String DESCRIPTION = "description";
-	public static final String ID_SPECIE = "id_specie";
+	//FIXME: Alterar string para "specie_id" ao recriar tabelas
+	public static final String SPECIE_ID = "id_specie";
 
 	public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( " 
 			+ ID + " integer primary key, "
 			+ DESCRIPTION + " text not null, " 
-			+ ID_SPECIE + " integer not null)";
+			+ SPECIE_ID + " integer not null)";
 	
 	private static DBRaceAdapter mInstance;
 	
@@ -45,7 +46,7 @@ public class DBRaceAdapter extends DBAdapter<Race> {
 		ContentValues values = new ContentValues();
 		values.put(ID, race.getId());
 		values.put(DESCRIPTION, race.getDescription());
-		values.put(ID_SPECIE, race.getIdSpecie());
+		values.put(SPECIE_ID, race.getIdSpecie());
 		database.insert(TABLE_NAME, null, values);
 
 		return get(race.getId());
@@ -75,6 +76,18 @@ public class DBRaceAdapter extends DBAdapter<Race> {
 		}
 		return listaRaca;
 	}
+	
+	public List<Race> listBySpecieId(int specieId) {
+		Log.d(LOG_TAG, "Listing Races");
+		List<Race> listaRaca = new ArrayList<Race>();
+		Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " where " + SPECIE_ID + " = " + specieId + " order by " + ID, null);
+		if (cursor != null && cursor.moveToFirst()) {
+	        do {
+	        	listaRaca.add(cursorTo(cursor));
+	        } while (cursor.moveToNext());
+		}
+		return listaRaca;
+	}
 
 	@Override
 	public Race get(int idRaca) {
@@ -82,7 +95,7 @@ public class DBRaceAdapter extends DBAdapter<Race> {
 		String query = "select " +
 				TABLE_NAME + "." + ID + ", " +
 				TABLE_NAME + "." + DESCRIPTION + ", " +
-				TABLE_NAME + "." + ID_SPECIE + 
+				TABLE_NAME + "." + SPECIE_ID + 
 				
 				" from " + TABLE_NAME + 
 				

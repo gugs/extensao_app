@@ -28,17 +28,17 @@
 		</EditText>
 	
 	    <!-- specie -->
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/animal_specie_label"
-	        android:textAppearance="?android:attr/textAppearanceSmall"
-	        android:textColor="@color/label_color" />
+<!-- 	    <TextView -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:text="@string/animal_specie_label" -->
+<!-- 	        android:textAppearance="?android:attr/textAppearanceSmall" -->
+<!-- 	        android:textColor="@color/label_color" /> -->
 	
-	    <Spinner
-	        android:id="@+id/spinner_add_animal_specie"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" />
+<!-- 	    <Spinner -->
+<!-- 	        android:id="@+id/spinner_add_animal_specie" -->
+<!-- 	        android:layout_width="match_parent" -->
+<!-- 	        android:layout_height="wrap_content" /> -->
 	
 	    <!-- race -->
 	    <TextView

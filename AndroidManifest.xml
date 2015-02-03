@@ -34,7 +34,7 @@
         
         <activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity"
-            android:label="@string/add_animal" 
+            android:label="@string/detail_animal" 
             android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
 	            android:name="android.support.PARENT_ACTIVITY"

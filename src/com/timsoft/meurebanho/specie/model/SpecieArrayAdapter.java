@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.timsoft.meurebanho.R;
-
+//FIXME: Classe não mais utilizada
 public class SpecieArrayAdapter extends ArrayAdapter<Specie> {
 	
 	@SuppressWarnings("unused")

@@ -119,5 +119,11 @@
     <string name="animal_main_death_label">Mortos</string>
     
     <string name="months">Meses</string>
+    <string name="animal_picture">Foto</string>
+    <string name="image_saved_success">Imagem salva com sucesso</string>
 
+    <string name="camera_not_supported">Não há suporte a câmera no dispositivo</string>
+    <string name="take_picture">Tirar foto</string>
+    <string name="select_picture">Escolher foto</string>
+    
 </resources>

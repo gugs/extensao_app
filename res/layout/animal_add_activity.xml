@@ -27,19 +27,6 @@
 	        <requestFocus />
 		</EditText>
 	
-	    <!-- specie -->
-<!-- 	    <TextView -->
-<!-- 	        android:layout_width="wrap_content" -->
-<!-- 	        android:layout_height="wrap_content" -->
-<!-- 	        android:text="@string/animal_specie_label" -->
-<!-- 	        android:textAppearance="?android:attr/textAppearanceSmall" -->
-<!-- 	        android:textColor="@color/label_color" /> -->
-	
-<!-- 	    <Spinner -->
-<!-- 	        android:id="@+id/spinner_add_animal_specie" -->
-<!-- 	        android:layout_width="match_parent" -->
-<!-- 	        android:layout_height="wrap_content" /> -->
-	
 	    <!-- race -->
 	    <TextView
 	        android:layout_width="wrap_content"
@@ -221,6 +208,20 @@
 	        android:inputType="text"
 	        android:ems="10">
 	    </EditText>
+	    
+	    <TableRow
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center" >
+	        
+			<ImageView
+			    android:id="@+id/img_view_add_animal_picture"
+			    android:layout_width="200dp"
+			    android:layout_height="200dp"
+			    android:contentDescription="@string/animal_picture"
+			    android:src="@drawable/ic_action_picture" />
+
+		</TableRow>
 	
 	    <!-- buttons -->
 	    <TableRow
@@ -237,4 +238,5 @@
 	    </TableRow>
 	
 	</LinearLayout>
+	
 </ScrollView>

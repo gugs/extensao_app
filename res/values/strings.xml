@@ -9,6 +9,7 @@
 	
     <string name="exclusion_confirmation">Confirmação de Exclusão</string>
     <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
     <string name="add">Incluir</string>
     <string name="delete">Excluir</string>
     <string name="yes">Sim</string>

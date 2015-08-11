@@ -20,6 +20,7 @@
 		<!-- Main -->
         <activity
             android:name="com.timsoft.meurebanho.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,11 +31,13 @@
         <!-- Animal -->
         <activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalListActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
         
         <activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/detail_animal" 
             android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
@@ -44,6 +47,7 @@
         
         <activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalAddActivity"
+            android:screenOrientation="portrait"
             android:label="@string/add_animal" 
             android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
@@ -53,6 +57,7 @@
         
 		<activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalEditActivity"
+            android:screenOrientation="portrait"
             android:label="@string/animals" 
             android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
@@ -63,6 +68,7 @@
         <!-- Farm -->
 		<activity
             android:name="com.timsoft.meurebanho.farm.activity.FarmsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/farms" 
             android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
         	<meta-data
@@ -71,6 +77,7 @@
         </activity>
 		<activity
             android:name="com.timsoft.meurebanho.farm.activity.FarmAddActivity"
+            android:screenOrientation="portrait"
             android:label="@string/add_farm" 
             android:parentActivityName="com.timsoft.meurebanho.farm.activity.FarmsActivity" >
         	<meta-data
@@ -79,6 +86,7 @@
         </activity>
 		<activity
             android:name="com.timsoft.meurebanho.farm.activity.FarmEditActivity"
+            android:screenOrientation="portrait"
             android:label="@string/edit_farm" 
             android:parentActivityName="com.timsoft.meurebanho.farm.activity.FarmsActivity" >
         	<meta-data

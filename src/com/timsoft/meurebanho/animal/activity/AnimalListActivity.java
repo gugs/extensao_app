@@ -42,8 +42,8 @@ public class AnimalListActivity extends ActionBarActivity {
 
 		// ActionBar
 		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.setIcon(R.drawable.ic_launcher);
+//		actionBar.setDisplayShowHomeEnabled(true);
+//		actionBar.setIcon(R.drawable.ic_launcher);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		//
 		

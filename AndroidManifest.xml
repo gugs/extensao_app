@@ -47,6 +47,7 @@
         
         <activity
             android:name="com.timsoft.meurebanho.animal.activity.AnimalAddActivity"
+            android:icon="@drawable/ic_launcher"
             android:screenOrientation="portrait"
             android:label="@string/add_animal" 
             android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >

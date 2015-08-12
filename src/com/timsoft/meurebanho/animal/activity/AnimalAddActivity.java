@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -73,8 +74,12 @@ public class AnimalAddActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.animal_add_activity);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+			
+		final ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setIcon(R.drawable.ic_launcher);
+		
+		setContentView(R.layout.animal_add_activity);		
 		
 		//id
 		tvId = (TextView) findViewById(R.id.input_add_animal_id);

@@ -1,2 +1,2 @@
-# meurebanho_apk
-Controle de rebanho
+# Meu Rebanho
+> Uma aplicação de gerenciamento de rebanho para micro e pequenos produtores rurais

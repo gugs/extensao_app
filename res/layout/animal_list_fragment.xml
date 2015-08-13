@@ -9,18 +9,22 @@
         android:id="@+id/radio_group_animal_list_status"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <RadioButton
             android:id="@+id/radio_animal_list_available"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/animal_main_available_label" />
 
         <RadioButton
             android:id="@+id/radio_animal_list_sold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/animal_main_sold_label" />
         
         <RadioButton
@@ -47,8 +51,9 @@
             android:id="@+id/button_add_animal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/save"
-            android:src="@drawable/ic_action_new" />
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/add_animal"
+            android:src="@drawable/ic_action_big_new" />
     </TableRow>
     
 </LinearLayout>

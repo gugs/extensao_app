@@ -7,18 +7,17 @@ import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import com.timsoft.meurebanho.animal.activity.AnimalListActivity;
+import com.timsoft.meurebanho.race.db.DBRaceAdapter;
+import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
+import com.timsoft.meurebanho.specie.model.Specie;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-
-import com.timsoft.meurebanho.animal.activity.AnimalListActivity;
-import com.timsoft.meurebanho.infra.db.DBHandler;
-import com.timsoft.meurebanho.race.db.DBRaceAdapter;
-import com.timsoft.meurebanho.race.model.Race;
-import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
-import com.timsoft.meurebanho.specie.model.Specie;
 
 public class MainActivity extends ActionBarActivity {
 

@@ -12,7 +12,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.timsoft.meurebanho.MainActivity;
+import com.timsoft.meurebanho.R;
+import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
+import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.race.db.DBRaceAdapter;
+import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.race.model.RaceArrayAdapter;
+import com.timsoft.meurebanho.specie.model.Specie;
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ActivityNotFoundException;
@@ -25,8 +35,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,25 +43,16 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.timsoft.meurebanho.MainActivity;
-import com.timsoft.meurebanho.R;
-import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.race.db.DBRaceAdapter;
-import com.timsoft.meurebanho.race.model.Race;
-import com.timsoft.meurebanho.race.model.RaceArrayAdapter;
-import com.timsoft.meurebanho.specie.model.Specie;
-
-public class AnimalAddActivity extends ActionBarActivity {
+public class AnimalAddActivity extends Activity {
 
 	@SuppressWarnings("unused")
 	private static final String LOG_TAG = "AnimalAddActivity";
@@ -75,9 +74,9 @@ public class AnimalAddActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 			
-		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.setIcon(R.drawable.ic_launcher);
+//		final ActionBar actionBar = getSupportActionBar();
+//		actionBar.setDisplayShowHomeEnabled(true);
+//		actionBar.setIcon(R.drawable.ic_launcher);
 		
 		setContentView(R.layout.animal_add_activity);		
 		
@@ -230,10 +229,17 @@ public class AnimalAddActivity extends ActionBarActivity {
 		});
 		registerForContextMenu(imageViewPicture);
 		
-		final ImageButton buttonSave = (ImageButton) findViewById(R.id.btn_save_add_animal);
+		final Button buttonSave = (Button) findViewById(R.id.btn_save_add_animal);
 		buttonSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	save();
+            }
+        });
+		
+		final Button buttonCancel = (Button) findViewById(R.id.btn_cancel_add_animal);
+		buttonCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	goBack();
             }
         });
 	}
@@ -556,11 +562,14 @@ public class AnimalAddActivity extends ActionBarActivity {
     		picture.renameTo(destFile);
     	}
     	
+		goBack();
+    }
+    
+    private void goBack() {
 		//Going back to MainActivity
 		Intent intent = new Intent(this, MainActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(intent);
 		finish();
     }
-    
 }

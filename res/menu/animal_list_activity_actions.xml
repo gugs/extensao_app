@@ -1,11 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
+<!--     TODO: Busca de animais-->
+<!--     <item -->
+<!--         android:id="@+id/action_find_animal" -->
+<!--         android:icon="@drawable/ic_magnify" -->
+<!--         android:orderInCategory="100" -->
+<!--         android:title="@string/find_animal" -->
+<!--         app:showAsAction="ifRoom"/> -->
     <item
         android:id="@+id/action_new_animal"
-        android:icon="@drawable/ic_magnify"
+        android:icon="@drawable/ic_action_new"
         android:orderInCategory="100"
-        android:title="@string/find_animal"
+        android:title="@string/add_animal"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_events"

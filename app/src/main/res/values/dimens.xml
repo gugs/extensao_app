@@ -1,0 +1,7 @@
+<resources>
+
+    <dimen name="activity_padding_left">6dp</dimen>
+    <dimen name="activity_padding_right">6dp</dimen>
+    <dimen name="activity_padding_top">6dp</dimen>
+
+</resources>

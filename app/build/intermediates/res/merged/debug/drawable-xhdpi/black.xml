@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+   <solid android:color="#ffffff" />
+   <stroke android:width="1dip" android:color="#4fa5d5"/>
+</shape><!-- From: file:/C:/Users/tiago/StudioProjects/meurebanho_apk/app/src/main/res/drawable-xhdpi/black.xml -->

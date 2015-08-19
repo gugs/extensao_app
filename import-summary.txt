@@ -1,0 +1,164 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* README.md
+* ic_launcher-web.png
+* proguard-project.txt
+* temp\
+* temp\cow-icon-128x128.png
+* temp\cow-icon-16x16.png
+* temp\cow-icon-24x24.png
+* temp\cow-icon-256x256.png
+* temp\cow-icon-32x32.png
+* temp\cow-icon-48x48.png
+* temp\cow-icon-64x64.png
+* temp\cow-icon-96x96.png
+* temp\images\
+* temp\images\races\
+* temp\images\races\101.jpg
+* temp\images\races\102.jpg
+* temp\images\races\103.jpg
+* temp\images\races\104.jpg
+* temp\images\races\105.jpg
+* temp\images\races\106.jpg
+* temp\images\races\107.jpg
+* temp\images\races\108.jpg
+* temp\images\races\109.jpg
+* temp\images\races\110.jpg
+* temp\images\races\111.jpg
+* temp\images\races\112.jpg
+* temp\images\races\113.jpg
+* temp\images\races\114.jpg
+* temp\images\races\115.jpg
+* temp\images\races\116.jpg
+* temp\images\races\117.jpg
+* temp\images\races\118.jpg
+* temp\images\races\119.jpg
+* temp\images\races\120.jpg
+* temp\images\races\121.jpg
+* temp\images\races\122.jpg
+* temp\images\races\123.jpg
+* temp\images\races\124.jpg
+* temp\images\races\125.jpg
+* temp\images\races\126.jpg
+* temp\images\races\127.jpg
+* temp\images\races\128.jpg
+* temp\images\races\201.jpg
+* temp\images\races\202.jpg
+* temp\images\races\203.jpg
+* temp\images\races\204.jpg
+* temp\images\races\205.jpg
+* temp\images\races\206.jpg
+* temp\images\races\301.jpg
+* temp\images\races\302.jpg
+* temp\images\races\303.jpg
+* temp\images\races\304.jpg
+* temp\images\races\305.jpg
+* temp\images\races\306.jpg
+* temp\images\races\307.jpg
+* temp\images\races\308.jpg
+* temp\images\races\309.jpg
+* temp\images\races\310.jpg
+* temp\images\races\311.jpg
+* temp\images\races\312.jpg
+* temp\images\races\313.jpg
+* temp\images\races\314.jpg
+* temp\images\races\315.jpg
+* temp\images\races\316.jpg
+* temp\images\races\317.jpg
+* temp\images\races\318.jpg
+* temp\images\races\319.jpg
+* temp\images\races\320.jpg
+* temp\images\races\321.jpg
+* temp\images\races\322.jpg
+* temp\images\races\323.jpg
+* temp\images\races\324.jpg
+* temp\images\races\325.jpg
+* temp\images\races\326.jpg
+* temp\images\races\401.jpg
+* temp\images\races\402.jpg
+* temp\images\races\403.jpg
+* temp\images\races\404.jpg
+* temp\images\races\405.jpg
+* temp\images\races\406.jpg
+* temp\images\races\407.JPG
+* temp\images\races\408.jpg
+* temp\images\races\409.jpg
+* temp\images\races\410.jpg
+* temp\images\races\411.jpg
+* temp\images\species\
+* temp\images\species\1.png
+* temp\images\species\2.png
+* temp\images\species\3.png
+* temp\images\species\4.png
+* temp\images\species\5.png
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:23.+
+android-support-v7-appcompat.jar => com.android.support:appcompat-v7:23.+
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+android-support-v7-appcompat => [com.android.support:appcompat-v7:23.+]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+* src\com\timsoft\meurebanho\lot\db\DBLotAdapter.java.txt => app\src\main\resources\com\timsoft\meurebanho\lot\db\DBLotAdapter.java.txt
+* src\com\timsoft\meurebanho\lot\db\DBLotHelper.java.txt => app\src\main\resources\com\timsoft\meurebanho\lot\db\DBLotHelper.java.txt
+* src\com\timsoft\meurebanho\pasture\db\DBPastureAdapter.java.txt => app\src\main\resources\com\timsoft\meurebanho\pasture\db\DBPastureAdapter.java.txt
+* src\com\timsoft\meurebanho\pasture\db\DBPastureHelper.java.txt => app\src\main\resources\com\timsoft\meurebanho\pasture\db\DBPastureHelper.java.txt
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

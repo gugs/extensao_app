@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_take_picture"
+        android:title="@string/take_picture"/>
+    <item
+        android:id="@+id/action_select_picture"
+        android:title="@string/select_picture"/>
+
+</menu><!-- From: file:/C:/Users/tiago/StudioProjects/meurebanho_apk/app/src/main/res/menu/take_or_select_picture_context_menu.xml -->

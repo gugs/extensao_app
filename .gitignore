@@ -36,3 +36,5 @@ proguard/
 # *.ipr
 # *.iws
 # .idea/
+
+*.apk

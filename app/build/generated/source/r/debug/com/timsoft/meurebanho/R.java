@@ -2145,12 +2145,12 @@ containing a value of this type.
         public static final int activity_chooser_view_content=0x7f0c003b;
         public static final int alertTitle=0x7f0c0045;
         public static final int always=0x7f0c0030;
-        public static final int animal_age=0x7f0c008c;
-        public static final int animal_id=0x7f0c0089;
-        public static final int animal_image=0x7f0c008d;
+        public static final int animal_age=0x7f0c008d;
+        public static final int animal_id=0x7f0c008a;
+        public static final int animal_image=0x7f0c0089;
         public static final int animal_list_pager=0x7f0c008e;
-        public static final int animal_name=0x7f0c008a;
-        public static final int animal_sex=0x7f0c008b;
+        public static final int animal_name=0x7f0c008b;
+        public static final int animal_sex=0x7f0c008c;
         public static final int beginning=0x7f0c002e;
         public static final int bottom=0x7f0c001a;
         public static final int btn_add_animal_clear_aquisition_date=0x7f0c0071;

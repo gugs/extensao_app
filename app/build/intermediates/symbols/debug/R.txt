@@ -568,12 +568,12 @@ int id action_take_picture 0x7f0c00ba
 int id activity_chooser_view_content 0x7f0c003b
 int id alertTitle 0x7f0c0045
 int id always 0x7f0c0030
-int id animal_age 0x7f0c008c
-int id animal_id 0x7f0c0089
-int id animal_image 0x7f0c008d
+int id animal_age 0x7f0c008d
+int id animal_id 0x7f0c008a
+int id animal_image 0x7f0c0089
 int id animal_list_pager 0x7f0c008e
-int id animal_name 0x7f0c008a
-int id animal_sex 0x7f0c008b
+int id animal_name 0x7f0c008b
+int id animal_sex 0x7f0c008c
 int id beginning 0x7f0c002e
 int id bottom 0x7f0c001a
 int id btn_add_animal_clear_aquisition_date 0x7f0c0071

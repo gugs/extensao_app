@@ -2,8 +2,8 @@
 .DS_Store
 
 # Ignore gradle files
-# .gradle
-# .gradletasknamecache
+.gradle
+.gradletasknamecache
 
 # generated files
 bin/
@@ -36,5 +36,3 @@ proguard/
 # *.ipr
 # *.iws
 # .idea/
-
-*.apk

@@ -14,7 +14,8 @@ public class AnimalListFragmentPagerAdapter extends FragmentPagerAdapter{
  
     @Override
     public Fragment getItem(int index) {
-    	return new AnimalListFragment(index);
+        return AnimalListFragment.newInstance(index);
+    	//return new AnimalListFragment(index);
     }
  
     @Override

@@ -22,15 +22,32 @@ public class AnimalListFragment extends Fragment {
 	private AnimalListActivity activity;
 	private int selectedStatus;
 	private int index;
-	
-	public AnimalListFragment(int index) {
-		this.index = index;
+
+	static AnimalListFragment newInstance(int index) {
+		AnimalListFragment f = new AnimalListFragment();
+
+		Bundle args = new Bundle();
+		args.putInt("index", index);
+		f.setArguments(args);
+
+		return f;
 	}
 	
+//	public AnimalListFragment(int index) {
+//		this.index = index;
+//	}
+	
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		activity = (AnimalListActivity)getActivity();
+//	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		activity = (AnimalListActivity)getActivity();
+		this.index = getArguments() != null ? getArguments().getInt("index") : 0;
 	}
 
 	@Override
@@ -90,7 +107,7 @@ public class AnimalListFragment extends Fragment {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+									int position, long id) {
 				detailAnimal(((Animal) parent.getItemAtPosition(position)));
 			}
 		});

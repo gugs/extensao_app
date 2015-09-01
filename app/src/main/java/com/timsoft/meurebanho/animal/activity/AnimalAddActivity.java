@@ -1,28 +1,6 @@
 package com.timsoft.meurebanho.animal.activity;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import com.timsoft.meurebanho.MainActivity;
-import com.timsoft.meurebanho.R;
-import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.race.db.DBRaceAdapter;
-import com.timsoft.meurebanho.race.model.Race;
-import com.timsoft.meurebanho.race.model.RaceArrayAdapter;
-import com.timsoft.meurebanho.specie.model.Specie;
-
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ActivityNotFoundException;
@@ -35,6 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -52,9 +32,29 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AnimalAddActivity extends Activity {
+import com.timsoft.meurebanho.MainActivity;
+import com.timsoft.meurebanho.R;
+import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
+import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.race.db.DBRaceAdapter;
+import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.race.model.RaceArrayAdapter;
+import com.timsoft.meurebanho.specie.model.Specie;
 
-	@SuppressWarnings("unused")
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+public class AnimalAddActivity extends ActionBarActivity {
+
 	private static final String LOG_TAG = "AnimalAddActivity";
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -74,9 +74,11 @@ public class AnimalAddActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 			
-//		final ActionBar actionBar = getSupportActionBar();
+		final ActionBar actionBar = getSupportActionBar();
 //		actionBar.setDisplayShowHomeEnabled(true);
 //		actionBar.setIcon(R.drawable.ic_launcher);
+
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_accept);
 		
 		setContentView(R.layout.animal_add_activity);		
 		
@@ -229,19 +231,19 @@ public class AnimalAddActivity extends Activity {
 		});
 		registerForContextMenu(imageViewPicture);
 		
-		final Button buttonSave = (Button) findViewById(R.id.btn_save_add_animal);
-		buttonSave.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	save();
-            }
-        });
-		
-		final Button buttonCancel = (Button) findViewById(R.id.btn_cancel_add_animal);
-		buttonCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	goBack();
-            }
-        });
+//		final Button buttonSave = (Button) findViewById(R.id.btn_save_add_animal);
+//		buttonSave.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//            	save();
+//            }
+//        });
+//
+//		final Button buttonCancel = (Button) findViewById(R.id.btn_cancel_add_animal);
+//		buttonCancel.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//            	goBack();
+//            }
+//        });
 	}
 	
 	@Override
@@ -572,4 +574,15 @@ public class AnimalAddActivity extends Activity {
 		startActivity(intent);
 		finish();
     }
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Log.d(LOG_TAG, "item.getItemId() : " + item.getItemId());
+
+        if (item.getItemId() == android.R.id.home) {
+            Log.d(LOG_TAG, "Back Pressed!");
+        }
+
+		return super.onOptionsItemSelected(item);
+	}
 }

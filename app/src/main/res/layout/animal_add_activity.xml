@@ -8,57 +8,56 @@
     android:paddingStart="@dimen/activity_padding_left"
     android:paddingTop="@dimen/activity_padding_top" >
 
-    <RelativeLayout
-        android:id="@+id/buttons_add_animal"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="10dp" >
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/buttons_add_animal"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginBottom="10dp" >-->
 
-        <!-- Divisor vertical -->
+        <!--&lt;!&ndash; Divisor vertical &ndash;&gt;-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/button_material_dark" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="@color/button_material_dark" />-->
 
-        <!-- Divisor horizontal -->
+        <!--&lt;!&ndash; Divisor horizontal &ndash;&gt;-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" >-->
 
-            <Button
-                android:id="@+id/btn_cancel_add_animal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackground"
-                android:text="@string/cancel" />
+            <!--<Button-->
+                <!--android:id="@+id/btn_cancel_add_animal"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="?attr/selectableItemBackground"-->
+                <!--android:text="@string/cancel" />-->
 
-            <View
-                android:layout_width="1dip"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dip"
-                android:layout_marginTop="4dip"
-                android:background="@color/button_material_dark" />
+            <!--<View-->
+                <!--android:layout_width="1dip"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="4dip"-->
+                <!--android:layout_marginTop="4dip"-->
+                <!--android:background="@color/button_material_dark" />-->
 
-            <Button
-                android:id="@+id/btn_save_add_animal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackground"
-                android:text="@string/save" />
-        </LinearLayout>
-    </RelativeLayout>
+            <!--<Button-->
+                <!--android:id="@+id/btn_save_add_animal"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="?attr/selectableItemBackground"-->
+                <!--android:text="@string/save" />-->
+        <!--</LinearLayout>-->
+    <!--</RelativeLayout>-->
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/buttons_add_animal" >
+        android:layout_alignParentBottom="true">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -56,43 +56,4 @@
         android:layout_gravity="bottom|right"
         app:layout_anchorGravity="bottom|right|end"/>
 
-    <!-- buttons -->
-    <!-- <TableRow -->
-    <!-- android:layout_width="fill_parent" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:gravity="center" > -->
-
-
-    <!-- <ImageButton -->
-    <!-- android:id="@+id/button_add_animal" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:layout_marginTop="20dp" -->
-    <!-- android:contentDescription="@string/add_animal" -->
-    <!-- android:src="@drawable/ic_action_big_new" /> -->
-    <!-- </TableRow> -->
-
-
-    <!-- <Button -->
-    <!-- android:id="@+id/button_add_animal" -->
-    <!-- android:layout_width="fill_parent" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:text="@string/add_animal" /> -->
-
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:background="#E0E0E0" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/button_add_animal"-->
-        <!--style="@style/button_text"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:background="@drawable/button_text"-->
-        <!--android:text="@string/add_animal" />-->
-
 </LinearLayout>

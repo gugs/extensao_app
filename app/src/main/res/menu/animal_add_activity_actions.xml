@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_discard_add_animal"
+        android:title="@string/discard_add_animal"
+        app:showAsAction="never"/>
+
+</menu>

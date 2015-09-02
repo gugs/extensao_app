@@ -15,11 +15,14 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,7 +56,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class AnimalAddActivity extends ActionBarActivity {
+public class AnimalAddActivity extends AppCompatActivity {
 
 	private static final String LOG_TAG = "AnimalAddActivity";
 	
@@ -78,7 +81,9 @@ public class AnimalAddActivity extends ActionBarActivity {
 //		actionBar.setDisplayShowHomeEnabled(true);
 //		actionBar.setIcon(R.drawable.ic_launcher);
 
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_accept);
+        if(actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.check);
+        }
 		
 		setContentView(R.layout.animal_add_activity);		
 		
@@ -91,7 +96,7 @@ public class AnimalAddActivity extends ActionBarActivity {
 		//
 		
 		//Specie
-		specie = (Specie)getIntent().getParcelableExtra(Specie.class.toString());
+		specie = getIntent().getParcelableExtra(Specie.class.toString());
 		setTitle(getResources().getString(R.string.add) + " " + specie.getDescription());
 		//
 		
@@ -245,7 +250,14 @@ public class AnimalAddActivity extends ActionBarActivity {
 //            }
 //        });
 	}
-	
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.animal_add_activity_actions, menu);
+        return true;
+    }
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 	    super.onCreateContextMenu(menu, v, menuInfo);
@@ -356,7 +368,7 @@ public class AnimalAddActivity extends ActionBarActivity {
 	    } else if(requestCode == PICTURE_SELECT_ACTIVITY_REQUEST_CODE){
 	    	if (resultCode == RESULT_OK) {
 	    		//Copia o arquivo original para dentro da pasta de imagens do aplicativo
-	    		Uri selectedPictureUri = (Uri) data.getData();
+	    		Uri selectedPictureUri = data.getData();
 	    		tempPicture = getOutputMediaFile(MEDIA_TYPE_IMAGE);
 	    		
 	    		String[] filePathColumn = { MediaStore.Images.Media.DATA };
@@ -402,7 +414,7 @@ public class AnimalAddActivity extends ActionBarActivity {
 	}
 	
 	private void saveBitmapToFile(Bitmap bmp, File file) {
-		FileOutputStream out = null;
+		FileOutputStream out;
 		try {
 			out = new FileOutputStream(file);
 			bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
@@ -561,7 +573,9 @@ public class AnimalAddActivity extends ActionBarActivity {
     	
     	if(picture != null) {
     		File destFile = new File(picture.getAbsolutePath().replace("TMP", a.getIdToDisplay()));
-    		picture.renameTo(destFile);
+    		if(!picture.renameTo(destFile)){
+                throw new RuntimeException("Falha ao renomear arquivo");
+            }
     	}
     	
 		goBack();
@@ -577,12 +591,21 @@ public class AnimalAddActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Log.d(LOG_TAG, "item.getItemId() : " + item.getItemId());
+        switch (item.getItemId()) {
+			//Substitui a ação de voltar pela ação de salvar
+			case android.R.id.home:
+				save();
+				break;
 
-        if (item.getItemId() == android.R.id.home) {
-            Log.d(LOG_TAG, "Back Pressed!");
-        }
+            //Cancela a inclusão de animal
+            case R.id.action_discard_add_animal:
+                goBack();
+                break;
 
-		return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+
+        return true;
 	}
 }

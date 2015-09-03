@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_padding_left"
     android:paddingRight="@dimen/activity_padding_right"
     android:paddingStart="@dimen/activity_padding_left"
-    android:paddingTop="@dimen/activity_padding_top" >
+    android:paddingTop="@dimen/activity_padding_top"
+    android:layout_marginTop="10dp">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -18,49 +19,59 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <!-- id -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/animal_picture_label"
+                android:textAppearance="@style/LabelTextAppearance"/>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/img_view_add_animal_picture"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:contentDescription="@string/animal_picture_hint"
+                    android:src="@drawable/ic_action_picture" />
+            </TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/animal_id_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/no_focus_label_color" />
+                android:textAppearance="@style/LabelTextAppearance"/>
 
             <EditText
                 android:id="@+id/input_add_animal_id"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/animal_id_hint"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/animal_name_label"
+                android:textAppearance="@style/LabelTextAppearance" />
+
+            <EditText
+                android:id="@+id/input_add_animal_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number" >
-
-                <requestFocus />
+                android:hint="@string/animal_name_hint"
+                android:inputType="textCapWords" >
             </EditText>
 
-            <!-- race -->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
-                android:text="@string/animal_race_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
-
-            <Spinner
-                android:id="@+id/spinner_add_animal_race"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- sex -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
+                android:layout_marginTop="6dp"
                 android:text="@string/animal_sex_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
+                android:textAppearance="@style/LabelTextAppearance"/>
 
             <RadioGroup
                 android:id="@+id/radio_group_add_animal_sex"
@@ -72,59 +83,53 @@
                     android:id="@+id/radio_add_animal_sex_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/male" />
+                    android:text="@string/male"
+                    android:paddingLeft="@dimen/activity_padding_left"
+                    android:paddingRight="@dimen/activity_padding_right"
+                    android:textAllCaps = "true"/>
 
                 <RadioButton
                     android:id="@+id/radio_add_animal_sex_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/female" />
+                    android:text="@string/female"
+                    android:paddingLeft="@dimen/activity_padding_left"
+                    android:paddingRight="@dimen/activity_padding_right"
+                    android:textAllCaps = "true"/>
             </RadioGroup>
 
-            <!-- name -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/animal_race_label"
+                android:textAppearance="@style/LabelTextAppearance"/>
+
+            <Spinner
+                android:id="@+id/spinner_add_animal_race"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
-                android:text="@string/animal_name_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
-
-            <EditText
-                android:id="@+id/input_add_animal_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textCapWords" >
-            </EditText>
-
-            <!-- ear tag -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
+                android:layout_marginTop="10dp"
                 android:text="@string/animal_ear_tag_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
+                android:textAppearance="@style/LabelTextAppearance" />
 
             <EditText
                 android:id="@+id/input_add_animal_ear_tag"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:hint="@string/animal_ear_tag_hint"
                 android:inputType="textCapWords" />
-
-            <!-- birth date -->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
+                android:layout_marginTop="10dp"
                 android:text="@string/animal_birth_date_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
+                android:textAppearance="@style/LabelTextAppearance" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,31 +137,30 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/input_add_animal_birth_date"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/black"
-                    android:padding="12dp"
-                    android:textSize="20sp" />
+                    android:id="@+id/tv_add_animal_birth_date"
+                    android:layout_height="40dp"
+                    android:layout_width="200dp"
+                    android:text="@string/animal_birth_date_hint"
+                    android:textAppearance="@style/HintTextAppearance"
+                    style="?android:attr/spinnerStyle"/>
 
                 <ImageButton
                     android:id="@+id/btn_add_animal_clear_birth_date"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:contentDescription="@string/cancel"
+                    android:background="@android:color/transparent"
+                    android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_action_cancel" />
-            </LinearLayout>
 
-            <!-- aquisition date -->
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
+                android:layout_marginTop="10dp"
                 android:text="@string/animal_aquisition_date_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
+                android:textAppearance="@style/LabelTextAppearance" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,155 +168,37 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/input_add_animal_aquisition_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/black"
-                    android:padding="12dp"
-                    android:textSize="20sp" />
+                    android:id="@+id/tv_add_animal_acquisition_date"
+                    android:layout_height="40dp"
+                    android:layout_width="200dp"
+                    android:text="@string/animal_aquisition_date_hint"
+                    android:textAppearance="@style/HintTextAppearance"
+                    style="?android:attr/spinnerStyle"/>
 
                 <ImageButton
                     android:id="@+id/btn_add_animal_clear_aquisition_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
                     android:contentDescription="@string/cancel"
+                    android:background="@android:color/transparent"
+                    android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_action_cancel" />
             </LinearLayout>
-
-            <!-- aquisition value -->
-            <!-- TODO: Mostrar somente se tiver preenchido data da compra -->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
+                android:layout_marginTop="10dp"
                 android:text="@string/animal_aquisition_value_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
+                android:textAppearance="@style/LabelTextAppearance" />
 
             <EditText
                 android:id="@+id/input_add_animal_aquisition_value"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:digits="1234567890.,"
                 android:ems="10"
                 android:inputType="numberDecimal" />
-
-            <!-- sell date -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
-                android:text="@string/animal_sell_date_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/input_add_animal_sell_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/black"
-                    android:padding="12dp"
-                    android:textSize="20sp" />
-
-                <ImageButton
-                    android:id="@+id/btn_add_animal_clear_sell_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:contentDescription="@string/cancel"
-                    android:src="@drawable/ic_action_cancel" />
-            </LinearLayout>
-
-            <!-- sell value -->
-            <!-- TODO: Mostrar somente se tiver preenchido data da venda -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
-                android:text="@string/animal_sell_value_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
-
-            <EditText
-                android:id="@+id/input_add_animal_sell_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="1234567890.,"
-                android:ems="10"
-                android:inputType="numberDecimal" />
-
-            <!-- death date -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
-                android:text="@string/animal_death_date_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/input_add_animal_death_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/black"
-                    android:padding="12dp"
-                    android:textSize="20sp" />
-
-                <ImageButton
-                    android:id="@+id/btn_add_animal_clear_death_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:contentDescription="@string/cancel"
-                    android:src="@drawable/ic_action_cancel" />
-            </LinearLayout>
-
-            <!-- death reason -->
-            <!-- TODO: Mostrar somente se tiver preenchido data da morte -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_padding_top"
-                android:text="@string/animal_death_reason_label"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/label_color" />
-
-            <EditText
-                android:id="@+id/input_add_animal_death_reason"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text" >
-            </EditText>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center" >
-
-                <ImageView
-                    android:id="@+id/img_view_add_animal_picture"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:contentDescription="@string/animal_picture"
-                    android:src="@drawable/ic_action_picture" />
-            </TableRow>
 
         </LinearLayout>
     </ScrollView>

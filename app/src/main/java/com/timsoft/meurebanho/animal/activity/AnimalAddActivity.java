@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -68,188 +68,121 @@ public class AnimalAddActivity extends AppCompatActivity {
 	private Spinner racesSpinner;
 	private Specie specie;
 	private File tempPicture, picture;
-	private TextView tvId, tvBirthDate, tvAquisitionDate, tvSellDate, tvDeathDate, tvAquisitionValue, tvSellValue;
+	private TextView tvId, tvAquisitionValue, tvBirthDate, tvAquisitionDate;
+	private ImageButton btnClearBirthDate, btnClearAquisitionDate;
 	private ImageView imageViewPicture;
-	private double aquisitionValue, sellValue;
+	private double aquisitionValue;
 	private DBAnimalAdapter animalDatasource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-			
-		final ActionBar actionBar = getSupportActionBar();
+        super.onCreate(savedInstanceState);
+
+        final ActionBar actionBar = getSupportActionBar();
 //		actionBar.setDisplayShowHomeEnabled(true);
 //		actionBar.setIcon(R.drawable.ic_launcher);
 
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.check);
         }
-		
-		setContentView(R.layout.animal_add_activity);		
-		
-		//id
-		tvId = (TextView) findViewById(R.id.input_add_animal_id);
-		animalDatasource = DBAnimalAdapter.getInstance(this);
-		animalDatasource.open();
-		tvId.setText(Integer.toString(animalDatasource.getNextId()));
-		animalDatasource.close();
-		//
-		
-		//Specie
-		specie = getIntent().getParcelableExtra(Specie.class.toString());
-		setTitle(getResources().getString(R.string.add) + " " + specie.getDescription());
-		//
-		
-    	//Races
-		DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance(this);
-		raceDatasource.open();
-		List<Race> races = raceDatasource.listBySpecieId(specie.getId());
-		raceDatasource.close();
-		
-		racesSpinner = (Spinner) findViewById(R.id.spinner_add_animal_race);
-    	racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
-    	//
-		
-		//Birth Date
-		tvBirthDate = (TextView) findViewById(R.id.input_add_animal_birth_date);
-		tvBirthDate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OnDateSetListener listener = new OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-						updateBirthDate(year, monthOfYear, dayOfMonth);
-					}
-				};
 
-				DatePickerDialog d = new DatePickerDialog(AnimalAddActivity.this, listener, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-				d.show();
-			}
-		});
-		//
-		
-		//Aquisition Date
-		tvAquisitionDate = (TextView) findViewById(R.id.input_add_animal_aquisition_date);
-		tvAquisitionDate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OnDateSetListener listener = new OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-						updateAquisitionDate(year, monthOfYear, dayOfMonth);
-					}
-				};
+        setContentView(R.layout.animal_add_activity);
 
-				DatePickerDialog d = new DatePickerDialog(AnimalAddActivity.this, listener, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-				d.show();
-			}
-		});
-		//
-		
-		//Sell Date
-		tvSellDate = (TextView) findViewById(R.id.input_add_animal_sell_date);
-		tvSellDate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OnDateSetListener listener = new OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-						updateSellDate(year, monthOfYear, dayOfMonth);
-					}
-				};
+        //id
+        tvId = (TextView) findViewById(R.id.input_add_animal_id);
+        animalDatasource = DBAnimalAdapter.getInstance(this);
+        animalDatasource.open();
+        tvId.setText(Integer.toString(animalDatasource.getNextId()));
+        animalDatasource.close();
+        //
 
-				DatePickerDialog d = new DatePickerDialog(AnimalAddActivity.this, listener, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-				d.show();
-			}
-		});
-		//
-		
-		//Death Date
-		tvDeathDate = (TextView) findViewById(R.id.input_add_animal_death_date);
-		tvDeathDate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OnDateSetListener listener = new OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-						updateDeathDate(year, monthOfYear, dayOfMonth);
-					}
-				};
+        //Specie
+        specie = getIntent().getParcelableExtra(Specie.class.toString());
+        setTitle(getResources().getString(R.string.add) + " " + specie.getDescription());
+        //
 
-				DatePickerDialog d = new DatePickerDialog(AnimalAddActivity.this, listener, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-				d.show();
-			}
-		});
-		//
-		
-		//Aquisition Value
-		tvAquisitionValue = (TextView) findViewById(R.id.input_add_animal_aquisition_value);
-		
-		tvAquisitionValue.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
+        //Races
+        DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance(this);
+        raceDatasource.open();
+        List<Race> races = raceDatasource.listBySpecieId(specie.getId());
+        raceDatasource.close();
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
+        racesSpinner = (Spinner) findViewById(R.id.spinner_add_animal_race);
+        racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
+        //
 
-			@Override
-			public void afterTextChanged(Editable editable) {
-				try {
-					aquisitionValue = Double.parseDouble(editable.toString().replace(',', '.'));
-				}catch (ParseException e){
-					aquisitionValue = 0;
-				}
-			}
-		});
-		//
-		
-		//Sell Value
-		tvSellValue = (TextView) findViewById(R.id.input_add_animal_sell_value);
-		
-		tvSellValue.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
+        //Birth Date
+        tvBirthDate = (TextView) findViewById(R.id.tv_add_animal_birth_date);
+        tvBirthDate.setOnClickListener(getOnClickListenerForBtnSetDate(tvBirthDate));
+        btnClearBirthDate = (ImageButton) findViewById(R.id.btn_add_animal_clear_birth_date);
+        btnClearBirthDate.setOnClickListener(getOnClickListenerForBtnClearDate(tvBirthDate, R.string.animal_birth_date_hint));
+        //
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
+        //Aquisition Date
+        tvAquisitionDate = (TextView) findViewById(R.id.tv_add_animal_acquisition_date);
+        tvAquisitionDate.setOnClickListener(getOnClickListenerForBtnSetDate(tvAquisitionDate));
+        btnClearAquisitionDate = (ImageButton) findViewById(R.id.btn_add_animal_clear_aquisition_date);
+        btnClearAquisitionDate.setOnClickListener(getOnClickListenerForBtnClearDate(tvAquisitionDate, R.string.animal_aquisition_date_hint));
+        //
 
-			@Override
-			public void afterTextChanged(Editable editable) {
-				try {
-					sellValue = Double.parseDouble(editable.toString().replace(',', '.'));
-				}catch (ParseException e){
-					sellValue = 0;
-				}
-			}
-		});
+        //Aquisition Value
+        tvAquisitionValue = (TextView) findViewById(R.id.input_add_animal_aquisition_value);
+
+        tvAquisitionValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    aquisitionValue = Double.parseDouble(editable.toString().replace(',', '.'));
+                } catch (ParseException e) {
+                    aquisitionValue = 0;
+                }
+            }
+        });
+        //
+
+        imageViewPicture = (ImageView) findViewById(R.id.img_view_add_animal_picture);
+        imageViewPicture.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.showContextMenu();
+            }
+        });
+        registerForContextMenu(imageViewPicture);
+    }
 		
-		imageViewPicture = (ImageView) findViewById(R.id.img_view_add_animal_picture);
-		imageViewPicture.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				v.showContextMenu();
-			}
-		});
-		registerForContextMenu(imageViewPicture);
-		
-//		final Button buttonSave = (Button) findViewById(R.id.btn_save_add_animal);
-//		buttonSave.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//            	save();
-//            }
-//        });
-//
-//		final Button buttonCancel = (Button) findViewById(R.id.btn_cancel_add_animal);
-//		buttonCancel.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//            	goBack();
-//            }
-//        });
-	}
+    private OnClickListener getOnClickListenerForBtnSetDate(final TextView tvDate) {
+        return new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnDateSetListener listener = new OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        updateDate(tvDate, year, monthOfYear, dayOfMonth);
+                    }
+                };
+
+                DatePickerDialog d = new DatePickerDialog(AnimalAddActivity.this, listener, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                d.show();
+            }
+        };
+    }
+
+    private OnClickListener getOnClickListenerForBtnClearDate(final TextView tvDate, final int hint_id) {
+        return new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvDate.setText(getResources().getString(hint_id));
+            }
+        };
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -281,22 +214,6 @@ public class AnimalAddActivity extends AppCompatActivity {
 	        default:
 	            return super.onContextItemSelected(item);
 	    }
-	}
-	
-	private void updateBirthDate(int year, int monthOfYear, int dayOfMonth) {
-		updateDate(tvBirthDate, year, monthOfYear, dayOfMonth);
-	}
-	
-	private void updateAquisitionDate(int year, int monthOfYear, int dayOfMonth) {
-		updateDate(tvAquisitionDate, year, monthOfYear, dayOfMonth);
-	}
-	
-	private void updateSellDate(int year, int monthOfYear, int dayOfMonth) {
-		updateDate(tvSellDate, year, monthOfYear, dayOfMonth);
-	}
-	
-	private void updateDeathDate(int year, int monthOfYear, int dayOfMonth) {
-		updateDate(tvDeathDate, year, monthOfYear, dayOfMonth);
 	}
 	
 	private void updateDate(TextView tv, int year, int monthOfYear, int dayOfMonth) {
@@ -525,7 +442,7 @@ public class AnimalAddActivity extends AppCompatActivity {
     	//
     	
     	//Aquisition date
-    	if(!"".equals(tvAquisitionDate.getText().toString().trim())){
+    	if(tvAquisitionDate.getText().toString() != getResources().getString(R.string.animal_aquisition_date_hint)){
 	    	try {
 				a.setAquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
 			} catch (java.text.ParseException e) {
@@ -537,35 +454,6 @@ public class AnimalAddActivity extends AppCompatActivity {
     	//Aquisition value
     	a.setAquisitionValue(aquisitionValue);
     	//
-    	
-    	//Sell date
-    	if(!"".equals(tvSellDate.getText().toString())) {
-	    	try {
-				a.setSellDate(MainActivity.getDateFormat().parse(tvSellDate.getText().toString()));
-			} catch (java.text.ParseException e) {
-				Toast.makeText(this, R.string.sell_date_invalid, Toast.LENGTH_SHORT).show();
-				return;
-			}
-    	}
-    	//
-    	
-    	//Sell value
-    	a.setSellValue(sellValue);
-    	//
-    	
-    	//Death date
-    	if(!"".equals(tvDeathDate.getText().toString())) {
-	    	try {
-				a.setSellDate(MainActivity.getDateFormat().parse(tvDeathDate.getText().toString()));
-			} catch (java.text.ParseException e) {
-				Toast.makeText(this, R.string.death_date_invalid, Toast.LENGTH_SHORT).show();
-				return;
-			}
-    	}
-    	//
-    	
-    	//Death reason
-    	a.setDeathReason(((EditText) findViewById(R.id.input_add_animal_death_reason)).getText().toString().trim());
     	
     	animalDatasource.open();
     	animalDatasource.create(a);

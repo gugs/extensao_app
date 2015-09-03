@@ -26,35 +26,49 @@
 
     <!-- Animal related messages -->
     <string name="animals">Animais</string>
-    <string name="animal_id_label">Número de Identificação:</string>
+
+    <string name="animal_id_label">NÚMERO DE IDENTIFICAÇÃO</string>
     <string name="animal_id_hint">Número de Identificação</string>
     <string name="alert_invalid_id">Número de Identificação inválido</string>
     <string name="alert_id_already_used">Número de Identificação já utilizado</string>
-    <string name="animal_specie_label">Espécie:</string>
-    <string name="animal_race_label">Raça:</string>
-    <string name="animal_sex_label">Sexo:</string>
+
+    <string name="animal_specie_label">ESPÉCIE</string>
+    <string name="animal_race_label">RAÇA</string>
+
+    <string name="animal_sex_label">SEXO</string>
     <string name="male">Macho</string>
     <string name="female">Fêmea</string>
-    <string name="animal_name_label">Nome:</string>
-    <string name="animal_name_hint">Nome</string>
-    <string name="animal_ear_tag_label">Brinco/Número de Controle:</string>
+
+    <string name="animal_name_label">NOME</string>
+    <string name="animal_name_hint">Nome do Animal</string>
+
+    <string name="animal_ear_tag_label">BRINCO/NÚMERO DE CONTROLE</string>
     <string name="animal_ear_tag_hint">Brinco/Número de Controle</string>
-    <string name="animal_birth_date_label">Data de nascimento:</string>
+
+    <string name="animal_birth_date_label">DATA DE NASCIMENTO</string>
     <string name="animal_birth_date_hint">Data de nascimento</string>
-    <string name="animal_aquisition_date_label">Data de aquisição:</string>
+
+    <string name="animal_aquisition_date_label">DATA DE AQUISIÇÃO</string>
     <string name="animal_aquisition_date_hint">Data de aquisição</string>
-    <string name="animal_sell_date_label">Data da venda:</string>
+
+    <string name="animal_sell_date_label">DATA DA VENDA</string>
     <string name="animal_sell_date_hint">Data da venda</string>
-    <string name="animal_death_date_label">Data da morte:</string>
-    <string name="animal_death_reason_label">Motivo da morte:</string>
-    <string name="animal_aquisition_value_label">Valor de aquisição:</string>
+
+    <string name="animal_death_date_label">DATA DA MORTE</string>
+    <string name="animal_death_reason_label">MOTIVO DA MORTE</string>
+
+    <string name="animal_aquisition_value_label">VALOR DE AQUISIÇÃO</string>
     <string name="animal_aquisition_value_hint">Valor de aquisição</string>
-    <string name="animal_sell_value_label">Valor de venda:</string>
+
+    <string name="animal_sell_value_label">VALOR DE VENDA</string>
     <string name="animal_sell_value_hint">Valor de venda</string>
-    <string name="animal_father_label">Pai:</string>
+
+    <string name="animal_father_label">PAI</string>
     <string name="animal_father_hint">Pai</string>
-    <string name="animal_mother_label">Mãe:</string>
+
+    <string name="animal_mother_label">MÃE</string>
     <string name="animal_mother_hint">Mãe</string>
+
     <string name="add_animal">Incluir Animal</string>
     <string name="detail_animal">Detalhar Animal</string>
     <string name="edit_animal">Alterar Animal</string>
@@ -109,7 +123,10 @@
     <string name="animal_main_sold_label">Vendidos</string>
     <string name="animal_main_death_label">Mortos</string>
     <string name="months">Meses</string>
-    <string name="animal_picture">Foto</string>
+
+    <string name="animal_picture_label">FOTO</string>
+    <string name="animal_picture_hint">Foto</string>
+
     <string name="image_saved_success">Imagem salva com sucesso</string>
     <string name="camera_not_supported">Não há suporte a câmera no dispositivo</string>
     <string name="take_picture">Tirar foto</string>

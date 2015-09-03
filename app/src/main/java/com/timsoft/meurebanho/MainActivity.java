@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	public static DateFormat getDateFormat() {
-		return DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+		return DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
 	}
 	
 	public static String getFormatedDate(Date d) {

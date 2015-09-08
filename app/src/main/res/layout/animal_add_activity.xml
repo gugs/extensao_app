@@ -113,7 +113,7 @@
             <Spinner
                 android:id="@+id/spinner_add_animal_race"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="wrap_content"

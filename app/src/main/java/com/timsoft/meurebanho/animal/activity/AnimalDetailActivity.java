@@ -2,22 +2,20 @@ package com.timsoft.meurebanho.animal.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.farm.activity.FarmsActivity;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 
-public class AnimalDetailActivity extends ActionBarActivity {
+public class AnimalDetailActivity extends AppCompatActivity {
 
 	@SuppressWarnings("unused")
 	private static final String LOG_TAG = "AnimalDetailActivity";

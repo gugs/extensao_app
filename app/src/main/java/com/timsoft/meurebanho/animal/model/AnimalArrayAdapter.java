@@ -1,7 +1,5 @@
 package com.timsoft.meurebanho.animal.model;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.timsoft.meurebanho.R;
+
+import java.util.List;
 
 public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
 	private final Context context;

@@ -1,9 +1,9 @@
 package com.timsoft.meurebanho.race.model;
 
+import com.timsoft.meurebanho.infra.model.IDDescription;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.timsoft.meurebanho.infra.model.IDDescription;
 
 public class Race extends IDDescription {
 

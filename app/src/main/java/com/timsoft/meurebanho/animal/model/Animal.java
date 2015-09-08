@@ -1,16 +1,16 @@
 package com.timsoft.meurebanho.animal.model;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.event.model.Evento;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
 
 public class Animal {
 	public static final int STATUS_AVAILABLE = 0;

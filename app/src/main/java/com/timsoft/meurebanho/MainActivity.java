@@ -1,11 +1,10 @@
 package com.timsoft.meurebanho;
 
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
-import java.util.Date;
-import java.util.Locale;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.timsoft.meurebanho.animal.activity.AnimalListActivity;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
@@ -13,13 +12,14 @@ import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Date;
+import java.util.Locale;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
 	private static final String LOG_TAG = "MainActivity";
 

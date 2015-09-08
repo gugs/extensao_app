@@ -1,8 +1,5 @@
 package com.timsoft.meurebanho.animal.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,8 +20,11 @@ import com.timsoft.meurebanho.farm.activity.FarmsActivity;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressWarnings("deprecation")
-public class AnimalListActivity extends ActionBarActivity {
+public class AnimalListActivity extends AppCompatActivity {
 	private int selectedSpecieId;
 	
 	private DBAnimalAdapter animalDatasource;

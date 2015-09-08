@@ -1,12 +1,12 @@
 package com.timsoft.meurebanho.infra.db;
 
-import java.util.Date;
-import java.util.List;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.Date;
+import java.util.List;
 
 public abstract class DBAdapter<T> {
 	

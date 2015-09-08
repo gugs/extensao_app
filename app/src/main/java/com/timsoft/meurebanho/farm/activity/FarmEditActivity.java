@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +14,7 @@ import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.farm.db.DBFarmAdapter;
 import com.timsoft.meurebanho.farm.model.Farm;
 
-public class FarmEditActivity extends ActionBarActivity {
+public class FarmEditActivity extends AppCompatActivity {
 
 	private static final String LOG_TAG = "FarmEditActivity";
 	

@@ -1,8 +1,8 @@
 package com.timsoft.meurebanho.event.model;
 
-import java.util.Date;
-
 import com.timsoft.meurebanho.infra.model.IDDescription;
+
+import java.util.Date;
 
 public class Evento extends IDDescription {
 	private Date data;

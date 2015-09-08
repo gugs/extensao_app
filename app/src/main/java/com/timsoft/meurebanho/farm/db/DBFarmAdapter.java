@@ -1,8 +1,5 @@
 package com.timsoft.meurebanho.farm.db;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +7,9 @@ import android.util.Log;
 
 import com.timsoft.meurebanho.farm.model.Farm;
 import com.timsoft.meurebanho.infra.db.DBAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBFarmAdapter extends DBAdapter<Farm>{
 	

@@ -1,7 +1,5 @@
 package com.timsoft.meurebanho.race.model;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +7,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.timsoft.meurebanho.R;
+
+import java.util.List;
 
 public class RaceArrayAdapter extends ArrayAdapter<Race> {
 	

@@ -1,10 +1,8 @@
 package com.timsoft.meurebanho.farm.activity;
 
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +15,9 @@ import com.timsoft.meurebanho.farm.db.DBFarmAdapter;
 import com.timsoft.meurebanho.farm.model.Farm;
 import com.timsoft.meurebanho.farm.model.FarmArrayAdapter;
 
-public class FarmsActivity extends ActionBarActivity {
+import java.util.List;
+
+public class FarmsActivity extends AppCompatActivity {
 
 	private static final String LOG_TAG = "FarmsActivity";
 	private DBFarmAdapter farmsDatasource;

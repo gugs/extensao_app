@@ -1,7 +1,5 @@
 package com.timsoft.meurebanho.farm.model;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +9,9 @@ import android.widget.TextView;
 
 import com.timsoft.meurebanho.R;
 
+import java.util.List;
+
 public class FarmArrayAdapter extends ArrayAdapter<Farm> {
-	//FIXME: Utilizar a solução do SpecieArrayAdapter
 	
 	@SuppressWarnings("unused")
 	private final Context context;

@@ -1,14 +1,14 @@
 package com.timsoft.meurebanho.specie.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.infra.model.IDDescription;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Specie extends IDDescription {
 	public Specie(int id, String description) {

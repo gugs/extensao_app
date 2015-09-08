@@ -174,10 +174,12 @@ public class AnimalAddActivity extends AppCompatActivity {
         };
     }
 
+	@SuppressWarnings("deprecation")
     private OnClickListener getOnClickListenerForBtnClearDate(final TextView tvDate, final int hint_id) {
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
+				tvDate.setTextColor(getResources().getColor(R.color.hintTextAppearance));
                 tvDate.setText(getResources().getString(hint_id));
             }
         };
@@ -214,11 +216,13 @@ public class AnimalAddActivity extends AppCompatActivity {
 	            return super.onContextItemSelected(item);
 	    }
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	private void updateDate(TextView tv, int year, int monthOfYear, int dayOfMonth) {
 		DateFormat f = MainActivity.getDateFormat();
 		Calendar c = Calendar.getInstance();
 		c.set(year, monthOfYear, dayOfMonth);
+		tv.setTextColor(getResources().getColor(android.R.color.primary_text_light));
 		tv.setText(f.format(c.getTime()));
 	}
 	
@@ -441,7 +445,7 @@ public class AnimalAddActivity extends AppCompatActivity {
     	//
     	
     	//Aquisition date
-    	if(tvAquisitionDate.getText().toString() != getResources().getString(R.string.animal_aquisition_date_hint)){
+		if (!getResources().getString(R.string.animal_aquisition_date_hint).equals(tvAquisitionDate.getText().toString())){
 	    	try {
 				a.setAquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
 			} catch (java.text.ParseException e) {

@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_remove_picture"
+        android:title="@string/remove_picture"/>
+    <item
+        android:id="@+id/action_take_other_picture"
+        android:title="@string/take_other_picture"/>
+    <item
+        android:id="@+id/action_select_other_picture"
+        android:title="@string/select_other_picture"/>
+
+</menu>

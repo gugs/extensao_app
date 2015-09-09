@@ -129,8 +129,14 @@
 
     <string name="image_saved_success">Imagem salva com sucesso</string>
     <string name="camera_not_supported">Não há suporte a câmera no dispositivo</string>
+
     <string name="take_picture">Tirar foto</string>
     <string name="select_picture">Escolher foto</string>
+
+    <string name="remove_picture">Remover foto</string>
+    <string name="take_other_picture">Tirar outra foto</string>
+    <string name="select_other_picture">Escolher outra foto</string>
+
     <string name="discard_add_animal">Descartar alterações</string>
 
 </resources>

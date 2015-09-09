@@ -196,21 +196,32 @@ public class AnimalAddActivity extends AppCompatActivity {
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 	    super.onCreateContextMenu(menu, v, menuInfo);
 
-	    if (v.getId() == R.id.img_view_add_animal_picture) {
-	        getMenuInflater().inflate(R.menu.take_or_select_picture_context_menu, menu);
-	    }
+		if(v.getId() == R.id.img_view_add_animal_picture) {
+			if (picture == null) {
+				getMenuInflater().inflate(R.menu.take_or_select_picture_context_menu, menu);
+			} else {
+				getMenuInflater().inflate(R.menu.remove_take_other_or_select_other_picture_context_menu, menu);
+			}
+		}
 	}
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case R.id.action_take_picture:
+			case R.id.action_take_other_picture:
 	        	takePicture();
 	            return true;
 	            
 	        case R.id.action_select_picture:
+			case R.id.action_select_other_picture:
 	        	selectPictureFromGallery();
 	            return true;
+
+			case R.id.action_remove_picture:
+				picture = null;
+				updateImageViewPicture();
+				return true;
 	            
 	        default:
 	            return super.onContextItemSelected(item);
@@ -379,7 +390,11 @@ public class AnimalAddActivity extends AppCompatActivity {
 	}
 	
 	private void updateImageViewPicture() {
-		imageViewPicture.setImageBitmap(BitmapFactory.decodeFile(picture.getPath()));
+		if(picture != null) {
+			imageViewPicture.setImageBitmap(BitmapFactory.decodeFile(picture.getPath()));
+		} else {
+			imageViewPicture.setImageResource(R.drawable.ic_action_picture);
+		}
 	}
 	
     private void save() {

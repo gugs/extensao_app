@@ -60,7 +60,7 @@
                         android:layout_height="80dp"
                         android:layout_gravity="center_horizontal"
                         android:contentDescription="@string/animal_picture_hint"
-                        android:src="@drawable/ic_action_picture" />
+                        android:src="@drawable/cow" />
 
                 </LinearLayout>
 

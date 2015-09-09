@@ -15,5 +15,5 @@
 -->
 <resources>
      <color name="hintTextAppearance">#808080</color>
-    <color name="primary">#03A9F4</color>
+     <color name="primary">#03A9F4</color>
 </resources>

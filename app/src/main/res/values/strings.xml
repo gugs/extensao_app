@@ -27,10 +27,10 @@
     <!-- Animal related messages -->
     <string name="animals">Animais</string>
 
-    <string name="animal_id_label">NÚMERO DE IDENTIFICAÇÃO</string>
-    <string name="animal_id_hint">Número de Identificação</string>
-    <string name="alert_invalid_id">Número de Identificação inválido</string>
-    <string name="alert_id_already_used">Número de Identificação já utilizado</string>
+    <string name="animal_id_label">IDENTIFICAÇÃO</string>
+    <string name="animal_id_hint">Identificação</string>
+    <string name="alert_invalid_id">Identificação inválida</string>
+    <string name="alert_id_already_used">Identificação já utilizada</string>
 
     <string name="animal_specie_label">ESPÉCIE</string>
     <string name="animal_race_label">RAÇA</string>

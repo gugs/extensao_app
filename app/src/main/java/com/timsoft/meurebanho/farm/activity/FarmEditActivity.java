@@ -36,7 +36,7 @@ public class FarmEditActivity extends AppCompatActivity {
 		farmDatasource = DBFarmAdapter.getInstance(this);
 		
 		Bundle data = getIntent().getExtras();
-		farm = (Farm) data.getParcelable("farm");
+		farm = data.getParcelable("farm");
 		
 		input = (EditText) findViewById(R.id.input_edit_farm);
 		input.setText(farm.getDescription());

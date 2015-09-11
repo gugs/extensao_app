@@ -3,9 +3,11 @@ package com.timsoft.meurebanho.animal.model;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.event.model.Evento;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -252,13 +254,15 @@ public class Animal {
 			endCalendar.setTime(new Date());
 
 			int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
-			int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
-			
-			return diffMonth;
+			return diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
 		}
 	}
 	
 	public String getAgeInMonthsToDisplay(Context context) {
 		return getAgeInMonths() + " " + context.getResources().getString(R.string.months);
+	}
+
+	public File getPictureFile() {
+		return new File(MeuRebanhoApp.getMediaStorageDir().getPath() + File.separator + getIdToDisplay() + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
 	}
 }

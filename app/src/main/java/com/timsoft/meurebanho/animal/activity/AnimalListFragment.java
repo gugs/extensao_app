@@ -32,16 +32,6 @@ public class AnimalListFragment extends Fragment {
 		return f;
 	}
 	
-//	public AnimalListFragment(int index) {
-//		this.index = index;
-//	}
-	
-//	@Override
-//	public void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		activity = (AnimalListActivity)getActivity();
-//	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,7 +79,7 @@ public class AnimalListFragment extends Fragment {
 	    //
 	    
 	    //buttons
-	    final View addButton = (View) v.findViewById(R.id.button_add_animal);
+	    final View addButton = v.findViewById(R.id.button_add_animal);
 		addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	activity.actionNewAnimal();

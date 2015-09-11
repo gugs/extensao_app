@@ -26,7 +26,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class AnimalListActivity extends AppCompatActivity {
 	private int selectedSpecieId;
-	
+
 	private DBAnimalAdapter animalDatasource;
 	private List<Animal> animals;
 
@@ -42,8 +42,6 @@ public class AnimalListActivity extends AppCompatActivity {
 
 		// ActionBar
 		final ActionBar actionBar = getSupportActionBar();
-//		actionBar.setDisplayShowHomeEnabled(true);
-//		actionBar.setIcon(R.drawable.ic_launcher);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		//
 		
@@ -81,7 +79,6 @@ public class AnimalListActivity extends AppCompatActivity {
         // Tabs
         for(Specie s : species){
 			Tab tab = actionBar.newTab();   
-		    tab = actionBar.newTab();
 		    tab.setText(s.getDescription());
 
 		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
@@ -126,7 +123,7 @@ public class AnimalListActivity extends AppCompatActivity {
 	}
 	
 	public List<Animal> getAnimals(int specieId, int status) {
-		List<Animal> filteredAnimals = new ArrayList<Animal>();
+		List<Animal> filteredAnimals = new ArrayList<>();
 		boolean correctStatus = true;
 		
 		for (Animal a : animals) {

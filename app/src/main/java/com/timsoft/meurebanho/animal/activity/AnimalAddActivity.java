@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.timsoft.meurebanho.MainActivity;
+import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
@@ -219,6 +220,7 @@ public class AnimalAddActivity extends AppCompatActivity {
 	            return true;
 
 			case R.id.action_remove_picture:
+				picture.delete();
 				picture = null;
 				updateImageViewPicture();
 				return true;
@@ -242,7 +244,7 @@ public class AnimalAddActivity extends AppCompatActivity {
 			// create Intent to take a picture and return control to the calling application
 		    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	
-		    tempPicture = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+		    tempPicture = getOutputMediaFile();
 		    
 		    Uri fileUri = Uri.fromFile(tempPicture); // create a file to save the image
 		    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
@@ -262,14 +264,16 @@ public class AnimalAddActivity extends AppCompatActivity {
 	
 	/** Create a File for saving an image or video */
 	@SuppressLint("SimpleDateFormat")
-	private File getOutputMediaFile(int type){
+	private File getOutputMediaFile(){
 		//TODO:
 	    // To be safe, you should check that the SDCard is mounted
 	    // using Environment.getExternalStorageState() before doing this.
 
-		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-	              Environment.DIRECTORY_PICTURES), getResources().getString(R.string.app_full_name));
-	    // This location works best if you want the created images to be shared
+//		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+//	              Environment.DIRECTORY_PICTURES), getResources().getString(R.string.app_full_name));
+
+        File mediaStorageDir = MeuRebanhoApp.getMediaStorageDir();
+        // This location works best if you want the created images to be shared
 	    // between applications and persist after your app has been uninstalled.
 
 	    // Create the storage directory if it does not exist
@@ -282,7 +286,7 @@ public class AnimalAddActivity extends AppCompatActivity {
 
 	    // Create a temporary media file name
 	    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-	    return new File(mediaStorageDir.getPath() + File.separator + "TMP_"+ timeStamp + ".jpg");
+	    return new File(mediaStorageDir.getPath() + File.separator + "TMP_"+ timeStamp + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
 	}
 	
 	@Override
@@ -293,14 +297,16 @@ public class AnimalAddActivity extends AppCompatActivity {
 	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 	        if (resultCode == RESULT_OK) {
 	        	performCrop();
-	        }
+	        } else {
+				Toast.makeText(this, "Unrecognized resultCode: " + resultCode, Toast.LENGTH_LONG).show();
+			}
 	        
 	    //user is selecting image from gallery
 	    } else if(requestCode == PICTURE_SELECT_ACTIVITY_REQUEST_CODE){
 	    	if (resultCode == RESULT_OK) {
 	    		//Copia o arquivo original para dentro da pasta de imagens do aplicativo
 	    		Uri selectedPictureUri = data.getData();
-	    		tempPicture = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+	    		tempPicture = getOutputMediaFile();
 	    		
 	    		String[] filePathColumn = { MediaStore.Images.Media.DATA };
 				Cursor cursor = getContentResolver().query(selectedPictureUri, filePathColumn, null, null, null);
@@ -312,7 +318,9 @@ public class AnimalAddActivity extends AppCompatActivity {
 	             
 	    		copy(originalPicture, tempPicture);
 	    		performCrop();
-	    	}
+	    	} else {
+				Toast.makeText(this, "Unrecognized resultCode: " + resultCode, Toast.LENGTH_LONG).show();
+			}
 	    	
 	    //user is returning from cropping the image
 	    } else if(requestCode == PICTURE_CROP_ACTIVITY_REQUEST_CODE){
@@ -478,7 +486,16 @@ public class AnimalAddActivity extends AppCompatActivity {
     	animalDatasource.close();
     	
     	if(picture != null) {
-    		File destFile = new File(picture.getAbsolutePath().replace("TMP", a.getIdToDisplay()));
+            //TODO: Clean
+    		//File destFile = new File(picture.getAbsolutePath().replace(picture.getName(), a.getIdToDisplay() + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION));
+
+            File destFile = a.getPictureFile();
+
+            //Arquivo pode existir devido a alguma instalação anterior
+            if(destFile.exists()) {
+                destFile.delete();
+            }
+
     		if(!picture.renameTo(destFile)){
                 throw new RuntimeException("Falha ao renomear arquivo");
             }

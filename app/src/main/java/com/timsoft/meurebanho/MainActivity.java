@@ -3,6 +3,7 @@ package com.timsoft.meurebanho;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -12,6 +13,7 @@ import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 		if (prefs.getBoolean(FIRST_RUN, true)) {
 			populateDefaultData();
 			prefs.edit().putBoolean(FIRST_RUN, false).commit();
-		};
+		}
 		
 		Intent intent = new Intent(this, AnimalListActivity.class);
 		startActivity(intent);

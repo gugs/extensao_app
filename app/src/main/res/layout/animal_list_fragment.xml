@@ -37,23 +37,29 @@
             android:text="@string/animal_main_death_label" />
     </RadioGroup>
 
-    <!-- animal list -->
-     <ListView
-        android:id="@+id/list_animal_list"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_add_animal"
-        android:clickable="true"
-        android:src="@drawable/md_plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-10dp"
-        android:layout_marginRight="20dp"
+        <!-- animal list -->
+         <ListView
+            android:id="@+id/list_animal_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_add_animal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:src="@drawable/md_plus"
+            app:layout_anchor="@id/list_animal_list"
+            app:layout_anchorGravity="bottom|right|end"/>
 
-        android:layout_gravity="bottom|right"
-        app:layout_anchorGravity="bottom|right|end"/>
+    </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

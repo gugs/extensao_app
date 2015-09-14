@@ -44,6 +44,7 @@
                     <EditText
                         android:id="@+id/input_add_animal_id"
                         android:layout_width="160dp"
+                        android:enabled="false"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:hint="@string/animal_id_hint"/>

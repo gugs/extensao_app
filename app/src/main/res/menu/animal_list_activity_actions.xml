@@ -10,13 +10,13 @@
 <!--         app:showAsAction="ifRoom"/> -->
     <item
         android:id="@+id/action_new_animal"
-        android:icon="@drawable/md_plus"
+        android:icon="@drawable/plus"
         android:orderInCategory="100"
         android:title="@string/add_animal"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_events"
-        android:icon="@drawable/md_calendar"
+        android:icon="@drawable/calendar"
         android:orderInCategory="100"
         android:title="@string/events"
         app:showAsAction="ifRoom"/>

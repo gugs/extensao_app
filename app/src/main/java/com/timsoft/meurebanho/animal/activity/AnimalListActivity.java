@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.farm.activity.FarmsActivity;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
@@ -184,10 +183,10 @@ public class AnimalListActivity extends AppCompatActivity {
 			Toast.makeText(this, "Event Selected", Toast.LENGTH_SHORT).show();
 			break;
 			
-		case R.id.action_farms:
-			Intent intent = new Intent(this, FarmsActivity.class);
-			startActivity(intent);
-			break;
+//		case R.id.action_farms:
+//			Intent intent = new Intent(this, FarmsActivity.class);
+//			startActivity(intent);
+//			break;
 		default:
 			break;
 		}

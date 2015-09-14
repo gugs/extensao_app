@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.farm.db.DBFarmAdapter;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 
@@ -29,8 +28,8 @@ public class DBHandler extends SQLiteOpenHelper {
 		//FIXME: Voltar para linha de baixo para nao salvar na memória do aparelho e não no sdcard
 		//super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		
-		listTableCreate = new ArrayList<String>();
-		listTableName = new ArrayList<String>();
+		listTableCreate = new ArrayList<>();
+		listTableName = new ArrayList<>();
 		
 		listTableCreate.add(DBAnimalAdapter.TABLE_CREATE);
 		listTableName.add(DBAnimalAdapter.TABLE_NAME);
@@ -38,8 +37,8 @@ public class DBHandler extends SQLiteOpenHelper {
 //		listTableCreate.add(DBEventAdapter.TABLE_CREATE);
 //		listTableName.add(DBEventAdapter.TABLE_NAME);
 		
-		listTableCreate.add(DBFarmAdapter.TABLE_CREATE);
-		listTableName.add(DBFarmAdapter.TABLE_NAME);
+//		listTableCreate.add(DBFarmAdapter.TABLE_CREATE);
+//		listTableName.add(DBFarmAdapter.TABLE_NAME);
 		
 //		listTableCreate.add(DBLotAdapter.TABLE_CREATE);
 //		listTableName.add(DBLotAdapter.TABLE_NAME);

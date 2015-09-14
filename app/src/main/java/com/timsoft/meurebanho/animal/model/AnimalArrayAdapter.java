@@ -45,7 +45,7 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
 		((TextView) rowView.findViewById(R.id.animal_sex))
 			.setText(a.getSexToDisplay(context));
 		
-		((TextView) rowView.findViewById(R.id.animal_sex))
+		((TextView) rowView.findViewById(R.id.animal_age))
 			.setText(a.getAgeInMonthsToDisplay(context));
 		
 		return rowView;

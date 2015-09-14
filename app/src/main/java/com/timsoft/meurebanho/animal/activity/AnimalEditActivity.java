@@ -30,7 +30,7 @@ public class AnimalEditActivity extends AppCompatActivity {
 		setContentView(R.layout.animal_edit_activity);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
-		getSupportActionBar().setIcon(R.drawable.ic_launcher);
+		getSupportActionBar().setIcon(R.drawable.launcher);
 		
 		Log.d(LOG_TAG, "onCreate");
 		

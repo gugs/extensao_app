@@ -11,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.ParseException;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -79,8 +78,6 @@ public class AnimalAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final ActionBar actionBar = getSupportActionBar();
-//		actionBar.setDisplayShowHomeEnabled(true);
-//		actionBar.setIcon(R.drawable.ic_launcher);
 
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.check);
@@ -404,7 +401,7 @@ public class AnimalAddActivity extends AppCompatActivity {
 		if(picture != null) {
 			imageViewPicture.setImageBitmap(BitmapFactory.decodeFile(picture.getPath()));
 		} else {
-			imageViewPicture.setImageResource(R.drawable.ic_action_picture);
+			imageViewPicture.setImageResource(R.drawable.picture);
 		}
 	}
 	

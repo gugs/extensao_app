@@ -80,7 +80,7 @@ public class Animal {
 	}
 	
 	public String getIdToDisplay() {
-		return String.format(Locale.getDefault(), "%05d", getId());
+		return String.format(Locale.getDefault(), "%04d", getId());
 	}
 
 	public void setId(int id) {

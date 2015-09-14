@@ -167,7 +167,7 @@
                     android:contentDescription="@string/cancel"
                     android:background="@android:color/transparent"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_action_cancel" />
+                    android:src="@drawable/cancel" />
 
             </LinearLayout>
 
@@ -198,7 +198,7 @@
                     android:contentDescription="@string/cancel"
                     android:background="@android:color/transparent"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_action_cancel" />
+                    android:src="@drawable/cancel" />
             </LinearLayout>
 
             <TextView

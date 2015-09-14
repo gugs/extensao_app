@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:src="@drawable/md_plus"
+            android:src="@drawable/plus"
             app:layout_anchor="@id/list_animal_list"
             app:layout_anchorGravity="bottom|right|end"/>
 

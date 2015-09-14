@@ -297,6 +297,8 @@ public class AnimalAddActivity extends AppCompatActivity {
 	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 	        if (resultCode == RESULT_OK) {
 	        	performCrop();
+			} else if (resultCode == RESULT_CANCELED) {
+				//Não faz nada, usuário cancelou a ação
 	        } else {
 				Toast.makeText(this, "Unrecognized resultCode: " + resultCode, Toast.LENGTH_LONG).show();
 			}
@@ -318,7 +320,9 @@ public class AnimalAddActivity extends AppCompatActivity {
 	             
 	    		copy(originalPicture, tempPicture);
 	    		performCrop();
-	    	} else {
+	    	} else if (resultCode == RESULT_CANCELED) {
+				//Não faz nada, usuário cancelou a ação
+			} else {
 				Toast.makeText(this, "Unrecognized resultCode: " + resultCode, Toast.LENGTH_LONG).show();
 			}
 	    	
@@ -328,7 +332,6 @@ public class AnimalAddActivity extends AppCompatActivity {
 	    	Bundle extras = data.getExtras();
 	    	//get the cropped bitmap
 	    	saveBitmapToFile((Bitmap) extras.getParcelable("data"), tempPicture);
-	    	
 	    } else {
 	    	Toast.makeText(this, "Unrecognized requestCode: " + requestCode, Toast.LENGTH_LONG).show();
 	    }

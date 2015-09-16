@@ -43,10 +43,10 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
 			.setText(a.getName());
 		
 		((TextView) rowView.findViewById(R.id.animal_sex))
-			.setText(a.getSexToDisplay(context));
+			.setText(a.getSexToDisplay());
 		
 		((TextView) rowView.findViewById(R.id.animal_age))
-			.setText(a.getAgeInMonthsToDisplay(context));
+			.setText(a.getAgeInMonthsToDisplay());
 		
 		return rowView;
 	}

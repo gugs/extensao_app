@@ -27,10 +27,10 @@
     <!-- Animal related messages -->
     <string name="animals">Animais</string>
 
-    <string name="animal_id_label">NR. IDENTIFICAÇÃO</string>
-    <string name="animal_id_hint">Nr. Identificação</string>
-    <string name="alert_invalid_id">Nr. Identificação inválida</string>
-    <string name="alert_id_already_used">Nr. de Identificação já utilizada</string>
+    <string name="animal_id_label">Nº IDENTIFICAÇÃO</string>
+    <string name="animal_id_hint">Nº Identificação</string>
+    <string name="alert_invalid_id">Nº Identificação inválida</string>
+    <string name="alert_id_already_used">Nº de Identificação já utilizada</string>
 
     <string name="animal_specie_label">ESPÉCIE</string>
     <string name="animal_race_label">RAÇA</string>
@@ -42,8 +42,8 @@
     <string name="animal_name_label">NOME</string>
     <string name="animal_name_hint">Nome do Animal</string>
 
-    <string name="animal_ear_tag_label">BRINCO/NÚMERO DE CONTROLE</string>
-    <string name="animal_ear_tag_hint">Brinco/Número de Controle</string>
+    <string name="animal_ear_tag_label">BRINCO/Nº DE CONTROLE</string>
+    <string name="animal_ear_tag_hint">Brinco/Nº de Controle</string>
 
     <string name="animal_birth_date_label">DATA DE NASCIMENTO</string>
     <string name="animal_birth_date_hint">Data de nascimento</string>

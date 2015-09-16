@@ -1,185 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true"
-    android:scrollbars="vertical" >
+    android:layout_height="fill_parent"
+    android:paddingEnd="@dimen/activity_padding_right"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right"
+    android:paddingStart="@dimen/activity_padding_left"
+    android:paddingTop="@dimen/activity_padding_top"
+    android:layout_marginTop="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        <!-- id -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_id_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
-
-        <TextView
-            android:id="@+id/tv_detail_animal_id"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:orientation="vertical" >
 
-        <!-- race -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_race_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/tv_detail_animal_race"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:orientation="vertical" >
 
-        <!-- sex -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_sex_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+                    <TextView
+                        android:id="@+id/ad_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[0001]"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:id="@+id/tv_detail_animal_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <TextView
+                        android:id="@+id/ad_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="[Fumaça]"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <!-- name -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_name_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+                    <TextView
+                        android:id="@+id/ad_ear_tag_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/animal_ear_tag_label"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:paddingTop="10dp" />
 
-        <TextView
-            android:id="@+id/tv_detail_animal_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    <TextView
+                        android:id="@+id/ad_ear_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[0016A]"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <!-- ear tag -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_ear_tag_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_detail_animal_ear_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <!-- birth date -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_birth_date_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+                    <ImageView
+                        android:id="@+id/ad_picture"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/animal_picture_hint"
+                        android:src="@drawable/cow" />
 
-        <TextView
-            android:id="@+id/tv_detail_animal_birth_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+            </LinearLayout>
 
-        <!-- aquisition date -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_aquisition_date_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
 
-        <TextView
-            android:id="@+id/tv_detail_animal_aquisition_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-        <!-- aquisition value -->
-        <!-- TODO: Mostrar somente se tiver preenchido data da compra -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_aquisition_value_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+            <TextView
+                android:id="@+id/ad_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[FÊMEA]"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/tv_detail_animal_aquisition_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/ad_race"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="[NELORE]"
+                android:gravity="end"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <!-- sell date -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_sell_date_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_detail_animal_sell_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <!-- birth date -->
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/animal_birth_date_label"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
-        <!-- sell value -->
-        <!-- TODO: Mostrar somente se tiver preenchido data da venda -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_sell_value_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/tv_detail_animal_sell_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/ad_birth_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[16/11/2012]"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <!-- death date -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_death_date_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+                <TextView
+                    android:id="@+id/ad_age"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="[36 meses]"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_detail_animal_death_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <!-- aquisition date -->
+            <TextView
+                android:id="@+id/ad_aquisition_date_label"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/animal_aquisition_date_label"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
-        <!-- death reason -->
-        <!-- TODO: Mostrar somente se tiver preenchido data da morte -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animal_death_reason_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/label_color" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/tv_detail_animal_death_reason"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/ad_aquisition_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[16/11/2013]"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/ad_aquisition_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="[R$ 1.500,00]"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar Evento"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar Venda"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar Morte"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar Baixa"/>
+            </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+</RelativeLayout>

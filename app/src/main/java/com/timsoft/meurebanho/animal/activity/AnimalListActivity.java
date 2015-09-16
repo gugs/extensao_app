@@ -175,13 +175,13 @@ public class AnimalListActivity extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_new_animal:
-			actionNewAnimal();
+		case R.id.action_search:
+			Toast.makeText(this, "Busca Animal", Toast.LENGTH_SHORT).show();
 			break;
 			
-		case R.id.action_events:
-			Toast.makeText(this, "Event Selected", Toast.LENGTH_SHORT).show();
-			break;
+//		case R.id.action_events:
+//			Toast.makeText(this, "Event Selected", Toast.LENGTH_SHORT).show();
+//			break;
 			
 //		case R.id.action_farms:
 //			Intent intent = new Intent(this, FarmsActivity.class);

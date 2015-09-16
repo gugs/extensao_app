@@ -401,7 +401,7 @@ public class AnimalAddActivity extends AppCompatActivity {
 		if(picture != null) {
 			imageViewPicture.setImageBitmap(BitmapFactory.decodeFile(picture.getPath()));
 		} else {
-			imageViewPicture.setImageResource(R.drawable.picture);
+			imageViewPicture.setImageResource(R.drawable.cow);
 		}
 	}
 	

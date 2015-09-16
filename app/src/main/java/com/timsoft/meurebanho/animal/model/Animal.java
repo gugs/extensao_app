@@ -1,6 +1,5 @@
 package com.timsoft.meurebanho.animal.model;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.timsoft.meurebanho.MeuRebanhoApp;
@@ -179,8 +178,8 @@ public class Animal {
 		return sex;
 	}
 	
-	public String getSexToDisplay(Context context) {
-		return "F".equalsIgnoreCase(getSex()) ?  context.getResources().getString(R.string.female) : context.getResources().getString(R.string.male);
+	public String getSexToDisplay() {
+		return "F".equalsIgnoreCase(getSex()) ?  MeuRebanhoApp.getContext().getResources().getString(R.string.female) : MeuRebanhoApp.getContext().getResources().getString(R.string.male);
 	}
 
 	public void setSex(String sex) {
@@ -258,8 +257,8 @@ public class Animal {
 		}
 	}
 	
-	public String getAgeInMonthsToDisplay(Context context) {
-		return getAgeInMonths() + " " + context.getResources().getString(R.string.months);
+	public String getAgeInMonthsToDisplay() {
+		return getAgeInMonths() + " " + MeuRebanhoApp.getContext().getResources().getString(R.string.months);
 	}
 
 	public File getPictureFile() {

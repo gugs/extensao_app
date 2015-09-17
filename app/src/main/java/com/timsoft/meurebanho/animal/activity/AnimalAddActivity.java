@@ -438,9 +438,9 @@ public class AnimalAddActivity extends AppCompatActivity {
     	//
     	
     	//sex
-    	if(((RadioButton) findViewById(R.id.radio_add_animal_sex_male)).isChecked()) {
+    	if(((RadioButton) findViewById(R.id.am_sex_male)).isChecked()) {
     		a.setSex("M");
-    	} else if(((RadioButton) findViewById(R.id.radio_add_animal_sex_female)).isChecked()) {
+    	} else if(((RadioButton) findViewById(R.id.am_sex_female)).isChecked()) {
     		a.setSex("F");
     	}
     	
@@ -451,11 +451,11 @@ public class AnimalAddActivity extends AppCompatActivity {
     	//
     	
     	//Name
-    	a.setName(((EditText) findViewById(R.id.input_add_animal_name)).getText().toString().trim());
+    	a.setName(((EditText) findViewById(R.id.am_name)).getText().toString().trim());
     	//
     	
     	//Ear tag
-    	a.setEarTag(((EditText) findViewById(R.id.input_add_animal_ear_tag)).getText().toString().trim());
+    	a.setEarTag(((EditText) findViewById(R.id.am_ear_tag)).getText().toString().trim());
     	//
     	
     	//Birth date

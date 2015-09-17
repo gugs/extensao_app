@@ -8,14 +8,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.ParseException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -38,6 +36,7 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.infra.MoneyTextWatcher;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.race.model.RaceArrayAdapter;
@@ -51,11 +50,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class AnimalMaintainActivity extends AppCompatActivity {
 
 	private static final String LOG_TAG = "AnimalMaintainActivity";
@@ -68,7 +69,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 	private Specie includingSpecie;
 	private Animal editingAnimal;
 	private File tempPicture, picture;
-	private TextView tvId, tvBirthDate, tvAquisitionDate, tvAquisitionValue;
+	private TextView tvId, tvBirthDate, tvAquisitionDate;
+	private EditText etAquisitionValue;
 	private ImageView imageViewPicture;
 	private double acquisitionValue;
     String action;
@@ -115,9 +117,17 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             specieDatasource.close();
 		}
 
+		//Activity Title
+		if(action.equals(MeuRebanhoApp.ACTION_ADD)) {
+			setTitle(getResources().getString(R.string.add) + " " + includingSpecie.getDescription());
+		} else {
+			setTitle(getResources().getString(R.string.edit_animal));
+		}
+		//
+
 		//id
 		tvId = (TextView) findViewById(R.id.am_id);
-		if(editingAnimal == null) {
+		if(action.equals(MeuRebanhoApp.ACTION_ADD)) {
 			animalDatasource.open();
 			tvId.setText(Integer.toString(animalDatasource.getNextId()));
 			animalDatasource.close();
@@ -126,13 +136,22 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		}
 		//
 
-		//Specie
-		if(action.equals(MeuRebanhoApp.ACTION_ADD)) {
-			setTitle(getResources().getString(R.string.add) + " " + includingSpecie.getDescription());
-		} else {
-			setTitle(getResources().getString(R.string.edit_animal));
+		//Name
+		if(action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+			((TextView) findViewById(R.id.am_name)).setText(editingAnimal.getName());
 		}
 		//
+
+		//sex
+		if(action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+			if ("M".equalsIgnoreCase(editingAnimal.getSex())) {
+				((RadioButton) findViewById(R.id.am_sex_male)).setChecked(true);
+				((RadioButton) findViewById(R.id.am_sex_female)).setChecked(false);
+			} else {
+				((RadioButton) findViewById(R.id.am_sex_male)).setChecked(false);
+				((RadioButton) findViewById(R.id.am_sex_female)).setChecked(true);
+			}
+		}
 
 		//Races
 		DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance(this);
@@ -158,6 +177,12 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		}
 		//
 
+		//Ear tag
+		if(action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+			((EditText) findViewById(R.id.am_ear_tag)).setText(editingAnimal.getEarTag());
+		}
+		//
+
 		//Birth Date
 		tvBirthDate = (TextView) findViewById(R.id.am_birth_date);
 		tvBirthDate.setOnClickListener(getOnClickListenerForBtnSetDate(tvBirthDate));
@@ -171,9 +196,9 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
 		//Aquisition Date
 		tvAquisitionDate = (TextView) findViewById(R.id.am_acquisition_date);
-		tvAquisitionDate.setOnClickListener(getOnClickListenerForBtnSetDate(tvAquisitionDate));
+		tvAquisitionDate.setOnClickListener(getOnClickListenerForBtnSetAquisitionDate(tvAquisitionDate));
 		btnClearAquisitionDate = (ImageButton) findViewById(R.id.am_clear_aquisition_date);
-		btnClearAquisitionDate.setOnClickListener(getOnClickListenerForBtnClearDate(tvAquisitionDate, R.string.animal_aquisition_date_hint));
+		btnClearAquisitionDate.setOnClickListener(getOnClickListenerForBtnClearAquisitionDate(tvAquisitionDate, R.string.animal_aquisition_date_hint));
 
 		if(action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAquisitionDate() != null) {
 			updateDate(tvAquisitionDate, editingAnimal.getAquisitionDate());
@@ -181,30 +206,35 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		//
 
 		//Aquisition Value
-		tvAquisitionValue = (TextView) findViewById(R.id.am_aquisition_value);
+		etAquisitionValue = (EditText) findViewById(R.id.am_aquisition_value);
 
-		tvAquisitionValue.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
+		etAquisitionValue.addTextChangedListener(new MoneyTextWatcher(etAquisitionValue));
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable editable) {
-				try {
-					acquisitionValue = Double.parseDouble(editable.toString().replace(',', '.'));
-				} catch (ParseException e) {
-					acquisitionValue = 0;
-				}
-			}
-		});
+//		tvAquisitionValue.addTextChangedListener(new TextWatcher() {
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//			}
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//			}
+//
+//			@Override
+//			public void afterTextChanged(Editable editable) {
+//				try {
+//					acquisitionValue = Double.parseDouble(editable.toString().replace(',', '.'));
+//				} catch (ParseException e) {
+//					acquisitionValue = 0;
+//				}
+//			}
+//		});
 
 		if(action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAquisitionDate() != null) {
-			tvAquisitionValue.setText(Double.toString(editingAnimal.getAquisitionValue()));
+			etAquisitionValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getAquisitionValue()));
+		} else {
+			etAquisitionValue.setEnabled(false);
 		}
+
 		//
 
 		imageViewPicture = (ImageView) findViewById(R.id.am_picture);
@@ -241,13 +271,46 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		};
 	}
 
-	@SuppressWarnings("deprecation")
+	private OnClickListener getOnClickListenerForBtnSetAquisitionDate(final TextView tvDate) {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				OnDateSetListener listener = new OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+						updateDate(tvDate, year, monthOfYear, dayOfMonth);
+						etAquisitionValue.setEnabled(true);
+					}
+				};
+
+				//TODO: Se já houver uma data digitada, exibir esta data no calendário, default está como data de hoje
+				DatePickerDialog d = new DatePickerDialog(AnimalMaintainActivity.this, listener,
+						Calendar.getInstance().get(Calendar.YEAR),
+						Calendar.getInstance().get(Calendar.MONTH),
+						Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+				d.show();
+			}
+		};
+	}
+
 	private OnClickListener getOnClickListenerForBtnClearDate(final TextView tvDate, final int hint_id) {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				tvDate.setTextColor(getResources().getColor(R.color.hintTextAppearance));
 				tvDate.setText(getResources().getString(hint_id));
+			}
+		};
+	}
+
+	private OnClickListener getOnClickListenerForBtnClearAquisitionDate(final TextView tvDate, final int hint_id) {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				tvDate.setTextColor(getResources().getColor(R.color.hintTextAppearance));
+				tvDate.setText(getResources().getString(hint_id));
+				etAquisitionValue.setText("");
+				etAquisitionValue.setEnabled(false);
 			}
 		};
 	}
@@ -511,7 +574,10 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             //includingSpecie
             a.setSpecieId(includingSpecie.getId());
             //
-        }
+        } else {
+			a.setId(editingAnimal.getId());
+			a.setSpecieId(editingAnimal.getSpecieId());
+		}
 
 		//race
 		Race selectedRace = (Race) racesSpinner.getSelectedItem();
@@ -524,9 +590,9 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		//
 
 		//sex
-		if(((RadioButton) findViewById(R.id.radio_add_animal_sex_male)).isChecked()) {
+		if(((RadioButton) findViewById(R.id.am_sex_male)).isChecked()) {
 			a.setSex("M");
-		} else if(((RadioButton) findViewById(R.id.radio_add_animal_sex_female)).isChecked()) {
+		} else if(((RadioButton) findViewById(R.id.am_sex_female)).isChecked()) {
 			a.setSex("F");
 		}
 
@@ -537,11 +603,11 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		//
 
 		//Name
-		a.setName(((EditText) findViewById(R.id.input_add_animal_name)).getText().toString().trim());
+		a.setName(((EditText) findViewById(R.id.am_name)).getText().toString().trim());
 		//
 
 		//Ear tag
-		a.setEarTag(((EditText) findViewById(R.id.input_add_animal_ear_tag)).getText().toString().trim());
+		a.setEarTag(((EditText) findViewById(R.id.am_ear_tag)).getText().toString().trim());
 		//
 
 		//Birth date
@@ -554,18 +620,24 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		//
 
 		//Aquisition date
-		if (!getResources().getString(R.string.animal_aquisition_date_hint).equals(tvAquisitionDate.getText().toString())){
+        //Test if there is numbers typed (it is not empty because the placeholder text)
+		if (!TextUtils.isEmpty(tvAquisitionDate.getText().toString().replaceAll("[^\\d]", ""))){
 			try {
 				a.setAquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
 			} catch (java.text.ParseException e) {
 				Toast.makeText(this, R.string.aquisition_date_invalid, Toast.LENGTH_SHORT).show();
 				return;
 			}
-		}
 
-		//Aquisition value
-		a.setAquisitionValue(acquisitionValue);
-		//
+			//Aquisition value
+			if(acquisitionValue > 0) {
+				a.setAquisitionValue(acquisitionValue);
+			} else {
+				Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
+				return;
+			}
+			//
+		}
 
 		animalDatasource.open();
 

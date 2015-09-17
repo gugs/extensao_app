@@ -91,7 +91,7 @@
     <string name="birth_date_invalid">Data de nascimento inválida</string>
 
     <!-- Aquisition Date related messages -->
-    <string name="aquisition_date_invalid">Data de nascimento inválida</string>
+    <string name="aquisition_date_invalid">Data de aquisição inválida</string>
 
     <!-- Sell Date related messages -->
     <string name="sell_date_invalid">Data de venda inválida</string>
@@ -141,5 +141,6 @@
     <string name="select_other_picture">Escolher outra foto</string>
 
     <string name="discard_add_animal">Descartar alterações</string>
+    <string name="aquisition_value_invalid">Valor de aquisição inválido</string>
 
 </resources>

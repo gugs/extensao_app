@@ -113,6 +113,9 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 	@Override
 	public void delete(Animal a) {
 		Log.d(LOG_TAG, "Excluindo animal: " + a.getId());
+		if(get(a.getId()) == null) {
+			throw new RuntimeException("Solicitação de exclusão de animal inexistente: " + a.getId());
+		}
 		database.delete(TABLE_NAME, ID + " = " + a.getId(), null);
 	}
 	

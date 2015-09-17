@@ -51,6 +51,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -72,7 +73,6 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 	private TextView tvId, tvBirthDate, tvAquisitionDate;
 	private EditText etAquisitionValue;
 	private ImageView imageViewPicture;
-	private double acquisitionValue;
     String action;
 
 	@Override
@@ -210,32 +210,11 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
 		etAquisitionValue.addTextChangedListener(new MoneyTextWatcher(etAquisitionValue));
 
-//		tvAquisitionValue.addTextChangedListener(new TextWatcher() {
-//			@Override
-//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//			}
-//
-//			@Override
-//			public void onTextChanged(CharSequence s, int start, int before, int count) {
-//			}
-//
-//			@Override
-//			public void afterTextChanged(Editable editable) {
-//				try {
-//					acquisitionValue = Double.parseDouble(editable.toString().replace(',', '.'));
-//				} catch (ParseException e) {
-//					acquisitionValue = 0;
-//				}
-//			}
-//		});
-
 		if(action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAquisitionDate() != null) {
 			etAquisitionValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getAquisitionValue()));
 		} else {
 			etAquisitionValue.setEnabled(false);
 		}
-
-		//
 
 		imageViewPicture = (ImageView) findViewById(R.id.am_picture);
 		imageViewPicture.setOnClickListener(new OnClickListener() {
@@ -630,12 +609,17 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 			}
 
 			//Aquisition value
-			if(acquisitionValue > 0) {
-				a.setAquisitionValue(acquisitionValue);
-			} else {
-				Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
-				return;
-			}
+            try {
+                double aquisitionValue = NumberFormat.getCurrencyInstance().parse(etAquisitionValue.getText().toString()).doubleValue();
+                if(aquisitionValue  <= 0) {
+                    Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                a.setAquisitionValue(aquisitionValue);
+            } catch (ParseException e) {
+                Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
 			//
 		}
 

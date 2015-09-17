@@ -68,6 +68,8 @@ public class AnimalDetailActivity extends AppCompatActivity {
 		((TextView) findViewById(R.id.ad_name))
 				.setText(animal.getName());
 
+		findViewById(R.id.ad_ear_tag_label).setVisibility(View.VISIBLE);
+		findViewById(R.id.ad_ear_tag).setVisibility(View.VISIBLE);
 		if(!TextUtils.isEmpty(animal.getEarTag())){
 			((TextView) findViewById(R.id.ad_ear_tag))
 					.setText(animal.getEarTag());
@@ -92,6 +94,9 @@ public class AnimalDetailActivity extends AppCompatActivity {
 		((TextView) findViewById(R.id.ad_age))
 				.setText(animal.getAgeInMonthsToDisplay());
 
+		findViewById(R.id.ad_aquisition_date_label).setVisibility(View.VISIBLE);
+		findViewById(R.id.ad_aquisition_date).setVisibility(View.VISIBLE);
+		findViewById(R.id.ad_aquisition_value).setVisibility(View.VISIBLE);
 		if(animal.getAquisitionDate() != null){
 			((TextView) findViewById(R.id.ad_aquisition_date))
 					.setText(MainActivity.getFormatedDate(animal.getAquisitionDate()));
@@ -136,4 +141,5 @@ public class AnimalDetailActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
     
+
 }

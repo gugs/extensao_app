@@ -27,6 +27,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
 	private static final String LOG_TAG = "AnimalDetailActivity";
 	private Animal animal;
+	private int animalId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,23 +37,30 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
 		setContentView(R.layout.animal_detail_activity);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
+		animalId = getIntent().getExtras().getInt(DBAnimalAdapter.ID);
+    }
+
+	@Override
+	public void onResume() {
+		super.onResume();  // Always call the superclass method first
+
 		//Animal data
 		DBAnimalAdapter animalDatasource = DBAnimalAdapter.getInstance(this);
 		animalDatasource.open();
-		animal = animalDatasource.get(getIntent().getExtras().getInt(DBAnimalAdapter.ID));
+		animal = animalDatasource.get(animalId);
 		animalDatasource.close();
 		//
-		
+
 		//Race data
 		DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance(this);
 		raceDatasource.open();
 		Race race = raceDatasource.get(animal.getRaceId());
 		raceDatasource.close();
 		//
-		
+
 		((TextView) findViewById(R.id.ad_id))
-			.setText(animal.getIdToDisplay());
+				.setText(animal.getIdToDisplay());
 
 		((TextView) findViewById(R.id.ad_name))
 				.setText(animal.getName());
@@ -62,7 +70,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
 		if(!TextUtils.isEmpty(animal.getEarTag())){
 			((TextView) findViewById(R.id.ad_ear_tag))
-				.setText(animal.getEarTag());
+					.setText(animal.getEarTag());
 		} else {
 			findViewById(R.id.ad_ear_tag_label).setVisibility(View.GONE);
 			findViewById(R.id.ad_ear_tag).setVisibility(View.GONE);
@@ -79,7 +87,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
 				.setText(animal.getSexToDisplay());
 
 		((TextView) findViewById(R.id.ad_birth_date))
-			.setText(MainActivity.getFormatedDate(animal.getBirthDate()));
+				.setText(MainActivity.getFormatedDate(animal.getBirthDate()));
 
 		((TextView) findViewById(R.id.ad_age))
 				.setText(animal.getAgeInMonthsToDisplay());
@@ -96,8 +104,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
 			findViewById(R.id.ad_aquisition_date).setVisibility(View.GONE);
 			findViewById(R.id.ad_aquisition_value).setVisibility(View.GONE);
 		}
-		
-    }
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,9 +119,9 @@ public class AnimalDetailActivity extends AppCompatActivity {
 		case R.id.action_edit_animal:
 			actionEditAnimal();
 			break;
-			
-		default:
-			return super.onOptionsItemSelected(item);
+
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 
 		return true;
@@ -127,7 +134,6 @@ public class AnimalDetailActivity extends AppCompatActivity {
 		intent.putExtra(DBAnimalAdapter.ID, animal.getId());
 
 		startActivity(intent);
-		finish();
 	}
     
 }

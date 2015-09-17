@@ -40,7 +40,7 @@
                         android:nextFocusLeft="@id/dummyfocus"/>
 
                     <EditText
-                        android:id="@+id/aa_id"
+                        android:id="@+id/am_id"
                         android:layout_width="160dp"
                         android:enabled="false"
                         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                     android:orientation="vertical">
 
                 <ImageView
-                        android:id="@+id/aa_picture"
+                        android:id="@+id/am_picture"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center_horizontal"
@@ -120,7 +120,7 @@
                 android:textAppearance="@style/LabelTextAppearance"/>
 
             <Spinner
-                android:id="@+id/aa_race"
+                android:id="@+id/am_race"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -151,7 +151,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/aa_birth_date"
+                    android:id="@+id/am_birth_date"
                     android:layout_height="40dp"
                     android:layout_width="200dp"
                     android:text="@string/animal_birth_date_hint"
@@ -159,7 +159,7 @@
                     style="?android:attr/spinnerStyle"/>
 
                 <ImageButton
-                    android:id="@+id/aa_clear_birth_date"
+                    android:id="@+id/am_clear_birth_date"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:contentDescription="@string/cancel"
@@ -182,7 +182,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/aa_acquisition_date"
+                    android:id="@+id/am_acquisition_date"
                     android:layout_height="40dp"
                     android:layout_width="200dp"
                     android:text="@string/animal_aquisition_date_hint"
@@ -190,7 +190,7 @@
                     style="?android:attr/spinnerStyle"/>
 
                 <ImageButton
-                    android:id="@+id/aa_clear_aquisition_date"
+                    android:id="@+id/am_clear_aquisition_date"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:contentDescription="@string/cancel"
@@ -207,7 +207,7 @@
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <EditText
-                android:id="@+id/aa_aquisition_value"
+                android:id="@+id/am_aquisition_value"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:digits="1234567890.,"

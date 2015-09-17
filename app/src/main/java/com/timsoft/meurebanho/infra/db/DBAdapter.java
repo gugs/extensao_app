@@ -34,7 +34,8 @@ public abstract class DBAdapter<T> {
 	public final void clear() {
 		database.delete(getTableName(), null, null);
 	}
-	
+
+	//TODO: Deve ser feita atualização da tabela e não exclusão e inclusão
 	public void update(T t) {
 		delete(t);
 		create(t);

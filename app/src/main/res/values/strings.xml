@@ -13,6 +13,7 @@
     <string name="cancel">Cancelar</string>
     <string name="add">Incluir</string>
     <string name="delete">Excluir</string>
+    <string name="edit">Alterar</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
 
@@ -129,6 +130,8 @@
 
     <string name="image_saved_success">Imagem salva com sucesso</string>
     <string name="camera_not_supported">Não há suporte a câmera no dispositivo</string>
+
+    <string name="error_deleting_file">Ocorreu um erro ao tentar apagar o arquivo</string>
 
     <string name="take_picture">Tirar foto</string>
     <string name="select_picture">Escolher foto</string>

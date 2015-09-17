@@ -12,6 +12,12 @@ public class MeuRebanhoApp extends Application {
 
     public static final String DEFAULT_IMAGE_FILE_EXTENSION = ".jpg";
 
+    public static final String ACTION = "ACTION";
+
+    public static final String ACTION_ADD = "ACTION_ADD";
+    public static final String ACTION_EDIT = "ACTION_EDIT";
+
+
     @Override
     public void onCreate() {
         super.onCreate();

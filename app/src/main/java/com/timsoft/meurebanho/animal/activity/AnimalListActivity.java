@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
@@ -158,10 +159,15 @@ public class AnimalListActivity extends AppCompatActivity {
 	}
 	
 	public void actionNewAnimal() {
-		Intent intent = new Intent(this, AnimalAddActivity.class);
-		Bundle bundle = new Bundle(); 
-		bundle.putParcelable(Specie.class.toString(), species.get(pager.getCurrentItem()));
-		intent.putExtras(bundle);
+		Intent intent = new Intent(this, AnimalMaintainActivity.class);
+
+//		Bundle bundle = new Bundle();
+//		bundle.putParcelable(Specie.class.toString(), species.get(pager.getCurrentItem()));
+//		intent.putExtras(bundle);
+
+        intent.putExtra(DBSpecieAdapter.ID, species.get(pager.getCurrentItem()).getId());
+		intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
+
 		startActivity(intent);
 	}
 	

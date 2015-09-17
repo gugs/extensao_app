@@ -58,12 +58,13 @@ import java.util.List;
 public class AnimalAddActivity extends AppCompatActivity {
 
 	private static final String LOG_TAG = "AnimalAddActivity";
-	
+
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private static final int PICTURE_CROP_ACTIVITY_REQUEST_CODE = 200;
 	private static final int PICTURE_SELECT_ACTIVITY_REQUEST_CODE = 300;
-	private static final int MEDIA_TYPE_IMAGE = 1;
-	
+
+	private DBAnimalAdapter animalDatasource;
+
 	private Spinner racesSpinner;
 	private Specie specie;
 	private File tempPicture, picture;
@@ -71,7 +72,6 @@ public class AnimalAddActivity extends AppCompatActivity {
 	private ImageButton btnClearBirthDate, btnClearAquisitionDate;
 	private ImageView imageViewPicture;
 	private double aquisitionValue;
-	private DBAnimalAdapter animalDatasource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class AnimalAddActivity extends AppCompatActivity {
         setContentView(R.layout.animal_add_activity);
 
         //id
-        tvId = (TextView) findViewById(R.id.input_add_animal_id);
+        tvId = (TextView) findViewById(R.id.aa_id);
         animalDatasource = DBAnimalAdapter.getInstance(this);
         animalDatasource.open();
         tvId.setText(Integer.toString(animalDatasource.getNextId()));
@@ -104,26 +104,26 @@ public class AnimalAddActivity extends AppCompatActivity {
         List<Race> races = raceDatasource.listBySpecieId(specie.getId());
         raceDatasource.close();
 
-        racesSpinner = (Spinner) findViewById(R.id.spinner_add_animal_race);
+        racesSpinner = (Spinner) findViewById(R.id.aa_race);
         racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
         //
 
         //Birth Date
-        tvBirthDate = (TextView) findViewById(R.id.tv_add_animal_birth_date);
+        tvBirthDate = (TextView) findViewById(R.id.aa_birth_date);
         tvBirthDate.setOnClickListener(getOnClickListenerForBtnSetDate(tvBirthDate));
-        btnClearBirthDate = (ImageButton) findViewById(R.id.btn_add_animal_clear_birth_date);
+        btnClearBirthDate = (ImageButton) findViewById(R.id.aa_clear_birth_date);
         btnClearBirthDate.setOnClickListener(getOnClickListenerForBtnClearDate(tvBirthDate, R.string.animal_birth_date_hint));
         //
 
         //Aquisition Date
-        tvAquisitionDate = (TextView) findViewById(R.id.tv_add_animal_acquisition_date);
+        tvAquisitionDate = (TextView) findViewById(R.id.aa_acquisition_date);
         tvAquisitionDate.setOnClickListener(getOnClickListenerForBtnSetDate(tvAquisitionDate));
-        btnClearAquisitionDate = (ImageButton) findViewById(R.id.btn_add_animal_clear_aquisition_date);
+        btnClearAquisitionDate = (ImageButton) findViewById(R.id.aa_clear_aquisition_date);
         btnClearAquisitionDate.setOnClickListener(getOnClickListenerForBtnClearDate(tvAquisitionDate, R.string.animal_aquisition_date_hint));
         //
 
         //Aquisition Value
-        tvAquisitionValue = (TextView) findViewById(R.id.input_add_animal_aquisition_value);
+        tvAquisitionValue = (TextView) findViewById(R.id.aa_aquisition_value);
 
         tvAquisitionValue.addTextChangedListener(new TextWatcher() {
             @Override
@@ -145,7 +145,7 @@ public class AnimalAddActivity extends AppCompatActivity {
         });
         //
 
-        imageViewPicture = (ImageView) findViewById(R.id.img_view_add_animal_picture);
+        imageViewPicture = (ImageView) findViewById(R.id.aa_picture);
         imageViewPicture.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,7 +186,7 @@ public class AnimalAddActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.animal_add_activity_actions, menu);
+        inflater.inflate(R.menu.animal_add_actions, menu);
         return true;
     }
 
@@ -194,7 +194,7 @@ public class AnimalAddActivity extends AppCompatActivity {
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 	    super.onCreateContextMenu(menu, v, menuInfo);
 
-		if(v.getId() == R.id.img_view_add_animal_picture) {
+		if(v.getId() == R.id.aa_picture) {
 			if (picture == null) {
 				getMenuInflater().inflate(R.menu.take_or_select_picture_context_menu, menu);
 			} else {

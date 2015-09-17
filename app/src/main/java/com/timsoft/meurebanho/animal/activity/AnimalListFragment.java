@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.timsoft.meurebanho.R;
+import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.animal.model.AnimalArrayAdapter;
 
@@ -110,7 +111,7 @@ public class AnimalListFragment extends Fragment {
 	
 	private void detailAnimal(Animal a) {
 		Intent intent = new Intent(activity, AnimalDetailActivity.class);
-		intent.putExtra("animal_id", a.getId());
+		intent.putExtra(DBAnimalAdapter.ID, a.getId());
 		startActivity(intent);
 	}
 }

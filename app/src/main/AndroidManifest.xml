@@ -56,18 +56,15 @@
 	            android:name="android.support.PARENT_ACTIVITY"
 	            android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
-        
-		<activity
-            android:name="com.timsoft.meurebanho.animal.activity.AnimalEditActivity"
+
+        <activity
+            android:name="com.timsoft.meurebanho.animal.activity.AnimalMaintainActivity"
+            android:icon="@drawable/launcher"
             android:screenOrientation="portrait"
-            android:label="@string/animals" 
-            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity" >
-        	<meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
+            android:label="@string/add_animal" >
         </activity>
-        
-		<meta-data android:name="DATABASE" android:value="meurebanho.db" />
+
+        <meta-data android:name="DATABASE" android:value="meurebanho.db" />
 		<meta-data android:name="VERSION" android:value="1" />
 		<meta-data android:name="QUERY_LOG" android:value="true" />
 		<meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.timsoft.meurebanho" />

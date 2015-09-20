@@ -97,13 +97,13 @@ public class AnimalDetailActivity extends AppCompatActivity {
 		findViewById(R.id.ad_aquisition_date_label).setVisibility(View.VISIBLE);
 		findViewById(R.id.ad_aquisition_date).setVisibility(View.VISIBLE);
 		findViewById(R.id.ad_aquisition_value).setVisibility(View.VISIBLE);
-		if(animal.getAquisitionDate() != null){
+		if(animal.getAcquisitionDate() != null){
 			((TextView) findViewById(R.id.ad_aquisition_date))
-					.setText(MainActivity.getFormatedDate(animal.getAquisitionDate()));
+					.setText(MainActivity.getFormatedDate(animal.getAcquisitionDate()));
 
 			NumberFormat nf = NumberFormat.getCurrencyInstance();
 			((TextView) findViewById(R.id.ad_aquisition_value))
-					.setText(nf.format(animal.getAquisitionValue()));
+					.setText(nf.format(animal.getAcquisitionValue()));
 		} else {
 			findViewById(R.id.ad_aquisition_date_label).setVisibility(View.GONE);
 			findViewById(R.id.ad_aquisition_date).setVisibility(View.GONE);

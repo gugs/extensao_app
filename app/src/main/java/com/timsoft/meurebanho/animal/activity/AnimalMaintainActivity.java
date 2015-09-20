@@ -200,8 +200,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 		btnClearAquisitionDate = (ImageButton) findViewById(R.id.am_clear_aquisition_date);
 		btnClearAquisitionDate.setOnClickListener(getOnClickListenerForBtnClearAquisitionDate(tvAquisitionDate, R.string.animal_aquisition_date_hint));
 
-		if(action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAquisitionDate() != null) {
-			updateDate(tvAquisitionDate, editingAnimal.getAquisitionDate());
+		if(action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAcquisitionDate() != null) {
+			updateDate(tvAquisitionDate, editingAnimal.getAcquisitionDate());
 		}
 		//
 
@@ -210,8 +210,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
 		etAquisitionValue.addTextChangedListener(new MoneyTextWatcher(etAquisitionValue));
 
-		if(action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAquisitionDate() != null) {
-			etAquisitionValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getAquisitionValue()));
+		if(action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAcquisitionDate() != null) {
+			etAquisitionValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getAcquisitionValue()));
 		} else {
 			etAquisitionValue.setEnabled(false);
 		}
@@ -602,7 +602,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         //Test if there is numbers typed (it is not empty because the placeholder text)
 		if (!TextUtils.isEmpty(tvAquisitionDate.getText().toString().replaceAll("[^\\d]", ""))){
 			try {
-				a.setAquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
+				a.setAcquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
 			} catch (java.text.ParseException e) {
 				Toast.makeText(this, R.string.aquisition_date_invalid, Toast.LENGTH_SHORT).show();
 				return;
@@ -615,7 +615,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
                     Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                a.setAquisitionValue(aquisitionValue);
+                a.setAcquisitionValue(aquisitionValue);
             } catch (ParseException e) {
                 Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
                 return;

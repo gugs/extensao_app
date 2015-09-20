@@ -1,16 +1,12 @@
 package com.timsoft.meurebanho.animal.model;
 
-import android.graphics.Bitmap;
-
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
-import com.timsoft.meurebanho.event.model.Evento;
 
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Locale;
 
 public class Animal {
@@ -27,31 +23,23 @@ public class Animal {
 	private String earTag;
 	
 	private Date birthDate;
-	private Date aquisitionDate;
+	private Date acquisitionDate;
 	private Date sellDate;
 	
 	private Date deathDate;
 	private String deathReason;
 	
-	private double aquisitionValue;
+	private double acquisitionValue;
 	private double sellValue;
-	
-	private int fatherId;
-	private int motherId;
-	
-	private List<Bitmap> pictures;
-	
-	private List<Evento> events;
 	
 	public Animal() {
 	}
 	
 	public Animal(	int id, int specieId, int raceId, 
 					String sex, String name, String earTag, 
-					Date birthDate, Date aquisitionDate, Date sellDate, 
+					Date birthDate, Date acquisitionDate, Date sellDate,
 					Date deathDate, String deathReason,
-					double aquisitionValue, double sellValue, 
-					int fatherId, int motherId) {
+					double acquisitionValue, double sellValue) {
 		
 		this.id = id;
 		this.specieId = specieId;
@@ -61,17 +49,14 @@ public class Animal {
 		this.earTag = earTag;
 		
 		this.birthDate = birthDate;
-		this.aquisitionDate = aquisitionDate;
+		this.acquisitionDate = acquisitionDate;
 		this.sellDate = sellDate;
 		
 		this.deathDate = deathDate;
 		this.deathReason = deathReason;
 		
-		this.aquisitionValue = aquisitionValue;
+		this.acquisitionValue = acquisitionValue;
 		this.sellValue = sellValue;
-		
-		this.fatherId = fatherId;
-		this.motherId = motherId;
 	}
 
 	public int getId() {
@@ -126,12 +111,12 @@ public class Animal {
 		this.birthDate = birthDate;
 	}
 
-	public Date getAquisitionDate() {
-		return aquisitionDate;
+	public Date getAcquisitionDate() {
+		return acquisitionDate;
 	}
 
-	public void setAquisitionDate(Date aquisitionDate) {
-		this.aquisitionDate = aquisitionDate;
+	public void setAcquisitionDate(Date acquisitionDate) {
+		this.acquisitionDate = acquisitionDate;
 	}
 
 	public Date getSellDate() {
@@ -142,12 +127,12 @@ public class Animal {
 		this.sellDate = sellDate;
 	}
 
-	public double getAquisitionValue() {
-		return aquisitionValue;
+	public double getAcquisitionValue() {
+		return acquisitionValue;
 	}
 
-	public void setAquisitionValue(double aquisitionValue) {
-		this.aquisitionValue = aquisitionValue;
+	public void setAcquisitionValue(double acquisitionValue) {
+		this.acquisitionValue = acquisitionValue;
 	}
 
 	public double getSellValue() {
@@ -158,22 +143,6 @@ public class Animal {
 		this.sellValue = sellValue;
 	}
 
-	public List<Bitmap> getPictures() {
-		return pictures;
-	}
-
-	public void setPictures(List<Bitmap> pictures) {
-		this.pictures = pictures;
-	}
-
-	public List<Evento> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Evento> events) {
-		this.events = events;
-	}
-	
 	public String getSex() {
 		return sex;
 	}
@@ -184,22 +153,6 @@ public class Animal {
 
 	public void setSex(String sex) {
 		this.sex = sex;
-	}
-
-	public int getFatherId() {
-		return fatherId;
-	}
-
-	public void setFatherId(int fatherId) {
-		this.fatherId = fatherId;
-	}
-
-	public int getMotherId() {
-		return motherId;
-	}
-
-	public void setMotherId(int motherId) {
-		this.motherId = motherId;
 	}
 
 	public Date getDeathDate() {
@@ -222,13 +175,11 @@ public class Animal {
 	public String toString() {
 		return "Animal [id=" + id + ", specieId=" + specieId + ", raceId="
 				+ raceId + ", sex=" + sex + ", name=" + name + ", earTag="
-				+ earTag + ", birthDate=" + birthDate + ", aquisitionDate="
-				+ aquisitionDate + ", sellDate=" + sellDate + ", deathDate="
+				+ earTag + ", birthDate=" + birthDate + ", acquisitionDate="
+				+ acquisitionDate + ", sellDate=" + sellDate + ", deathDate="
 				+ deathDate + ", deathReason=" + deathReason
-				+ ", aquisitionValue=" + aquisitionValue + ", sellValue="
-				+ sellValue + ", fatherId=" + fatherId + ", motherId="
-				+ motherId + ", pictures=" + pictures + ", events=" + events
-				+ "]";
+				+ ", acquisitionValue=" + acquisitionValue + ", sellValue="
+				+ sellValue + "]";
 	}
 	
 	public boolean isAvailable() {

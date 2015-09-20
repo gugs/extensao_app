@@ -91,8 +91,8 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 			values.put(BIRTH_DATE, animal.getBirthDate().getTime());
 		}
 		
-		if(animal.getAquisitionDate() != null) {
-			values.put(AQUISITION_DATE, animal.getAquisitionDate().getTime());
+		if(animal.getAcquisitionDate() != null) {
+			values.put(AQUISITION_DATE, animal.getAcquisitionDate().getTime());
 		}
 		
 		if(animal.getSellDate() != null) {
@@ -104,7 +104,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 		}
 		values.put(DEATH_REASON, animal.getDeathReason());
 		
-		values.put(AQUISITION_VALUE, animal.getAquisitionValue());
+		values.put(AQUISITION_VALUE, animal.getAcquisitionValue());
 		values.put(SELL_VALUE, animal.getSellValue());
 		database.insert(TABLE_NAME, null, values);
 		return get(animal.getId());
@@ -138,10 +138,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 				cursor.getString(10),
 				
 				cursor.getDouble(11),
-				cursor.getDouble(12),
-				
-				cursor.getInt(13),
-				cursor.getInt(14));
+				cursor.getDouble(12));
 		return Animal;
 	}
 	

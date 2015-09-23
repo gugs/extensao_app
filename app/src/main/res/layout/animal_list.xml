@@ -2,124 +2,125 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-	android:layout_marginRight="10dp"
-	android:baselineAligned="false"
-	android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_weight="2"
-		android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
-		<ImageView
-			android:id="@+id/animal_image"
-			android:layout_width="80dp"
-			android:layout_height="80dp"
-			android:layout_weight="1"
-			android:layout_gravity="center"
-			android:padding="10dp"
-			android:src="@drawable/cow" />
+        <ImageView
+            android:id="@+id/animal_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/cow" />
 
-	</LinearLayout>
+    </LinearLayout>
 
-	<TableLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_weight="1"
-		android:stretchColumns="1">
-		<TableRow>
-			<!-- ID -->
-			<TextView
-				android:id="@+id/animal_id"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="0001"
-				android:textStyle="bold"
-				android:padding="5dip"
-				android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:stretchColumns="1">
 
-			<!-- Name -->
-			<TextView
-				android:id="@+id/animal_name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:padding="5dip"
-				android:text="Fumaça"
-				android:textAppearance="?android:attr/textAppearanceLarge" />
-		</TableRow>
+        <TableRow>
+            <!-- ID -->
+            <TextView
+                android:id="@+id/animal_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="0001"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
 
-		<TableRow>
-			<!-- Sex -->
-			<TextView
-				android:id="@+id/animal_sex"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Fêmea"
-				android:padding="5dip"
-				android:textAppearance="?android:attr/textAppearanceLarge" />
+            <!-- Name -->
+            <TextView
+                android:id="@+id/animal_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="Fumaça"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
 
-			<!-- Age -->
-			<TextView
-				android:id="@+id/animal_age"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="36 Meses"
-				android:padding="5dip"
-				android:textAppearance="?android:attr/textAppearanceLarge" />
-		</TableRow>
-	</TableLayout>
+        <TableRow>
+            <!-- Sex -->
+            <TextView
+                android:id="@+id/animal_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="Fêmea"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-		<!--<LinearLayout-->
-			<!--android:layout_width="fill_parent"-->
-			<!--android:layout_height="wrap_content"-->
-			<!--android:layout_weight="1"-->
-			<!--android:orientation="horizontal" >-->
+            <!-- Age -->
+            <TextView
+                android:id="@+id/animal_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="36 Meses"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+    </TableLayout>
 
-			<!--&lt;!&ndash; ID &ndash;&gt;-->
-			<!--<TextView-->
-				<!--android:id="@+id/animal_id"-->
-				<!--android:layout_width="wrap_content"-->
-				<!--android:layout_height="wrap_content"-->
-				<!--android:text="000001"-->
-				<!--android:textStyle="bold"-->
-				<!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal" >-->
 
-			<!--&lt;!&ndash; Name &ndash;&gt;-->
-			<!--<TextView-->
-				<!--android:id="@+id/animal_name"-->
-				<!--android:layout_width="wrap_content"-->
-				<!--android:layout_height="wrap_content"-->
-				<!--android:text="Fumaça"-->
-				<!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+    <!--&lt;!&ndash; ID &ndash;&gt;-->
+    <!--<TextView-->
+    <!--android:id="@+id/animal_id"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="000001"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
 
-		<!--</LinearLayout>-->
+    <!--&lt;!&ndash; Name &ndash;&gt;-->
+    <!--<TextView-->
+    <!--android:id="@+id/animal_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Fumaça"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
 
-		<!--<LinearLayout-->
-			<!--android:layout_width="fill_parent"-->
-			<!--android:layout_height="wrap_content"-->
-			<!--android:layout_weight="1"-->
-			<!--android:orientation="horizontal" >-->
-
-			<!--&lt;!&ndash; Sex &ndash;&gt;-->
-			<!--<TextView-->
-				<!--android:id="@+id/animal_sex"-->
-				<!--android:layout_width="wrap_content"-->
-				<!--android:layout_height="wrap_content"-->
-				<!--android:text="Fêmea"-->
-				<!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-
-			<!--&lt;!&ndash; Age &ndash;&gt;-->
-			<!--<TextView-->
-				<!--android:id="@+id/animal_age"-->
-				<!--android:layout_width="wrap_content"-->
-				<!--android:layout_height="wrap_content"-->
-				<!--android:text="36 Meses"-->
-				<!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-
-		<!--</LinearLayout>-->
     <!--</LinearLayout>-->
- 
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal" >-->
+
+    <!--&lt;!&ndash; Sex &ndash;&gt;-->
+    <!--<TextView-->
+    <!--android:id="@+id/animal_sex"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Fêmea"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+
+    <!--&lt;!&ndash; Age &ndash;&gt;-->
+    <!--<TextView-->
+    <!--android:id="@+id/animal_age"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="36 Meses"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
 </LinearLayout>
 

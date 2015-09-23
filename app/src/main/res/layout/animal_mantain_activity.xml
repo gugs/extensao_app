@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_marginTop="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingEnd="@dimen/activity_padding_right"
     android:paddingLeft="@dimen/activity_padding_left"
     android:paddingRight="@dimen/activity_padding_right"
     android:paddingStart="@dimen/activity_padding_left"
-    android:paddingTop="@dimen/activity_padding_top"
-    android:layout_marginTop="10dp"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:paddingTop="@dimen/activity_padding_top">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -18,34 +18,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/dummyfocus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/animal_id_label"
-                        android:textAppearance="@style/LabelTextAppearance"
+                        android:nextFocusLeft="@id/dummyfocus"
                         android:nextFocusUp="@id/dummyfocus"
-                        android:nextFocusLeft="@id/dummyfocus"/>
+                        android:text="@string/animal_id_label"
+                        android:textAppearance="@style/LabelTextAppearance" />
 
                     <EditText
                         android:id="@+id/am_id"
                         android:layout_width="160dp"
-                        android:enabled="false"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="@string/animal_id_hint"/>
+                        android:enabled="false"
+                        android:hint="@string/animal_id_hint"
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <ImageView
+                    <ImageView
                         android:id="@+id/am_picture"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -77,39 +77,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/animal_name_hint"
-                android:inputType="textCapWords" >
-            </EditText>
+                android:inputType="textCapWords"></EditText>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="@string/animal_sex_label"
-                android:textAppearance="@style/LabelTextAppearance"/>
+                android:textAppearance="@style/LabelTextAppearance" />
 
             <RadioGroup
                 android:id="@+id/radio_group_add_animal_sex"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/am_sex_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/male"
                     android:paddingLeft="@dimen/activity_padding_left"
                     android:paddingRight="@dimen/activity_padding_right"
-                    android:textAllCaps = "true"/>
+                    android:text="@string/male"
+                    android:textAllCaps="true" />
 
                 <RadioButton
                     android:id="@+id/am_sex_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/female"
                     android:paddingLeft="@dimen/activity_padding_left"
                     android:paddingRight="@dimen/activity_padding_right"
-                    android:textAllCaps = "true"/>
+                    android:text="@string/female"
+                    android:textAllCaps="true" />
             </RadioGroup>
 
             <TextView
@@ -117,12 +116,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/animal_race_label"
-                android:textAppearance="@style/LabelTextAppearance"/>
+                android:textAppearance="@style/LabelTextAppearance" />
 
             <Spinner
                 android:id="@+id/am_race"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,23 +147,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/am_birth_date"
-                    android:layout_height="40dp"
+                    style="?android:attr/spinnerStyle"
                     android:layout_width="200dp"
+                    android:layout_height="40dp"
                     android:text="@string/animal_birth_date_hint"
-                    android:textAppearance="@style/HintTextAppearance"
-                    style="?android:attr/spinnerStyle"/>
+                    android:textAppearance="@style/HintTextAppearance" />
 
                 <ImageButton
                     android:id="@+id/am_clear_birth_date"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:contentDescription="@string/cancel"
-                    android:background="@android:color/transparent"
                     android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/cancel"
                     android:src="@drawable/cancel" />
 
             </LinearLayout>
@@ -179,23 +178,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/am_acquisition_date"
-                    android:layout_height="40dp"
+                    style="?android:attr/spinnerStyle"
                     android:layout_width="200dp"
+                    android:layout_height="40dp"
                     android:text="@string/animal_aquisition_date_hint"
-                    android:textAppearance="@style/HintTextAppearance"
-                    style="?android:attr/spinnerStyle"/>
+                    android:textAppearance="@style/HintTextAppearance" />
 
                 <ImageButton
                     android:id="@+id/am_clear_aquisition_date"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:contentDescription="@string/cancel"
-                    android:background="@android:color/transparent"
                     android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/cancel"
                     android:src="@drawable/cancel" />
             </LinearLayout>
 

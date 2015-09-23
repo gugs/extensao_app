@@ -4,7 +4,6 @@
 
 
     <!-- Generic messages -->
-
     <string name="app_name">Meu Rebanho</string>
     <string name="app_full_name">com.timsoft.meurebanho</string>
     <string name="raw_base_path">/res/raw</string>
@@ -16,6 +15,9 @@
     <string name="edit">Alterar</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="birth">Nascimento</string>
+
+    <string name="discard_changes">Descartar alterações</string>
 
     <color name="background">#FFFFFF</color>
     <color name="label_color">#000000</color>
@@ -140,7 +142,34 @@
     <string name="take_other_picture">Tirar outra foto</string>
     <string name="select_other_picture">Escolher outra foto</string>
 
-    <string name="discard_add_animal">Descartar alterações</string>
     <string name="aquisition_value_invalid">Valor de aquisição inválido</string>
+
+    <!-- Treatment Maintain Activity -->
+    <string name="edit_treatment">Alterar Tratamento</string>
+    <string name="add_treatment">Incluir Tratamento</string>
+
+    <string name="treatment_date_label">DATA DE TRATAMENTO</string>
+    <string name="treatment_date_hint">Data de tratamento</string>
+
+    <string name="treatment_reason_label">MOTIVO DO TRATAMENTO</string>
+    <string name="treatment_reason_hint">Motivo do Tratamento</string>
+
+    <string name="treatment_medication_label">MEDICAÇÃO</string>
+    <string name="treatment_medication_hint">Medicação</string>
+
+    <string name="treatment_withdrawal_period_label">PERÍODO DE CARÊNCIA (DIAS)</string>
+    <string name="treatment_withdrawal_period_hint">Período de Carência (dias)</string>
+
+    <string name="treatment_cost_label">CUSTO</string>
+    <string name="treatment_cost_hint">Custo</string>
+
+    <string name="treatment_notes_label">ANOTAÇÕES</string>
+    <string name="treatment_notes_hint">Anotações</string>
+    <string name="treatment_date_invalid">Data de tratamento inválida</string>
+    <string name="treatment_reason_invalid">Motivo do tratamento inválido</string>
+    <string name="treatment_medication_invalid">Medicação do tratamento inválida</string>
+    <string name="treatment_cost_invalid">Custo de tratamento inválido</string>
+    <string name="confirm_delete">Confirmar a Exclusão</string>
+    <string name="confirm_delete_treatment">Confirma a exclusão do tratamento?</string>
 
 </resources>

@@ -53,6 +53,12 @@
             android:label="@string/add_animal" >
         </activity>
 
+        <activity
+            android:name="com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/add_treatment" >
+        </activity>
+
         <meta-data android:name="DATABASE" android:value="meurebanho.db" />
 		<meta-data android:name="VERSION" android:value="1" />
 		<meta-data android:name="QUERY_LOG" android:value="true" />

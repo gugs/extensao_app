@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/view_animal_list_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- status radio selector -->
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radio_animal_list_available"
@@ -38,14 +38,14 @@
     </RadioGroup>
 
     <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/main_content"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!-- animal list -->
-         <ListView
+        <ListView
             android:id="@+id/list_animal_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -58,7 +58,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/plus"
             app:layout_anchor="@id/list_animal_list"
-            app:layout_anchorGravity="bottom|right|end"/>
+            app:layout_anchorGravity="bottom|right|end" />
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -2,217 +2,256 @@ package com.timsoft.meurebanho.animal.model;
 
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
+import com.timsoft.meurebanho.event.model.Event;
+import com.timsoft.meurebanho.event.model.EventType;
+import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
+import com.timsoft.meurebanho.treatment.model.Treatment;
 
 import java.io.File;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 public class Animal {
-	public static final int STATUS_AVAILABLE = 0;
-	public static final int STATUS_SOLD = 1;
-	public static final int STATUS_DEAD = 2;
-	
-	private int id;
-	private int specieId;
-	private int raceId;
-	
-	private String sex;
-	private String name;
-	private String earTag;
-	
-	private Date birthDate;
-	private Date acquisitionDate;
-	private Date sellDate;
-	
-	private Date deathDate;
-	private String deathReason;
-	
-	private double acquisitionValue;
-	private double sellValue;
-	
-	public Animal() {
-	}
-	
-	public Animal(	int id, int specieId, int raceId, 
-					String sex, String name, String earTag, 
-					Date birthDate, Date acquisitionDate, Date sellDate,
-					Date deathDate, String deathReason,
-					double acquisitionValue, double sellValue) {
-		
-		this.id = id;
-		this.specieId = specieId;
-		this.raceId = raceId;
-		this.sex = sex;
-		this.name = name;
-		this.earTag = earTag;
-		
-		this.birthDate = birthDate;
-		this.acquisitionDate = acquisitionDate;
-		this.sellDate = sellDate;
-		
-		this.deathDate = deathDate;
-		this.deathReason = deathReason;
-		
-		this.acquisitionValue = acquisitionValue;
-		this.sellValue = sellValue;
-	}
+    public static final int STATUS_AVAILABLE = 0;
+    public static final int STATUS_SOLD = 1;
+    public static final int STATUS_DEAD = 2;
 
-	public int getId() {
-		return id;
-	}
-	
-	public String getIdToDisplay() {
-		return String.format(Locale.getDefault(), "%04d", getId());
-	}
+    private int id;
+    private int specieId;
+    private int raceId;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private String sex;
+    private String name;
+    private String earTag;
 
-	public int getRaceId() {
-		return raceId;
-	}
+    private Date birthDate;
+    private Date acquisitionDate;
+    private Date sellDate;
 
-	public void setRaceId(int raceId) {
-		this.raceId = raceId;
-	}
+    private Date deathDate;
+    private String deathReason;
 
-	public int getSpecieId() {
-		return specieId;
-	}
+    public Date getRetireDate() {
+        return retireDate;
+    }
 
-	public void setSpecieId(int specieId) {
-		this.specieId = specieId;
-	}
+    public void setRetireDate(Date retireDate) {
+        this.retireDate = retireDate;
+    }
 
-	public String getName() {
-		return name;
-	}
+    private Date retireDate;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private double acquisitionValue;
+    private double sellValue;
 
-	public String getEarTag() {
-		return earTag;
-	}
+    public Animal() {
+    }
 
-	public void setEarTag(String earTag) {
-		this.earTag = earTag;
-	}
+    public Animal(int id, int specieId, int raceId,
+                  String sex, String name, String earTag,
+                  Date birthDate, Date acquisitionDate, Date sellDate,
+                  Date deathDate, String deathReason, Date retireDate,
+                  double acquisitionValue, double sellValue) {
 
-	public Date getBirthDate() {
-		return birthDate;
-	}
+        this.id = id;
+        this.specieId = specieId;
+        this.raceId = raceId;
+        this.sex = sex;
+        this.name = name;
+        this.earTag = earTag;
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
+        this.birthDate = birthDate;
+        this.acquisitionDate = acquisitionDate;
+        this.sellDate = sellDate;
 
-	public Date getAcquisitionDate() {
-		return acquisitionDate;
-	}
+        this.deathDate = deathDate;
+        this.deathReason = deathReason;
 
-	public void setAcquisitionDate(Date acquisitionDate) {
-		this.acquisitionDate = acquisitionDate;
-	}
+        this.retireDate = retireDate;
 
-	public Date getSellDate() {
-		return sellDate;
-	}
+        this.acquisitionValue = acquisitionValue;
+        this.sellValue = sellValue;
+    }
 
-	public void setSellDate(Date sellDate) {
-		this.sellDate = sellDate;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public double getAcquisitionValue() {
-		return acquisitionValue;
-	}
+    public String getIdToDisplay() {
+        return String.format(Locale.getDefault(), "%04d", getId());
+    }
 
-	public void setAcquisitionValue(double acquisitionValue) {
-		this.acquisitionValue = acquisitionValue;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public double getSellValue() {
-		return sellValue;
-	}
+    public int getRaceId() {
+        return raceId;
+    }
 
-	public void setSellValue(double sellValue) {
-		this.sellValue = sellValue;
-	}
+    public void setRaceId(int raceId) {
+        this.raceId = raceId;
+    }
 
-	public String getSex() {
-		return sex;
-	}
-	
-	public String getSexToDisplay() {
-		return "F".equalsIgnoreCase(getSex()) ?  MeuRebanhoApp.getContext().getResources().getString(R.string.female) : MeuRebanhoApp.getContext().getResources().getString(R.string.male);
-	}
+    public int getSpecieId() {
+        return specieId;
+    }
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+    public void setSpecieId(int specieId) {
+        this.specieId = specieId;
+    }
 
-	public Date getDeathDate() {
-		return deathDate;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDeathDate(Date deathDate) {
-		this.deathDate = deathDate;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDeathReason() {
-		return deathReason;
-	}
+    public String getEarTag() {
+        return earTag;
+    }
 
-	public void setDeathReason(String deathReason) {
-		this.deathReason = deathReason;
-	}
+    public void setEarTag(String earTag) {
+        this.earTag = earTag;
+    }
 
-	@Override
-	public String toString() {
-		return "Animal [id=" + id + ", specieId=" + specieId + ", raceId="
-				+ raceId + ", sex=" + sex + ", name=" + name + ", earTag="
-				+ earTag + ", birthDate=" + birthDate + ", acquisitionDate="
-				+ acquisitionDate + ", sellDate=" + sellDate + ", deathDate="
-				+ deathDate + ", deathReason=" + deathReason
-				+ ", acquisitionValue=" + acquisitionValue + ", sellValue="
-				+ sellValue + "]";
-	}
-	
-	public boolean isAvailable() {
-		return !isSold() && !isDead();
-	}
-	
-	public boolean isSold() {
-		return getSellDate() != null;
-	}
-	
-	public boolean isDead() {
-		return getDeathDate() != null;
-	}
+    public Date getBirthDate() {
+        return birthDate;
+    }
 
-	public int getAgeInMonths() {
-		if(getBirthDate() == null) {
-			return 0;
-		} else {
-			Calendar startCalendar = new GregorianCalendar();
-			startCalendar.setTime(getBirthDate());
-			Calendar endCalendar = new GregorianCalendar();
-			endCalendar.setTime(new Date());
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
 
-			int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
-			return diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
-		}
-	}
-	
-	public String getAgeInMonthsToDisplay() {
-		return getAgeInMonths() + " " + MeuRebanhoApp.getContext().getResources().getString(R.string.months);
-	}
+    public Date getAcquisitionDate() {
+        return acquisitionDate;
+    }
 
-	public File getPictureFile() {
-		return new File(MeuRebanhoApp.getMediaStorageDir().getPath() + File.separator + getIdToDisplay() + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
-	}
+    public void setAcquisitionDate(Date acquisitionDate) {
+        this.acquisitionDate = acquisitionDate;
+    }
+
+    public Date getSellDate() {
+        return sellDate;
+    }
+
+    public void setSellDate(Date sellDate) {
+        this.sellDate = sellDate;
+    }
+
+    public double getAcquisitionValue() {
+        return acquisitionValue;
+    }
+
+    public void setAcquisitionValue(double acquisitionValue) {
+        this.acquisitionValue = acquisitionValue;
+    }
+
+    public double getSellValue() {
+        return sellValue;
+    }
+
+    public void setSellValue(double sellValue) {
+        this.sellValue = sellValue;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getSexToDisplay() {
+        return "F".equalsIgnoreCase(getSex()) ? MeuRebanhoApp.getContext().getResources().getString(R.string.female) : MeuRebanhoApp.getContext().getResources().getString(R.string.male);
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Date getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(Date deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public String getDeathReason() {
+        return deathReason;
+    }
+
+    public void setDeathReason(String deathReason) {
+        this.deathReason = deathReason;
+    }
+
+    public boolean isAvailable() {
+        return !isSold() && !isDead() && !isRetired();
+    }
+
+    public boolean isSold() {
+        return getSellDate() != null;
+    }
+
+    public boolean isDead() {
+        return getDeathDate() != null;
+    }
+
+    public boolean isRetired() {
+        return getRetireDate() != null;
+    }
+
+    public int getAgeInMonths() {
+        if (getBirthDate() == null) {
+            return 0;
+        } else {
+            Calendar startCalendar = new GregorianCalendar();
+            startCalendar.setTime(getBirthDate());
+            Calendar endCalendar = new GregorianCalendar();
+            endCalendar.setTime(new Date());
+
+            int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+            return diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+        }
+    }
+
+    public String getAgeInMonthsToDisplay() {
+        return getAgeInMonths() + " " + MeuRebanhoApp.getContext().getResources().getString(R.string.months);
+    }
+
+    public File getPictureFile() {
+        return new File(MeuRebanhoApp.getMediaStorageDir().getPath() + File.separator + getIdToDisplay() + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
+    }
+
+    public List<Event> getEvents() {
+        List<Event> events = new ArrayList<>();
+        if (getBirthDate() != null) {
+            events.add(new Event(0, EventType.BIRTH, getBirthDate(), MeuRebanhoApp.getContext().getResources().getString(R.string.birth)));
+        }
+
+        if (getAcquisitionDate() != null) {
+            events.add(new Event(0, EventType.ACQUISITION, getAcquisitionDate(), NumberFormat.getCurrencyInstance().format(getAcquisitionValue())));
+        }
+
+        if (getDeathDate() != null) {
+            events.add(new Event(0, EventType.DEATH, getDeathDate(), getDeathReason()));
+        }
+
+        DBTreatmentAdapter treatmentDatasource = DBTreatmentAdapter.getInstance();
+        treatmentDatasource.open();
+        for (Treatment t : treatmentDatasource.list(getId())) {
+            events.add(new Event(t.getId(), EventType.TREATMENT, t.getDate(), t.getMedication()));
+        }
+        treatmentDatasource.close();
+
+        Collections.sort(events, Collections.reverseOrder());
+
+        return events;
+    }
 }

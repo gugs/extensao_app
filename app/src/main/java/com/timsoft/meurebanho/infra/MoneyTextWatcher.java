@@ -31,7 +31,7 @@ public class MoneyTextWatcher implements TextWatcher {
         String s = editable.toString();
         editText.removeTextChangedListener(this);
         String cleanString = s.toString().replaceAll("[^\\d]", "");
-        if(!TextUtils.isEmpty(cleanString)) {
+        if (!TextUtils.isEmpty(cleanString)) {
             BigDecimal parsed = new BigDecimal(cleanString).setScale(2, BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100), BigDecimal.ROUND_FLOOR);
             String formatted = NumberFormat.getCurrencyInstance().format(parsed);
             editText.setText(formatted);

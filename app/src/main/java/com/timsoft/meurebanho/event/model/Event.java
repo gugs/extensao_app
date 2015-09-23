@@ -1,46 +1,62 @@
 package com.timsoft.meurebanho.event.model;
 
-import com.timsoft.meurebanho.infra.model.IDDescription;
-
 import java.util.Date;
 
-public class Event extends IDDescription {
-	private int animalId;
-	private Date date;
-	private int eventTypeId;
+public class Event implements Comparable<Event> {
+    private int entityId;
+    private EventType type;
+    private Date date;
+    private String description;
 
-	public Event(){
-	}
+    public Event() {
+    }
 
-	public Event(int id, int eventTypeId, int animalId,
-				 Date date, String description) {
-		super(id, description);
-		this.eventTypeId = eventTypeId;
-		this.animalId = animalId;
-		this.date = date;
-	}
+    public Event(int entityId, EventType type, Date date, String description) {
+        this.entityId = entityId;
+        this.type = type;
+        this.date = date;
+        this.description = description;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public int getEntityId() {
+        return entityId;
+    }
 
-	public void setDate(Date data) {
-		this.date = data;
-	}
+    public void setEntityId(int entityId) {
+        this.entityId = entityId;
+    }
 
-	public int getAnimalId() {
-		return animalId;
-	}
+    public EventType getType() {
+        return type;
+    }
 
-	public void setAnimalId(int animalId) {
-		this.animalId = animalId;
-	}
+    public void setType(EventType type) {
+        this.type = type;
+    }
 
-	public int getEventTypeId() {
-		return eventTypeId;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public void setEventTypeId(int eventTypeId) {
-		this.eventTypeId = eventTypeId;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public int compareTo(Event another) {
+        //order by date and after by type
+        if (getDate().compareTo(another.getDate()) != 0) {
+            return getDate().compareTo(another.getDate());
+        } else {
+            return type.compareTo(another.getType());
+        }
+    }
 }

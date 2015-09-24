@@ -44,11 +44,8 @@ import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -98,16 +95,16 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         action = getIntent().getStringExtra(MeuRebanhoApp.ACTION);
 
-        //Caso seja uma inclusão de animal
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
+            //Caso seja uma inclusão de animal
             int idSpecie = getIntent().getExtras().getInt(DBSpecieAdapter.ID);
 
             specieDatasource.open();
             includingSpecie = specieDatasource.get(idSpecie);
             specieDatasource.close();
 
-            //Caso seja uma edição de animal
         } else {
+            //Caso seja uma edição de animal
             int idAnimal = getIntent().getExtras().getInt(DBAnimalAdapter.ID);
 
             animalDatasource.open();
@@ -144,7 +141,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
         //
 
-        //sex
+        //Sex
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
             if ("M".equalsIgnoreCase(editingAnimal.getSex())) {
                 ((RadioButton) findViewById(R.id.am_sex_male)).setChecked(true);
@@ -227,7 +224,9 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         });
         registerForContextMenu(imageViewPicture);
         if (action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getPictureFile().exists()) {
-            imageViewPicture.setImageBitmap(BitmapFactory.decodeFile(editingAnimal.getPictureFile().getPath()));
+            picture = getOutputMediaFile();
+            MeuRebanhoApp.copy(editingAnimal.getPictureFile(), picture);
+            updateImageViewPicture();
         }
     }
 
@@ -442,7 +441,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
                 File originalPicture = new File(picturePath);
                 cursor.close();
 
-                copy(originalPicture, tempPicture);
+                MeuRebanhoApp.copy(originalPicture, tempPicture);
+
                 performCrop();
             } else if (resultCode == RESULT_CANCELED) {
                 //Não faz nada, usuário cancelou a ação
@@ -461,24 +461,6 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
     }
 
-    public void copy(File src, File dst) {
-        try {
-            InputStream in = new FileInputStream(src);
-            OutputStream out = new FileOutputStream(dst);
-
-            // Transfer bytes from in to out
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            in.close();
-            out.close();
-        } catch (IOException e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-
     private void saveBitmapToFile(Bitmap bmp, File file) {
         FileOutputStream out;
         try {
@@ -489,6 +471,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             updateImageViewPicture();
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            throw new RuntimeException(e);
         }
     }
 
@@ -633,17 +616,16 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         animalDatasource.close();
 
-        if (picture != null) {
-            File destFile = a.getPictureFile();
-
-            //Arquivo pode existir devido a alguma instalação anterior
-            if (destFile.exists()) {
-                if (!destFile.delete()) {
-                    Toast.makeText(this, getResources().getString(R.string.error_deleting_file) + ":" + destFile.getName(), Toast.LENGTH_SHORT).show();
-                }
+        //Remove current file if exists
+        if (a.getPictureFile().exists()) {
+            if (!a.getPictureFile().delete()) {
+                Toast.makeText(this, getResources().getString(R.string.error_deleting_file) + ":" + a.getPictureFile().getName(), Toast.LENGTH_SHORT).show();
             }
+        }
 
-            if (!picture.renameTo(destFile)) {
+        //If a picture was set, rename it to the correct animal picture file name
+        if (picture != null) {
+            if (!picture.renameTo(a.getPictureFile())) {
                 throw new RuntimeException("Falha ao renomear arquivo");
             }
         }

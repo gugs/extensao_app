@@ -89,6 +89,8 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         if (animal.getPictureFile().exists()) {
             ((ImageView) findViewById(R.id.ad_picture)).setImageBitmap(BitmapFactory.decodeFile(animal.getPictureFile().getPath()));
+        } else {
+            ((ImageView) findViewById(R.id.ad_picture)).setImageResource(R.drawable.cow);
         }
 
         ((TextView) findViewById(R.id.ad_race))

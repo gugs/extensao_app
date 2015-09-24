@@ -25,7 +25,9 @@ import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity;
+import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
 
 public class AnimalDetailActivity extends AppCompatActivity {
 
@@ -49,7 +51,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AnimalDetailActivity.this, TreatmentMaintainActivity.class);
                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
-                intent.putExtra(DBAnimalAdapter.TABLE_NAME + "_" + DBAnimalAdapter.ID, animal.getId());
+                intent.putExtra(DBAnimalAdapter.ID, animal.getId());
                 startActivity(intent);
             }
         });
@@ -101,7 +103,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
         TableLayout table = (TableLayout) findViewById(R.id.ad_events_table);
         table.removeAllViews();
 
-        for (Event e : animal.getEvents()) {
+        for (final Event e : animal.getEvents()) {
             TableRow row = (TableRow) LayoutInflater.from(this).inflate(R.layout.event_row, null);
             ((TextView) row.findViewById(R.id.er_icon)).setText(e.getType().getIcon());
             ((TextView) row.findViewById(R.id.er_date)).setText(MainActivity.getFormatedDate(e.getDate()));
@@ -112,7 +114,18 @@ public class AnimalDetailActivity extends AppCompatActivity {
                 row.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(AnimalDetailActivity.this, "Click", Toast.LENGTH_SHORT).show();
+                        switch (e.getType()) {
+                            case TREATMENT:
+                                Intent intent = new Intent(AnimalDetailActivity.this, TreatmentDetailActivity.class);
+                                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
+                                intent.putExtra(DBTreatmentAdapter.ID, e.getEntityId());
+                                startActivity(intent);
+                                break;
+                            case DEATH:
+                                break;
+                            default:
+                                Toast.makeText(AnimalDetailActivity.this, "No action defined for this event type: " + e.getType().toString(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }

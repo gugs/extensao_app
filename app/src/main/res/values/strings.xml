@@ -171,5 +171,7 @@
     <string name="treatment_cost_invalid">Custo de tratamento inválido</string>
     <string name="confirm_delete">Confirmar a Exclusão</string>
     <string name="confirm_delete_treatment">Confirma a exclusão do tratamento?</string>
+    <string name="withdrawal_period_invalid">Período de carência inválido</string>
+    <string name="detail_treatment">Detalhar Tratamento</string>
 
 </resources>

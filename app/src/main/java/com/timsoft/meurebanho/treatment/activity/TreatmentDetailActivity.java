@@ -59,7 +59,7 @@ public class TreatmentDetailActivity extends AppCompatActivity {
                 .setText(treatment.getMedication());
 
         ((TextView) findViewById(R.id.td_withdrawal_period))
-                .setText(treatment.getWithdrawalPeriod());
+                .setText(Integer.toString(treatment.getWithdrawalPeriod()));
 
         ((TextView) findViewById(R.id.td_cost))
                 .setText(NumberFormat.getCurrencyInstance().format(treatment.getCost()));
@@ -114,6 +114,7 @@ public class TreatmentDetailActivity extends AppCompatActivity {
                     treatmentDatasource.open();
                     treatmentDatasource.delete(treatment);
                     treatmentDatasource.close();
+                    TreatmentDetailActivity.this.finish();
                 }
             })
             .setNegativeButton(R.string.no, null)

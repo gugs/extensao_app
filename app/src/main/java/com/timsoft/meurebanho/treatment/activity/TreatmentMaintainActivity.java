@@ -58,16 +58,15 @@ public class TreatmentMaintainActivity extends AppCompatActivity {
 
         action = getIntent().getStringExtra(MeuRebanhoApp.ACTION);
 
-        //Caso seja uma inclusão de tratamento
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
-            //noop
+            //Caso seja uma inclusão de tratamento
+            editingTreatment = new Treatment();
+            editingTreatment.setAnimalId(getIntent().getExtras().getInt(DBAnimalAdapter.ID));
 
-            //Caso seja uma edição de tratamento
         } else {
-            int idTreatment = getIntent().getExtras().getInt(DBTreatmentAdapter.ID);
-
+            //Caso seja uma edição de tratamento
             treatmentDatasource.open();
-            editingTreatment = treatmentDatasource.get(idTreatment);
+            editingTreatment = treatmentDatasource.get(getIntent().getExtras().getInt(DBTreatmentAdapter.ID));
             treatmentDatasource.close();
         }
 
@@ -109,7 +108,7 @@ public class TreatmentMaintainActivity extends AppCompatActivity {
         //Withdrawal Period
         etWithdrawalPeriod = ((EditText) findViewById(R.id.tm_withdrawal_period));
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etWithdrawalPeriod.setText(editingTreatment.getWithdrawalPeriod());
+            etWithdrawalPeriod.setText(Integer.toString(editingTreatment.getWithdrawalPeriod()));
         }
         //
 
@@ -141,14 +140,8 @@ public class TreatmentMaintainActivity extends AppCompatActivity {
     private void save() {
         Treatment t = new Treatment();
 
-        //AnimalId
-        t.setAnimalId(getIntent().getExtras().getInt(DBAnimalAdapter.TABLE_NAME + "_" + DBAnimalAdapter.ID));
-
-        action = getIntent().getStringExtra(MeuRebanhoApp.ACTION);
-        //Caso seja uma edição de tratamento
-        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            t.setId(getIntent().getExtras().getInt(DBTreatmentAdapter.TABLE_NAME + "_" + DBTreatmentAdapter.ID));
-        }
+        t.setId(editingTreatment.getId());
+        t.setAnimalId(editingTreatment.getAnimalId());
 
         //Date
         try {
@@ -179,21 +172,28 @@ public class TreatmentMaintainActivity extends AppCompatActivity {
 
         //Withdrawal Perioc
         if (!TextUtils.isEmpty(etWithdrawalPeriod.getText())) {
-            t.setWithdrawalPeriod(Integer.parseInt(etWithdrawalPeriod.getText().toString()));
+            try {
+                t.setWithdrawalPeriod(Integer.parseInt(etWithdrawalPeriod.getText().toString()));
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, R.string.withdrawal_period_invalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         //
 
         //Cost
-        try {
-            double cost = NumberFormat.getCurrencyInstance().parse(etCost.getText().toString()).doubleValue();
-            if (cost < 0) {
+        if (!TextUtils.isEmpty(etCost.getText().toString())) {
+            try {
+                double cost = NumberFormat.getCurrencyInstance().parse(etCost.getText().toString()).doubleValue();
+                if (cost < 0) {
+                    Toast.makeText(this, R.string.treatment_cost_invalid, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                t.setCost(cost);
+            } catch (ParseException e) {
                 Toast.makeText(this, R.string.treatment_cost_invalid, Toast.LENGTH_SHORT).show();
                 return;
             }
-            t.setCost(cost);
-        } catch (ParseException e) {
-            Toast.makeText(this, R.string.treatment_cost_invalid, Toast.LENGTH_SHORT).show();
-            return;
         }
         //
 

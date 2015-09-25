@@ -56,7 +56,7 @@
 
         <activity
             android:name="com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity"
-            android:label="@string/detail_treatment"
+            android:label="@string/treatment_detail"
             android:parentActivityName="com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -66,7 +66,7 @@
 
         <activity
             android:name="com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity"
-            android:label="@string/add_treatment"
+            android:label="@string/treatment_add"
             android:screenOrientation="portrait" />
 
         <meta-data

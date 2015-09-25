@@ -42,8 +42,6 @@ public class TreatmentMaintainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ImageButton btnClearTreatmentDate;
-
         treatmentDatasource = DBTreatmentAdapter.getInstance();
 
         Log.d(LOG_TAG, "onCreate");
@@ -72,9 +70,9 @@ public class TreatmentMaintainActivity extends AppCompatActivity {
 
         //Activity Title
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
-            setTitle(getResources().getString(R.string.add_treatment));
+            setTitle(getResources().getString(R.string.treatment_add));
         } else {
-            setTitle(getResources().getString(R.string.edit_treatment));
+            setTitle(getResources().getString(R.string.treatment_edit));
         }
         //
 
@@ -175,7 +173,7 @@ public class TreatmentMaintainActivity extends AppCompatActivity {
             try {
                 t.setWithdrawalPeriod(Integer.parseInt(etWithdrawalPeriod.getText().toString()));
             } catch (NumberFormatException e) {
-                Toast.makeText(this, R.string.withdrawal_period_invalid, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.treatment_withdrawal_period_invalid, Toast.LENGTH_SHORT).show();
                 return;
             }
         }

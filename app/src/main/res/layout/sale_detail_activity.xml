@@ -20,81 +20,55 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--Sale Date-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/treatment_date_label"
+                android:text="@string/sale_date_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/td_date"
+                android:id="@+id/sd_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="[25/10/2013]"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
+            <!--Sale Value-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/treatment_reason_label"
+                android:text="@string/sale_value_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/td_reason"
+                android:id="@+id/sd_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="[Aftosa]"
+                android:text="[R$ 850,00]"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
+            <!--Buyer-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/treatment_medication_label"
+                android:text="@string/sale_buyer_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/td_medication"
+                android:id="@+id/sd_buyer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="[Vacina]"
+                android:text="[Mauro Alberto]"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/treatment_withdrawal_period_label"
-                android:textAppearance="@style/LabelTextAppearance" />
-
-            <TextView
-                android:id="@+id/td_withdrawal_period"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="[10]"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/treatment_cost_label"
-                android:textAppearance="@style/LabelTextAppearance" />
-
-            <TextView
-                android:id="@+id/td_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="[R$ 33,45]"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
+            <!--Notes-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,7 +77,7 @@
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/td_notes"
+                android:id="@+id/sd_notes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

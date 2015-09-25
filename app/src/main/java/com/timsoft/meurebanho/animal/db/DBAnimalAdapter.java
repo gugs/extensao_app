@@ -39,6 +39,12 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
     public static final String ACQUISITION_VALUE = "acquisition_value";
     public static final String SELL_VALUE = "sell_value";
 
+    public static final String SELLER_NAME = "seller_name";
+
+    public static final String BUYER_NAME = "buyer_name";
+
+    public static final String SELL_NOTES = "sell_notes";
+
     public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( "
             + ID + " integer primary key, "
             + SPECIE_ID + " integer not null, "
@@ -58,7 +64,11 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
             + RETIRE_DATE + "integer, "
 
             + ACQUISITION_VALUE + " real, "
-            + SELL_VALUE + " real"
+            + SELL_VALUE + " real, "
+
+            + SELLER_NAME + " text, "
+            + BUYER_NAME + " text, "
+            + SELL_NOTES + " text"
 
             + ");";
 
@@ -106,6 +116,11 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 
         values.put(ACQUISITION_VALUE, animal.getAcquisitionValue());
         values.put(SELL_VALUE, animal.getSellValue());
+
+        values.put(SELLER_NAME, animal.getSellerName());
+        values.put(BUYER_NAME, animal.getBuyerName());
+        values.put(SELL_NOTES, animal.getSellNotes());
+
         try {
             database.insertOrThrow(TABLE_NAME, null, values);
         } catch (SQLiteException e) {
@@ -166,7 +181,17 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
                 cursor.getDouble(12),
 
                 //SELL_VALUE
-                cursor.getDouble(13));
+                cursor.getDouble(13),
+
+                //SELLER_NAME
+                cursor.getString(14),
+
+                //BUYER_NAME
+                cursor.getString(15),
+
+                //SELL_NOTES
+                cursor.getString(16)
+        );
     }
 
     @Override

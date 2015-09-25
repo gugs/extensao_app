@@ -52,7 +52,7 @@
     <string name="animal_birth_date_hint">Data de nascimento</string>
 
     <string name="animal_aquisition_date_label">DATA DE AQUISIÇÃO</string>
-    <string name="animal_aquisition_date_hint">Data de aquisição</string>
+    <string name="animal_acquisition_date_hint">Data de aquisição</string>
 
     <string name="animal_sell_date_label">DATA DA VENDA</string>
     <string name="animal_sell_date_hint">Data da venda</string>
@@ -60,7 +60,7 @@
     <string name="animal_death_date_label">DATA DA MORTE</string>
     <string name="animal_death_reason_label">MOTIVO DA MORTE</string>
 
-    <string name="animal_aquisition_value_label">VALOR DE AQUISIÇÃO</string>
+    <string name="animal_acquisition_value_label">VALOR DE AQUISIÇÃO</string>
     <string name="animal_aquisition_value_hint">Valor de aquisição</string>
 
     <string name="animal_sell_value_label">VALOR DE VENDA</string>
@@ -145,11 +145,11 @@
     <string name="aquisition_value_invalid">Valor de aquisição inválido</string>
 
     <!-- Treatment Maintain Activity -->
-    <string name="edit_treatment">Alterar Tratamento</string>
-    <string name="add_treatment">Incluir Tratamento</string>
+    <string name="treatment_edit">Alterar Tratamento</string>
+    <string name="treatment_add">Incluir Tratamento</string>
 
     <string name="treatment_date_label">DATA DE TRATAMENTO</string>
-    <string name="treatment_date_hint">Data de tratamento</string>
+    <string name="treatment_date_hint">Data do Tratamento</string>
 
     <string name="treatment_reason_label">MOTIVO DO TRATAMENTO</string>
     <string name="treatment_reason_hint">Motivo do Tratamento</string>
@@ -163,15 +163,32 @@
     <string name="treatment_cost_label">CUSTO</string>
     <string name="treatment_cost_hint">Custo</string>
 
-    <string name="treatment_notes_label">ANOTAÇÕES</string>
-    <string name="treatment_notes_hint">Anotações</string>
     <string name="treatment_date_invalid">Data de tratamento inválida</string>
     <string name="treatment_reason_invalid">Motivo do tratamento inválido</string>
     <string name="treatment_medication_invalid">Medicação do tratamento inválida</string>
     <string name="treatment_cost_invalid">Custo de tratamento inválido</string>
+    <string name="treatment_confirm_delete">Confirma a exclusão do tratamento?</string>
+    <string name="treatment_withdrawal_period_invalid">Período de carência inválido</string>
+    <string name="treatment_detail">Detalhar Tratamento</string>
+
+    <string name="sale_confirm_delete">Confirma a exclusão da venda?</string>
+    <string name="sale_date_label">DATA DA VENDA</string>
+    <string name="sale_value_label">VALOR DA VENDA</string>
+    <string name="sale_buyer_label">COMPRADOR</string>
+
     <string name="confirm_delete">Confirmar a Exclusão</string>
-    <string name="confirm_delete_treatment">Confirma a exclusão do tratamento?</string>
-    <string name="withdrawal_period_invalid">Período de carência inválido</string>
-    <string name="detail_treatment">Detalhar Tratamento</string>
+    <string name="notes_label">ANOTAÇÕES</string>
+    <string name="notes_hint">Anotações</string>
+    <string name="sale_add">Registrar Venda</string>
+    <string name="sale_edit">Alterar Venda</string>
+    <string name="sale_date_hint">Data da Venda</string>
+    <string name="sale_value_hint">Valor da Venda</string>
+    <string name="sale_buyer_hint">Comprador</string>
+    <string name="sale_date_invalid">Data da venda inválida</string>
+    <string name="sale_value_invalid">Valor da venda inválido</string>
+    <string name="sale_buyer_name_invalid">Nome do comprador inválido</string>
+    <string name="seller_name_invalid">Nome do vendedor inválido</string>
+    <string name="animal_seller_name_label">NOME DO VENDEDOR</string>
+    <string name="seller_name_hint">Nome do Vendedor</string>
 
 </resources>

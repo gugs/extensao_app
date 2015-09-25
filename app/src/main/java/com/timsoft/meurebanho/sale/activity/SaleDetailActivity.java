@@ -1,4 +1,4 @@
-package com.timsoft.meurebanho.treatment.activity;
+package com.timsoft.meurebanho.sale.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,17 +14,17 @@ import android.widget.TextView;
 import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
-import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
-import com.timsoft.meurebanho.treatment.model.Treatment;
+import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
+import com.timsoft.meurebanho.animal.model.Animal;
 
 import java.text.NumberFormat;
 
-public class TreatmentDetailActivity extends AppCompatActivity {
+public class SaleDetailActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "TreatmentDetailActivity";
-    private Treatment treatment;
-    private int treatmentId;
-    private DBTreatmentAdapter treatmentDatasource;
+    private static final String LOG_TAG = "SaleDetailActivity";
+    private Animal animal;
+    private int animalId;
+    private DBAnimalAdapter animalDatasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,41 +32,34 @@ public class TreatmentDetailActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "onCreate");
 
-        setContentView(R.layout.treatment_detail_activity);
+        setContentView(R.layout.sale_detail_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        treatmentId = getIntent().getExtras().getInt(DBTreatmentAdapter.ID);
-        treatmentDatasource = DBTreatmentAdapter.getInstance();
+        animalId = getIntent().getExtras().getInt(DBAnimalAdapter.ID);
+        animalDatasource = DBAnimalAdapter.getInstance();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        //Treatment data
-        treatmentDatasource.open();
-        treatment = treatmentDatasource.get(treatmentId);
-        treatmentDatasource.close();
+        //Sale data
+        animalDatasource.open();
+        animal = animalDatasource.get(animalId);
+        animalDatasource.close();
         //
 
-        ((TextView) findViewById(R.id.td_date))
-                .setText(MainActivity.getFormatedDate(treatment.getDate()));
+        ((TextView) findViewById(R.id.sd_date))
+                .setText(MainActivity.getFormatedDate(animal.getSellDate()));
 
-        ((TextView) findViewById(R.id.td_reason))
-                .setText(treatment.getReason());
+        ((TextView) findViewById(R.id.sd_value))
+                .setText(NumberFormat.getCurrencyInstance().format(animal.getSellValue()));
 
-        ((TextView) findViewById(R.id.td_medication))
-                .setText(treatment.getMedication());
+        ((TextView) findViewById(R.id.sd_buyer))
+                .setText(animal.getBuyerName());
 
-        ((TextView) findViewById(R.id.td_withdrawal_period))
-                .setText(Integer.toString(treatment.getWithdrawalPeriod()));
-
-        ((TextView) findViewById(R.id.td_cost))
-                .setText(NumberFormat.getCurrencyInstance().format(treatment.getCost()));
-
-        ((TextView) findViewById(R.id.td_notes))
-                .setText(treatment.getNotes());
-
+        ((TextView) findViewById(R.id.sd_notes))
+                .setText(animal.getSellNotes());
     }
 
     @Override
@@ -95,10 +88,10 @@ public class TreatmentDetailActivity extends AppCompatActivity {
     }
 
     private void actionEdit() {
-        Intent intent = new Intent(this, TreatmentMaintainActivity.class);
+        Intent intent = new Intent(this, SaleMaintainActivity.class);
 
         intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
-        intent.putExtra(DBTreatmentAdapter.ID, treatment.getId());
+        intent.putExtra(DBAnimalAdapter.ID, animal.getId());
 
         startActivity(intent);
     }
@@ -107,14 +100,18 @@ public class TreatmentDetailActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setTitle(R.string.confirm_delete)
-            .setMessage(R.string.treatment_confirm_delete)
+            .setMessage(R.string.sale_confirm_delete)
             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    treatmentDatasource.open();
-                    treatmentDatasource.delete(treatment);
-                    treatmentDatasource.close();
-                    TreatmentDetailActivity.this.finish();
+                    animalDatasource.open();
+                    animal.setSellDate(null);
+                    animal.setSellValue(0);
+                    animal.setBuyerName(null);
+                    animal.setSellNotes(null);
+                    animalDatasource.update(animal);
+                    animalDatasource.close();
+                    SaleDetailActivity.this.finish();
                 }
             })
             .setNegativeButton(R.string.no, null)

@@ -68,7 +68,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     private Animal editingAnimal;
     private File tempPicture, picture;
     private TextView tvId, tvBirthDate, tvAquisitionDate;
-    private EditText etAquisitionValue;
+    private EditText etAcquisitionValue, etSellerName;
     private ImageView imageViewPicture;
     private String action;
 
@@ -196,8 +196,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         //Aquisition Date
         tvAquisitionDate = (TextView) findViewById(R.id.am_acquisition_date);
         tvAquisitionDate.setOnClickListener(getOnClickListenerForBtnSetAquisitionDate(tvAquisitionDate));
-        btnClearAquisitionDate = (ImageButton) findViewById(R.id.am_clear_aquisition_date);
-        btnClearAquisitionDate.setOnClickListener(getOnClickListenerForBtnClearAquisitionDate(tvAquisitionDate, R.string.animal_aquisition_date_hint));
+        btnClearAquisitionDate = (ImageButton) findViewById(R.id.am_clear_acquisition_date);
+        btnClearAquisitionDate.setOnClickListener(getOnClickListenerForBtnClearAquisitionDate(tvAquisitionDate, R.string.animal_acquisition_date_hint));
 
         if (action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAcquisitionDate() != null) {
             updateDate(tvAquisitionDate, editingAnimal.getAcquisitionDate());
@@ -205,14 +205,23 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         //
 
         //Aquisition Value
-        etAquisitionValue = (EditText) findViewById(R.id.am_aquisition_value);
+        etAcquisitionValue = (EditText) findViewById(R.id.am_acquisition_value);
 
-        etAquisitionValue.addTextChangedListener(new MoneyTextWatcher(etAquisitionValue));
+        etAcquisitionValue.addTextChangedListener(new MoneyTextWatcher(etAcquisitionValue));
 
         if (action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAcquisitionDate() != null) {
-            etAquisitionValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getAcquisitionValue()));
+            etAcquisitionValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getAcquisitionValue()));
         } else {
-            etAquisitionValue.setEnabled(false);
+            etAcquisitionValue.setEnabled(false);
+        }
+
+        //Seller Name
+        etSellerName = (EditText) findViewById(R.id.am_seller_name);
+
+        if (action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getAcquisitionDate() != null) {
+            etSellerName.setText(editingAnimal.getSellerName());
+        } else {
+            etSellerName.setEnabled(false);
         }
 
         imageViewPicture = (ImageView) findViewById(R.id.am_picture);
@@ -259,7 +268,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         updateDate(tvDate, year, monthOfYear, dayOfMonth);
-                        etAquisitionValue.setEnabled(true);
+                        etSellerName.setEnabled(true);
+                        etAcquisitionValue.setEnabled(true);
                     }
                 };
 
@@ -289,8 +299,10 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 tvDate.setTextColor(getResources().getColor(R.color.hintTextAppearance));
                 tvDate.setText(getResources().getString(hint_id));
-                etAquisitionValue.setText("");
-                etAquisitionValue.setEnabled(false);
+                etAcquisitionValue.setText("");
+                etAcquisitionValue.setEnabled(false);
+                etSellerName.setText("");
+                etSellerName.setEnabled(false);
             }
         };
     }
@@ -515,30 +527,20 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     }
 
     private void save() {
-        Animal a = new Animal();
+        if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
+            editingAnimal = new Animal();
+        }
 
         animalDatasource.open();
 
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
             // id
-            a.setId(Integer.parseInt((tvId.getText().toString())));
-            if (a.getId() == 0) {
-                Toast.makeText(this, R.string.alert_invalid_id, Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (animalDatasource.get(a.getId()) != null) {
-                Toast.makeText(this, R.string.alert_id_already_used, Toast.LENGTH_SHORT).show();
-                return;
-            }
+            editingAnimal.setId(Integer.parseInt((tvId.getText().toString())));
             //
 
             //includingSpecie
-            a.setSpecieId(includingSpecie.getId());
+            editingAnimal.setSpecieId(includingSpecie.getId());
             //
-        } else {
-            a.setId(editingAnimal.getId());
-            a.setSpecieId(editingAnimal.getSpecieId());
         }
 
         //race
@@ -547,34 +549,34 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.race_not_selected, Toast.LENGTH_SHORT).show();
             return;
         } else {
-            a.setRaceId(selectedRace.getId());
+            editingAnimal.setRaceId(selectedRace.getId());
         }
         //
 
         //sex
         if (((RadioButton) findViewById(R.id.am_sex_male)).isChecked()) {
-            a.setSex("M");
+            editingAnimal.setSex("M");
         } else if (((RadioButton) findViewById(R.id.am_sex_female)).isChecked()) {
-            a.setSex("F");
+            editingAnimal.setSex("F");
         }
 
-        if (a.getSex() == null) {
+        if (editingAnimal.getSex() == null) {
             Toast.makeText(this, R.string.sex_not_selected, Toast.LENGTH_SHORT).show();
             return;
         }
         //
 
         //Name
-        a.setName(((EditText) findViewById(R.id.am_name)).getText().toString().trim());
+        editingAnimal.setName(((EditText) findViewById(R.id.am_name)).getText().toString().trim());
         //
 
         //Ear tag
-        a.setEarTag(((EditText) findViewById(R.id.am_ear_tag)).getText().toString().trim());
+        editingAnimal.setEarTag(((EditText) findViewById(R.id.am_ear_tag)).getText().toString().trim());
         //
 
         //Birth date
         try {
-            a.setBirthDate(MainActivity.getDateFormat().parse(tvBirthDate.getText().toString()));
+            editingAnimal.setBirthDate(MainActivity.getDateFormat().parse(tvBirthDate.getText().toString()));
         } catch (java.text.ParseException e) {
             Toast.makeText(this, R.string.birth_date_invalid, Toast.LENGTH_SHORT).show();
             return;
@@ -583,9 +585,12 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         //Aquisition date
         //Test if there is numbers typed (it is not empty because the placeholder text)
+        editingAnimal.setAcquisitionDate(null);
+        editingAnimal.setAcquisitionValue(0);
+        editingAnimal.setSellerName(null);
         if (!TextUtils.isEmpty(tvAquisitionDate.getText().toString().replaceAll("[^\\d]", ""))) {
             try {
-                a.setAcquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
+                editingAnimal.setAcquisitionDate(MainActivity.getDateFormat().parse(tvAquisitionDate.getText().toString()));
             } catch (java.text.ParseException e) {
                 Toast.makeText(this, R.string.aquisition_date_invalid, Toast.LENGTH_SHORT).show();
                 return;
@@ -593,39 +598,46 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
             //Aquisition value
             try {
-                double aquisitionValue = NumberFormat.getCurrencyInstance().parse(etAquisitionValue.getText().toString()).doubleValue();
+                double aquisitionValue = NumberFormat.getCurrencyInstance().parse(etAcquisitionValue.getText().toString()).doubleValue();
                 if (aquisitionValue <= 0) {
                     Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                a.setAcquisitionValue(aquisitionValue);
+                editingAnimal.setAcquisitionValue(aquisitionValue);
             } catch (ParseException e) {
                 Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
                 return;
             }
-            //
+
+            //Seller name
+            if (!TextUtils.isEmpty(etSellerName.getText().toString())) {
+                editingAnimal.setSellerName(etSellerName.getText().toString());
+            } else {
+                Toast.makeText(this, R.string.seller_name_invalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         animalDatasource.open();
 
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
-            animalDatasource.create(a);
+            animalDatasource.create(editingAnimal);
         } else {
-            animalDatasource.update(a);
+            animalDatasource.update(editingAnimal);
         }
 
         animalDatasource.close();
 
         //Remove current file if exists
-        if (a.getPictureFile().exists()) {
-            if (!a.getPictureFile().delete()) {
-                Toast.makeText(this, getResources().getString(R.string.error_deleting_file) + ":" + a.getPictureFile().getName(), Toast.LENGTH_SHORT).show();
+        if (editingAnimal.getPictureFile().exists()) {
+            if (!editingAnimal.getPictureFile().delete()) {
+                Toast.makeText(this, getResources().getString(R.string.error_deleting_file) + ":" + editingAnimal.getPictureFile().getName(), Toast.LENGTH_SHORT).show();
             }
         }
 
         //If a picture was set, rename it to the correct animal picture file name
         if (picture != null) {
-            if (!picture.renameTo(a.getPictureFile())) {
+            if (!picture.renameTo(editingAnimal.getPictureFile())) {
                 throw new RuntimeException("Falha ao renomear arquivo");
             }
         }

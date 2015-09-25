@@ -30,6 +30,11 @@ public class Animal {
     private String name;
     private String earTag;
 
+    private String sellerName;
+
+    private String buyerName;
+    private String sellNotes;
+
     private Date birthDate;
     private Date acquisitionDate;
     private Date sellDate;
@@ -57,7 +62,8 @@ public class Animal {
                   String sex, String name, String earTag,
                   Date birthDate, Date acquisitionDate, Date sellDate,
                   Date deathDate, String deathReason, Date retireDate,
-                  double acquisitionValue, double sellValue) {
+                  double acquisitionValue, double sellValue,
+                  String sellerName, String buyerName, String sellNotes) {
 
         this.id = id;
         this.specieId = specieId;
@@ -77,6 +83,10 @@ public class Animal {
 
         this.acquisitionValue = acquisitionValue;
         this.sellValue = sellValue;
+
+        this.sellerName = sellerName;
+        this.buyerName = buyerName;
+        this.sellNotes = sellNotes;
     }
 
     public int getId() {
@@ -205,6 +215,30 @@ public class Animal {
 
     public boolean isRetired() {
         return getRetireDate() != null;
+    }
+
+    public String getSellNotes() {
+        return sellNotes;
+    }
+
+    public void setSellNotes(String sellNotes) {
+        this.sellNotes = sellNotes;
+    }
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
     public int getAgeInMonths() {

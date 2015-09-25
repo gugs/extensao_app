@@ -25,6 +25,7 @@ import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.sale.activity.SaleMaintainActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
@@ -50,6 +51,16 @@ public class AnimalDetailActivity extends AppCompatActivity {
         btn_add_treatment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AnimalDetailActivity.this, TreatmentMaintainActivity.class);
+                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
+                intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+                startActivity(intent);
+            }
+        });
+
+        final Button btn_register_sale = (Button) findViewById(R.id.ad_register_sale);
+        btn_register_sale.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(AnimalDetailActivity.this, SaleMaintainActivity.class);
                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
                 intent.putExtra(DBAnimalAdapter.ID, animal.getId());
                 startActivity(intent);

@@ -25,63 +25,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/sale_date_label"
+                android:text="@string/death_date_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/sd_date"
+                android:id="@+id/dd_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="[25/10/2013]"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <!--Sale Value-->
+            <!--Reason-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/sale_value_label"
+                android:text="@string/death_reason_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/sd_value"
+                android:id="@+id/dd_reason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="[R$ 850,00]"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <!--Buyer-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/sale_buyer_label"
-                android:textAppearance="@style/LabelTextAppearance" />
-
-            <TextView
-                android:id="@+id/sd_buyer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="[Mauro Alberto]"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <!--Notes-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/notes_label"
-                android:textAppearance="@style/LabelTextAppearance" />
-
-            <TextView
-                android:id="@+id/sd_notes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="[Uma anotação sobre a venda]"
+                android:text="[Motivo da morte]"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </LinearLayout>

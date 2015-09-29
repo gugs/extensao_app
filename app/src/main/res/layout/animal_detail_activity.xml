@@ -132,14 +132,22 @@
                     android:text="Registrar Venda"/>
 
                 <Button
+                    android:id="@+id/ad_register_death"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Registrar Morte"/>
 
                 <Button
+                    android:id="@+id/ad_register_retire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Registrar Baixa"/>
+
+                <Button
+                    android:id="@+id/ad_delete_retire"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancelar Baixa"/>
             </LinearLayout>
     </LinearLayout>
 

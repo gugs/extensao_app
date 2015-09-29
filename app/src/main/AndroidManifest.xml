@@ -55,9 +55,14 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name="com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity"
+            android:label="@string/treatment_add"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity"
             android:label="@string/treatment_detail"
-            android:parentActivityName="com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity"
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -65,9 +70,19 @@
         </activity>
 
         <activity
-            android:name="com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity"
-            android:label="@string/treatment_add"
+            android:name="com.timsoft.meurebanho.sale.activity.SaleMaintainActivity"
+            android:label="@string/sale_add"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.timsoft.meurebanho.sale.activity.SaleDetailActivity"
+            android:label="@string/sale_detail"
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity" />
+        </activity>
 
         <meta-data
             android:name="DATABASE"

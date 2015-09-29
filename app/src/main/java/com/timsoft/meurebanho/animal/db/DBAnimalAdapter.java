@@ -29,7 +29,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 
     public static final String BIRTH_DATE = "birth_date";
     public static final String ACQUISITION_DATE = "acquisition_date";
-    public static final String SELL_DATE = "sell_date";
+    public static final String SALE_DATE = "sale_date";
 
     public static final String DEATH_DATE = "death_date";
     public static final String DEATH_REASON = "death_reason";
@@ -37,13 +37,13 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
     public static final String RETIRE_DATE = "retire_date";
 
     public static final String ACQUISITION_VALUE = "acquisition_value";
-    public static final String SELL_VALUE = "sell_value";
+    public static final String SALE_VALUE = "sale_value";
 
     public static final String SELLER_NAME = "seller_name";
 
     public static final String BUYER_NAME = "buyer_name";
 
-    public static final String SELL_NOTES = "sell_notes";
+    public static final String SALE_NOTES = "sale_notes";
 
     public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( "
             + ID + " integer primary key, "
@@ -56,7 +56,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 
             + BIRTH_DATE + " integer not null, "
             + ACQUISITION_DATE + " integer, "
-            + SELL_DATE + " integer, "
+            + SALE_DATE + " integer, "
 
             + DEATH_DATE + " integer, "
             + DEATH_REASON + " text, "
@@ -64,11 +64,11 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
             + RETIRE_DATE + "integer, "
 
             + ACQUISITION_VALUE + " real, "
-            + SELL_VALUE + " real, "
+            + SALE_VALUE + " real, "
 
             + SELLER_NAME + " text, "
             + BUYER_NAME + " text, "
-            + SELL_NOTES + " text"
+            + SALE_NOTES + " text"
 
             + ");";
 
@@ -105,8 +105,8 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
             values.put(ACQUISITION_DATE, animal.getAcquisitionDate().getTime());
         }
 
-        if (animal.getSellDate() != null) {
-            values.put(SELL_DATE, animal.getSellDate().getTime());
+        if (animal.getSaleDate() != null) {
+            values.put(SALE_DATE, animal.getSaleDate().getTime());
         }
 
         if (animal.getDeathDate() != null) {
@@ -115,11 +115,11 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         values.put(DEATH_REASON, animal.getDeathReason());
 
         values.put(ACQUISITION_VALUE, animal.getAcquisitionValue());
-        values.put(SELL_VALUE, animal.getSellValue());
+        values.put(SALE_VALUE, animal.getSaleValue());
 
         values.put(SELLER_NAME, animal.getSellerName());
         values.put(BUYER_NAME, animal.getBuyerName());
-        values.put(SELL_NOTES, animal.getSellNotes());
+        values.put(SALE_NOTES, animal.getSaleNotes());
 
         try {
             database.insertOrThrow(TABLE_NAME, null, values);
@@ -165,7 +165,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
                 //ACQUISITION_DATE
                 longToDate(cursor, 7),
 
-                //SELL_DATE
+                //SALE_DATE
                 longToDate(cursor, 8),
 
                 //DEATH_DATE
@@ -180,7 +180,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
                 //ACQUISITION_VALUE
                 cursor.getDouble(12),
 
-                //SELL_VALUE
+                //SALE_VALUE
                 cursor.getDouble(13),
 
                 //SELLER_NAME
@@ -189,7 +189,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
                 //BUYER_NAME
                 cursor.getString(15),
 
-                //SELL_NOTES
+                //SALE_NOTES
                 cursor.getString(16)
         );
     }

@@ -33,11 +33,11 @@ public class Animal {
     private String sellerName;
 
     private String buyerName;
-    private String sellNotes;
+    private String saleNotes;
 
     private Date birthDate;
     private Date acquisitionDate;
-    private Date sellDate;
+    private Date saleDate;
 
     private Date deathDate;
     private String deathReason;
@@ -53,17 +53,17 @@ public class Animal {
     private Date retireDate;
 
     private double acquisitionValue;
-    private double sellValue;
+    private double saleValue;
 
     public Animal() {
     }
 
     public Animal(int id, int specieId, int raceId,
                   String sex, String name, String earTag,
-                  Date birthDate, Date acquisitionDate, Date sellDate,
+                  Date birthDate, Date acquisitionDate, Date saleDate,
                   Date deathDate, String deathReason, Date retireDate,
-                  double acquisitionValue, double sellValue,
-                  String sellerName, String buyerName, String sellNotes) {
+                  double acquisitionValue, double saleValue,
+                  String sellerName, String buyerName, String saleNotes) {
 
         this.id = id;
         this.specieId = specieId;
@@ -74,7 +74,7 @@ public class Animal {
 
         this.birthDate = birthDate;
         this.acquisitionDate = acquisitionDate;
-        this.sellDate = sellDate;
+        this.saleDate = saleDate;
 
         this.deathDate = deathDate;
         this.deathReason = deathReason;
@@ -82,11 +82,11 @@ public class Animal {
         this.retireDate = retireDate;
 
         this.acquisitionValue = acquisitionValue;
-        this.sellValue = sellValue;
+        this.saleValue = saleValue;
 
         this.sellerName = sellerName;
         this.buyerName = buyerName;
-        this.sellNotes = sellNotes;
+        this.saleNotes = saleNotes;
     }
 
     public int getId() {
@@ -149,12 +149,12 @@ public class Animal {
         this.acquisitionDate = acquisitionDate;
     }
 
-    public Date getSellDate() {
-        return sellDate;
+    public Date getSaleDate() {
+        return saleDate;
     }
 
-    public void setSellDate(Date sellDate) {
-        this.sellDate = sellDate;
+    public void setSaleDate(Date saleDate) {
+        this.saleDate = saleDate;
     }
 
     public double getAcquisitionValue() {
@@ -165,12 +165,12 @@ public class Animal {
         this.acquisitionValue = acquisitionValue;
     }
 
-    public double getSellValue() {
-        return sellValue;
+    public double getSaleValue() {
+        return saleValue;
     }
 
-    public void setSellValue(double sellValue) {
-        this.sellValue = sellValue;
+    public void setSaleValue(double saleValue) {
+        this.saleValue = saleValue;
     }
 
     public String getSex() {
@@ -206,7 +206,7 @@ public class Animal {
     }
 
     public boolean isSold() {
-        return getSellDate() != null;
+        return getSaleDate() != null;
     }
 
     public boolean isDead() {
@@ -217,12 +217,12 @@ public class Animal {
         return getRetireDate() != null;
     }
 
-    public String getSellNotes() {
-        return sellNotes;
+    public String getSaleNotes() {
+        return saleNotes;
     }
 
-    public void setSellNotes(String sellNotes) {
-        this.sellNotes = sellNotes;
+    public void setSaleNotes(String saleNotes) {
+        this.saleNotes = saleNotes;
     }
 
     public String getBuyerName() {
@@ -271,6 +271,10 @@ public class Animal {
 
         if (getAcquisitionDate() != null) {
             events.add(new Event(0, EventType.ACQUISITION, getAcquisitionDate(), NumberFormat.getCurrencyInstance().format(getAcquisitionValue())));
+        }
+
+        if (getSaleDate() != null) {
+            events.add(new Event(getId(), EventType.SALE, getSaleDate(), NumberFormat.getCurrencyInstance().format(getSaleValue())));
         }
 
         if (getDeathDate() != null) {

@@ -1,4 +1,4 @@
-package com.timsoft.meurebanho.sale.activity;
+package com.timsoft.meurebanho.death.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -18,23 +18,21 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.infra.MoneyTextWatcher;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Date;
 
 @SuppressWarnings("deprecation")
-public class SaleMaintainActivity extends AppCompatActivity {
+public class DeathMaintainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "SaleMaintainActivity";
+    private static final String LOG_TAG = "DeathMaintainActivity";
 
     private Animal editingAnimal;
     private String action;
 
     private TextView tvDate;
     private ImageButton btnClearDate;
-    private EditText etValue, etBuyer, etNotes;
+    private EditText etReason;
     private DBAnimalAdapter animalDatasource;
 
     @Override
@@ -51,7 +49,7 @@ public class SaleMaintainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        setContentView(R.layout.sale_mantain_activity);
+        setContentView(R.layout.death_mantain_activity);
 
         action = getIntent().getStringExtra(MeuRebanhoApp.ACTION);
 
@@ -61,46 +59,29 @@ public class SaleMaintainActivity extends AppCompatActivity {
 
         //Activity Title
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
-            setTitle(getResources().getString(R.string.sale_add));
+            setTitle(getResources().getString(R.string.death_add));
         } else {
-            setTitle(getResources().getString(R.string.sale_edit));
+            setTitle(getResources().getString(R.string.death_edit));
         }
         //
 
         //Date
-        tvDate = (TextView) findViewById(R.id.sm_date);
+        tvDate = (TextView) findViewById(R.id.dm_date);
         tvDate.setOnClickListener(MeuRebanhoApp.getOnClickListenerForBtnSetDate(this, tvDate));
-        btnClearDate = (ImageButton) findViewById(R.id.sm_clear_date);
-        btnClearDate.setOnClickListener(MeuRebanhoApp.getOnClickListenerForBtnClearDate(tvDate, R.string.sale_date_hint));
+        btnClearDate = (ImageButton) findViewById(R.id.dm_clear_date);
+        btnClearDate.setOnClickListener(MeuRebanhoApp.getOnClickListenerForBtnClearDate(tvDate, R.string.death_date_hint));
 
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
             MeuRebanhoApp.updateDate(tvDate, new Date());
         } else {
-            MeuRebanhoApp.updateDate(tvDate, editingAnimal.getSaleDate());
+            MeuRebanhoApp.updateDate(tvDate, editingAnimal.getDeathDate());
         }
         //
 
-        //Value
-        etValue = (EditText) findViewById(R.id.sm_value);
-
-        etValue.addTextChangedListener(new MoneyTextWatcher(etValue));
-
+        //Reason
+        etReason = (EditText) findViewById(R.id.dm_notes);
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getSaleValue()));
-        }
-        //
-
-        //Buyer
-        etBuyer = (EditText) findViewById(R.id.sm_buyer);
-        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etBuyer.setText(editingAnimal.getBuyerName());
-        }
-        //
-
-        //Notes
-        etNotes = (EditText) findViewById(R.id.sm_notes);
-        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etNotes.setText(editingAnimal.getSaleNotes());
+            etReason.setText(editingAnimal.getDeathReason());
         }
         //
 
@@ -116,41 +97,18 @@ public class SaleMaintainActivity extends AppCompatActivity {
     private void save() {
         //Date
         try {
-            editingAnimal.setSaleDate(MainActivity.getDateFormat().parse(tvDate.getText().toString()));
+            editingAnimal.setDeathDate(MainActivity.getDateFormat().parse(tvDate.getText().toString()));
         } catch (ParseException e) {
-            Toast.makeText(this, R.string.sale_date_invalid, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.death_date_invalid, Toast.LENGTH_SHORT).show();
             return;
         }
         //
 
-        //Value
-        try {
-            double value = NumberFormat.getCurrencyInstance().parse(etValue.getText().toString()).doubleValue();
-            if (value <= 0) {
-                Toast.makeText(this, R.string.sale_value_invalid, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            editingAnimal.setSaleValue(value);
-        } catch (ParseException e) {
-            Toast.makeText(this, R.string.sale_value_invalid, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        //
-
-        //Buyer
-        if (!TextUtils.isEmpty(etBuyer.getText())) {
-            editingAnimal.setBuyerName(etBuyer.getText().toString());
+        //Reason
+        if (!TextUtils.isEmpty(etReason.getText().toString())) {
+            editingAnimal.setDeathReason(etReason.getText().toString());
         } else {
-            Toast.makeText(this, R.string.sale_buyer_name_invalid, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        //
-
-        //Notes
-        if (!TextUtils.isEmpty(etNotes.getText().toString())) {
-            editingAnimal.setSaleNotes(etNotes.getText().toString());
-        } else {
-            editingAnimal.setSaleNotes("");
+            editingAnimal.setDeathReason("");
         }
         //
 

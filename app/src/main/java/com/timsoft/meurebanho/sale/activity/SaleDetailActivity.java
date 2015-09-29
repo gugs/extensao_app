@@ -50,16 +50,16 @@ public class SaleDetailActivity extends AppCompatActivity {
         //
 
         ((TextView) findViewById(R.id.sd_date))
-                .setText(MainActivity.getFormatedDate(animal.getSellDate()));
+                .setText(MainActivity.getFormatedDate(animal.getSaleDate()));
 
         ((TextView) findViewById(R.id.sd_value))
-                .setText(NumberFormat.getCurrencyInstance().format(animal.getSellValue()));
+                .setText(NumberFormat.getCurrencyInstance().format(animal.getSaleValue()));
 
         ((TextView) findViewById(R.id.sd_buyer))
                 .setText(animal.getBuyerName());
 
         ((TextView) findViewById(R.id.sd_notes))
-                .setText(animal.getSellNotes());
+                .setText(animal.getSaleNotes());
     }
 
     @Override
@@ -79,6 +79,10 @@ public class SaleDetailActivity extends AppCompatActivity {
             case R.id.action_delete:
                 actionDelete();
                 break;
+
+            case android.R.id.home:
+                finish();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -105,10 +109,10 @@ public class SaleDetailActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     animalDatasource.open();
-                    animal.setSellDate(null);
-                    animal.setSellValue(0);
+                    animal.setSaleDate(null);
+                    animal.setSaleValue(0);
                     animal.setBuyerName(null);
-                    animal.setSellNotes(null);
+                    animal.setSaleNotes(null);
                     animalDatasource.update(animal);
                     animalDatasource.close();
                     SaleDetailActivity.this.finish();

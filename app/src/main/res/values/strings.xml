@@ -190,5 +190,14 @@
     <string name="seller_name_invalid">Nome do vendedor inválido</string>
     <string name="animal_seller_name_label">NOME DO VENDEDOR</string>
     <string name="seller_name_hint">Nome do Vendedor</string>
+    <string name="sale_detail">Detalhar Venda</string>
+
+    <string name="death_confirm_delete">Confirma a exclusão da morte?</string>
+    <string name="death_add">Registrar Morte</string>
+    <string name="death_edit">Alterar Morte</string>
+    <string name="death_date_hint">Data da Morte</string>
+    <string name="death_date_label">DATA DA MORTE</string>
+    <string name="death_reason_label">MOTIVO DA MORTE</string>
+    <string name="death_reason_hint">Motivo da Morte</string>
 
 </resources>

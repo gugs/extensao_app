@@ -1,8 +1,10 @@
 package com.timsoft.meurebanho.animal.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,19 +24,24 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.death.activity.DeathMaintainActivity;
 import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.sale.activity.SaleDetailActivity;
 import com.timsoft.meurebanho.sale.activity.SaleMaintainActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
+
+import java.util.Date;
 
 public class AnimalDetailActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "AnimalDetailActivity";
     private Animal animal;
     private int animalId;
+    DBAnimalAdapter animalDatasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +73,43 @@ public class AnimalDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        final Button btn_register_death = (Button) findViewById(R.id.ad_register_death);
+        btn_register_death.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(AnimalDetailActivity.this, DeathMaintainActivity.class);
+                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
+                intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+                startActivity(intent);
+            }
+        });
+
+        final Button btn_register_retire = (Button) findViewById(R.id.ad_register_retire);
+        btn_register_retire.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new AlertDialog.Builder(AnimalDetailActivity.this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle(R.string.confirm_delete)
+                    .setMessage(R.string.death_confirm_delete)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            animalDatasource.open();
+                            animal.setRetireDate(new Date());
+                            animalDatasource.update(animal);
+                            animalDatasource.close();
+                            updateAnimalData();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, null)
+                    .show();
+            }
+        });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();  // Always call the superclass method first
-
+    private void updateAnimalData() {
         //Animal data
-        DBAnimalAdapter animalDatasource = DBAnimalAdapter.getInstance();
+        animalDatasource= DBAnimalAdapter.getInstance();
         animalDatasource.open();
         animal = animalDatasource.get(animalId);
         animalDatasource.close();
@@ -125,19 +161,32 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
             if(e.getType().isSelectable()) {
                 row.setOnClickListener(new View.OnClickListener() {
+                    private Intent intent;
+
                     @Override
                     public void onClick(View v) {
                         switch (e.getType()) {
                             case TREATMENT:
-                                Intent intent = new Intent(AnimalDetailActivity.this, TreatmentDetailActivity.class);
+                                intent = new Intent(AnimalDetailActivity.this, TreatmentDetailActivity.class);
                                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
                                 intent.putExtra(DBTreatmentAdapter.ID, e.getEntityId());
                                 startActivity(intent);
                                 break;
+
                             case DEATH:
+                                Toast.makeText(AnimalDetailActivity.this, "A Implementar...", Toast.LENGTH_SHORT).show();
                                 break;
+
+                            case SALE:
+                                intent = new Intent(AnimalDetailActivity.this, SaleDetailActivity.class);
+                                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
+                                intent.putExtra(DBAnimalAdapter.ID, e.getEntityId());
+                                startActivity(intent);
+                                break;
+
                             default:
                                 Toast.makeText(AnimalDetailActivity.this, "No action defined for this event type: " + e.getType().toString(), Toast.LENGTH_SHORT).show();
+                                break;
                         }
                     }
                 });
@@ -146,6 +195,36 @@ public class AnimalDetailActivity extends AppCompatActivity {
             table.addView(row);
         }
         table.requestLayout();     // Not sure if this is needed.
+
+        Button btn_register_sale = (Button) findViewById(R.id.ad_register_sale);
+        if(animal.isSold()) {
+            btn_register_sale.setVisibility(View.VISIBLE);
+        } else {
+            btn_register_sale.setVisibility(View.GONE);
+        }
+
+        Button btn_register_death = (Button) findViewById(R.id.ad_register_death);
+        if(animal.isDead()) {
+            btn_register_death.setVisibility(View.VISIBLE);
+        } else {
+            btn_register_death.setVisibility(View.GONE);
+        }
+
+        Button btn_register_retire = (Button) findViewById(R.id.ad_register_retire);
+        Button btn_delete_retire = (Button) findViewById(R.id.ad_delete_retire);
+        if(animal.isRetired()) {
+            btn_register_retire.setVisibility(View.GONE);
+            btn_delete_retire.setVisibility(View.VISIBLE);
+        } else {
+            btn_register_retire.setVisibility(View.VISIBLE);
+            btn_delete_retire.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        updateAnimalData();
     }
 
     @Override

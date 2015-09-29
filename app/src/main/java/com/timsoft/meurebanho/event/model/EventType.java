@@ -1,7 +1,7 @@
 package com.timsoft.meurebanho.event.model;
 
 public enum EventType {
-    ACQUISITION(false, "A"), BIRTH(false, "B"), DEATH(false, "D"), TREATMENT(true, "T");
+    ACQUISITION(false, "A"), BIRTH(false, "B"), DEATH(false, "D"), SALE(true, "S"), TREATMENT(true, "T");
 
     private boolean selectable;
     private String icon;

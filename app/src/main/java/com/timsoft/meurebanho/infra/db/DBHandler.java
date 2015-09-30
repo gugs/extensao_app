@@ -17,7 +17,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     private static final String LOG_TAG = "DatabaseHandler";
 
-    public static final String DB_FULL_PATH = "meurebanho.db";
+    public static final String DB_NAME = "meurebanho.db";
     public static final int DB_VERSION = 1;
 
     private static DBHandler mInstance;
@@ -25,9 +25,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private List<String> listTableName;
 
     private DBHandler() {
-        //super(MeuRebanhoApp.getContext(), MeuRebanhoApp.getContext().getExternalFilesDir(null).getAbsolutePath() + "/" + DB_FULL_PATH, null, DB_VERSION);
-        //FIXME: Voltar para linha de baixo para nao salvar na memória do aparelho e não no sdcard
-        super(MeuRebanhoApp.getContext(), DB_FULL_PATH, null, DB_VERSION);
+        super(MeuRebanhoApp.getContext(), DB_NAME, null, DB_VERSION);
 
         listTableCreate = new ArrayList<>();
         listTableName = new ArrayList<>();

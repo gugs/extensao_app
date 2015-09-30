@@ -108,7 +108,8 @@ public class DeathMaintainActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(etReason.getText().toString())) {
             editingAnimal.setDeathReason(etReason.getText().toString());
         } else {
-            editingAnimal.setDeathReason("");
+            Toast.makeText(this, R.string.death_reason_invalid, Toast.LENGTH_SHORT).show();
+            return;
         }
         //
 

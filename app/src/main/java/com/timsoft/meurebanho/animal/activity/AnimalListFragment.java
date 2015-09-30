@@ -19,6 +19,9 @@ import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.animal.model.AnimalArrayAdapter;
 
 public class AnimalListFragment extends Fragment {
+
+    private static final String LOG_TAG = "AnimalListFragment";
+
     private AnimalListActivity activity;
     private int selectedStatus;
     private int index;
@@ -69,6 +72,10 @@ public class AnimalListFragment extends Fragment {
                         selectedStatus = Animal.STATUS_DEAD;
                         break;
 
+                    case R.id.radio_animal_list_retired:
+                        selectedStatus = Animal.STATUS_RETIRED;
+                        break;
+
                     default:
                         throw new RuntimeException("Status not defined for id: " + checkedId);
                 }
@@ -90,7 +97,7 @@ public class AnimalListFragment extends Fragment {
         return v;
     }
 
-    private void updateView() {
+    public void updateView() {
         ListView lv = (ListView) getView().findViewById(R.id.list_animal_list);
         lv.setAdapter(new AnimalArrayAdapter(activity, activity.getAnimals(activity.getSpecies().get(index).getId(), selectedStatus)));
         lv.setOnItemClickListener(new OnItemClickListener() {

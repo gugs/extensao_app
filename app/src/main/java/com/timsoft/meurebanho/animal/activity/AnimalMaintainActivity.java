@@ -420,7 +420,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
 
         // Create a temporary media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
         return new File(mediaStorageDir.getPath() + File.separator + "TMP_" + timeStamp + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
     }
 

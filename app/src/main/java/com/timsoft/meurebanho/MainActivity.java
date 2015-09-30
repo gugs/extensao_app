@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (recreateDB) {
-            if (!deleteDatabase(DBHandler.DB_FULL_PATH)) {
-                Log.w(LOG_TAG, "Could not delete DB: " + DBHandler.DB_FULL_PATH);
+            if (!deleteDatabase(DBHandler.DB_NAME)) {
+                Log.w(LOG_TAG, "Could not delete DB: " + DBHandler.DB_NAME);
             }
             populateDefaultData();
         }

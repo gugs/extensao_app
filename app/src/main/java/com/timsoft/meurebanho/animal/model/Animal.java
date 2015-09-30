@@ -21,6 +21,7 @@ public class Animal {
     public static final int STATUS_AVAILABLE = 0;
     public static final int STATUS_SOLD = 1;
     public static final int STATUS_DEAD = 2;
+    public static final int STATUS_RETIRED = 3;
 
     private int id;
     private int specieId;
@@ -41,14 +42,6 @@ public class Animal {
 
     private Date deathDate;
     private String deathReason;
-
-    public Date getRetireDate() {
-        return retireDate;
-    }
-
-    public void setRetireDate(Date retireDate) {
-        this.retireDate = retireDate;
-    }
 
     private Date retireDate;
 
@@ -241,6 +234,14 @@ public class Animal {
         this.sellerName = sellerName;
     }
 
+    public Date getRetireDate() {
+        return retireDate;
+    }
+
+    public void setRetireDate(Date retireDate) {
+        this.retireDate = retireDate;
+    }
+
     public int getAgeInMonths() {
         if (getBirthDate() == null) {
             return 0;
@@ -278,7 +279,11 @@ public class Animal {
         }
 
         if (getDeathDate() != null) {
-            events.add(new Event(0, EventType.DEATH, getDeathDate(), getDeathReason()));
+            events.add(new Event(getId(), EventType.DEATH, getDeathDate(), getDeathReason()));
+        }
+
+        if (getRetireDate() != null) {
+            events.add(new Event(0, EventType.RETIRE, getRetireDate(),  MeuRebanhoApp.getContext().getString(R.string.retire)));
         }
 
         DBTreatmentAdapter treatmentDatasource = DBTreatmentAdapter.getInstance();

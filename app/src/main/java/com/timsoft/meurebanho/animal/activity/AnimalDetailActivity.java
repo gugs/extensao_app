@@ -24,6 +24,7 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.death.activity.DeathDetailActivity;
 import com.timsoft.meurebanho.death.activity.DeathMaintainActivity;
 import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
@@ -89,8 +90,8 @@ public class AnimalDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new AlertDialog.Builder(AnimalDetailActivity.this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(R.string.confirm_delete)
-                    .setMessage(R.string.death_confirm_delete)
+                    .setTitle(R.string.retire)
+                    .setMessage(R.string.retire_register_confirm)
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -103,6 +104,28 @@ public class AnimalDetailActivity extends AppCompatActivity {
                     })
                     .setNegativeButton(R.string.no, null)
                     .show();
+            }
+        });
+
+        final Button btn_delete_retire = (Button) findViewById(R.id.ad_delete_retire);
+        btn_delete_retire.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new AlertDialog.Builder(AnimalDetailActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(R.string.retire)
+                        .setMessage(R.string.retire_delete_confirm)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                animalDatasource.open();
+                                animal.setRetireDate(null);
+                                animalDatasource.update(animal);
+                                animalDatasource.close();
+                                updateAnimalData();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .show();
             }
         });
     }
@@ -174,7 +197,10 @@ public class AnimalDetailActivity extends AppCompatActivity {
                                 break;
 
                             case DEATH:
-                                Toast.makeText(AnimalDetailActivity.this, "A Implementar...", Toast.LENGTH_SHORT).show();
+                                intent = new Intent(AnimalDetailActivity.this, DeathDetailActivity.class);
+                                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
+                                intent.putExtra(DBAnimalAdapter.ID, e.getEntityId());
+                                startActivity(intent);
                                 break;
 
                             case SALE:
@@ -198,16 +224,16 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         Button btn_register_sale = (Button) findViewById(R.id.ad_register_sale);
         if(animal.isSold()) {
-            btn_register_sale.setVisibility(View.VISIBLE);
-        } else {
             btn_register_sale.setVisibility(View.GONE);
+        } else {
+            btn_register_sale.setVisibility(View.VISIBLE);
         }
 
         Button btn_register_death = (Button) findViewById(R.id.ad_register_death);
         if(animal.isDead()) {
-            btn_register_death.setVisibility(View.VISIBLE);
-        } else {
             btn_register_death.setVisibility(View.GONE);
+        } else {
+            btn_register_death.setVisibility(View.VISIBLE);
         }
 
         Button btn_register_retire = (Button) findViewById(R.id.ad_register_retire);

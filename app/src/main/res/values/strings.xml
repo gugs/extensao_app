@@ -6,6 +6,7 @@
     <!-- Generic messages -->
     <string name="app_name">Meu Rebanho</string>
     <string name="app_full_name">com.timsoft.meurebanho</string>
+    <string name="app_short_name">meurebanho</string>
     <string name="raw_base_path">/res/raw</string>
     <string name="exclusion_confirmation">Confirmação de Exclusão</string>
     <string name="save">Salvar</string>
@@ -122,7 +123,7 @@
     <string name="specie_swine">Suíno</string>
 
     <!-- Main activity -->
-    <string name="animal_main_available_label">Disponíveis</string>
+    <string name="animal_main_available_label">Disp.</string>
     <string name="animal_main_sold_label">Vendidos</string>
     <string name="animal_main_death_label">Mortos</string>
     <string name="months">Meses</string>
@@ -199,5 +200,21 @@
     <string name="death_date_label">DATA DA MORTE</string>
     <string name="death_reason_label">MOTIVO DA MORTE</string>
     <string name="death_reason_hint">Motivo da Morte</string>
+    <string name="death_reason_invalid">Motivo da morte inválido</string>
+    <string name="death_detail">Detalhar Morte</string>
+
+    <string name="retire">Baixa</string>
+    <string name="retire_register_confirm">Confirma a baixa do animal?</string>
+    <string name="retire_delete_confirm">Confirma a exclusão da baixa do animal?</string>
+    <string name="animal_main_retire_label">Baixados</string>
+    <string name="search_hint">Pesquisar animais...</string>
+    <string name="drawer_open">Exibir Opções</string>
+    <string name="drawer_close">Ocultar Opções</string>
+    <string name="backup">Cópia de Segurança</string>
+    <string name="contacts">Contatos</string>
+    <string name="rate_app">Avaliar Aplicação</string>
+    <string name="about">Sobre</string>
+    <string name="create_backup_label">Criar cópia de segurança</string>
+    <string name="restore_backup_label">Restaurar cópia de segurança</string>
 
 </resources>

@@ -61,7 +61,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
             + DEATH_DATE + " integer, "
             + DEATH_REASON + " text, "
 
-            + RETIRE_DATE + "integer, "
+            + RETIRE_DATE + " integer, "
 
             + ACQUISITION_VALUE + " real, "
             + SALE_VALUE + " real, "
@@ -111,8 +111,12 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 
         if (animal.getDeathDate() != null) {
             values.put(DEATH_DATE, animal.getDeathDate().getTime());
+            values.put(DEATH_REASON, animal.getDeathReason());
         }
-        values.put(DEATH_REASON, animal.getDeathReason());
+
+        if (animal.getRetireDate() != null) {
+            values.put(RETIRE_DATE, animal.getRetireDate().getTime());
+        }
 
         values.put(ACQUISITION_VALUE, animal.getAcquisitionValue());
         values.put(SALE_VALUE, animal.getSaleValue());

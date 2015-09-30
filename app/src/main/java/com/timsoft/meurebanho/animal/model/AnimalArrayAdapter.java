@@ -18,7 +18,7 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
     private final List<Animal> values;
 
     public AnimalArrayAdapter(Context context, List<Animal> values) {
-        super(context, R.layout.animal_list, values);
+        super(context, R.layout.animal_list_item, values);
         this.context = context;
         this.values = values;
     }
@@ -27,7 +27,7 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         //FIXME: Warning abaixo
-        View rowView = inflater.inflate(R.layout.animal_list, parent, false);
+        View rowView = inflater.inflate(R.layout.animal_list_item, parent, false);
         Animal a = values.get(position);
 
         if (a.getPictureFile().exists()) {

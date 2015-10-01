@@ -14,16 +14,20 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MeuRebanhoApp extends Application {
 
     private static final String LOG_TAG = "MeuRebanhoApp";
+    public static final String TEMPORARY_FILE_PREFIX = "TMP_";
 
     private static Context mContext;
 
@@ -186,6 +190,19 @@ public class MeuRebanhoApp extends Application {
 
         for (int co = 0; co < files.length; co++) {
             rescanApplicationStorageDir(files[co].getAbsolutePath());
+        }
+    }
+
+    public static void deleteTemporaryImageFiles() {
+        List<File> list = Arrays.asList(getMediaStorageDir().listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.startsWith(TEMPORARY_FILE_PREFIX);
+            }
+        }));
+
+        for(File f : list) {
+            f.delete();
         }
     }
 }

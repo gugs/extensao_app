@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
             populateDefaultData();
         }
 
+        MeuRebanhoApp.deleteTemporaryImageFiles();
+
         Intent intent = new Intent(this, AnimalListActivity.class);
         startActivity(intent);
         finish();

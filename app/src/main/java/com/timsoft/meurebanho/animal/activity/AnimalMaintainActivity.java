@@ -36,6 +36,7 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.infra.MoneyTextWatcher;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
@@ -234,7 +235,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         registerForContextMenu(imageViewPicture);
         if (action.equals(MeuRebanhoApp.ACTION_EDIT) && editingAnimal.getPictureFile().exists()) {
             picture = getOutputMediaFile();
-            MeuRebanhoApp.copy(editingAnimal.getPictureFile(), picture);
+            FileUtils.copy(editingAnimal.getPictureFile(), picture);
             updateImageViewPicture();
         }
     }
@@ -407,7 +408,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 //		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
 //	              Environment.DIRECTORY_PICTURES), getResources().getString(R.string.app_full_name));
 
-        File mediaStorageDir = MeuRebanhoApp.getMediaStorageDir();
+        File mediaStorageDir = FileUtils.getMediaStorageDir();
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
@@ -453,7 +454,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
                 File originalPicture = new File(picturePath);
                 cursor.close();
 
-                MeuRebanhoApp.copy(originalPicture, tempPicture);
+                FileUtils.copy(originalPicture, tempPicture);
 
                 performCrop();
             } else if (resultCode == RESULT_CANCELED) {

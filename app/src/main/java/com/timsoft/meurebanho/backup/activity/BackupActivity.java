@@ -1,5 +1,7 @@
 package com.timsoft.meurebanho.backup.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
+import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.infra.db.DBHandler;
 
 import java.io.File;
@@ -18,7 +21,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BackupActivity extends AppCompatActivity {
 
@@ -80,40 +85,39 @@ public class BackupActivity extends AppCompatActivity {
     }
 
     private void create() {
-        try {
-//            File sd = Environment.getExternalStorageDirectory();
-//            File data = Environment.getDataDirectory();
-
-            if (MeuRebanhoApp.getBackupStorageDir().canWrite()) {
-                // String currentDBPath = "//data//" + "<package name>"  + "//databases//" + "<db name>";
-                String currentDBPath = getDatabasePath(DBHandler.DB_NAME).toString();
-
-                String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
-
-                String backupDBPath = MeuRebanhoApp.getBackupStorageDir().toString() + File.separator + timeStamp + "_" + DBHandler.DB_NAME;
-                File currentDB = new File(currentDBPath);
-                File backupDB = new File(backupDBPath);
-
-                FileChannel src = new FileInputStream(currentDB).getChannel();
-                FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                dst.transferFrom(src, 0, src.size());
-                src.close();
-                dst.close();
-
-                MeuRebanhoApp.rescanApplicationStorageDir();
-
-                Toast.makeText(getApplicationContext(), "Cópia de segurança criada com sucesso em: " + backupDBPath.toString(),
-                        Toast.LENGTH_SHORT).show();
-
-            } else {
-                throw new Exception("Não foi possível gravar no cartão de memória!");
-            }
-        } catch (Exception e) {
-
-            Toast.makeText(getApplicationContext(), "Falha ao criar cópia de segurança: " + e.getMessage(), Toast.LENGTH_SHORT)
+        if (!FileUtils.getBackupStorageDir().canWrite()) {
+            Toast.makeText(getApplicationContext(), "Não foi possível gravar no cartão de memória!", Toast.LENGTH_LONG)
                     .show();
-
+            return;
         }
+
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+
+        String zipFile = FileUtils.getBackupStorageDir().toString() + File.separator + timeStamp + "_"
+                + MeuRebanhoApp.getContext().getString(R.string.app_short_name) + ".zip";
+
+        List<String> files = new ArrayList<>();
+
+        files.add(getDatabasePath(DBHandler.DB_NAME).toString());
+
+        for (File f : FileUtils.getMediaStorageDir().listFiles()) {
+            files.add(f.toString());
+        }
+
+        FileUtils.zip(files, zipFile);
+
+        FileUtils.rescanApplicationStorageDir();
+
+        Uri uriToZip = Uri.fromFile(new File(zipFile));
+
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uriToZip);
+        shareIntent.setType("application/zip");
+        startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
+
+        Toast.makeText(getApplicationContext(), "Cópia de segurança criada com sucesso em: " + zipFile,
+                Toast.LENGTH_LONG).show();
     }
 
     @Override

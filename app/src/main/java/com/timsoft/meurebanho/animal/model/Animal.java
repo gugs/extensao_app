@@ -4,6 +4,7 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.event.model.EventType;
+import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
 import com.timsoft.meurebanho.treatment.model.Treatment;
 
@@ -261,7 +262,7 @@ public class Animal {
     }
 
     public File getPictureFile() {
-        return new File(MeuRebanhoApp.getMediaStorageDir().getPath() + File.separator + getIdToDisplay() + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
+        return new File(FileUtils.getMediaStorageDir().getPath() + File.separator + getIdToDisplay() + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
     }
 
     public List<Event> getEvents() {

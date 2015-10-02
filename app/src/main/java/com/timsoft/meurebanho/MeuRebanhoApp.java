@@ -3,26 +3,13 @@ package com.timsoft.meurebanho;
 import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.media.MediaScannerConnection;
-import android.os.Environment;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.DateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class MeuRebanhoApp extends Application {
 
@@ -38,6 +25,8 @@ public class MeuRebanhoApp extends Application {
     public static final String ACTION_ADD = "ACTION_ADD";
     public static final String ACTION_EDIT = "ACTION_EDIT";
 
+    private static final int BUFFER = 2048;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -46,50 +35,6 @@ public class MeuRebanhoApp extends Application {
 
     public static Context getContext() {
         return mContext;
-    }
-
-    public static File getMediaStorageDir() {
-//        return new File(Environment.getExternalStoragePublicDirectory(
-//                Environment.DIRECTORY_PICTURES), getContext().getResources().getString(R.string.app_full_name));
-        File f = new File(getApplicationStorageDir(), "pictures");
-
-        if (!f.exists()) {
-            if (!f.mkdir()) {
-                String m = "Não foi possível criar o diretório para armazenamento de mídia em: " + f.toString();
-                Toast.makeText(getContext(), m, Toast.LENGTH_LONG).show();
-                throw new RuntimeException(m);
-            }
-        }
-
-        return f;
-    }
-
-    public static File getBackupStorageDir() {
-        File f = new File(getApplicationStorageDir(), "backup");
-
-        if (!f.exists()) {
-            if (!f.mkdir()) {
-                String m = "Não foi possível criar o diretório para cópia de segurança da aplicação: " + f.toString();
-                Toast.makeText(getContext(), m, Toast.LENGTH_LONG).show();
-                throw new RuntimeException(m);
-            }
-        }
-
-        return f;
-    }
-
-    public static File getApplicationStorageDir() {
-        File f = new File(Environment.getExternalStorageDirectory(), getContext().getResources().getString(R.string.app_short_name));
-
-        if (!f.exists()) {
-            if (!f.mkdir()) {
-                String m = "Não foi possível criar o diretório para armazenamento de dados da aplicação em: " + f.toString();
-                Toast.makeText(getContext(), m, Toast.LENGTH_LONG).show();
-                throw new RuntimeException(m);
-            }
-        }
-
-        return f;
     }
 
     public static View.OnClickListener getOnClickListenerForBtnSetDate(final Context context, final TextView tvDate) {
@@ -139,70 +84,5 @@ public class MeuRebanhoApp extends Application {
                 tvDate.setText(getContext().getResources().getString(hint_id));
             }
         };
-    }
-
-    public static void copy(File src, File dst) {
-        try {
-            InputStream in = new FileInputStream(src);
-            OutputStream out = new FileOutputStream(dst);
-
-            // Transfer bytes from in to out
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            in.close();
-            out.close();
-        } catch (IOException e) {
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static void rescanApplicationStorageDir() {
-        rescanApplicationStorageDir(getApplicationStorageDir().toString());
-    }
-
-    private static void rescanApplicationStorageDir(String dest) {
-        // Scan files only (not folders);
-        File[] files = new File(dest).listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.isFile();
-            }
-        });
-
-        String[] paths = new String[files.length];
-        for (int co = 0; co < files.length; co++) {
-            paths[co] = files[co].getAbsolutePath();
-        }
-
-        MediaScannerConnection.scanFile(getContext(), paths, null, null);
-
-        // and now recursively scan subfolders
-        files = new File(dest).listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.isDirectory();
-            }
-        });
-
-        for (int co = 0; co < files.length; co++) {
-            rescanApplicationStorageDir(files[co].getAbsolutePath());
-        }
-    }
-
-    public static void deleteTemporaryImageFiles() {
-        List<File> list = Arrays.asList(getMediaStorageDir().listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.startsWith(TEMPORARY_FILE_PREFIX);
-            }
-        }));
-
-        for(File f : list) {
-            f.delete();
-        }
     }
 }

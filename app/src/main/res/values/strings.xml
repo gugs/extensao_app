@@ -216,5 +216,6 @@
     <string name="about">Sobre</string>
     <string name="create_backup_label">Criar cópia de segurança</string>
     <string name="restore_backup_label">Restaurar cópia de segurança</string>
+    <string name="send_to">Enviar para</string>
 
 </resources>

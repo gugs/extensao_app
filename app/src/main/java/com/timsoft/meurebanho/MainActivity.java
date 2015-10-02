@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.timsoft.meurebanho.animal.activity.AnimalListActivity;
+import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.infra.db.DBHandler;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             populateDefaultData();
         }
 
-        MeuRebanhoApp.deleteTemporaryImageFiles();
+        FileUtils.deleteTemporaryImageFiles();
 
         Intent intent = new Intent(this, AnimalListActivity.class);
         startActivity(intent);

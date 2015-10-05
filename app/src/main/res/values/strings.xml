@@ -217,5 +217,10 @@
     <string name="create_backup_label">Criar cópia de segurança</string>
     <string name="restore_backup_label">Restaurar cópia de segurança</string>
     <string name="send_to">Enviar para</string>
+    <string name="select_restore_origin">Selecione o local do arquivo</string>
+    <string name="select_restore_file">Selecione o arquivo de backup a restaurar</string>
+    <string name="confirm_restore">Confirma a restauração?</string>
+    <string name="all_data_lost">ATENÇÃO: TODOS OS DADOS ATUAIS SERÃO PERDIDOS!</string>
+    <string name="ok">Ok</string>
 
 </resources>

@@ -97,7 +97,7 @@ public class FileUtils {
         }
     }
 
-    public static void zip(List<String> files, String zipFile) {
+    public static boolean zip(List<String> files, String zipFile) {
         try {
             BufferedInputStream origin = null;
             FileOutputStream dest = new FileOutputStream(zipFile);
@@ -121,17 +121,20 @@ public class FileUtils {
 
             out.close();
         } catch (Exception e) {
-            Toast.makeText(MeuRebanhoApp.getContext(), "Error compressing files: " + e, Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+            String m = "Error compressing files: " + e;
+            Log.e(LOG_TAG, m);
+            Toast.makeText(MeuRebanhoApp.getContext(), m, Toast.LENGTH_LONG).show();
+            return false;
         }
+        return true;
     }
 
-    public static void unzip(String path, String zipFile) {
+    public static boolean unzip(String dest, String zipFile) {
         InputStream is;
         ZipInputStream zis;
         try {
             String filename;
-            is = new FileInputStream(path + File.separator + zipFile);
+            is = new FileInputStream(zipFile);
             zis = new ZipInputStream(new BufferedInputStream(is));
             ZipEntry ze;
             byte[] buffer = new byte[BUFFER];
@@ -143,12 +146,12 @@ public class FileUtils {
                 // Need to create directories if not exists, or
                 // it will generate an Exception...
                 if (ze.isDirectory()) {
-                    File fmd = new File(path + filename);
+                    File fmd = new File(dest + File.separator + filename);
                     fmd.mkdirs();
                     continue;
                 }
 
-                FileOutputStream fout = new FileOutputStream(path + filename);
+                FileOutputStream fout = new FileOutputStream(dest + File.separator + filename);
 
                 while ((count = zis.read(buffer)) != -1) {
                     fout.write(buffer, 0, count);
@@ -160,9 +163,13 @@ public class FileUtils {
 
             zis.close();
         } catch (IOException e) {
-            Toast.makeText(MeuRebanhoApp.getContext(), "Error uncompressing files: " + e, Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+            String m = "Error uncompressing file: " + e;
+            Log.e(LOG_TAG, m);
+            Toast.makeText(MeuRebanhoApp.getContext(), m, Toast.LENGTH_LONG).show();
+            return false;
         }
+
+        return true;
     }
 
     public static File getMediaStorageDir() {
@@ -201,6 +208,20 @@ public class FileUtils {
         if (!f.exists()) {
             if (!f.mkdir()) {
                 String m = "Não foi possível criar o diretório para armazenamento de dados da aplicação em: " + f.toString();
+                Toast.makeText(MeuRebanhoApp.getContext(), m, Toast.LENGTH_LONG).show();
+                throw new RuntimeException(m);
+            }
+        }
+
+        return f;
+    }
+
+    public static File getTemporaryStorageDir() {
+        File f = new File(getApplicationStorageDir(), "tmp");
+
+        if (!f.exists()) {
+            if (!f.mkdir()) {
+                String m = "Não foi possível criar o diretório para arquivos temporários da aplicação: " + f.toString();
                 Toast.makeText(MeuRebanhoApp.getContext(), m, Toast.LENGTH_LONG).show();
                 throw new RuntimeException(m);
             }

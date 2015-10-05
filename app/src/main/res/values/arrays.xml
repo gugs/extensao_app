@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="restore_backup_sources">
+        <item>Downloads</item>
+        <item>meurebanho/backup</item>
+    </string-array>
+</resources>

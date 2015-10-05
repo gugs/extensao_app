@@ -54,6 +54,7 @@ public class Race extends IDDescription {
         r.add(new Race(126, "Simental", 1));
         r.add(new Race(127, "Tabapuã", 1));
         r.add(new Race(128, "Wagyu", 1));
+        r.add(new Race(129, "Comum", 1));
 
         //Caprinos - http://www.caprileite.com.br/racas.php?tipo=Caprinos
         r.add(new Race(201, "Alpino", 2));

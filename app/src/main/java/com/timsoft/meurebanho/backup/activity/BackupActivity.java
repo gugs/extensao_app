@@ -62,8 +62,6 @@ public class BackupActivity extends AppCompatActivity {
     }
 
     private void restore() {
-        Log.d(LOG_TAG, "Click!");
-
         new AlertDialog.Builder(this)
                 .setTitle(R.string.select_restore_origin)
                 .setItems(R.array.restore_backup_sources, new DialogInterface.OnClickListener() {
@@ -156,10 +154,10 @@ public class BackupActivity extends AppCompatActivity {
         for (File f : FileUtils.getTemporaryStorageDir().listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String filename) {
-                return filename.toLowerCase().endsWith("*" + MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
+                return filename.toLowerCase().endsWith(MeuRebanhoApp.DEFAULT_IMAGE_FILE_EXTENSION);
             }
         })) {
-            FileUtils.copy(f, new File(FileUtils.getMediaStorageDir() + File.separator + f.toString()));
+            FileUtils.copy(f, new File(FileUtils.getMediaStorageDir() + File.separator + f.getName().toString()));
         }
 
         //Restaurando o arquivo do banco de dados
@@ -177,7 +175,7 @@ public class BackupActivity extends AppCompatActivity {
 
         //Restart application
         Intent i = getBaseContext().getPackageManager()
-                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                .getLaunchIntentForPackage(getBaseContext().getPackageName());
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }

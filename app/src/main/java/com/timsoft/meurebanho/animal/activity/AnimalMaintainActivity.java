@@ -467,8 +467,12 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         } else if (requestCode == PICTURE_CROP_ACTIVITY_REQUEST_CODE) {
             //get the returned data
             Bundle extras = data.getExtras();
-            //get the cropped bitmap
-            saveBitmapToFile((Bitmap) extras.getParcelable("data"), tempPicture);
+
+            //If user canceled the crop activity
+            if (extras != null) {
+                //get the cropped bitmap
+                saveBitmapToFile((Bitmap) extras.getParcelable("data"), tempPicture);
+            }
         } else {
             Toast.makeText(this, LOG_TAG + " - Unrecognized requestCode: " + requestCode, Toast.LENGTH_LONG).show();
         }

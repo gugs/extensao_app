@@ -4,4 +4,15 @@
         <item>Downloads</item>
         <item>meurebanho/backup</item>
     </string-array>
+
+    <string-array name="filter_types">
+        <item>Raça</item>
+        <item>Sexo</item>
+    </string-array>
+
+    <string-array name="sex_options">
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
+
 </resources>

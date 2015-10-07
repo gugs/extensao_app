@@ -222,5 +222,14 @@
     <string name="confirm_restore">Confirma a restauração?</string>
     <string name="all_data_lost">ATENÇÃO: TODOS OS DADOS ATUAIS SERÃO PERDIDOS!</string>
     <string name="ok">Ok</string>
+    <string name="sort_animal">Ordenar Animais</string>
+    <string name="filter_animal">Filtrar Animais</string>
+    <string name="remove_filter_animal">Remover Filtro</string>
+    <string name="select_filter_type">Selecione o tipo do filtro</string>
+    <string name="select_filter_sex">Selecione o sexo</string>
+    <string name="select_filter_race">Selecione a raça</string>
+    <string name="ascending">Crescente</string>
+    <string name="descending">Decrescente</string>
+    <string name="select_sort_type">Selecione o tipo de ordenação</string>
 
 </resources>

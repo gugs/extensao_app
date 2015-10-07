@@ -1,7 +1,9 @@
 package com.timsoft.meurebanho.animal.activity;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
@@ -19,16 +22,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.animal.model.AnimalBirthDateComparator;
+import com.timsoft.meurebanho.animal.model.AnimalEarTagComparator;
+import com.timsoft.meurebanho.animal.model.AnimalIDComparator;
+import com.timsoft.meurebanho.animal.model.AnimalNameComparator;
+import com.timsoft.meurebanho.animal.model.EnumFilterType;
+import com.timsoft.meurebanho.animal.model.EnumSortType;
 import com.timsoft.meurebanho.backup.activity.BackupActivity;
+import com.timsoft.meurebanho.race.db.DBRaceAdapter;
+import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
@@ -46,6 +62,15 @@ public class AnimalListActivity extends AppCompatActivity {
     private SearchView searchView;
 
     private String queryString = "";
+
+    private MenuItem menuItemFilter;
+    private MenuItem menuItemRemoveFilter;
+
+    private EnumFilterType filterType;
+    private String filterParameter;
+
+    private EnumSortType sortType = EnumSortType.ID;
+    private boolean sortAscending = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +109,8 @@ public class AnimalListActivity extends AppCompatActivity {
                 searchView.setIconified(true);
                 searchView.setQuery("", false);
                 queryString = "";
-                ((AnimalListFragment) findFragmentByPosition(pager.getCurrentItem())).updateView();
+                clearFilter();
+                updateView();
             }
         };
 
@@ -122,6 +148,13 @@ public class AnimalListActivity extends AppCompatActivity {
         actionBar.show();
     }
 
+    private void clearFilter() {
+        filterType = null;
+        filterParameter = null;
+        menuItemFilter.setVisible(true);
+        menuItemRemoveFilter.setVisible(false);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -140,7 +173,7 @@ public class AnimalListActivity extends AppCompatActivity {
 
     public List<Animal> getAnimals(int specieId, int status) {
         List<Animal> filteredAnimals = new ArrayList<>();
-        boolean correctStatus = true, matchQueryString = true;
+        boolean correctStatus = true, matchQueryString = true, matchFilter = true;
 
         for (Animal a : animals) {
             if (a.getSpecieId() == specieId) {
@@ -180,17 +213,56 @@ public class AnimalListActivity extends AppCompatActivity {
                     }
                 }
 
-                if (correctStatus && matchQueryString) {
+                if (filterType != null && !TextUtils.isEmpty(filterParameter)) {
+                    matchFilter = false;
+                    switch (filterType) {
+                        case RACE:
+                            if (a.getRaceId() == Integer.parseInt(filterParameter)) {
+                                matchFilter = true;
+                            }
+                            break;
+
+                        case SEX:
+                            if (a.getSex().equalsIgnoreCase(filterParameter)) {
+                                matchFilter = true;
+                            }
+                            break;
+
+                        default:
+                            Toast.makeText(getApplicationContext(), "Tipo de filtro inválido: " + filterType, Toast.LENGTH_LONG).show();
+                            break;
+                    }
+                }
+
+                if (correctStatus && matchQueryString && matchFilter) {
                     filteredAnimals.add(a);
                 }
             }
         }
 
-        return filteredAnimals;
-    }
+        switch (sortType) {
+            case BIRTH_DATE:
+                Collections.sort(filteredAnimals, new AnimalBirthDateComparator());
+                break;
 
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
+            case EAR_TAG:
+                Collections.sort(filteredAnimals, new AnimalEarTagComparator());
+                break;
+
+            case ID:
+                Collections.sort(filteredAnimals, new AnimalIDComparator());
+                break;
+
+            case NAME:
+                Collections.sort(filteredAnimals, new AnimalNameComparator());
+                break;
+
+            default:
+                Toast.makeText(getApplicationContext(), "Tipo de ordenação não definido: " + sortType, Toast.LENGTH_LONG).show();
+                break;
+        }
+
+        return filteredAnimals;
     }
 
     public void actionNewAnimal() {
@@ -221,7 +293,7 @@ public class AnimalListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 queryString = s;
-                ((AnimalListFragment) findFragmentByPosition(pager.getCurrentItem())).updateView();
+                updateView();
                 MenuItemCompat.collapseActionView(searchItem);
                 return false;
             }
@@ -229,10 +301,16 @@ public class AnimalListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
                 queryString = s;
-                ((AnimalListFragment) findFragmentByPosition(pager.getCurrentItem())).updateView();
+                updateView();
                 return false;
             }
         });
+
+        menuItemFilter = menu.findItem(R.id.action_filter);
+        menuItemRemoveFilter = menu.findItem(R.id.action_remove_filter);
+
+        menuItemRemoveFilter.setVisible(false);
+
         return true;
     }
 
@@ -244,6 +322,19 @@ public class AnimalListActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
 
+            case R.id.action_filter:
+                filterAnimal();
+                break;
+
+            case R.id.action_sort:
+                sortAnimal();
+                break;
+
+            case R.id.action_remove_filter:
+                clearFilter();
+                updateView();
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -251,12 +342,148 @@ public class AnimalListActivity extends AppCompatActivity {
         return true;
     }
 
-    public List<Specie> getSpecies() {
-        return species;
+    private void sortAnimal() {
+        final Dialog sortDialog = new Dialog(this);
+
+        sortDialog.setContentView(R.layout.order_dialog);
+        sortDialog.setTitle(R.string.select_sort_type);
+
+        ((RadioButton) sortDialog.findViewById(R.id.od_ascending)).setChecked(true);
+        ((RadioButton) sortDialog.findViewById(R.id.od_descending)).setChecked(false);
+
+        ((TextView) sortDialog.findViewById(R.id.od_id)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sortType = EnumSortType.ID;
+                sortAscending = ((RadioButton) sortDialog.findViewById(R.id.od_ascending)).isChecked();
+                sortDialog.dismiss();
+                updateView();
+            }
+        });
+
+        ((TextView) sortDialog.findViewById(R.id.od_ear_tag)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sortType = EnumSortType.EAR_TAG;
+                sortAscending = ((RadioButton) sortDialog.findViewById(R.id.od_ascending)).isChecked();
+                sortDialog.dismiss();
+                updateView();
+            }
+        });
+
+        ((TextView) sortDialog.findViewById(R.id.od_name)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sortType = EnumSortType.NAME;
+                sortAscending = ((RadioButton) sortDialog.findViewById(R.id.od_ascending)).isChecked();
+                sortDialog.dismiss();
+                updateView();
+            }
+        });
+
+        ((TextView) sortDialog.findViewById(R.id.od_birth_date)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sortType = EnumSortType.BIRTH_DATE;
+                sortAscending = ((RadioButton) sortDialog.findViewById(R.id.od_ascending)).isChecked();
+                sortDialog.dismiss();
+                updateView();
+            }
+        });
+
+        sortDialog.show();
     }
 
-    public void setSpecies(List<Specie> species) {
-        this.species = species;
+    private void filterAnimal() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.select_filter_type)
+                .setItems(R.array.filter_types, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                filterType = EnumFilterType.RACE;
+                                showOptionsForFilterType();
+                                break;
+                            case 1:
+                                filterType = EnumFilterType.SEX;
+                                showOptionsForFilterType();
+                                break;
+                            default:
+                                Toast.makeText(getApplicationContext(), "Tipo de filtro não definido: " + which, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .show();
+    }
+
+    private void showOptionsForFilterType() {
+        switch (filterType) {
+            case RACE:
+
+                DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance();
+                raceDatasource.open();
+                final List<Race> races = raceDatasource.listBySpecieId(getSpecies().get(pager.getCurrentItem()).getId());
+                raceDatasource.close();
+
+                List<CharSequence> raceNames = new ArrayList<>();
+                for (Race r : races) {
+                    raceNames.add(r.getDescription());
+                }
+
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.select_filter_race)
+                        .setItems(raceNames.toArray(new CharSequence[raceNames.size()]), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                menuItemFilter.setVisible(false);
+                                menuItemRemoveFilter.setVisible(true);
+
+                                filterParameter = Integer.toString(races.get(which).getId());
+                                updateView();
+                            }
+                        })
+                        .show();
+
+                break;
+
+            case SEX:
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.select_filter_sex)
+                        .setItems(R.array.sex_options, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                menuItemFilter.setVisible(false);
+                                menuItemRemoveFilter.setVisible(true);
+
+                                switch (which) {
+                                    case 0:
+                                        filterParameter = "M";
+                                        updateView();
+                                        break;
+                                    case 1:
+                                        filterParameter = "F";
+                                        updateView();
+                                        break;
+                                    default:
+                                        Toast.makeText(getApplicationContext(), "Tipo de filtro não definido: " + which, Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        })
+                        .show();
+                break;
+
+            default:
+                Toast.makeText(getApplicationContext(), "Tipo de filtro não esperado: " + filterType, Toast.LENGTH_LONG).show();
+                break;
+        }
+    }
+
+    private void updateView() {
+        ((AnimalListFragment) findFragmentByPosition(pager.getCurrentItem())).updateView();
+    }
+
+    public List<Specie> getSpecies() {
+        return species;
     }
 
     public Fragment findFragmentByPosition(int position) {

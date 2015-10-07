@@ -222,28 +222,28 @@ public class AnimalDetailActivity extends AppCompatActivity {
         }
         table.requestLayout();     // Not sure if this is needed.
 
-        Button btn_register_sale = (Button) findViewById(R.id.ad_register_sale);
+        Button btnRegisterSale = (Button) findViewById(R.id.ad_register_sale);
         if(animal.isSold()) {
-            btn_register_sale.setVisibility(View.GONE);
+            btnRegisterSale.setVisibility(View.GONE);
         } else {
-            btn_register_sale.setVisibility(View.VISIBLE);
+            btnRegisterSale.setVisibility(View.VISIBLE);
         }
 
-        Button btn_register_death = (Button) findViewById(R.id.ad_register_death);
+        Button btnRegisterDeath = (Button) findViewById(R.id.ad_register_death);
         if(animal.isDead()) {
-            btn_register_death.setVisibility(View.GONE);
+            btnRegisterDeath.setVisibility(View.GONE);
         } else {
-            btn_register_death.setVisibility(View.VISIBLE);
+            btnRegisterDeath.setVisibility(View.VISIBLE);
         }
 
-        Button btn_register_retire = (Button) findViewById(R.id.ad_register_retire);
-        Button btn_delete_retire = (Button) findViewById(R.id.ad_delete_retire);
+        Button btnRegisterRetire = (Button) findViewById(R.id.ad_register_retire);
+        Button btnDeleteRetire = (Button) findViewById(R.id.ad_delete_retire);
         if(animal.isRetired()) {
-            btn_register_retire.setVisibility(View.GONE);
-            btn_delete_retire.setVisibility(View.VISIBLE);
+            btnRegisterRetire.setVisibility(View.GONE);
+            btnDeleteRetire.setVisibility(View.VISIBLE);
         } else {
-            btn_register_retire.setVisibility(View.VISIBLE);
-            btn_delete_retire.setVisibility(View.GONE);
+            btnRegisterRetire.setVisibility(View.VISIBLE);
+            btnDeleteRetire.setVisibility(View.GONE);
         }
     }
 

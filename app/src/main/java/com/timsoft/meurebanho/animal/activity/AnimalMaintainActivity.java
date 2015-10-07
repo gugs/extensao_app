@@ -157,6 +157,10 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance();
         raceDatasource.open();
         List<Race> races = raceDatasource.listBySpecieId(includingSpecie.getId());
+
+        Race r = new Race(0, "Não selecionada", 0);
+        races.add(0, r);
+
         raceDatasource.close();
 
         racesSpinner = (Spinner) findViewById(R.id.am_race);
@@ -548,16 +552,6 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             //
         }
 
-        //race
-        Race selectedRace = (Race) racesSpinner.getSelectedItem();
-        if (selectedRace == null) {
-            Toast.makeText(this, R.string.race_not_selected, Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            editingAnimal.setRaceId(selectedRace.getId());
-        }
-        //
-
         //sex
         if (((RadioButton) findViewById(R.id.am_sex_male)).isChecked()) {
             editingAnimal.setSex("M");
@@ -568,6 +562,16 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         if (editingAnimal.getSex() == null) {
             Toast.makeText(this, R.string.sex_not_selected, Toast.LENGTH_SHORT).show();
             return;
+        }
+        //
+
+        //race
+        Race selectedRace = (Race) racesSpinner.getSelectedItem();
+        if (selectedRace == null || selectedRace.getId() == 0) {
+            Toast.makeText(this, R.string.race_not_selected, Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            editingAnimal.setRaceId(selectedRace.getId());
         }
         //
 

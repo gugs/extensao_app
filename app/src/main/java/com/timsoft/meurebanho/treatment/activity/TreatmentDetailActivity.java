@@ -59,10 +59,10 @@ public class TreatmentDetailActivity extends AppCompatActivity {
                 .setText(treatment.getMedication());
 
         ((TextView) findViewById(R.id.td_withdrawal_period))
-                .setText(Integer.toString(treatment.getWithdrawalPeriod()));
+                .setText(treatment.getWithdrawalPeriod() > 0 ? Integer.toString(treatment.getWithdrawalPeriod()) : "-");
 
         ((TextView) findViewById(R.id.td_cost))
-                .setText(NumberFormat.getCurrencyInstance().format(treatment.getCost()));
+                .setText(treatment.getCost() > 0 ? NumberFormat.getCurrencyInstance().format(treatment.getCost()) : "-");
 
         ((TextView) findViewById(R.id.td_notes))
                 .setText(treatment.getNotes());

@@ -86,7 +86,7 @@ public class DBRaceAdapter extends DBAdapter<Race> {
     public List<Race> listBySpecieId(int specieId) {
         Log.d(LOG_TAG, "Listing Races");
         List<Race> listaRaca = new ArrayList<Race>();
-        Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " where " + SPECIE_ID + " = " + specieId + " order by " + ID, null);
+        Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " where " + SPECIE_ID + " = " + specieId + " order by " + DESCRIPTION, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 listaRaca.add(cursorTo(cursor));

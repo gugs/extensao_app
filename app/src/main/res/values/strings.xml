@@ -38,8 +38,10 @@
 
     <string name="animal_specie_label">ESPÉCIE</string>
     <string name="animal_race_label">RAÇA</string>
+    <string name="animal_race_m_label">RAÇA*</string>
 
     <string name="animal_sex_label">SEXO</string>
+    <string name="animal_sex_m_label">SEXO*</string>
     <string name="male">Macho</string>
     <string name="female">Fêmea</string>
 
@@ -50,6 +52,7 @@
     <string name="animal_ear_tag_hint">Brinco/Nº de Controle</string>
 
     <string name="animal_birth_date_label">DATA DE NASCIMENTO</string>
+    <string name="animal_birth_date_m_label">DATA DE NASCIMENTO*</string>
     <string name="animal_birth_date_hint">Data de nascimento</string>
 
     <string name="animal_aquisition_date_label">DATA DE AQUISIÇÃO</string>
@@ -150,12 +153,15 @@
     <string name="treatment_add">Incluir Tratamento</string>
 
     <string name="treatment_date_label">DATA DE TRATAMENTO</string>
+    <string name="treatment_date_m_label">DATA DE TRATAMENTO*</string>
     <string name="treatment_date_hint">Data do Tratamento</string>
 
     <string name="treatment_reason_label">MOTIVO DO TRATAMENTO</string>
+    <string name="treatment_reason_m_label">MOTIVO DO TRATAMENTO*</string>
     <string name="treatment_reason_hint">Motivo do Tratamento</string>
 
     <string name="treatment_medication_label">MEDICAÇÃO</string>
+    <string name="treatment_medication_m_label">MEDICAÇÃO*</string>
     <string name="treatment_medication_hint">Medicação</string>
 
     <string name="treatment_withdrawal_period_label">PERÍODO DE CARÊNCIA (DIAS)</string>
@@ -174,8 +180,11 @@
 
     <string name="sale_confirm_delete">Confirma a exclusão da venda?</string>
     <string name="sale_date_label">DATA DA VENDA</string>
+    <string name="sale_date_m_label">DATA DA VENDA*</string>
     <string name="sale_value_label">VALOR DA VENDA</string>
+    <string name="sale_value_m_label">VALOR DA VENDA*</string>
     <string name="sale_buyer_label">COMPRADOR</string>
+    <string name="sale_buyer_m_label">COMPRADOR*</string>
 
     <string name="confirm_delete">Confirmar a Exclusão</string>
     <string name="notes_label">ANOTAÇÕES</string>
@@ -198,7 +207,9 @@
     <string name="death_edit">Alterar Morte</string>
     <string name="death_date_hint">Data da Morte</string>
     <string name="death_date_label">DATA DA MORTE</string>
+    <string name="death_date_m_label">DATA DA MORTE*</string>
     <string name="death_reason_label">MOTIVO DA MORTE</string>
+    <string name="death_reason_m_label">MOTIVO DA MORTE*</string>
     <string name="death_reason_hint">Motivo da Morte</string>
     <string name="death_reason_invalid">Motivo da morte inválido</string>
     <string name="death_detail">Detalhar Morte</string>

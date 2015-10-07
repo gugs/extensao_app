@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/treatment_date_label"
+                android:text="@string/treatment_date_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <LinearLayout
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/treatment_reason_label"
+                android:text="@string/treatment_reason_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <EditText
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/treatment_medication_label"
+                android:text="@string/treatment_medication_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <EditText

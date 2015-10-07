@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/sale_date_label"
+                android:text="@string/sale_date_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <!--Date-->
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/sale_value_label"
+                android:text="@string/sale_value_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <EditText
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/sale_buyer_label"
+                android:text="@string/sale_buyer_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <EditText

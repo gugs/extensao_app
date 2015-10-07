@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@string/animal_sex_label"
+                android:text="@string/animal_sex_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <RadioGroup
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/animal_race_label"
+                android:text="@string/animal_race_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <Spinner
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/animal_birth_date_label"
+                android:text="@string/animal_birth_date_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <LinearLayout

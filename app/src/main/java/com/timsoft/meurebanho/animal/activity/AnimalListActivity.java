@@ -262,6 +262,10 @@ public class AnimalListActivity extends AppCompatActivity {
                 break;
         }
 
+        if(!sortAscending){
+            Collections.reverse(filteredAnimals);
+        }
+
         return filteredAnimals;
     }
 

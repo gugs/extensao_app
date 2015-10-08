@@ -2,8 +2,8 @@ package com.timsoft.meurebanho.animal.model;
 
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
+import com.timsoft.meurebanho.event.model.EnumEventType;
 import com.timsoft.meurebanho.event.model.Event;
-import com.timsoft.meurebanho.event.model.EventType;
 import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
 import com.timsoft.meurebanho.treatment.model.Treatment;
@@ -268,29 +268,29 @@ public class Animal {
     public List<Event> getEvents() {
         List<Event> events = new ArrayList<>();
         if (getBirthDate() != null) {
-            events.add(new Event(0, EventType.BIRTH, getBirthDate(), MeuRebanhoApp.getContext().getResources().getString(R.string.birth)));
+            events.add(new Event(0, EnumEventType.BIRTH, getBirthDate(), MeuRebanhoApp.getContext().getResources().getString(R.string.birth)));
         }
 
         if (getAcquisitionDate() != null) {
-            events.add(new Event(0, EventType.ACQUISITION, getAcquisitionDate(), NumberFormat.getCurrencyInstance().format(getAcquisitionValue())));
+            events.add(new Event(0, EnumEventType.ACQUISITION, getAcquisitionDate(), NumberFormat.getCurrencyInstance().format(getAcquisitionValue())));
         }
 
         if (getSaleDate() != null) {
-            events.add(new Event(getId(), EventType.SALE, getSaleDate(), NumberFormat.getCurrencyInstance().format(getSaleValue())));
+            events.add(new Event(getId(), EnumEventType.SALE, getSaleDate(), NumberFormat.getCurrencyInstance().format(getSaleValue())));
         }
 
         if (getDeathDate() != null) {
-            events.add(new Event(getId(), EventType.DEATH, getDeathDate(), getDeathReason()));
+            events.add(new Event(getId(), EnumEventType.DEATH, getDeathDate(), getDeathReason()));
         }
 
         if (getRetireDate() != null) {
-            events.add(new Event(0, EventType.RETIRE, getRetireDate(),  MeuRebanhoApp.getContext().getString(R.string.retire)));
+            events.add(new Event(0, EnumEventType.RETIRE, getRetireDate(),  MeuRebanhoApp.getContext().getString(R.string.retire)));
         }
 
         DBTreatmentAdapter treatmentDatasource = DBTreatmentAdapter.getInstance();
         treatmentDatasource.open();
         for (Treatment t : treatmentDatasource.list(getId())) {
-            events.add(new Event(t.getId(), EventType.TREATMENT, t.getDate(), t.getMedication()));
+            events.add(new Event(t.getId(), EnumEventType.TREATMENT, t.getDate(), t.getMedication()));
         }
         treatmentDatasource.close();
 

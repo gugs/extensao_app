@@ -45,7 +45,7 @@ public class DeathMaintainActivity extends AppCompatActivity {
 
         final ActionBar actionBar = getSupportActionBar();
 
-        actionBar.setHomeAsUpIndicator(R.drawable.check);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_check_hd);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 

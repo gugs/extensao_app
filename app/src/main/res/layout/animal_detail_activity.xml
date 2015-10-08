@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_marginTop="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingEnd="@dimen/activity_padding_right"
     android:paddingLeft="@dimen/activity_padding_left"
     android:paddingRight="@dimen/activity_padding_right"
     android:paddingStart="@dimen/activity_padding_left"
-    android:paddingTop="@dimen/activity_padding_top"
-    android:layout_marginTop="10dp"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:paddingTop="@dimen/activity_padding_top">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/ad_main_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:orientation="vertical" >
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
 
                     <TextView
                         android:id="@+id/ad_id"
@@ -88,7 +91,7 @@
                         android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
                         android:contentDescription="@string/animal_picture_hint"
-                        android:src="@drawable/cow" />
+                        android:src="@drawable/cow_hl" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -96,20 +99,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="0.2dp"
-                    android:visibility="visible"
-                    android:background="@android:color/darker_gray"/>
+                    android:background="@android:color/darker_gray"
+                    android:visibility="visible" />
 
                 <TableLayout
                     android:id="@+id/ad_events_table"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:stretchColumns="1">
-                </TableLayout>
+                    android:stretchColumns="1"></TableLayout>
 
             </LinearLayout>
 
@@ -123,33 +125,167 @@
                     android:id="@+id/ad_add_treatment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/treatment_add"/>
+                    android:text="@string/treatment_add" />
 
                 <Button
                     android:id="@+id/ad_register_sale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Registrar Venda"/>
+                    android:text="Registrar Venda" />
 
                 <Button
                     android:id="@+id/ad_register_death"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Registrar Morte"/>
+                    android:text="Registrar Morte" />
 
                 <Button
                     android:id="@+id/ad_register_retire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Registrar Baixa"/>
+                    android:text="Registrar Baixa" />
 
                 <Button
                     android:id="@+id/ad_delete_retire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cancelar Baixa"/>
+                    android:text="Cancelar Baixa" />
             </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>
 
-    </ScrollView>
+        <TextView
+            android:id="@+id/ad_label_register_death"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Morte"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="285dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#EC7703"
+            app:layout_anchorGravity="bottom|right|end"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/ad_btn_register_death"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="280dp"
+            android:src="@drawable/poison_filled_hd"
+            app:layout_anchor="@id/ad_main_layout"
+            app:fabSize="mini"
+            app:layout_anchorGravity="bottom|right|end"
+            />
+
+        <TextView
+            android:id="@+id/ad_label_register_sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Venda"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="235dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#EC7703"
+            app:layout_anchorGravity="bottom|right|end"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/ad_btn_register_sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="230dp"
+            android:src="@drawable/money_bag_hd"
+            app:layout_anchor="@id/ad_main_layout"
+            app:fabSize="mini"
+            app:layout_anchorGravity="bottom|right|end"
+            />
+
+        <TextView
+            android:id="@+id/ad_label_register_weighting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pesagem"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="190dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#EC7703"
+            app:layout_anchorGravity="bottom|right|end"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/ad_btn_register_weighting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="180dp"
+            android:src="@drawable/weight_filled_hd"
+            app:layout_anchor="@id/ad_main_layout"
+            app:fabSize="mini"
+            app:layout_anchorGravity="bottom|right|end"
+            />
+
+        <TextView
+            android:id="@+id/ad_label_register_milking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ordenha"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="140dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#EC7703"
+            app:layout_anchorGravity="bottom|right|end"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/ad_btn_register_milking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="130dp"
+            android:src="@drawable/milk_bottle_filled_hd"
+            app:layout_anchor="@id/ad_main_layout"
+            app:fabSize="mini"
+            app:layout_anchorGravity="bottom|right|end"
+            />
+
+        <TextView
+            android:id="@+id/ad_label_register_treatment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tratamento"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="90dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:background="#EC7703"
+            app:layout_anchorGravity="bottom|right|end"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/ad_btn_register_treatment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="80dp"
+            android:src="@drawable/syringe_hd"
+            app:layout_anchor="@id/ad_main_layout"
+            app:fabSize="mini"
+            app:layout_anchorGravity="bottom|right|end" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/ad_toggle_fam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_menu_hd"
+            app:layout_anchor="@id/ad_main_layout"
+            app:layout_anchorGravity="bottom|right|end" />
+
+    </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

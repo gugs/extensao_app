@@ -88,7 +88,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         final ActionBar actionBar = getSupportActionBar();
 
-        actionBar.setHomeAsUpIndicator(R.drawable.check);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_check_hd);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
@@ -531,7 +531,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         if (picture != null) {
             imageViewPicture.setImageBitmap(BitmapFactory.decodeFile(picture.getPath()));
         } else {
-            imageViewPicture.setImageResource(R.drawable.cow);
+            imageViewPicture.setImageResource(R.drawable.cow_hl);
         }
     }
 

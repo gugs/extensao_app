@@ -59,7 +59,7 @@
                         android:layout_height="80dp"
                         android:layout_gravity="center_horizontal"
                         android:contentDescription="@string/animal_picture_hint"
-                        android:src="@drawable/cow" />
+                        android:src="@drawable/cow_hl" />
 
                 </LinearLayout>
 
@@ -164,7 +164,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/cancel"
-                    android:src="@drawable/cancel" />
+                    android:src="@drawable/ic_cancel_hl" />
 
             </LinearLayout>
 
@@ -195,7 +195,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/cancel"
-                    android:src="@drawable/cancel" />
+                    android:src="@drawable/ic_cancel_hl" />
             </LinearLayout>
 
             Ac

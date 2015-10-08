@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Event implements Comparable<Event> {
     private int entityId;
-    private EventType type;
+    private EnumEventType type;
     private Date date;
     private String description;
 
     public Event() {
     }
 
-    public Event(int entityId, EventType type, Date date, String description) {
+    public Event(int entityId, EnumEventType type, Date date, String description) {
         this.entityId = entityId;
         this.type = type;
         this.date = date;
@@ -26,11 +26,11 @@ public class Event implements Comparable<Event> {
         this.entityId = entityId;
     }
 
-    public EventType getType() {
+    public EnumEventType getType() {
         return type;
     }
 
-    public void setType(EventType type) {
+    public void setType(EnumEventType type) {
         this.type = type;
     }
 

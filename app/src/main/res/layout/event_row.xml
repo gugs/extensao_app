@@ -14,13 +14,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageView
                 android:id="@+id/er_icon"
                 android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="[B]"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"/>
 
             <View
                 android:layout_width="1dp"

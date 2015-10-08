@@ -34,7 +34,7 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
         if (a.getPictureFile().exists()) {
             ((ImageView) rowView.findViewById(R.id.animal_image)).setImageBitmap(BitmapFactory.decodeFile(a.getPictureFile().getPath()));
         } else {
-            ((ImageView) rowView.findViewById(R.id.animal_image)).setImageResource(R.drawable.cow);
+            ((ImageView) rowView.findViewById(R.id.animal_image)).setImageResource(R.drawable.cow_hl);
         }
 
         ((TextView) rowView.findViewById(R.id.animal_id))

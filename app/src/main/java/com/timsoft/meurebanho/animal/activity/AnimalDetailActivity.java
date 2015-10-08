@@ -3,7 +3,9 @@ package com.timsoft.meurebanho.animal.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,14 +38,19 @@ import com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AnimalDetailActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "AnimalDetailActivity";
     private Animal animal;
     private int animalId;
-    DBAnimalAdapter animalDatasource;
+    private boolean famVisible = false;
+    private DBAnimalAdapter animalDatasource;
+    private List<Integer> famBtnElementsIds;
+    private List<Integer> famLblElementsIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,21 +97,21 @@ public class AnimalDetailActivity extends AppCompatActivity {
         btn_register_retire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(AnimalDetailActivity.this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(R.string.retire)
-                    .setMessage(R.string.retire_register_confirm)
-                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            animalDatasource.open();
-                            animal.setRetireDate(new Date());
-                            animalDatasource.update(animal);
-                            animalDatasource.close();
-                            updateAnimalData();
-                        }
-                    })
-                    .setNegativeButton(R.string.no, null)
-                    .show();
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(R.string.retire)
+                        .setMessage(R.string.retire_register_confirm)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                animalDatasource.open();
+                                animal.setRetireDate(new Date());
+                                animalDatasource.update(animal);
+                                animalDatasource.close();
+                                updateAnimalData();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .show();
             }
         });
 
@@ -128,11 +136,79 @@ public class AnimalDetailActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        ((FloatingActionButton) findViewById(R.id.ad_toggle_fam)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                famVisible = !famVisible;
+                updateFAM();
+            }
+        });
+
+        famBtnElementsIds = new ArrayList<>();
+        famLblElementsIds = new ArrayList<>();
+
+        famBtnElementsIds.add(R.id.ad_btn_register_treatment);
+        famLblElementsIds.add(R.id.ad_label_register_treatment);
+        famBtnElementsIds.add(R.id.ad_btn_register_milking);
+        famLblElementsIds.add(R.id.ad_label_register_milking);
+        famBtnElementsIds.add(R.id.ad_btn_register_weighting);
+        famLblElementsIds.add(R.id.ad_label_register_weighting);
+        famBtnElementsIds.add(R.id.ad_btn_register_sale);
+        famLblElementsIds.add(R.id.ad_label_register_sale);
+        famBtnElementsIds.add(R.id.ad_btn_register_death);
+        famLblElementsIds.add(R.id.ad_label_register_death);
+
+        updateFAM();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(famVisible) {
+            famVisible = false;
+            Rect viewRect = new Rect();
+            findViewById(R.id.ad_toggle_fam).getGlobalVisibleRect(viewRect);
+
+            if (viewRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
+                famVisible = true;
+            }
+
+            for(int id : famBtnElementsIds) {
+                findViewById(id).getGlobalVisibleRect(viewRect);
+
+                if (viewRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
+                    famVisible = true;
+                }
+            }
+
+            if(!famVisible) {
+                updateFAM();
+            }
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private void updateFAM() {
+        for(int id : famBtnElementsIds){
+            if(famVisible) {
+                findViewById(id).setVisibility(View.VISIBLE);
+            } else {
+                findViewById(id).setVisibility(View.GONE);
+            }
+        }
+
+        for(int id : famLblElementsIds){
+            if(famVisible) {
+                findViewById(id).setVisibility(View.VISIBLE);
+            } else {
+                findViewById(id).setVisibility(View.GONE);
+            }
+        }
     }
 
     private void updateAnimalData() {
         //Animal data
-        animalDatasource= DBAnimalAdapter.getInstance();
+        animalDatasource = DBAnimalAdapter.getInstance();
         animalDatasource.open();
         animal = animalDatasource.get(animalId);
         animalDatasource.close();
@@ -160,7 +236,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
         if (animal.getPictureFile().exists()) {
             ((ImageView) findViewById(R.id.ad_picture)).setImageBitmap(BitmapFactory.decodeFile(animal.getPictureFile().getPath()));
         } else {
-            ((ImageView) findViewById(R.id.ad_picture)).setImageResource(R.drawable.cow);
+            ((ImageView) findViewById(R.id.ad_picture)).setImageResource(R.drawable.cow_hl);
         }
 
         ((TextView) findViewById(R.id.ad_race))
@@ -177,12 +253,13 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         for (final Event e : animal.getEvents()) {
             TableRow row = (TableRow) LayoutInflater.from(this).inflate(R.layout.event_row, null);
-            ((TextView) row.findViewById(R.id.er_icon)).setText(e.getType().getIcon());
+
+            ((ImageView) row.findViewById(R.id.er_icon)).setImageResource(e.getType().getResourceIconHL());
             ((TextView) row.findViewById(R.id.er_date)).setText(MainActivity.getFormatedDate(e.getDate()));
             ((TextView) row.findViewById(R.id.er_description)).setText(e.getDescription());
             ((TextView) row.findViewById(R.id.er_plus)).setText(e.getType().isSelectable() ? "+" : "");
 
-            if(e.getType().isSelectable()) {
+            if (e.getType().isSelectable()) {
                 row.setOnClickListener(new View.OnClickListener() {
                     private Intent intent;
 
@@ -223,14 +300,14 @@ public class AnimalDetailActivity extends AppCompatActivity {
         table.requestLayout();     // Not sure if this is needed.
 
         Button btnRegisterSale = (Button) findViewById(R.id.ad_register_sale);
-        if(animal.isSold()) {
+        if (animal.isSold()) {
             btnRegisterSale.setVisibility(View.GONE);
         } else {
             btnRegisterSale.setVisibility(View.VISIBLE);
         }
 
         Button btnRegisterDeath = (Button) findViewById(R.id.ad_register_death);
-        if(animal.isDead()) {
+        if (animal.isDead()) {
             btnRegisterDeath.setVisibility(View.GONE);
         } else {
             btnRegisterDeath.setVisibility(View.VISIBLE);
@@ -238,7 +315,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         Button btnRegisterRetire = (Button) findViewById(R.id.ad_register_retire);
         Button btnDeleteRetire = (Button) findViewById(R.id.ad_delete_retire);
-        if(animal.isRetired()) {
+        if (animal.isRetired()) {
             btnRegisterRetire.setVisibility(View.GONE);
             btnDeleteRetire.setVisibility(View.VISIBLE);
         } else {

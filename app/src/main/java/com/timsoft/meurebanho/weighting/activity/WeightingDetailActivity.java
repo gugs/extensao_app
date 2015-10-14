@@ -1,0 +1,125 @@
+package com.timsoft.meurebanho.weighting.activity;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.timsoft.meurebanho.MainActivity;
+import com.timsoft.meurebanho.MeuRebanhoApp;
+import com.timsoft.meurebanho.R;
+import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
+import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.sale.activity.SaleMaintainActivity;
+
+import java.text.NumberFormat;
+
+public class WeightingDetailActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = "WeightingDActivity";
+    private Animal animal;
+    private int animalId;
+    private DBAnimalAdapter animalDatasource;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Log.d(LOG_TAG, "onCreate");
+
+        setContentView(R.layout.sale_detail_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        animalId = getIntent().getExtras().getInt(DBAnimalAdapter.ID);
+        animalDatasource = DBAnimalAdapter.getInstance();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Sale data
+        animalDatasource.open();
+        animal = animalDatasource.get(animalId);
+        animalDatasource.close();
+        //
+
+        ((TextView) findViewById(R.id.sd_date))
+                .setText(MainActivity.getFormatedDate(animal.getSaleDate()));
+
+        ((TextView) findViewById(R.id.sd_value))
+                .setText(NumberFormat.getCurrencyInstance().format(animal.getSaleValue()));
+
+        ((TextView) findViewById(R.id.sd_buyer))
+                .setText(animal.getBuyerName());
+
+        ((TextView) findViewById(R.id.sd_notes))
+                .setText(animal.getSaleNotes());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                actionEdit();
+                break;
+
+            case R.id.action_delete:
+                actionDelete();
+                break;
+
+            case android.R.id.home:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
+
+    private void actionEdit() {
+        Intent intent = new Intent(this, SaleMaintainActivity.class);
+
+        intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
+        intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+
+        startActivity(intent);
+    }
+
+    private void actionDelete() {
+        new AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle(R.string.confirm_delete)
+            .setMessage(R.string.sale_confirm_delete)
+            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    animalDatasource.open();
+                    animal.setSaleDate(null);
+                    animal.setSaleValue(0);
+                    animal.setBuyerName(null);
+                    animal.setSaleNotes(null);
+                    animalDatasource.update(animal);
+                    animalDatasource.close();
+                    WeightingDetailActivity.this.finish();
+                }
+            })
+            .setNegativeButton(R.string.no, null)
+            .show();
+    }
+}

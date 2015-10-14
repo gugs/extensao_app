@@ -3,7 +3,6 @@ package com.timsoft.meurebanho.animal.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -13,10 +12,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -49,8 +47,8 @@ public class AnimalDetailActivity extends AppCompatActivity {
     private int animalId;
     private boolean famVisible = false;
     private DBAnimalAdapter animalDatasource;
-    private List<Integer> famBtnElementsIds;
-    private List<Integer> famLblElementsIds;
+    private List<Integer> famElementsIds;
+    private MenuItem mnuRetire, mnuUndoRetire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +61,18 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         animalId = getIntent().getExtras().getInt(DBAnimalAdapter.ID);
 
-        final Button btn_add_treatment = (Button) findViewById(R.id.ad_add_treatment);
-        btn_add_treatment.setOnClickListener(new View.OnClickListener() {
+        final LinearLayout llOverlay = (LinearLayout) findViewById(R.id.ad_ll_overlay);
+        llOverlay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                famVisible = false;
+                updateFAM();
+            }
+        });
+
+        final FloatingActionButton btnAddTreatment = (FloatingActionButton) findViewById(R.id.ad_btn_register_treatment);
+        btnAddTreatment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                famVisible = false;
                 Intent intent = new Intent(AnimalDetailActivity.this, TreatmentMaintainActivity.class);
                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
                 intent.putExtra(DBAnimalAdapter.ID, animal.getId());
@@ -73,9 +80,10 @@ public class AnimalDetailActivity extends AppCompatActivity {
             }
         });
 
-        final Button btn_register_sale = (Button) findViewById(R.id.ad_register_sale);
-        btn_register_sale.setOnClickListener(new View.OnClickListener() {
+        final FloatingActionButton btnRegisterSale = (FloatingActionButton) findViewById(R.id.ad_btn_register_sale);
+        btnRegisterSale.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                famVisible = false;
                 Intent intent = new Intent(AnimalDetailActivity.this, SaleMaintainActivity.class);
                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
                 intent.putExtra(DBAnimalAdapter.ID, animal.getId());
@@ -83,9 +91,26 @@ public class AnimalDetailActivity extends AppCompatActivity {
             }
         });
 
-        final Button btn_register_death = (Button) findViewById(R.id.ad_register_death);
-        btn_register_death.setOnClickListener(new View.OnClickListener() {
+        final FloatingActionButton btnRegisterWeighting = (FloatingActionButton) findViewById(R.id.ad_btn_register_weighting);
+        btnRegisterWeighting.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                famVisible = false;
+                Toast.makeText(AnimalDetailActivity.this, "A Implementar", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        final FloatingActionButton btnRegisterMilking = (FloatingActionButton) findViewById(R.id.ad_btn_register_milking);
+        btnRegisterMilking.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                famVisible = false;
+                Toast.makeText(AnimalDetailActivity.this, "A Implementar", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        final FloatingActionButton btnRegisterDeath = (FloatingActionButton) findViewById(R.id.ad_btn_register_death);
+        btnRegisterDeath.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                famVisible = false;
                 Intent intent = new Intent(AnimalDetailActivity.this, DeathMaintainActivity.class);
                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
                 intent.putExtra(DBAnimalAdapter.ID, animal.getId());
@@ -93,113 +118,93 @@ public class AnimalDetailActivity extends AppCompatActivity {
             }
         });
 
-        final Button btn_register_retire = (Button) findViewById(R.id.ad_register_retire);
-        btn_register_retire.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new AlertDialog.Builder(AnimalDetailActivity.this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle(R.string.retire)
-                        .setMessage(R.string.retire_register_confirm)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                animalDatasource.open();
-                                animal.setRetireDate(new Date());
-                                animalDatasource.update(animal);
-                                animalDatasource.close();
-                                updateAnimalData();
-                            }
-                        })
-                        .setNegativeButton(R.string.no, null)
-                        .show();
-            }
-        });
+        ((FloatingActionButton) findViewById(R.id.ad_toggle_fam))
+                .setOnClickListener(new View.OnClickListener() {
+                                        public void onClick(View v) {
+                                            famVisible = !famVisible;
+                                            updateFAM();
+                                        }
+                                    }
 
-        final Button btn_delete_retire = (Button) findViewById(R.id.ad_delete_retire);
-        btn_delete_retire.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new AlertDialog.Builder(AnimalDetailActivity.this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle(R.string.retire)
-                        .setMessage(R.string.retire_delete_confirm)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                animalDatasource.open();
-                                animal.setRetireDate(null);
-                                animalDatasource.update(animal);
-                                animalDatasource.close();
-                                updateAnimalData();
-                            }
-                        })
-                        .setNegativeButton(R.string.no, null)
-                        .show();
-            }
-        });
+                );
 
-        ((FloatingActionButton) findViewById(R.id.ad_toggle_fam)).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                famVisible = !famVisible;
-                updateFAM();
-            }
-        });
+        famElementsIds = new ArrayList<>();
 
-        famBtnElementsIds = new ArrayList<>();
-        famLblElementsIds = new ArrayList<>();
-
-        famBtnElementsIds.add(R.id.ad_btn_register_treatment);
-        famLblElementsIds.add(R.id.ad_label_register_treatment);
-        famBtnElementsIds.add(R.id.ad_btn_register_milking);
-        famLblElementsIds.add(R.id.ad_label_register_milking);
-        famBtnElementsIds.add(R.id.ad_btn_register_weighting);
-        famLblElementsIds.add(R.id.ad_label_register_weighting);
-        famBtnElementsIds.add(R.id.ad_btn_register_sale);
-        famLblElementsIds.add(R.id.ad_label_register_sale);
-        famBtnElementsIds.add(R.id.ad_btn_register_death);
-        famLblElementsIds.add(R.id.ad_label_register_death);
+        famElementsIds.add(R.id.ad_ll_register_treatment);
+        famElementsIds.add(R.id.ad_ll_register_milking);
+        famElementsIds.add(R.id.ad_ll_register_weighting);
+        famElementsIds.add(R.id.ad_ll_register_sale);
+        famElementsIds.add(R.id.ad_ll_register_death);
+        famElementsIds.add(R.id.ad_ll_overlay);
 
         updateFAM();
+
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(famVisible) {
-            famVisible = false;
-            Rect viewRect = new Rect();
-            findViewById(R.id.ad_toggle_fam).getGlobalVisibleRect(viewRect);
+    public void retireAnimal() {
+        new AlertDialog.Builder(AnimalDetailActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.retire)
+                .setMessage(R.string.retire_register_confirm)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        animalDatasource.open();
+                        animal.setRetireDate(new Date());
+                        animalDatasource.update(animal);
+                        animalDatasource.close();
+                        updateAnimalData();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
+    }
 
-            if (viewRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
-                famVisible = true;
-            }
-
-            for(int id : famBtnElementsIds) {
-                findViewById(id).getGlobalVisibleRect(viewRect);
-
-                if (viewRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
-                    famVisible = true;
-                }
-            }
-
-            if(!famVisible) {
-                updateFAM();
-            }
-        }
-
-        return super.dispatchTouchEvent(ev);
+    public void undoRetireAnimal() {
+        new AlertDialog.Builder(AnimalDetailActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.retire)
+                .setMessage(R.string.retire_delete_confirm)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        animalDatasource.open();
+                        animal.setRetireDate(null);
+                        animalDatasource.update(animal);
+                        animalDatasource.close();
+                        updateAnimalData();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 
     private void updateFAM() {
-        for(int id : famBtnElementsIds){
-            if(famVisible) {
-                findViewById(id).setVisibility(View.VISIBLE);
-            } else {
-                findViewById(id).setVisibility(View.GONE);
-            }
-        }
+        for (int id : famElementsIds) {
+            if (famVisible) {
+                switch (id) {
+                    case R.id.ad_ll_register_sale:
+                        if (!animal.isSold()) {
+                            findViewById(id).setVisibility(View.VISIBLE);
+                        }
+                        break;
 
-        for(int id : famLblElementsIds){
-            if(famVisible) {
-                findViewById(id).setVisibility(View.VISIBLE);
+                    case R.id.ad_ll_register_death:
+                        if (!animal.isDead()) {
+                            findViewById(id).setVisibility(View.VISIBLE);
+                        }
+                        break;
+
+                    case R.id.ad_ll_register_milking:
+                        if (animal.getSex().equalsIgnoreCase("F")) {
+                            findViewById(id).setVisibility(View.VISIBLE);
+                        }
+                        break;
+
+                    default:
+                        findViewById(id).setVisibility(View.VISIBLE);
+                        break;
+                }
             } else {
                 findViewById(id).setVisibility(View.GONE);
             }
@@ -288,7 +293,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
                                 break;
 
                             default:
-                                Toast.makeText(AnimalDetailActivity.this, "No action defined for this event type: " + e.getType().toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AnimalDetailActivity.this, "No action defined for this event type: " + e.getType().toString(), Toast.LENGTH_LONG).show();
                                 break;
                         }
                     }
@@ -299,28 +304,9 @@ public class AnimalDetailActivity extends AppCompatActivity {
         }
         table.requestLayout();     // Not sure if this is needed.
 
-        Button btnRegisterSale = (Button) findViewById(R.id.ad_register_sale);
-        if (animal.isSold()) {
-            btnRegisterSale.setVisibility(View.GONE);
-        } else {
-            btnRegisterSale.setVisibility(View.VISIBLE);
-        }
-
-        Button btnRegisterDeath = (Button) findViewById(R.id.ad_register_death);
-        if (animal.isDead()) {
-            btnRegisterDeath.setVisibility(View.GONE);
-        } else {
-            btnRegisterDeath.setVisibility(View.VISIBLE);
-        }
-
-        Button btnRegisterRetire = (Button) findViewById(R.id.ad_register_retire);
-        Button btnDeleteRetire = (Button) findViewById(R.id.ad_delete_retire);
-        if (animal.isRetired()) {
-            btnRegisterRetire.setVisibility(View.GONE);
-            btnDeleteRetire.setVisibility(View.VISIBLE);
-        } else {
-            btnRegisterRetire.setVisibility(View.VISIBLE);
-            btnDeleteRetire.setVisibility(View.GONE);
+        //onResume ocorre antes do menu estar inflado, assim evita null pointer exception
+        if(mnuRetire != null) {
+            updateVisibleMenus();
         }
     }
 
@@ -328,13 +314,30 @@ public class AnimalDetailActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();  // Always call the superclass method first
         updateAnimalData();
+        updateFAM();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.animal_detail_actions, menu);
+
+        mnuRetire = menu.findItem(R.id.action_retire);
+        mnuUndoRetire = menu.findItem(R.id.action_undo_retire);
+
+        updateVisibleMenus();
+
         return true;
+    }
+
+    private void updateVisibleMenus() {
+        if (animal.isRetired()) {
+            mnuRetire.setVisible(false);
+            mnuUndoRetire.setVisible(true);
+        } else {
+            mnuRetire.setVisible(true);
+            mnuUndoRetire.setVisible(false);
+        }
     }
 
     @Override
@@ -342,6 +345,14 @@ public class AnimalDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_edit:
                 actionEditAnimal();
+                break;
+
+            case R.id.action_retire:
+                retireAnimal();
+                break;
+
+            case R.id.action_undo_retire:
+                undoRetireAnimal();
                 break;
 
             default:

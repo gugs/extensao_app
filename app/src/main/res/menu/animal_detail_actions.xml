@@ -1,11 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_edit"
         android:icon="@drawable/ic_pencil_hd"
         android:orderInCategory="100"
         android:title="@string/edit"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_retire"
+        android:title="@string/retire_animal"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_undo_retire"
+        android:title="@string/undo_retire"
+        app:showAsAction="never" />
 
 </menu>

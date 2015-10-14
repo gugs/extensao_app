@@ -115,167 +115,164 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/ad_add_treatment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/treatment_add" />
-
-                <Button
-                    android:id="@+id/ad_register_sale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Registrar Venda" />
-
-                <Button
-                    android:id="@+id/ad_register_death"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Registrar Morte" />
-
-                <Button
-                    android:id="@+id/ad_register_retire"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Registrar Baixa" />
-
-                <Button
-                    android:id="@+id/ad_delete_retire"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancelar Baixa" />
-            </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/ad_label_register_death"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Morte"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="285dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:background="#EC7703"
-            app:layout_anchorGravity="bottom|right|end"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <LinearLayout
+            android:id="@+id/ad_ll_overlay"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:background="#88555555"
+            android:orientation="vertical">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ad_btn_register_death"
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ad_ll_register_death"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="280dp"
-            android:src="@drawable/poison_filled_hd"
-            app:layout_anchor="@id/ad_main_layout"
-            app:fabSize="mini"
-            app:layout_anchorGravity="bottom|right|end"
-            />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/ad_label_register_sale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Venda"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="235dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:background="#EC7703"
-            app:layout_anchorGravity="bottom|right|end"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/ad_label_register_death"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="7dp"
+                android:gravity="center"
+                android:text="Morte"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ad_btn_register_sale"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/ad_btn_register_death"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/poison_filled_hd"
+                app:fabSize="mini"
+                app:layout_anchor="@id/ad_main_layout" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ad_ll_register_sale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="230dp"
-            android:src="@drawable/money_bag_hd"
-            app:layout_anchor="@id/ad_main_layout"
-            app:fabSize="mini"
-            app:layout_anchorGravity="bottom|right|end"
-            />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/ad_label_register_weighting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pesagem"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="190dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:background="#EC7703"
-            app:layout_anchorGravity="bottom|right|end"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/ad_label_register_sale"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="7dp"
+                android:gravity="center"
+                android:text="Venda"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ad_btn_register_weighting"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/ad_btn_register_sale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/money_bag_hd"
+                app:fabSize="mini"
+                app:layout_anchor="@id/ad_main_layout" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ad_ll_register_weighting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="180dp"
-            android:src="@drawable/weight_filled_hd"
-            app:layout_anchor="@id/ad_main_layout"
-            app:fabSize="mini"
-            app:layout_anchorGravity="bottom|right|end"
-            />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/ad_label_register_milking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ordenha"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="140dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:background="#EC7703"
-            app:layout_anchorGravity="bottom|right|end"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/ad_label_register_weighting"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="7dp"
+                android:gravity="center"
+                android:text="Pesagem"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ad_btn_register_milking"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/ad_btn_register_weighting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/weight_filled_hd"
+                app:fabSize="mini"
+                app:layout_anchor="@id/ad_main_layout" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ad_ll_register_milking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="130dp"
-            android:src="@drawable/milk_bottle_filled_hd"
-            app:layout_anchor="@id/ad_main_layout"
-            app:fabSize="mini"
-            app:layout_anchorGravity="bottom|right|end"
-            />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/ad_label_register_treatment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tratamento"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="90dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
-            android:background="#EC7703"
-            app:layout_anchorGravity="bottom|right|end"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/ad_label_register_milking"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="7dp"
+                android:gravity="center"
+                android:text="Ordenha"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ad_btn_register_treatment"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/ad_btn_register_milking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/milk_bottle_filled_hd"
+                app:fabSize="mini"
+                app:layout_anchor="@id/ad_main_layout" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ad_ll_register_treatment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="80dp"
-            android:src="@drawable/syringe_hd"
-            app:layout_anchor="@id/ad_main_layout"
-            app:fabSize="mini"
-            app:layout_anchorGravity="bottom|right|end" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ad_label_register_treatment"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="7dp"
+                android:gravity="center"
+                android:text="Tratamento"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/ad_btn_register_treatment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/syringe_hd"
+                app:fabSize="mini"
+                app:layout_anchor="@id/ad_main_layout"
+                app:layout_anchorGravity="bottom|right|end" />
+
+        </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/ad_toggle_fam"

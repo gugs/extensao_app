@@ -5,10 +5,15 @@ import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.event.model.EnumEventType;
 import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.infra.FileUtils;
+import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
+import com.timsoft.meurebanho.milking.model.Milking;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
 import com.timsoft.meurebanho.treatment.model.Treatment;
+import com.timsoft.meurebanho.weighting.db.DBWeightingAdapter;
+import com.timsoft.meurebanho.weighting.model.Weighting;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -293,6 +298,20 @@ public class Animal {
             events.add(new Event(t.getId(), EnumEventType.TREATMENT, t.getDate(), t.getMedication()));
         }
         treatmentDatasource.close();
+
+        DBWeightingAdapter weightingDatasource = DBWeightingAdapter.getInstance();
+        weightingDatasource.open();
+        for (Weighting w : weightingDatasource.list(getId())) {
+            events.add(new Event(w.getId(), EnumEventType.WEIGHING, w.getDate(), (new DecimalFormat("#,###.00 Kg")).format(w.getWeight())));
+        }
+        weightingDatasource.close();
+
+        DBMilkingAdapter milkingDatasource = DBMilkingAdapter.getInstance();
+        milkingDatasource.open();
+        for (Milking m : milkingDatasource.list(getId())) {
+            events.add(new Event(m.getId(), EnumEventType.MILKING, m.getDate(), (new DecimalFormat("#,###.00 Kg")).format(m.getWeight())));
+        }
+        milkingDatasource.close();
 
         Collections.sort(events, Collections.reverseOrder());
 

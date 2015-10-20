@@ -6,9 +6,11 @@ import android.util.Log;
 
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
+import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
+import com.timsoft.meurebanho.weighting.db.DBWeightingAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String LOG_TAG = "DatabaseHandler";
 
     public static final String DB_NAME = "meurebanho.db";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
 
     private static DBHandler mInstance;
     private List<String> listTableCreate;
@@ -41,6 +43,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
         listTableCreate.add(DBTreatmentAdapter.TABLE_CREATE);
         listTableName.add(DBTreatmentAdapter.TABLE_NAME);
+
+        listTableCreate.add(DBWeightingAdapter.TABLE_CREATE);
+        listTableName.add(DBWeightingAdapter.TABLE_NAME);
+
+        listTableCreate.add(DBMilkingAdapter.TABLE_CREATE);
+        listTableName.add(DBMilkingAdapter.TABLE_NAME);
     }
 
     public static DBHandler getInstance() {
@@ -66,8 +74,13 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(LOG_TAG, "onUpgrade");
-        forceDrop(db);
-        onCreate(db);
+        if (oldVersion == 1 && newVersion == 2) {
+            db.execSQL(DBWeightingAdapter.TABLE_CREATE);
+            db.execSQL(DBMilkingAdapter.TABLE_CREATE);
+        } else {
+            throw new RuntimeException(String.format("Unexpected database updgrade, from %s to %s",
+                    oldVersion, newVersion));
+        }
     }
 
     public void forceDrop(SQLiteDatabase db) {

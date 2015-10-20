@@ -16,10 +16,11 @@ import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.infra.MoneyTextWatcher;
+import com.timsoft.meurebanho.infra.DecimalTextWatcher;
 import com.timsoft.meurebanho.weighting.db.DBWeightingAdapter;
 import com.timsoft.meurebanho.weighting.model.Weighting;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -91,10 +92,10 @@ public class WeightingMaintainActivity extends AppCompatActivity {
         //Weight
         etWeight = (EditText) findViewById(R.id.wm_weight);
 
-        etWeight.addTextChangedListener(new MoneyTextWatcher(etWeight));
+        etWeight.addTextChangedListener(new DecimalTextWatcher(etWeight));
 
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etWeight.setText(NumberFormat.getNumberInstance().format(editingWeighting.getWeight()));
+            etWeight.setText((new DecimalFormat("#,###.00").format(editingWeighting.getWeight())));
         }
         //
 

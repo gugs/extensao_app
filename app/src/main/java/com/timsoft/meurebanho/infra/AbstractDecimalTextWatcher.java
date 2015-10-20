@@ -1,27 +1,18 @@
 package com.timsoft.meurebanho.infra;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.EditText;
 
-import java.text.DecimalFormat;
+import java.lang.ref.WeakReference;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-
-public class DecimalTextWatcher extends AbstractDecimalTextWatcher {
-
-    public DecimalTextWatcher(EditText editText) {
-        super(editText);
-    }
-
-    protected NumberFormat getNumberFormat() {
-        return new DecimalFormat("#,###.00");
-        //return NumberFormat.getNumberInstance();
-    }
-}
-/*
-public class MoneyTextWatcher implements TextWatcher {
+public abstract class AbstractDecimalTextWatcher implements TextWatcher {
     private final WeakReference<EditText> editTextWeakReference;
 
-    public MoneyTextWatcher(EditText editText) {
+    public AbstractDecimalTextWatcher(EditText editText) {
         editTextWeakReference = new WeakReference<EditText>(editText);
     }
 
@@ -42,11 +33,12 @@ public class MoneyTextWatcher implements TextWatcher {
         String cleanString = s.toString().replaceAll("[^\\d]", "");
         if (!TextUtils.isEmpty(cleanString)) {
             BigDecimal parsed = new BigDecimal(cleanString).setScale(2, BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100), BigDecimal.ROUND_FLOOR);
-            String formatted = NumberFormat.getCurrencyInstance().format(parsed);
+            String formatted = getNumberFormat().format(parsed);
             editText.setText(formatted);
             editText.setSelection(formatted.length());
         }
         editText.addTextChangedListener(this);
     }
+
+    protected abstract NumberFormat getNumberFormat();
 }
-*/

@@ -117,6 +117,36 @@
                 android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
 
+        <activity
+            android:name="com.timsoft.meurebanho.weighting.activity.WeightingMaintainActivity"
+            android:label="@string/treatment_add"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.timsoft.meurebanho.weighting.activity.WeightingDetailActivity"
+            android:label="@string/treatment_detail"
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity" />
+        </activity>
+
+        <activity
+            android:name="com.timsoft.meurebanho.milking.activity.MilkingMaintainActivity"
+            android:label="@string/treatment_add"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.timsoft.meurebanho.milking.activity.MilkingDetailActivity"
+            android:label="@string/treatment_detail"
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity" />
+        </activity>
+
         <meta-data
             android:name="DATABASE"
             android:value="meurebanho.db" />

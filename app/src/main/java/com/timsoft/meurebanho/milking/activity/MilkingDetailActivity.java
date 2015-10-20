@@ -18,7 +18,7 @@ import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
 import com.timsoft.meurebanho.milking.model.Milking;
 
-import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 public class MilkingDetailActivity extends AppCompatActivity {
 
@@ -50,11 +50,11 @@ public class MilkingDetailActivity extends AppCompatActivity {
         milkingDatasource.close();
         //
 
-        ((TextView) findViewById(R.id.wd_date))
+        ((TextView) findViewById(R.id.md_date))
                 .setText(MainActivity.getFormatedDate(milking.getDate()));
 
-        ((TextView) findViewById(R.id.wd_weight))
-                .setText(NumberFormat.getCurrencyInstance().format(milking.getWeight()));
+        ((TextView) findViewById(R.id.md_weight))
+                .setText((new DecimalFormat("#,###.00 Kg").format(milking.getWeight())));
 
     }
 

@@ -15,13 +15,10 @@ import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.sale.activity.SaleMaintainActivity;
-import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
 import com.timsoft.meurebanho.weighting.db.DBWeightingAdapter;
 import com.timsoft.meurebanho.weighting.model.Weighting;
 
-import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 public class WeightingDetailActivity extends AppCompatActivity {
 
@@ -57,7 +54,7 @@ public class WeightingDetailActivity extends AppCompatActivity {
                 .setText(MainActivity.getFormatedDate(weighting.getDate()));
 
         ((TextView) findViewById(R.id.wd_weight))
-                .setText(NumberFormat.getCurrencyInstance().format(weighting.getWeight()));
+                .setText((new DecimalFormat("#,###.00 Kg").format(weighting.getWeight())));
 
     }
 

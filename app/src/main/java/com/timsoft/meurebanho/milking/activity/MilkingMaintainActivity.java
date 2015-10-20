@@ -3,7 +3,6 @@ package com.timsoft.meurebanho.milking.activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,11 +16,11 @@ import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.infra.MoneyTextWatcher;
-import com.timsoft.meurebanho.treatment.model.Treatment;
+import com.timsoft.meurebanho.infra.DecimalTextWatcher;
 import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
 import com.timsoft.meurebanho.milking.model.Milking;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -93,10 +92,10 @@ public class MilkingMaintainActivity extends AppCompatActivity {
         //Weight
         etWeight = (EditText) findViewById(R.id.mm_weight);
 
-        etWeight.addTextChangedListener(new MoneyTextWatcher(etWeight));
+        etWeight.addTextChangedListener(new DecimalTextWatcher(etWeight));
 
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etWeight.setText(NumberFormat.getNumberInstance().format(editingMilking.getWeight()));
+            etWeight.setText((new DecimalFormat("#,###.00").format(editingMilking.getWeight())));
         }
         //
 

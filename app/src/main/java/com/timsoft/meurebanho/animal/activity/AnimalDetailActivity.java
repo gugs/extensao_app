@@ -28,6 +28,9 @@ import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.death.activity.DeathDetailActivity;
 import com.timsoft.meurebanho.death.activity.DeathMaintainActivity;
 import com.timsoft.meurebanho.event.model.Event;
+import com.timsoft.meurebanho.milking.activity.MilkingDetailActivity;
+import com.timsoft.meurebanho.milking.activity.MilkingMaintainActivity;
+import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.sale.activity.SaleDetailActivity;
@@ -35,6 +38,9 @@ import com.timsoft.meurebanho.sale.activity.SaleMaintainActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentDetailActivity;
 import com.timsoft.meurebanho.treatment.activity.TreatmentMaintainActivity;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
+import com.timsoft.meurebanho.weighting.activity.WeightingDetailActivity;
+import com.timsoft.meurebanho.weighting.activity.WeightingMaintainActivity;
+import com.timsoft.meurebanho.weighting.db.DBWeightingAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,7 +101,10 @@ public class AnimalDetailActivity extends AppCompatActivity {
         btnRegisterWeighting.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 famVisible = false;
-                Toast.makeText(AnimalDetailActivity.this, "A Implementar", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AnimalDetailActivity.this, WeightingMaintainActivity.class);
+                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
+                intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+                startActivity(intent);
             }
         });
 
@@ -103,7 +112,10 @@ public class AnimalDetailActivity extends AppCompatActivity {
         btnRegisterMilking.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 famVisible = false;
-                Toast.makeText(AnimalDetailActivity.this, "A Implementar", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AnimalDetailActivity.this, MilkingMaintainActivity.class);
+                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
+                intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+                startActivity(intent);
             }
         });
 
@@ -289,6 +301,20 @@ public class AnimalDetailActivity extends AppCompatActivity {
                                 intent = new Intent(AnimalDetailActivity.this, SaleDetailActivity.class);
                                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
                                 intent.putExtra(DBAnimalAdapter.ID, e.getEntityId());
+                                startActivity(intent);
+                                break;
+
+                            case MILKING:
+                                intent = new Intent(AnimalDetailActivity.this, MilkingDetailActivity.class);
+                                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
+                                intent.putExtra(DBMilkingAdapter.ID, e.getEntityId());
+                                startActivity(intent);
+                                break;
+
+                            case WEIGHING:
+                                intent = new Intent(AnimalDetailActivity.this, WeightingDetailActivity.class);
+                                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
+                                intent.putExtra(DBWeightingAdapter.ID, e.getEntityId());
                                 startActivity(intent);
                                 break;
 

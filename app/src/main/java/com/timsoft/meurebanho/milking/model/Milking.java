@@ -6,16 +6,16 @@ public class Milking {
     private int id;
     private int animalId;
     private Date date;
-    private double amount;
+    private double weight;
 
     public Milking() {
     }
 
-    public Milking(int id, int animalId, Date date, double amount) {
+    public Milking(int id, int animalId, Date date, double weight) {
         this.id = id;
         this.animalId = animalId;
         this.date = date;
-        this.amount = amount;
+        this.weight = weight;
     }
 
     public int getId() {
@@ -42,11 +42,11 @@ public class Milking {
         this.date = date;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 }

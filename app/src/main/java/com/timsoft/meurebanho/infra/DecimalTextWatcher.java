@@ -9,22 +9,10 @@ import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-
-public class MoneyTextWatcher extends DecimalTextWatcher {
-
-    public MoneyTextWatcher(EditText editText) {
-        super(editText);
-    }
-
-    private NumberFormat getNumberFormat() {
-        return NumberFormat.getCurrencyInstance();
-    }
-}
-/*
-public class MoneyTextWatcher implements TextWatcher {
+public class DecimalTextWatcher implements TextWatcher {
     private final WeakReference<EditText> editTextWeakReference;
 
-    public MoneyTextWatcher(EditText editText) {
+    public DecimalTextWatcher(EditText editText) {
         editTextWeakReference = new WeakReference<EditText>(editText);
     }
 
@@ -45,11 +33,14 @@ public class MoneyTextWatcher implements TextWatcher {
         String cleanString = s.toString().replaceAll("[^\\d]", "");
         if (!TextUtils.isEmpty(cleanString)) {
             BigDecimal parsed = new BigDecimal(cleanString).setScale(2, BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100), BigDecimal.ROUND_FLOOR);
-            String formatted = NumberFormat.getCurrencyInstance().format(parsed);
+            String formatted = getNumberFormat().format(parsed);
             editText.setText(formatted);
             editText.setSelection(formatted.length());
         }
         editText.addTextChangedListener(this);
     }
+
+    private NumberFormat getNumberFormat() {
+        return NumberFormat.getNumberInstance();
+    }
 }
-*/

@@ -15,17 +15,17 @@ import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.sale.activity.SaleMaintainActivity;
+import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
+import com.timsoft.meurebanho.milking.model.Milking;
 
 import java.text.NumberFormat;
 
 public class MilkingDetailActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "MilkingDActivity";
-    private Animal animal;
-    private int animalId;
-    private DBAnimalAdapter animalDatasource;
+    private static final String LOG_TAG = "MilkingDetailActivity";
+    private Milking milking;
+    private int milkingId;
+    private DBMilkingAdapter milkingDatasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,34 +33,29 @@ public class MilkingDetailActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "onCreate");
 
-        setContentView(R.layout.sale_detail_activity);
+        setContentView(R.layout.milking_detail_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        animalId = getIntent().getExtras().getInt(DBAnimalAdapter.ID);
-        animalDatasource = DBAnimalAdapter.getInstance();
+        milkingId = getIntent().getExtras().getInt(DBMilkingAdapter.ID);
+        milkingDatasource = DBMilkingAdapter.getInstance();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        //Sale data
-        animalDatasource.open();
-        animal = animalDatasource.get(animalId);
-        animalDatasource.close();
+        //Milking data
+        milkingDatasource.open();
+        milking = milkingDatasource.get(milkingId);
+        milkingDatasource.close();
         //
 
-        ((TextView) findViewById(R.id.sd_date))
-                .setText(MainActivity.getFormatedDate(animal.getSaleDate()));
+        ((TextView) findViewById(R.id.wd_date))
+                .setText(MainActivity.getFormatedDate(milking.getDate()));
 
-        ((TextView) findViewById(R.id.sd_value))
-                .setText(NumberFormat.getCurrencyInstance().format(animal.getSaleValue()));
+        ((TextView) findViewById(R.id.wd_weight))
+                .setText(NumberFormat.getCurrencyInstance().format(milking.getWeight()));
 
-        ((TextView) findViewById(R.id.sd_buyer))
-                .setText(animal.getBuyerName());
-
-        ((TextView) findViewById(R.id.sd_notes))
-                .setText(animal.getSaleNotes());
     }
 
     @Override
@@ -93,33 +88,29 @@ public class MilkingDetailActivity extends AppCompatActivity {
     }
 
     private void actionEdit() {
-        Intent intent = new Intent(this, SaleMaintainActivity.class);
+        Intent intent = new Intent(this, MilkingMaintainActivity.class);
 
         intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
-        intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+        intent.putExtra(DBAnimalAdapter.ID, milking.getId());
 
         startActivity(intent);
     }
 
     private void actionDelete() {
         new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle(R.string.confirm_delete)
-            .setMessage(R.string.sale_confirm_delete)
-            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    animalDatasource.open();
-                    animal.setSaleDate(null);
-                    animal.setSaleValue(0);
-                    animal.setBuyerName(null);
-                    animal.setSaleNotes(null);
-                    animalDatasource.update(animal);
-                    animalDatasource.close();
-                    MilkingDetailActivity.this.finish();
-                }
-            })
-            .setNegativeButton(R.string.no, null)
-            .show();
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.confirm_delete)
+                .setMessage(R.string.milking_confirm_delete)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        milkingDatasource.open();
+                        milkingDatasource.delete(milking);
+                        milkingDatasource.close();
+                        MilkingDetailActivity.this.finish();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 }

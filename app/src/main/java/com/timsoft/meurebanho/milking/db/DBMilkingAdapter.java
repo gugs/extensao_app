@@ -51,7 +51,7 @@ public class DBMilkingAdapter extends DBAdapter<Milking> {
 
         values.put(ANIMAL_ID, milking.getAnimalId());
         values.put(DATE, milking.getDate().getTime());
-        values.put(AMOUNT, milking.getAmount());
+        values.put(AMOUNT, milking.getWeight());
 
         try {
             database.insertOrThrow(TABLE_NAME, null, values);

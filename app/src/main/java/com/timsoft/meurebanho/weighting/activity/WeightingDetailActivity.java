@@ -17,15 +17,18 @@ import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.sale.activity.SaleMaintainActivity;
+import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
+import com.timsoft.meurebanho.weighting.db.DBWeightingAdapter;
+import com.timsoft.meurebanho.weighting.model.Weighting;
 
 import java.text.NumberFormat;
 
 public class WeightingDetailActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "WeightingDActivity";
-    private Animal animal;
-    private int animalId;
-    private DBAnimalAdapter animalDatasource;
+    private Weighting weighting;
+    private int weightingId;
+    private DBWeightingAdapter weightingDatasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,34 +36,29 @@ public class WeightingDetailActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "onCreate");
 
-        setContentView(R.layout.sale_detail_activity);
+        setContentView(R.layout.weighting_detail_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        animalId = getIntent().getExtras().getInt(DBAnimalAdapter.ID);
-        animalDatasource = DBAnimalAdapter.getInstance();
+        weightingId = getIntent().getExtras().getInt(DBWeightingAdapter.ID);
+        weightingDatasource = DBWeightingAdapter.getInstance();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        //Sale data
-        animalDatasource.open();
-        animal = animalDatasource.get(animalId);
-        animalDatasource.close();
+        //Weighting data
+        weightingDatasource.open();
+        weighting = weightingDatasource.get(weightingId);
+        weightingDatasource.close();
         //
 
-        ((TextView) findViewById(R.id.sd_date))
-                .setText(MainActivity.getFormatedDate(animal.getSaleDate()));
+        ((TextView) findViewById(R.id.wd_date))
+                .setText(MainActivity.getFormatedDate(weighting.getDate()));
 
-        ((TextView) findViewById(R.id.sd_value))
-                .setText(NumberFormat.getCurrencyInstance().format(animal.getSaleValue()));
+        ((TextView) findViewById(R.id.wd_weight))
+                .setText(NumberFormat.getCurrencyInstance().format(weighting.getWeight()));
 
-        ((TextView) findViewById(R.id.sd_buyer))
-                .setText(animal.getBuyerName());
-
-        ((TextView) findViewById(R.id.sd_notes))
-                .setText(animal.getSaleNotes());
     }
 
     @Override
@@ -93,33 +91,29 @@ public class WeightingDetailActivity extends AppCompatActivity {
     }
 
     private void actionEdit() {
-        Intent intent = new Intent(this, SaleMaintainActivity.class);
+        Intent intent = new Intent(this, WeightingMaintainActivity.class);
 
         intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
-        intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+        intent.putExtra(DBAnimalAdapter.ID, weighting.getId());
 
         startActivity(intent);
     }
 
     private void actionDelete() {
         new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle(R.string.confirm_delete)
-            .setMessage(R.string.sale_confirm_delete)
-            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    animalDatasource.open();
-                    animal.setSaleDate(null);
-                    animal.setSaleValue(0);
-                    animal.setBuyerName(null);
-                    animal.setSaleNotes(null);
-                    animalDatasource.update(animal);
-                    animalDatasource.close();
-                    WeightingDetailActivity.this.finish();
-                }
-            })
-            .setNegativeButton(R.string.no, null)
-            .show();
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.confirm_delete)
+                .setMessage(R.string.weighting_confirm_delete)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        weightingDatasource.open();
+                        weightingDatasource.delete(weighting);
+                        weightingDatasource.close();
+                        WeightingDetailActivity.this.finish();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 }

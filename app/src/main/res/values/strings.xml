@@ -244,5 +244,27 @@
     <string name="select_sort_type">Selecione o tipo de ordenação</string>
     <string name="retire_animal">Excluir Animal</string>
     <string name="undo_retire">Cancelar Exclusão de Animal</string>
+    <string name="weighting_date_m_label">DATA DA PESAGEM*</string>
+    <string name="weighting_date_hint">Data da Pesagem</string>
+    <string name="weighting_weight_m_label">PESO (Kg)*</string>
+    <string name="weighting_weight_hint">Peso (Kg)</string>
+    <string name="weighting_add">Adicionar Pesagem</string>
+    <string name="weighting_edit">Alterar Pesagem</string>
+    <string name="weighting_date_invalid">Data de pesagem inválida</string>
+    <string name="weighting_weight_invalid">Valor da pesagem inválido</string>
+    <string name="weighting_date_label">DATA DA PESAGEM</string>
+    <string name="weighting_weight_label">PESO (Kg)</string>
+    <string name="milking_date_invalid">Data de ordenha inválida</string>
+    <string name="milking_weight_invalid">Peso da ordenha inválido</string>
+    <string name="milking_add">Incluir ordenha</string>
+    <string name="milking_edit">Alterar ordenha</string>
+    <string name="milking_date_hint">Data da Ordenha (Kg)</string>
+    <string name="milking_date_m_label">DATA DA ORDENHA*</string>
+    <string name="milking_weight_hint">Peso (Kg)</string>
+    <string name="milking_date_label">DATA DA ORDENHA</string>
+    <string name="milking_weight_m_label">PESO (Kg)*</string>
+    <string name="milking_weight_label">PESO (Kg)</string>
+    <string name="milking_confirm_delete">Confirma a exclusão da ordenha?</string>
+    <string name="weighting_confirm_delete">Confirma a exclusão da pesagem?></string>
 
 </resources>

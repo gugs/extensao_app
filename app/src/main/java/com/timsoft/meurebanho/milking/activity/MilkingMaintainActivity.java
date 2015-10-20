@@ -17,8 +17,10 @@ import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.animal.model.Animal;
 import com.timsoft.meurebanho.infra.MoneyTextWatcher;
+import com.timsoft.meurebanho.treatment.model.Treatment;
+import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
+import com.timsoft.meurebanho.milking.model.Milking;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -29,19 +31,19 @@ public class MilkingMaintainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "MilkingMActivity";
 
-    private Animal editingAnimal;
+    private Milking editingMilking;
     private String action;
 
     private TextView tvDate;
     private ImageButton btnClearDate;
-    private EditText etValue, etBuyer, etNotes;
-    private DBAnimalAdapter animalDatasource;
+    private EditText etWeight;
+    private DBMilkingAdapter milkingDatasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        animalDatasource = animalDatasource.getInstance();
+        milkingDatasource = milkingDatasource.getInstance();
 
         Log.d(LOG_TAG, "onCreate");
 
@@ -51,56 +53,50 @@ public class MilkingMaintainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        setContentView(R.layout.sale_mantain_activity);
+        setContentView(R.layout.milking_mantain_activity);
 
         action = getIntent().getStringExtra(MeuRebanhoApp.ACTION);
 
-        animalDatasource.open();
-        editingAnimal = animalDatasource.get(getIntent().getExtras().getInt(DBAnimalAdapter.ID));
-        animalDatasource.close();
+        if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
+            //Caso seja uma inclusão de tratamento
+            editingMilking = new Milking();
+            editingMilking.setAnimalId(getIntent().getExtras().getInt(DBAnimalAdapter.ID));
+
+        } else {
+            //Caso seja uma edição de tratamento
+            milkingDatasource.open();
+            editingMilking = milkingDatasource.get(getIntent().getExtras().getInt(DBMilkingAdapter.ID));
+            milkingDatasource.close();
+        }
 
         //Activity Title
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
-            setTitle(getResources().getString(R.string.sale_add));
+            setTitle(getResources().getString(R.string.milking_add));
         } else {
-            setTitle(getResources().getString(R.string.sale_edit));
+            setTitle(getResources().getString(R.string.milking_edit));
         }
         //
 
         //Date
-        tvDate = (TextView) findViewById(R.id.sm_date);
+        tvDate = (TextView) findViewById(R.id.mm_date);
         tvDate.setOnClickListener(MeuRebanhoApp.getOnClickListenerForBtnSetDate(this, tvDate));
-        btnClearDate = (ImageButton) findViewById(R.id.sm_clear_date);
+        btnClearDate = (ImageButton) findViewById(R.id.mm_clear_date);
         btnClearDate.setOnClickListener(MeuRebanhoApp.getOnClickListenerForBtnClearDate(tvDate, R.string.sale_date_hint));
 
         if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
             MeuRebanhoApp.updateDate(tvDate, new Date());
         } else {
-            MeuRebanhoApp.updateDate(tvDate, editingAnimal.getSaleDate());
+            MeuRebanhoApp.updateDate(tvDate, editingMilking.getDate());
         }
         //
 
-        //Value
-        etValue = (EditText) findViewById(R.id.sm_value);
+        //Weight
+        etWeight = (EditText) findViewById(R.id.mm_weight);
 
-        etValue.addTextChangedListener(new MoneyTextWatcher(etValue));
+        etWeight.addTextChangedListener(new MoneyTextWatcher(etWeight));
 
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etValue.setText(NumberFormat.getCurrencyInstance().format(editingAnimal.getSaleValue()));
-        }
-        //
-
-        //Buyer
-        etBuyer = (EditText) findViewById(R.id.sm_buyer);
-        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etBuyer.setText(editingAnimal.getBuyerName());
-        }
-        //
-
-        //Notes
-        etNotes = (EditText) findViewById(R.id.sm_notes);
-        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
-            etNotes.setText(editingAnimal.getSaleNotes());
+            etWeight.setText(NumberFormat.getNumberInstance().format(editingMilking.getWeight()));
         }
         //
 
@@ -114,51 +110,43 @@ public class MilkingMaintainActivity extends AppCompatActivity {
     }
 
     private void save() {
+        Milking m = new Milking();
+
+        m.setId(editingMilking.getId());
+        m.setAnimalId(editingMilking.getAnimalId());
+
         //Date
         try {
-            editingAnimal.setSaleDate(MainActivity.getDateFormat().parse(tvDate.getText().toString()));
+            m.setDate(MainActivity.getDateFormat().parse(tvDate.getText().toString()));
         } catch (ParseException e) {
-            Toast.makeText(this, R.string.sale_date_invalid, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.milking_date_invalid, Toast.LENGTH_SHORT).show();
             return;
         }
         //
 
-        //Value
+        //Weight
         try {
-            double value = NumberFormat.getCurrencyInstance().parse(etValue.getText().toString()).doubleValue();
+            double value = NumberFormat.getNumberInstance().parse(etWeight.getText().toString()).doubleValue();
             if (value <= 0) {
-                Toast.makeText(this, R.string.sale_value_invalid, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.milking_weight_invalid, Toast.LENGTH_SHORT).show();
                 return;
             }
-            editingAnimal.setSaleValue(value);
+            m.setWeight(value);
         } catch (ParseException e) {
-            Toast.makeText(this, R.string.sale_value_invalid, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.milking_weight_invalid, Toast.LENGTH_SHORT).show();
             return;
         }
         //
 
-        //Buyer
-        if (!TextUtils.isEmpty(etBuyer.getText())) {
-            editingAnimal.setBuyerName(etBuyer.getText().toString());
+        milkingDatasource.open();
+
+        if (action.equals(MeuRebanhoApp.ACTION_ADD)) {
+            milkingDatasource.create(m);
         } else {
-            Toast.makeText(this, R.string.sale_buyer_name_invalid, Toast.LENGTH_SHORT).show();
-            return;
+            milkingDatasource.update(m);
         }
-        //
 
-        //Notes
-        if (!TextUtils.isEmpty(etNotes.getText().toString())) {
-            editingAnimal.setSaleNotes(etNotes.getText().toString());
-        } else {
-            editingAnimal.setSaleNotes("");
-        }
-        //
-
-        animalDatasource.open();
-
-        animalDatasource.update(editingAnimal);
-
-        animalDatasource.close();
+        milkingDatasource.close();
 
         finish();
     }

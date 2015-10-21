@@ -28,6 +28,10 @@
         android:title="@string/remove_filter_animal"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/action_reports"
+        android:title="@string/reports"
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_backup"

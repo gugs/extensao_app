@@ -46,11 +46,18 @@
                 android:orientation="horizontal">
 
                 <!-- Ear Tag -->
+                <ImageView
+                    android:id="@+id/animal_ear_tag_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/price_tag_hl" />
+
                 <TextView
                     android:id="@+id/animal_ear_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dip"
+                    android:paddingEnd="5dip"
+                    android:paddingRight="5dip"
                     android:text="002"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 

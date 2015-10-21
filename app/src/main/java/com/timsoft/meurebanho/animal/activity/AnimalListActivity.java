@@ -40,6 +40,7 @@ import com.timsoft.meurebanho.animal.model.EnumSortType;
 import com.timsoft.meurebanho.backup.activity.BackupActivity;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
+import com.timsoft.meurebanho.reports.activity.ReportsActivity;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
@@ -320,9 +321,16 @@ public class AnimalListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+
         switch (item.getItemId()) {
+            case R.id.action_reports:
+                intent = new Intent(this, ReportsActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.action_backup:
-                Intent intent = new Intent(this, BackupActivity.class);
+                intent = new Intent(this, BackupActivity.class);
                 startActivity(intent);
                 break;
 

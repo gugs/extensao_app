@@ -211,6 +211,18 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         return listaAnimal;
     }
 
+    public List<Animal> list(int specieID) {
+        Log.d(LOG_TAG, "Obtendo Animals");
+        List<Animal> listaAnimal = new ArrayList<>();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_NAME + " where " + SPECIE_ID + " = " + specieID + " order by " + ID, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                listaAnimal.add(cursorTo(cursor));
+            } while (cursor.moveToNext());
+        }
+        return listaAnimal;
+    }
+
     @Override
     public Animal get(int idAnimal) {
         Log.d(LOG_TAG, "Obtendo Animal: " + idAnimal);

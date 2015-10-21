@@ -214,10 +214,10 @@
     <string name="death_reason_invalid">Motivo da morte inválido</string>
     <string name="death_detail">Detalhar Morte</string>
 
-    <string name="retire">Baixa</string>
-    <string name="retire_register_confirm">Confirma a baixa do animal?</string>
-    <string name="retire_delete_confirm">Confirma a exclusão da baixa do animal?</string>
-    <string name="animal_main_retire_label">Baixados</string>
+    <string name="retire">Exclusão</string>
+    <string name="retire_register_confirm">Confirma a exclusão do animal?</string>
+    <string name="retire_delete_confirm">Confirma o cancelamento da exclusão do animal?</string>
+    <string name="animal_main_retire_label">Excluídos</string>
     <string name="search_hint">Pesquisar animais...</string>
     <string name="drawer_open">Exibir Opções</string>
     <string name="drawer_close">Ocultar Opções</string>
@@ -266,5 +266,6 @@
     <string name="milking_weight_label">PESO (Kg)</string>
     <string name="milking_confirm_delete">Confirma a exclusão da ordenha?</string>
     <string name="weighting_confirm_delete">Confirma a exclusão da pesagem?</string>
+    <string name="reports">Relatórios</string>
 
 </resources>

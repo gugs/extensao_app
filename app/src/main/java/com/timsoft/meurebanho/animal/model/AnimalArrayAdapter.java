@@ -41,11 +41,14 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
                 .setText(a.getIdToDisplay());
 
         TextView tvAnimalEarTag = (TextView) rowView.findViewById(R.id.animal_ear_tag);
+        ImageView ivAnimalEarTagIcon = (ImageView) rowView.findViewById(R.id.animal_ear_tag_icon);
         if(TextUtils.isEmpty(a.getEarTag())) {
             tvAnimalEarTag.setVisibility(View.GONE);
+            ivAnimalEarTagIcon.setVisibility(View.GONE);
         } else {
             tvAnimalEarTag.setVisibility(View.VISIBLE);
             tvAnimalEarTag.setText(a.getEarTag());
+            ivAnimalEarTagIcon.setVisibility(View.VISIBLE);
         }
 
         TextView tvAnimalName = (TextView) rowView.findViewById(R.id.animal_name);

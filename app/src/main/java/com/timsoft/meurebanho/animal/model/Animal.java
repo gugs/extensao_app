@@ -205,11 +205,11 @@ public class Animal {
     }
 
     public boolean isSold() {
-        return getSaleDate() != null;
+        return getSaleDate() != null && !isRetired();
     }
 
     public boolean isDead() {
-        return getDeathDate() != null;
+        return getDeathDate() != null && !isRetired();
     }
 
     public boolean isRetired() {

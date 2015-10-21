@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -247,6 +248,9 @@ public class AnimalDetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.ad_name))
                 .setText(animal.getName());
 
+        if(TextUtils.isEmpty(animal.getEarTag())) {
+            findViewById(R.id.ad_ear_tag_icon).setVisibility(View.GONE);
+        }
         ((TextView) findViewById(R.id.ad_ear_tag))
                 .setText(animal.getEarTag());
 

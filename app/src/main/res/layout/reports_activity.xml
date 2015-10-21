@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingEnd="@dimen/activity_padding_right"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right"
+    android:paddingStart="@dimen/activity_padding_left"
+    android:paddingTop="@dimen/activity_padding_top">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/r_specie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Total de animais disponíveis:" />
+
+                    <TextView
+                        android:id="@+id/r_available"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="34" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Total de animais vendidos:" />
+
+                    <TextView
+                        android:id="@+id/r_sold"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Total de animais mortos:" />
+
+                    <TextView
+                        android:id="@+id/r_dead"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="2" />
+                </TableRow>
+
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Machos" />
+
+                    <TextView
+                        android:id="@+id/r_males"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="10" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Fêmeas" />
+
+                    <TextView
+                        android:id="@+id/r_females"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="0-6 meses:" />
+
+                    <TextView
+                        android:id="@+id/r_a0_6"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="7-12 meses:" />
+
+                    <TextView
+                        android:id="@+id/r_a7_12"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="13-18 meses:" />
+
+                    <TextView
+                        android:id="@+id/r_a13_18"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="19-24 meses:" />
+
+                    <TextView
+                        android:id="@+id/r_a19_24"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="25-36 meses:" />
+
+                    <TextView
+                        android:id="@+id/r_a25_36"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Mais de 36 meses:" />
+
+                    <TextView
+                        android:id="@+id/r_ao_36"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+                </TableRow>
+
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+
+            </TableLayout>
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/r_table"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

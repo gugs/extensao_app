@@ -266,6 +266,7 @@
     <string name="milking_weight_label">PESO (Kg)</string>
     <string name="milking_confirm_delete">Confirma a exclusão da ordenha?</string>
     <string name="weighting_confirm_delete">Confirma a exclusão da pesagem?</string>
-    <string name="reports">Relatórios</string>
+    <string name="report">Relatório Analítico</string>
+    <string name="evolution">Evolução do Rebanho</string>
 
 </resources>

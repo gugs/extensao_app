@@ -148,8 +148,18 @@
         </activity>
 
         <activity
-            android:name="com.timsoft.meurebanho.reports.activity.ReportsActivity"
-            android:label="@string/reports"
+            android:name=".report.activity.ReportActivity"
+            android:label="@string/report"
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
+        </activity>
+
+        <activity
+            android:name="com.timsoft.meurebanho.evolution.activity.EvolutionActivity"
+            android:label="@string/evolution"
             android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity"
             android:screenOrientation="portrait">
             <meta-data

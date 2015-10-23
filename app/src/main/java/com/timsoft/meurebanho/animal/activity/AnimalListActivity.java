@@ -38,9 +38,10 @@ import com.timsoft.meurebanho.animal.model.AnimalNameComparator;
 import com.timsoft.meurebanho.animal.model.EnumFilterType;
 import com.timsoft.meurebanho.animal.model.EnumSortType;
 import com.timsoft.meurebanho.backup.activity.BackupActivity;
+import com.timsoft.meurebanho.evolution.activity.EvolutionActivity;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
-import com.timsoft.meurebanho.reports.activity.ReportsActivity;
+import com.timsoft.meurebanho.report.activity.ReportActivity;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.specie.model.Specie;
 
@@ -324,8 +325,13 @@ public class AnimalListActivity extends AppCompatActivity {
         Intent intent;
 
         switch (item.getItemId()) {
-            case R.id.action_reports:
-                intent = new Intent(this, ReportsActivity.class);
+            case R.id.action_evolution:
+                intent = new Intent(this, EvolutionActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.action_report:
+                intent = new Intent(this, ReportActivity.class);
                 startActivity(intent);
                 break;
 

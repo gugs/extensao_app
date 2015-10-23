@@ -1,4 +1,4 @@
-package com.timsoft.meurebanho.reports.activity;
+package com.timsoft.meurebanho.report.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +22,9 @@ import com.timsoft.meurebanho.specie.model.SpecieArrayAdapter;
 
 import java.util.List;
 
-public class ReportsActivity extends AppCompatActivity {
+public class ReportActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "ReportsActivity";
+    private static final String LOG_TAG = "ReportActivity";
 
     private Spinner specieSpinner;
     private List<Animal> animals;
@@ -35,7 +35,7 @@ public class ReportsActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "onCreate");
 
-        setContentView(R.layout.reports_activity);
+        setContentView(R.layout.report_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Species
@@ -142,7 +142,7 @@ public class ReportsActivity extends AppCompatActivity {
             }
 
             if(qtd > 0) {
-                TableRow row = (TableRow) LayoutInflater.from(this).inflate(R.layout.reports_race_row, null);
+                TableRow row = (TableRow) LayoutInflater.from(this).inflate(R.layout.report_race_row, null);
 
                 ((TextView) row.findViewById(R.id.r_row_race_name)).setText(r.getDescription());
                 ((TextView) row.findViewById(R.id.r_row_race_quantity)).setText(Integer.toString(qtd));

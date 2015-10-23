@@ -200,6 +200,37 @@ public class Animal {
         this.deathReason = deathReason;
     }
 
+    public boolean isAvailable(Date date) {
+        if(isRetired()) {
+            return false;
+        }
+
+        Date startDate = getAcquisitionDate() == null ? getBirthDate() : getAcquisitionDate();
+        Date endDate = null;
+
+        if(getDeathDate() != null) {
+            endDate = getDeathDate();
+        }
+
+        if(getSaleDate() != null && (getDeathDate() == null || getSaleDate().getTime() < getDeathDate().getTime())) {
+            endDate = getSaleDate();
+        }
+
+        if(date.getTime() >= startDate.getTime()) {
+            if(endDate == null) {
+                return true;
+            } else {
+                if(date.getTime() <= endDate.getTime()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
     public boolean isAvailable() {
         return !isSold() && !isDead() && !isRetired();
     }

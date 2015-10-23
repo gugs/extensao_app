@@ -268,5 +268,6 @@
     <string name="weighting_confirm_delete">Confirma a exclusão da pesagem?</string>
     <string name="report">Relatório Analítico</string>
     <string name="evolution">Evolução do Rebanho</string>
+    <string name="milking_chart">Gráfico de Ordenha</string>
 
 </resources>

@@ -167,6 +167,16 @@
                 android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
 
+        <activity
+            android:name="com.timsoft.meurebanho.milking.activity.MilkingChartActivity"
+            android:label="@string/milking_chart"
+            android:parentActivityName="com.timsoft.meurebanho.animal.activity.AnimalListActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
+        </activity>
+
         <meta-data
             android:name="DATABASE"
             android:value="meurebanho.db" />

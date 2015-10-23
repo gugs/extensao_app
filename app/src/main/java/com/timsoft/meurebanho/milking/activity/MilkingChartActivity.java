@@ -1,12 +1,9 @@
-package com.timsoft.meurebanho.evolution.activity;
+package com.timsoft.meurebanho.milking.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -15,21 +12,17 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
-import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
-import com.timsoft.meurebanho.specie.model.Specie;
-import com.timsoft.meurebanho.specie.model.SpecieArrayAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class EvolutionActivity extends AppCompatActivity {
+public class MilkingChartActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "EvolutionActivity";
+    private static final String LOG_TAG = "MilkingChartActivity";
 
     private LineChart mChart;
-    private Spinner specieSpinner;
     private List<Animal> animals;
 
     @Override
@@ -38,41 +31,18 @@ public class EvolutionActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "onCreate");
 
-        setContentView(R.layout.evolution_activity);
+        setContentView(R.layout.milking_chart_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mChart = (LineChart) findViewById(R.id.evolution_chart);
-
-        //Species
-        DBSpecieAdapter specieDatasource = DBSpecieAdapter.getInstance();
-        specieDatasource.open();
-        List<Specie> species = specieDatasource.list();
-        specieDatasource.close();
-
-        specieSpinner = (Spinner) findViewById(R.id.e_specie);
-        specieSpinner.setAdapter(new SpecieArrayAdapter(this, species));
-
-        specieSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                updateChart();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                updateChart();
-            }
-        });
+        mChart = (LineChart) findViewById(R.id.milking_chart);
     }
 
     public void updateChart() {
-        mChart.setDescription("Evolução do Rebanho");
-
-        Specie specie = (Specie) specieSpinner.getSelectedItem();
-
+        mChart.setDescription("Gráfico de Ordenha");
+//???
         // Animals
         DBAnimalAdapter animalDatasource = DBAnimalAdapter.getInstance();
         animalDatasource.open();
-        animals = animalDatasource.list(specie.getId());
+        //animals = animalDatasource.list(specie.getId());
         animalDatasource.close();
         //
 
@@ -94,6 +64,7 @@ public class EvolutionActivity extends AppCompatActivity {
         currentDate.setTime(startDate.getTime());
 
         for (int i = 0; i < 12; i++) {
+            //????
             xVals.add(monthDate.format(currentDate.getTime()));
             int count = 0;
             for(Animal a : animals) {
@@ -139,5 +110,4 @@ public class EvolutionActivity extends AppCompatActivity {
         super.onResume();
         updateChart();
     }
-    //http://stackoverflow.com/questions/21321789/android-datepicker-change-to-only-month-and-year
 }

@@ -39,6 +39,11 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/action_milking_chart"
+        android:title="@string/milking_chart"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/action_backup"
         android:title="@string/backup"
         app:showAsAction="never"/>

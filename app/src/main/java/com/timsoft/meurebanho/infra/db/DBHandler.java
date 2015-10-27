@@ -67,6 +67,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d(LOG_TAG, "onCreate");
         for (String tableCreate : listTableCreate) {
+            Log.d(LOG_TAG, tableCreate);
             db.execSQL(tableCreate);
         }
     }

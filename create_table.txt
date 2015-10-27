@@ -1,0 +1,6 @@
+create table animal( id integer primary key, specie_id integer not null, race_id integer not null, sex text not null, name text, ear_tag text, birth_date integer not null, acquisition_date integer, sale_date integer, death_date integer, death_reason text, retire_date integer, acquisition_value real, sale_value real, seller_name text, buyer_name text, sale_notes text);
+create table race( id integer primary key, description text not null, id_specie integer not null)
+create table specie( id integer primary key, description text not null);
+create table treatment( id integer primary key, animal_id integer not null, date integer not null, reason text not null,medication text not null,withdrawal_period integer, cost real, notes text);
+create table weighting( id integer primary key, animal_id integer not null, date integer not null, weight real not null);
+create table milking( id integer primary key, animal_id integer not null, date integer not null, amount real not null);

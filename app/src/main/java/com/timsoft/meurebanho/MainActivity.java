@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(getString(R.string.app_full_name),
                 MODE_PRIVATE);
 
-        boolean recreateDB = false;
+        boolean recreateDB = true;
 
         if (prefs.getBoolean(FIRST_RUN, true)) {
             recreateDB = true;

@@ -1,1 +1,0 @@
-http://www.softicons.com/animal-icons/animal-icons-by-martin-berube/cow-icon

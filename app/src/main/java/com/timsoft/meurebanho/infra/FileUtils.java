@@ -203,7 +203,7 @@ public class FileUtils {
     }
 
     public static File getApplicationStorageDir() {
-        File f = new File(Environment.getExternalStorageDirectory(), MeuRebanhoApp.getContext().getResources().getString(R.string.app_short_name));
+        File f = new File(Environment.getExternalStorageDirectory(),MeuRebanhoApp.getContext().getResources().getString(R.string.app_short_name));
 
         if (!f.exists()) {
             if (!f.mkdir()) {

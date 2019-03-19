@@ -57,12 +57,12 @@ public class Race extends IDDescription {
 //        r.add(new Race(129, "Comum", 1));
 
         //Caprinos - http://www.caprileite.com.br/racas.php?tipo=Caprinos
-        r.add(new Race(101, "Alpino", 2));
-        r.add(new Race(102, "Anglonubiano", 2));
-        r.add(new Race(103, "Boer ", 2));
-        r.add(new Race(104, "Saanen ", 2));
-        r.add(new Race(105, "Savana ", 2));
-        r.add(new Race(106, "Toggenburg", 2));
+        r.add(new Race(101, "Alpino", 1));
+        r.add(new Race(102, "Anglonubiano", 1));
+        r.add(new Race(103, "Boer ", 1));
+        r.add(new Race(104, "Saanen ", 1));
+        r.add(new Race(105, "Savana ", 1));
+        r.add(new Race(106, "Toggenburg", 1));
 
 //        //Equinos - http://www.guiaderacas.com.br/cavalos/racas/
 //        r.add(new Race(301, "American Saddlebred", 3));
@@ -93,17 +93,17 @@ public class Race extends IDDescription {
 //        r.add(new Race(326, "Sela Francesa", 3));
 
         //Ovinos - http://www.caprileite.com.br/racas.php?tipo=Ovinos
-        r.add(new Race(201, "Bergamácia Brasileira", 4));
-        r.add(new Race(202, "Dâmara", 4));
-        r.add(new Race(203, "Dorper", 4));
-        r.add(new Race(204, "Hampshire Down", 4));
-        r.add(new Race(205, "Ile de France", 4));
-        r.add(new Race(206, "Lacaune", 4));
-        r.add(new Race(207, "Morada Nova", 4));
-        r.add(new Race(208, "Santa Inês", 4));
-        r.add(new Race(209, "Somalis Brasileira", 4));
-        r.add(new Race(210, "Suffolk", 4));
-        r.add(new Race(211, "Texel", 4));
+        r.add(new Race(201, "Bergamácia Brasileira", 2));
+        r.add(new Race(202, "Dâmara", 2));
+        r.add(new Race(203, "Dorper", 2));
+        r.add(new Race(204, "Hampshire Down", 2));
+        r.add(new Race(205, "Ile de France", 2));
+        r.add(new Race(206, "Lacaune", 2));
+        r.add(new Race(207, "Morada Nova", 2));
+        r.add(new Race(208, "Santa Inês", 2));
+        r.add(new Race(209, "Somalis Brasileira", 2));
+        r.add(new Race(210, "Suffolk", 2));
+        r.add(new Race(211, "Texel", 2));
 
         //TODO: Suínos - http://tcpermaculture.com/site/2014/01/15/domestic-pigs-breeds-and-terminology/
         //TODO: Asininos - http://www.oocities.org/asininos/raca.html

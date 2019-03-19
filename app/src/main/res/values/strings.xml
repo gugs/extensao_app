@@ -4,9 +4,9 @@
 
 
     <!-- Generic messages -->
-    <string name="app_name">Meu Rebanho</string>
+    <string name="app_name">Cap &amp; Ino Rebanho</string>
     <string name="app_full_name">com.timsoft.meurebanho</string>
-    <string name="app_short_name">meurebanho</string>
+    <string name="app_short_name">capino-soft</string>
     <string name="raw_base_path">/res/raw</string>
     <string name="exclusion_confirmation">Confirmação de Exclusão</string>
     <string name="save">Salvar</string>
@@ -124,6 +124,9 @@
     <string name="specie_equine">Equino</string>
     <string name="specie_ovine">Ovino</string>
     <string name="specie_swine">Suíno</string>
+
+    <!-- Default Species -->
+    <string name="categories_reprodutor">Reprodutor</string>
 
     <!-- Main activity -->
     <string name="animal_main_available_label">Disp.</string>

@@ -13,9 +13,9 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="colorPrimaryDark">#388E3C</item>
-        <item name="colorPrimary">#4CAF50</item>
-        <item name="colorAccent">#3F51B5</item>
+        <item name="colorPrimaryDark">#001774</item>
+        <item name="colorPrimary">#3d5ab1</item>
+        <item name="colorAccent">#878ba1</item>
     </style>
 
     <style name="LabelTextAppearance">

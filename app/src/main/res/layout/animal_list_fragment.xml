@@ -47,23 +47,22 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="457dp">
+        android:layout_height="match_parent">
 
         <!-- animal list -->
         <ListView
             android:id="@+id/list_animal_list"
             android:layout_width="match_parent"
-            android:layout_height="456dp" />
+            android:layout_height="match_parent" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/button_add_animal"
             android:layout_width="59dp"
             android:layout_height="56dp"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
+            android:layout_gravity="bottom|end"
             android:src="@drawable/ic_plus_hd"
             app:layout_anchor="@id/list_animal_list"
-            app:layout_anchorGravity="bottom|right|end" />
+            app:layout_anchorGravity="bottom|end" />
 
     </android.support.design.widget.CoordinatorLayout>
 

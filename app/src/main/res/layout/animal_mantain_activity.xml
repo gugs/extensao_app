@@ -183,7 +183,7 @@
                 <TextView
                     android:id="@+id/am_acquisition_date"
                     style="?android:attr/spinnerStyle"
-                    android:layout_width="200dp"
+                    android:layout_width="248dp"
                     android:layout_height="40dp"
                     android:text="@string/animal_acquisition_date_hint"
                     android:textAppearance="@style/HintTextAppearance" />

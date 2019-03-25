@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.timsoft.meurebanho.R;
-import com.timsoft.meurebanho.specie.model.Specie;
 
 import java.util.List;
 
@@ -32,10 +31,11 @@ public class CategoryArrayAdapter extends ArrayAdapter<Category> {
 
     private View initView(int position, View convertView) {
         if (convertView == null)
-            //convertView = View.inflate(getContext(),
-            //        R.layout.category_list,
-            //        null);
-        ((TextView) convertView.findViewById(R.id.specie_list_name)).setText(getItem(position).getDescription());
+            convertView = View.inflate(getContext(),
+                    R.layout.category_list,
+                    null);
+        ((TextView) convertView.findViewById(R.id.category_list_name)).setText(getItem(position).
+                getDescription());
 
         return convertView;
     }

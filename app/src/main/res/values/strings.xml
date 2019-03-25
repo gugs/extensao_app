@@ -37,6 +37,7 @@
     <string name="alert_id_already_used">Nº de Identificação já utilizada</string>
 
     <string name="animal_specie_label">ESPÉCIE</string>
+    <string name="animal_category_label">CATEGORIA</string>
     <string name="animal_race_label">RAÇA</string>
     <string name="animal_race_m_label">RAÇA*</string>
 

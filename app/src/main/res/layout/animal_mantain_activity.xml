@@ -115,6 +115,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:text="@string/animal_category_label"
+                android:textAppearance="@style/LabelTextAppearance" />
+
+            <Spinner
+                android:id="@+id/am_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="@string/animal_race_m_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 

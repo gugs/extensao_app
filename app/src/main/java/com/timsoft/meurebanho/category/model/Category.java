@@ -10,9 +10,19 @@ import java.util.List;
 
 public class Category extends IDDescription {
 
+    private int idCategory;
+
     public Category(int idCategory, String description)
     {
         super(idCategory, description);
+    }
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 
     public List<Category> getDefaultCategory()

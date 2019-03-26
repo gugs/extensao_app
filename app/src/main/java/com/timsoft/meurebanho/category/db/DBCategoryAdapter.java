@@ -9,8 +9,6 @@ import android.widget.Toast;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.category.model.Category;
 import com.timsoft.meurebanho.infra.db.DBAdapter;
-import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
-import com.timsoft.meurebanho.specie.model.Specie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,8 @@ public class DBCategoryAdapter extends DBAdapter<Category> {
 
     public static final String ID = "id";
     public static final String DESCRIPTION = "description";
+
+    public static final String ANIMAL_ID = "id_animal";
 
     public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( "
             + ID + " integer primary key, "
@@ -82,6 +82,7 @@ public class DBCategoryAdapter extends DBAdapter<Category> {
         }
         return listaCategory;
     }
+
 
     @Override
     public Category get(int idCategory) {

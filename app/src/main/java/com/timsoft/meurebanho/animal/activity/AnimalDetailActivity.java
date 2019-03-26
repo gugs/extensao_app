@@ -26,6 +26,8 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
+import com.timsoft.meurebanho.category.model.Category;
 import com.timsoft.meurebanho.death.activity.DeathDetailActivity;
 import com.timsoft.meurebanho.death.activity.DeathMaintainActivity;
 import com.timsoft.meurebanho.event.model.Event;
@@ -239,6 +241,12 @@ public class AnimalDetailActivity extends AppCompatActivity {
         raceDatasource.close();
         //
 
+        //Category Data
+        DBCategoryAdapter categoryDatasource = DBCategoryAdapter.getInstance();
+        categoryDatasource.open();
+        Category category = categoryDatasource.get(animal.getCategoryId());
+        categoryDatasource.close();
+
         ((TextView) findViewById(R.id.ad_id))
                 .setText(animal.getIdToDisplay());
 
@@ -262,6 +270,9 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.ad_race))
                 .setText(race.getDescription());
+
+        ((TextView) findViewById(R.id.ad_race))
+                .setText(category.getDescription());
 
         ((TextView) findViewById(R.id.ad_sex))
                 .setText(animal.getSexToDisplay());

@@ -30,6 +30,7 @@ public class Animal {
     public static final int STATUS_RETIRED = 3;
 
     private int id;
+    private int categoryId;
     private int specieId;
     private int raceId;
 
@@ -57,7 +58,7 @@ public class Animal {
     public Animal() {
     }
 
-    public Animal(int id, int specieId, int raceId,
+    public Animal(int id, int categoryId, int specieId, int raceId,
                   String sex, String name, String earTag,
                   Date birthDate, Date acquisitionDate, Date saleDate,
                   Date deathDate, String deathReason, Date retireDate,
@@ -65,6 +66,7 @@ public class Animal {
                   String sellerName, String buyerName, String saleNotes) {
 
         this.id = id;
+        this.categoryId = categoryId;
         this.specieId = specieId;
         this.raceId = raceId;
         this.sex = sex;
@@ -99,6 +101,10 @@ public class Animal {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getCategoryId() { return categoryId; }
+
+    public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
 
     public int getRaceId() {
         return raceId;

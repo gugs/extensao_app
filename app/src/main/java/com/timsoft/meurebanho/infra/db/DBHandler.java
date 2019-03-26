@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
+import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
 import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
@@ -34,6 +35,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
         listTableCreate.add(DBAnimalAdapter.TABLE_CREATE);
         listTableName.add(DBAnimalAdapter.TABLE_NAME);
+
+        listTableCreate.add(DBCategoryAdapter.TABLE_CREATE);
+        listTableName.add(DBCategoryAdapter.TABLE_NAME);
 
         listTableCreate.add(DBRaceAdapter.TABLE_CREATE);
         listTableName.add(DBRaceAdapter.TABLE_NAME);

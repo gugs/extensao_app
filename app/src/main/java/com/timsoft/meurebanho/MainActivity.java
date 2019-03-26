@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.timsoft.meurebanho.animal.activity.AnimalListActivity;
+import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
+import com.timsoft.meurebanho.category.model.Category;
 import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.infra.db.DBHandler;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void populateDefaultData() {
         DBRaceAdapter raceDatasource = DBRaceAdapter.getInstance();
         DBSpecieAdapter specieDatasource = DBSpecieAdapter.getInstance();
+        DBCategoryAdapter categoryDatasource = DBCategoryAdapter.getInstance();
 
         specieDatasource.open();
         for (Specie e : Specie.getDefaultSpecies()) {
@@ -69,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
             raceDatasource.create(r);
         }
         raceDatasource.close();
+
+        categoryDatasource.open();
+        for (Category c : Category.getDefaultCategory()) {
+            categoryDatasource.create(c);
+        }
+        categoryDatasource.close();
     }
 
     public static DateFormat getDateFormat() {

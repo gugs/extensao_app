@@ -20,6 +20,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
     public static final String TABLE_NAME = "animal";
 
     public static final String ID = "id";
+    public static final String CATEGORY_ID = "category_id";
     public static final String SPECIE_ID = "specie_id";
     public static final String RACE_ID = "race_id";
 
@@ -47,6 +48,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
 
     public static final String TABLE_CREATE = "create table " + TABLE_NAME + "( "
             + ID + " integer primary key, "
+            + CATEGORY_ID + " integer not null, "
             + SPECIE_ID + " integer not null, "
             + RACE_ID + " integer not null, "
 
@@ -90,6 +92,8 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         Log.d(LOG_TAG, "Including animal: " + animal.toString());
         ContentValues values = new ContentValues();
         values.put(ID, animal.getId());
+        // Category shift
+        values.put(CATEGORY_ID, animal.getCategoryId());
         values.put(SPECIE_ID, animal.getSpecieId());
         values.put(RACE_ID, animal.getRaceId());
 
@@ -125,6 +129,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         values.put(BUYER_NAME, animal.getBuyerName());
         values.put(SALE_NOTES, animal.getSaleNotes());
 
+
         try {
             database.insertOrThrow(TABLE_NAME, null, values);
         } catch (SQLiteException e) {
@@ -148,53 +153,56 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
                 //ID
                 cursor.getInt(0),
 
-                //SPECIE_ID
+                //CATEGORY_ID
                 cursor.getInt(1),
 
-                //RACE_ID
+                //SPECIE_ID
                 cursor.getInt(2),
 
-                //SEX
-                cursor.getString(3),
+                //RACE_ID
+                cursor.getInt(3),
 
-                //NAME
+                //SEX
                 cursor.getString(4),
 
-                //EAR_TAG
+                //NAME
                 cursor.getString(5),
 
-                //BIRTH_DATE
-                longToDate(cursor, 6),
+                //EAR_TAG
+                cursor.getString(6),
 
-                //ACQUISITION_DATE
+                //BIRTH_DATE
                 longToDate(cursor, 7),
 
-                //SALE_DATE
+                //ACQUISITION_DATE
                 longToDate(cursor, 8),
 
-                //DEATH_DATE
+                //SALE_DATE
                 longToDate(cursor, 9),
 
+                //DEATH_DATE
+                longToDate(cursor, 10),
+
                 //DEATH_REASON
-                cursor.getString(10),
+                cursor.getString(11),
 
                 //RETIRE_DATE
-                longToDate(cursor, 11),
+                longToDate(cursor, 12),
 
                 //ACQUISITION_VALUE
-                cursor.getDouble(12),
-
-                //SALE_VALUE
                 cursor.getDouble(13),
 
-                //SELLER_NAME
-                cursor.getString(14),
+                //SALE_VALUE
+                cursor.getDouble(14),
 
-                //BUYER_NAME
+                //SELLER_NAME
                 cursor.getString(15),
 
+                //BUYER_NAME
+                cursor.getString(16),
+
                 //SALE_NOTES
-                cursor.getString(16)
+                cursor.getString(17)
         );
     }
 

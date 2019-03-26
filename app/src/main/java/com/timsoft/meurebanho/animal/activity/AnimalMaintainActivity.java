@@ -36,6 +36,9 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
+import com.timsoft.meurebanho.category.model.Category;
+import com.timsoft.meurebanho.category.model.CategoryArrayAdapter;
 import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.infra.MoneyTextWatcher;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
@@ -65,6 +68,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     private static final int PICTURE_SELECT_ACTIVITY_REQUEST_CODE = 300;
 
     private Spinner racesSpinner;
+    private Spinner categorySpinner;
     private Specie includingSpecie;
     private Animal editingAnimal;
     private File tempPicture, picture;
@@ -83,6 +87,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         animalDatasource = DBAnimalAdapter.getInstance();
         DBSpecieAdapter specieDatasource = DBSpecieAdapter.getInstance();
+
 
         Log.d(LOG_TAG, "onCreate");
 
@@ -163,9 +168,23 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         raceDatasource.close();
 
+        //Categories
+        DBCategoryAdapter categoryDatasource = DBCategoryAdapter.getInstance();
+        categoryDatasource.open();
+        List<Category> categories = categoryDatasource.list();
+
+        Category c = new Category(0, "Não selecionada");
+        categories.add(0, c);
+
+        categoryDatasource.close();
+
         racesSpinner = (Spinner) findViewById(R.id.am_race);
         racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
 
+        categorySpinner = (Spinner) findViewById(R.id.am_category);
+        categorySpinner.setAdapter(new CategoryArrayAdapter(this, categories));
+
+        //races
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
             int pos = -1;
             for (int i = 0; i < races.size(); i++) {
@@ -180,6 +199,22 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             racesSpinner.setSelection(pos);
         }
         //
+
+        //categories
+        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+            int pos = -1;
+            for (int i = 0; i < categories.size(); i++) {
+                if (categories.get(i).getId() == editingAnimal.getCategoryId()) {
+                    pos = i;
+                    break;
+                }
+            }
+            if (pos == -1) {
+                throw new RuntimeException("Id de categoria não localizada: " +
+                        editingAnimal.getCategoryId());
+            }
+            categorySpinner.setSelection(pos);
+        }
 
         //Ear tag
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
@@ -572,6 +607,16 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             return;
         } else {
             editingAnimal.setRaceId(selectedRace.getId());
+        }
+        //
+
+        //Category
+        Category selectedCategory = (Category) categorySpinner.getSelectedItem();
+        if (selectedCategory == null || selectedCategory.getId() == 0) {
+            Toast.makeText(this, R.string.category_not_selected, Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            editingAnimal.setCategoryId(selectedCategory.getId());
         }
         //
 

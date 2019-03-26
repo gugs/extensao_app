@@ -88,6 +88,9 @@
     <string name="specie_image">Imagem da Espécie</string>
     <string name="specie_not_selected">Espécie não selecionada</string>
 
+    <!-- Category related messages -->
+    <string name="category_not_selected">Categoria não selecionada</string>
+
     <!-- Races related messages -->
     <string name="race_not_selected">Raça não selecionada</string>
 

@@ -200,7 +200,59 @@
                     android:layout_height="2dip"
                     android:background="#FF909090" />
 
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Cria:" />
+
+                    <TextView
+                        android:id="@+id/category_cria"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+
+                </TableRow>
+
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Recria:" />
+
+                    <TextView
+                        android:id="@+id/category_recria"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="1"
+                        android:padding="3dip"
+                        android:text="Terminação:" />
+
+
+                    <TextView
+                        android:id="@+id/category_terminacao"
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="5" />
+
+                </TableRow>
+
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+
             </TableLayout>
+
 
             <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/r_table"

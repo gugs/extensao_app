@@ -129,8 +129,10 @@
     <string name="specie_ovine">Ovino</string>
     <string name="specie_swine">Suíno</string>
 
-    <!-- Default Species -->
-    <string name="categories_reprodutor">Reprodutor</string>
+    <!-- Default Categories -->
+    <string name="categories_cria">Cria</string>
+    <string name="categories_recria">Recria</string>
+    <string name="categories_terminacao">Terminação</string>
 
     <!-- Main activity -->
     <string name="animal_main_available_label">Disp.</string>

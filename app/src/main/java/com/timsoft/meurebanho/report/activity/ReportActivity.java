@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
+import com.timsoft.meurebanho.category.model.Category;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
@@ -71,6 +73,7 @@ public class ReportActivity extends AppCompatActivity {
         //
 
         int available = 0, sold = 0, dead = 0;
+        int cria = 0, recria = 0, terminacao = 0;
         int males = 0, females = 0;
         int a0_6 = 0, a7_12 = 0, a13_18 = 0, a19_24 = 0, a25_36 = 0, ao_36 = 0;
 
@@ -106,6 +109,17 @@ public class ReportActivity extends AppCompatActivity {
                     a25_36++;
                 } else {
                     ao_36++;
+                }
+
+                if(a.getCategoryId() == 1)
+                {
+                    cria++;
+                } else if (a.getCategoryId() == 2)
+                {
+                    recria++;
+                } else if (a.getCategoryId() == 3)
+                {
+                    terminacao++;
                 }
             }
         }
@@ -149,6 +163,10 @@ public class ReportActivity extends AppCompatActivity {
                 table.addView(row);
             }
         }
+
+        ((TextView) findViewById(R.id.category_cria)).setText(Integer.toString(cria));
+        ((TextView) findViewById(R.id.category_recria)).setText(Integer.toString(recria));
+        ((TextView) findViewById(R.id.category_terminacao)).setText(Integer.toString(terminacao));
 
 
     }

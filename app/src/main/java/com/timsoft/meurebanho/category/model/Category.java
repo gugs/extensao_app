@@ -27,7 +27,11 @@ public class Category extends IDDescription {
     {
         List<Category> e = new ArrayList<Category>();
         e.add(new Category(1, MeuRebanhoApp.getContext().getResources().
-                getString(R.string.categories_reprodutor)));
+                getString(R.string.categories_cria)));
+        e.add(new Category(2, MeuRebanhoApp.getContext().getResources().
+                getString(R.string.categories_recria)));
+        e.add(new Category(3, MeuRebanhoApp.getContext().getResources().
+                getString(R.string.categories_terminacao)));
         return e;
     }
 }

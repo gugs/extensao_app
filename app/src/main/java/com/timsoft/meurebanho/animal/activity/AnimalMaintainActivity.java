@@ -73,7 +73,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     private Animal editingAnimal;
     private File tempPicture, picture;
     private TextView tvId, tvBirthDate, tvAquisitionDate;
-    private EditText etAcquisitionValue, etSellerName;
+    private EditText etPatrimonyNumber, etAcquisitionValue, etSellerName;
     private ImageView imageViewPicture;
     private String action;
 
@@ -221,6 +221,15 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             ((EditText) findViewById(R.id.am_ear_tag)).setText(editingAnimal.getEarTag());
         }
         //
+
+
+        //Patrimony Number
+        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+            ((EditText) findViewById(R.id.am_patrimony_number)).setText(editingAnimal.
+                    getPatrimonyNumber());
+        }
+        //
+
 
         //Birth Date
         tvBirthDate = (TextView) findViewById(R.id.am_birth_date);
@@ -627,6 +636,11 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         //Ear tag
         editingAnimal.setEarTag(((EditText) findViewById(R.id.am_ear_tag)).getText().toString().trim());
         //
+
+        //Patrimony Number
+        editingAnimal.setPatrimonyNumber(((EditText) findViewById(R.id.am_patrimony_number)).getText().toString().trim());
+        //
+
 
         //Birth date
         try {

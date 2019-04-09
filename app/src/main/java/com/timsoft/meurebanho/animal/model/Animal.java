@@ -37,6 +37,7 @@ public class Animal {
     private String sex;
     private String name;
     private String earTag;
+    private String patrimonyNumber;
 
     private String sellerName;
 
@@ -59,7 +60,7 @@ public class Animal {
     }
 
     public Animal(int id, int categoryId, int specieId, int raceId,
-                  String sex, String name, String earTag,
+                  String sex, String name, String earTag, String patrimonyNumber,
                   Date birthDate, Date acquisitionDate, Date saleDate,
                   Date deathDate, String deathReason, Date retireDate,
                   double acquisitionValue, double saleValue,
@@ -72,7 +73,7 @@ public class Animal {
         this.sex = sex;
         this.name = name;
         this.earTag = earTag;
-
+        this.patrimonyNumber = patrimonyNumber;
         this.birthDate = birthDate;
         this.acquisitionDate = acquisitionDate;
         this.saleDate = saleDate;
@@ -105,6 +106,10 @@ public class Animal {
     public int getCategoryId() { return categoryId; }
 
     public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
+
+    public String getPatrimonyNumber() { return patrimonyNumber; }
+
+    public void setPatrimonyNumber(String patrimonyNumber) {this.patrimonyNumber = patrimonyNumber;}
 
     public int getRaceId() {
         return raceId;

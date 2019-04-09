@@ -27,6 +27,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
     public static final String SEX = "sex";
     public static final String NAME = "name";
     public static final String EAR_TAG = "ear_tag";
+    public static final String PATRIMONY_NUMBER = "patrimony";
 
     public static final String BIRTH_DATE = "birth_date";
     public static final String ACQUISITION_DATE = "acquisition_date";
@@ -55,6 +56,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
             + SEX + " text not null, "
             + NAME + " text, "
             + EAR_TAG + " text, "
+            + PATRIMONY_NUMBER + " text, "
 
             + BIRTH_DATE + " integer not null, "
             + ACQUISITION_DATE + " integer, "
@@ -100,6 +102,7 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         values.put(SEX, animal.getSex());
         values.put(NAME, animal.getName());
         values.put(EAR_TAG, animal.getEarTag());
+        values.put(PATRIMONY_NUMBER, animal.getPatrimonyNumber());
 
         if (animal.getBirthDate() != null) {
             values.put(BIRTH_DATE, animal.getBirthDate().getTime());
@@ -171,38 +174,41 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
                 //EAR_TAG
                 cursor.getString(6),
 
-                //BIRTH_DATE
-                longToDate(cursor, 7),
+                //PATRIMONY_NUMBER
+                cursor.getString(7),
 
-                //ACQUISITION_DATE
+                //BIRTH_DATE
                 longToDate(cursor, 8),
 
-                //SALE_DATE
+                //ACQUISITION_DATE
                 longToDate(cursor, 9),
 
-                //DEATH_DATE
+                //SALE_DATE
                 longToDate(cursor, 10),
 
+                //DEATH_DATE
+                longToDate(cursor, 11),
+
                 //DEATH_REASON
-                cursor.getString(11),
+                cursor.getString(12),
 
                 //RETIRE_DATE
-                longToDate(cursor, 12),
+                longToDate(cursor, 13),
 
                 //ACQUISITION_VALUE
-                cursor.getDouble(13),
-
-                //SALE_VALUE
                 cursor.getDouble(14),
 
-                //SELLER_NAME
-                cursor.getString(15),
+                //SALE_VALUE
+                cursor.getDouble(15),
 
-                //BUYER_NAME
+                //SELLER_NAME
                 cursor.getString(16),
 
+                //BUYER_NAME
+                cursor.getString(17),
+
                 //SALE_NOTES
-                cursor.getString(17)
+                cursor.getString(18)
         );
     }
 

@@ -240,6 +240,20 @@
                 android:hint="@string/seller_name_hint"
                 android:inputType="textCapWords"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/animal_patrimony_number_label"
+                android:textAppearance="@style/LabelTextAppearance" />
+
+            <EditText
+                android:id="@+id/am_patrimony_number"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/animal_patrimony_number_hint"
+                android:inputType="textCapWords" />
+
         </LinearLayout>
     </ScrollView>
 

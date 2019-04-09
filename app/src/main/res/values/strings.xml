@@ -52,6 +52,9 @@
     <string name="animal_ear_tag_label">BRINCO/Nº DE CONTROLE</string>
     <string name="animal_ear_tag_hint">Brinco/Nº de Controle</string>
 
+    <string name="animal_patrimony_number_label">PATRIMÔNIO/Nº DE PATRIMÔNIO</string>
+    <string name="animal_patrimony_number_hint">Patrimônio/Nº de Patrimônio</string>
+
     <string name="animal_birth_date_label">DATA DE NASCIMENTO</string>
     <string name="animal_birth_date_m_label">DATA DE NASCIMENTO*</string>
     <string name="animal_birth_date_hint">Data de nascimento</string>

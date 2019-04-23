@@ -274,6 +274,9 @@ public class AnimalDetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.ad_race))
                 .setText(category.getDescription());
 
+        ((TextView) findViewById(R.id.ad_patrimony))
+                .setText(animal.getPatrimonyNumber());
+
         ((TextView) findViewById(R.id.ad_sex))
                 .setText(animal.getSexToDisplay());
 

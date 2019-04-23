@@ -47,27 +47,34 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="[Fumaça]"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/ad_sex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="[FÊMEA]"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/ad_age"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="[36 meses]"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/ad_race"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="[NELORE]"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/ad_patrimony"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[1AB056]"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <LinearLayout

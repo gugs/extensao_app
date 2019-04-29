@@ -67,4 +67,5 @@ public class AnimalArrayAdapter extends ArrayAdapter<Animal> {
 
         return rowView;
     }
+
 }

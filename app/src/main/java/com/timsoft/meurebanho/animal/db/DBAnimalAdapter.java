@@ -24,6 +24,10 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
     public static final String SPECIE_ID = "specie_id";
     public static final String RACE_ID = "race_id";
 
+    public static final String FATHER_ID = "father_id";
+    public static final String MOTHER_ID = "mother_id";
+
+
     public static final String SEX = "sex";
     public static final String NAME = "name";
     public static final String EAR_TAG = "ear_tag";
@@ -52,6 +56,9 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
             + CATEGORY_ID + " integer not null, "
             + SPECIE_ID + " integer not null, "
             + RACE_ID + " integer not null, "
+
+            + FATHER_ID + " integer, "
+            + MOTHER_ID + " integer, "
 
             + SEX + " text not null, "
             + NAME + " text, "
@@ -98,6 +105,9 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         values.put(CATEGORY_ID, animal.getCategoryId());
         values.put(SPECIE_ID, animal.getSpecieId());
         values.put(RACE_ID, animal.getRaceId());
+
+        values.put(FATHER_ID, animal.getFather());
+        values.put(MOTHER_ID, animal.getMother());
 
         values.put(SEX, animal.getSex());
         values.put(NAME, animal.getName());
@@ -165,50 +175,56 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
                 //RACE_ID
                 cursor.getInt(3),
 
+                //FATHER_ID
+                cursor.getInt(4),
+
+                //MOTHER_ID
+                cursor.getInt(5),
+
                 //SEX
-                cursor.getString(4),
-
-                //NAME
-                cursor.getString(5),
-
-                //EAR_TAG
                 cursor.getString(6),
 
-                //PATRIMONY_NUMBER
+                //NAME
                 cursor.getString(7),
 
+                //EAR_TAG
+                cursor.getString(8),
+
+                //PATRIMONY_NUMBER
+                cursor.getString(9),
+
                 //BIRTH_DATE
-                longToDate(cursor, 8),
-
-                //ACQUISITION_DATE
-                longToDate(cursor, 9),
-
-                //SALE_DATE
                 longToDate(cursor, 10),
 
-                //DEATH_DATE
+                //ACQUISITION_DATE
                 longToDate(cursor, 11),
 
-                //DEATH_REASON
-                cursor.getString(12),
+                //SALE_DATE
+                longToDate(cursor, 12),
 
-                //RETIRE_DATE
+                //DEATH_DATE
                 longToDate(cursor, 13),
 
+                //DEATH_REASON
+                cursor.getString(14),
+
+                //RETIRE_DATE
+                longToDate(cursor, 15),
+
                 //ACQUISITION_VALUE
-                cursor.getDouble(14),
+                cursor.getDouble(16),
 
                 //SALE_VALUE
-                cursor.getDouble(15),
+                cursor.getDouble(17),
 
                 //SELLER_NAME
-                cursor.getString(16),
+                cursor.getString(18),
 
                 //BUYER_NAME
-                cursor.getString(17),
+                cursor.getString(19),
 
                 //SALE_NOTES
-                cursor.getString(18)
+                cursor.getString(20)
         );
     }
 
@@ -265,6 +281,30 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         } else {
             return 1;
         }
+    }
+
+    /**
+     * Sex letter for query filter. M for male and F for female
+     * @param sexType M for male, F for Female
+     * @return animalListBySex
+     */
+
+    public List<Animal> getAnimalsBySex(String sexType)
+    {
+        Log.d(LOG_TAG, "Obtendo Animal Male List");
+        List<Animal> listaAnimal = new ArrayList<>();
+        String query = "select * from "
+                + TABLE_NAME
+                + " where "
+                + TABLE_NAME + "." + SEX +"= '"+sexType+"';";
+
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                listaAnimal.add(cursorTo(cursor));
+            } while (cursor.moveToNext());
+        }
+        return listaAnimal;
     }
 
     @Override

@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,6 +37,8 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.animal.model.AnimalArrayAdapter;
+import com.timsoft.meurebanho.animal.model.AnimalSexArrayAdapter;
 import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
 import com.timsoft.meurebanho.category.model.Category;
 import com.timsoft.meurebanho.category.model.CategoryArrayAdapter;
@@ -69,6 +72,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
     private Spinner racesSpinner;
     private Spinner categorySpinner;
+    private Spinner fatherSpinner;
+    private Spinner motherSpinner;
     private Specie includingSpecie;
     private Animal editingAnimal;
     private File tempPicture, picture;
@@ -178,11 +183,62 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         categoryDatasource.close();
 
+        //Parents
+        DBAnimalAdapter parentsDatasource = DBAnimalAdapter.getInstance();
+        parentsDatasource.open();
+        List<Animal> father = animalDatasource.getAnimalsBySex("M");
+        List<Animal> mother = animalDatasource.getAnimalsBySex("F");
+        animalDatasource.close();
+
+        Animal a = new Animal();
+        a.setId(0);
+        a.setName("Não selecionado");
+
+        father.add(0,a);
+        mother.add(0,a);
+
         racesSpinner = (Spinner) findViewById(R.id.am_race);
         racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
 
         categorySpinner = (Spinner) findViewById(R.id.am_category);
         categorySpinner.setAdapter(new CategoryArrayAdapter(this, categories));
+
+        fatherSpinner = (Spinner) findViewById(R.id.am_father);
+        fatherSpinner.setAdapter(new AnimalSexArrayAdapter(this, father));
+        motherSpinner = (Spinner) findViewById(R.id.am_mother);
+        motherSpinner.setAdapter(new AnimalSexArrayAdapter(this, mother));
+
+        //father
+        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+            int pos = -1;
+            for (int i = 0; i < father.size(); i++) {
+                if (father.get(i).getId() == editingAnimal.getFather()) {
+                    pos = i;
+                    break;
+                }
+            }
+            if (pos == -1) {
+                throw new RuntimeException("Id do pai não localizado: " + editingAnimal.getFather());
+            }
+            fatherSpinner.setSelection(pos);
+        }
+        //
+
+        //mother
+        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+            int pos = -1;
+            for (int i = 0; i < mother.size(); i++) {
+                if (mother.get(i).getId() == editingAnimal.getMother()) {
+                    pos = i;
+                    break;
+                }
+            }
+            if (pos == -1) {
+                throw new RuntimeException("Id da mãe não localizado: " + editingAnimal.getMother());
+            }
+            motherSpinner.setSelection(pos);
+        }
+        //
 
         //races
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
@@ -629,6 +685,24 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
         //
 
+        //Father_Parent
+        Animal father = (Animal) fatherSpinner.getSelectedItem();
+        if (father == null || father.getId() == 0) {
+            Toast.makeText(this, "Animal definido sem parente - pai", Toast.LENGTH_SHORT).show();
+        } else {
+            editingAnimal.setFather(father.getId());
+        }
+        //
+
+        //Father_Parent
+        Animal mother = (Animal) motherSpinner.getSelectedItem();
+        if (mother == null || mother.getId() == 0) {
+            Toast.makeText(this, "Animal definido sem parente - mãe", Toast.LENGTH_SHORT).show();
+        } else {
+            editingAnimal.setMother(mother.getId());
+        }
+        //
+
         //Name
         editingAnimal.setName(((EditText) findViewById(R.id.am_name)).getText().toString().trim());
         //
@@ -667,7 +741,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             //Aquisition value
             try {
                 double aquisitionValue = NumberFormat.getCurrencyInstance().parse(etAcquisitionValue.getText().toString()).doubleValue();
-                if (aquisitionValue <= 0) {
+                if (aquisitionValue < 0) {
                     Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
                     return;
                 }

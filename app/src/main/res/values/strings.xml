@@ -137,6 +137,11 @@
     <string name="categories_recria">Recria</string>
     <string name="categories_terminacao">Terminação</string>
 
+    <!-- Parental Relationship -->
+    <string name="animal_parental_father_label">PAI</string>
+    <string name="animal_parental_mother_label">MÃE</string>
+
+
     <!-- Main activity -->
     <string name="animal_main_available_label">Disp.</string>
     <string name="animal_main_sold_label">Vendidos</string>

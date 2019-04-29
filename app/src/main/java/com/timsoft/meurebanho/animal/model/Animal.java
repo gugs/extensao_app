@@ -34,6 +34,9 @@ public class Animal {
     private int specieId;
     private int raceId;
 
+    private int father;
+    private int mother;
+
     private String sex;
     private String name;
     private String earTag;
@@ -59,7 +62,7 @@ public class Animal {
     public Animal() {
     }
 
-    public Animal(int id, int categoryId, int specieId, int raceId,
+    public Animal(int id, int categoryId, int specieId, int raceId, int father, int mother,
                   String sex, String name, String earTag, String patrimonyNumber,
                   Date birthDate, Date acquisitionDate, Date saleDate,
                   Date deathDate, String deathReason, Date retireDate,
@@ -70,6 +73,8 @@ public class Animal {
         this.categoryId = categoryId;
         this.specieId = specieId;
         this.raceId = raceId;
+        this.father = father;
+        this.mother = mother;
         this.sex = sex;
         this.name = name;
         this.earTag = earTag;
@@ -117,6 +122,22 @@ public class Animal {
 
     public void setRaceId(int raceId) {
         this.raceId = raceId;
+    }
+
+    public int getFather() {
+        return father;
+    }
+
+    public void setFather(int father) {
+        this.father = father;
+    }
+
+    public int getMother() {
+        return mother;
+    }
+
+    public void setMother(int mother) {
+        this.mother = mother;
     }
 
     public int getSpecieId() {

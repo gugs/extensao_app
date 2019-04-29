@@ -149,6 +149,31 @@
                 android:hint="@string/animal_ear_tag_hint"
                 android:inputType="textCapWords" />
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/animal_parental_father_label"
+                android:textAppearance="@style/LabelTextAppearance" />
+
+            <Spinner
+                android:id="@+id/am_father"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/animal_parental_mother_label"
+                android:textAppearance="@style/LabelTextAppearance" />
+
+            <Spinner
+                android:id="@+id/am_mother"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

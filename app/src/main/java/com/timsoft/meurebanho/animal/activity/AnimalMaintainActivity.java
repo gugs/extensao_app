@@ -69,6 +69,7 @@ import java.util.List;
 public class AnimalMaintainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "AnimalMaintainActivity";
+    private final int MY_PERMISSIONS = 1;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private static final int PICTURE_CROP_ACTIVITY_REQUEST_CODE = 200;
@@ -91,6 +92,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        verifyPermissions();
 
         ImageButton btnClearBirthDate, btnClearAquisitionDate;
 
@@ -198,8 +201,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         a.setId(0);
         a.setName("Não selecionado");
 
-        father.add(0,a);
-        mother.add(0,a);
+        father.add(0, a);
+        mother.add(0, a);
 
         racesSpinner = (Spinner) findViewById(R.id.am_race);
         racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
@@ -809,4 +812,58 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    private void verifyPermissions()
+    {
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                        MY_PERMISSIONS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
 }

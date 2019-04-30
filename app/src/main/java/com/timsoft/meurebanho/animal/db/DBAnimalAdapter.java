@@ -289,14 +289,15 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
      * @return animalListBySex
      */
 
-    public List<Animal> getAnimalsBySex(String sexType)
+    public List<Animal> getAnimalsBySex(String sexType, int specie)
     {
         Log.d(LOG_TAG, "Obtendo Animal Male List");
         List<Animal> listaAnimal = new ArrayList<>();
         String query = "select * from "
                 + TABLE_NAME
                 + " where "
-                + TABLE_NAME + "." + SEX +"= '"+sexType+"';";
+                + TABLE_NAME + "." + SEX +"= '"+sexType+
+                "' AND "+ TABLE_NAME + "." +SPECIE_ID+"="+String.valueOf(specie)+";";
 
         Cursor cursor = database.rawQuery(query, null);
         if (cursor != null && cursor.moveToFirst()) {

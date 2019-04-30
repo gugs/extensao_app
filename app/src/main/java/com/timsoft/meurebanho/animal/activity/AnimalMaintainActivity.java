@@ -1,16 +1,20 @@
 package com.timsoft.meurebanho.animal.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -186,8 +190,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         //Parents
         DBAnimalAdapter parentsDatasource = DBAnimalAdapter.getInstance();
         parentsDatasource.open();
-        List<Animal> father = animalDatasource.getAnimalsBySex("M");
-        List<Animal> mother = animalDatasource.getAnimalsBySex("F");
+        List<Animal> father = animalDatasource.getAnimalsBySex("M", includingSpecie.getId());
+        List<Animal> mother = animalDatasource.getAnimalsBySex("F", includingSpecie.getId());
         animalDatasource.close();
 
         Animal a = new Animal();

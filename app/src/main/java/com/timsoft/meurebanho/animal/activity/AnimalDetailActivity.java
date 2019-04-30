@@ -227,10 +227,18 @@ public class AnimalDetailActivity extends AppCompatActivity {
     }
 
     private void updateAnimalData() {
+
+        Animal father = new Animal();
+        Animal mother = new Animal();
+
         //Animal data
         animalDatasource = DBAnimalAdapter.getInstance();
         animalDatasource.open();
         animal = animalDatasource.get(animalId);
+        if(animal.getFather() > 0)
+            father = animalDatasource.get(animal.getFather());
+        if(animal.getMother() > 0)
+            mother = animalDatasource.get(animal.getMother());
         animalDatasource.close();
         //
 
@@ -282,6 +290,19 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.ad_age))
                 .setText(animal.getAgeInMonthsToDisplay());
+
+        if(animal.getFather() > 0)
+            ((TextView) findViewById(R.id.ad_father))
+                .setText(String.valueOf(father.getId())+" - "+father.getName()+" ["+father.getEarTag()+"]");
+        else
+            ((TextView) findViewById(R.id.ad_father))
+                    .setText("Sem Paternidade");
+        if(animal.getMother() > 0)
+            ((TextView) findViewById(R.id.ad_mother))
+                .setText(String.valueOf(mother.getId())+" - "+mother.getName()+" ["+mother.getEarTag()+"]");
+        else
+            ((TextView) findViewById(R.id.ad_mother))
+                    .setText("Sem Maternidade");
 
         TableLayout table = (TableLayout) findViewById(R.id.ad_events_table);
         table.removeAllViews();

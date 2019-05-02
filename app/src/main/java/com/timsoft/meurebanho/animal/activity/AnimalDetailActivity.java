@@ -1,8 +1,11 @@
 package com.timsoft.meurebanho.animal.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -59,11 +62,22 @@ public class AnimalDetailActivity extends AppCompatActivity {
     private List<Integer> famElementsIds;
     private MenuItem mnuRetire, mnuUndoRetire;
 
+    private static final int MY_STORAGE_REQUEST_CODE = 111;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Log.d(LOG_TAG, "onCreate");
+
+        int MyVersion = Build.VERSION.SDK_INT;
+        if (MyVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (checkSelfPermission(Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
+                        MY_STORAGE_REQUEST_CODE);
+            }
+        }
 
         setContentView(R.layout.animal_detail_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -414,4 +428,24 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    @Override
+
+    public void onRequestPermissionsResult(int requestCode,  String[] permissions,  int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_STORAGE_REQUEST_CODE) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, "STORAGE permission granted", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(this, "STORAGE permission denied", Toast.LENGTH_LONG).show();
+
+            }
+
+        }}//end onRequestPermissionsResult
 }

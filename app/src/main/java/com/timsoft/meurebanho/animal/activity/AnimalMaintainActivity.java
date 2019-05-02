@@ -1,16 +1,24 @@
 package com.timsoft.meurebanho.animal.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -50,6 +58,7 @@ import com.timsoft.meurebanho.specie.model.Specie;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -66,7 +75,9 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private static final int PICTURE_CROP_ACTIVITY_REQUEST_CODE = 200;
     private static final int PICTURE_SELECT_ACTIVITY_REQUEST_CODE = 300;
+    private static final int MY_CAMERA_REQUEST_CODE = 110;
 
+    private String currentPhotoPath;
     private Spinner racesSpinner;
     private Spinner categorySpinner;
     private Specie includingSpecie;
@@ -82,6 +93,26 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int MyVersion = Build.VERSION.SDK_INT;
+        if (MyVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (checkSelfPermission(Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
+                        MY_CAMERA_REQUEST_CODE);
+            }
+        }
+
+        if(Build.VERSION.SDK_INT>=24){
+            try{
+                Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                m.invoke(null);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+
 
         ImageButton btnClearBirthDate, btnClearAquisitionDate;
 
@@ -426,13 +457,18 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             // create Intent to take a picture and return control to the calling application
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
             tempPicture = getOutputMediaFile();
 
             Uri fileUri = Uri.fromFile(tempPicture); // create a file to save the image
+
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
-            // start the image capture Intent
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+
+
+            //startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
         } catch (ActivityNotFoundException anfe) {
             Toast.makeText(this, getResources().getString(R.string.camera_not_supported), Toast.LENGTH_SHORT).show();
@@ -443,7 +479,6 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, PICTURE_SELECT_ACTIVITY_REQUEST_CODE);
     }
-
     /**
      * Create a File for saving an image or video
      */
@@ -457,6 +492,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 //	              Environment.DIRECTORY_PICTURES), getResources().getString(R.string.app_full_name));
 
         File mediaStorageDir = FileUtils.getMediaStorageDir();
+        //File mediaStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
@@ -478,7 +514,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         //user is returning from camera app
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             if (resultCode == RESULT_OK) {
                 performCrop();
             } else if (resultCode == RESULT_CANCELED) {
@@ -731,4 +767,27 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
+
+
+    @Override
+
+    public void onRequestPermissionsResult(int requestCode,  String[] permissions,  int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+
+            }
+
+        }}//end onRequestPermissionsResult
 }

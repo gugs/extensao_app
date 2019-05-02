@@ -18,7 +18,10 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+<<<<<<< HEAD
 import android.support.v4.content.FileProvider;
+=======
+>>>>>>> parental_relationship
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -30,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,6 +48,8 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
+import com.timsoft.meurebanho.animal.model.AnimalArrayAdapter;
+import com.timsoft.meurebanho.animal.model.AnimalSexArrayAdapter;
 import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
 import com.timsoft.meurebanho.category.model.Category;
 import com.timsoft.meurebanho.category.model.CategoryArrayAdapter;
@@ -71,6 +77,7 @@ import java.util.List;
 public class AnimalMaintainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "AnimalMaintainActivity";
+    private final int MY_PERMISSIONS = 1;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private static final int PICTURE_CROP_ACTIVITY_REQUEST_CODE = 200;
@@ -80,6 +87,8 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     private String currentPhotoPath;
     private Spinner racesSpinner;
     private Spinner categorySpinner;
+    private Spinner fatherSpinner;
+    private Spinner motherSpinner;
     private Specie includingSpecie;
     private Animal editingAnimal;
     private File tempPicture, picture;
@@ -94,6 +103,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+<<<<<<< HEAD
         int MyVersion = Build.VERSION.SDK_INT;
         if (MyVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
             if (checkSelfPermission(Manifest.permission.CAMERA)
@@ -113,6 +123,9 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
 
 
+=======
+        verifyPermissions();
+>>>>>>> parental_relationship
 
         ImageButton btnClearBirthDate, btnClearAquisitionDate;
 
@@ -209,11 +222,62 @@ public class AnimalMaintainActivity extends AppCompatActivity {
 
         categoryDatasource.close();
 
+        //Parents
+        DBAnimalAdapter parentsDatasource = DBAnimalAdapter.getInstance();
+        parentsDatasource.open();
+        List<Animal> father = animalDatasource.getAnimalsBySex("M", includingSpecie.getId());
+        List<Animal> mother = animalDatasource.getAnimalsBySex("F", includingSpecie.getId());
+        animalDatasource.close();
+
+        Animal a = new Animal();
+        a.setId(0);
+        a.setName("Não selecionado");
+
+        father.add(0, a);
+        mother.add(0, a);
+
         racesSpinner = (Spinner) findViewById(R.id.am_race);
         racesSpinner.setAdapter(new RaceArrayAdapter(this, races));
 
         categorySpinner = (Spinner) findViewById(R.id.am_category);
         categorySpinner.setAdapter(new CategoryArrayAdapter(this, categories));
+
+        fatherSpinner = (Spinner) findViewById(R.id.am_father);
+        fatherSpinner.setAdapter(new AnimalSexArrayAdapter(this, father));
+        motherSpinner = (Spinner) findViewById(R.id.am_mother);
+        motherSpinner.setAdapter(new AnimalSexArrayAdapter(this, mother));
+
+        //father
+        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+            int pos = -1;
+            for (int i = 0; i < father.size(); i++) {
+                if (father.get(i).getId() == editingAnimal.getFather()) {
+                    pos = i;
+                    break;
+                }
+            }
+            if (pos == -1) {
+                throw new RuntimeException("Id do pai não localizado: " + editingAnimal.getFather());
+            }
+            fatherSpinner.setSelection(pos);
+        }
+        //
+
+        //mother
+        if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
+            int pos = -1;
+            for (int i = 0; i < mother.size(); i++) {
+                if (mother.get(i).getId() == editingAnimal.getMother()) {
+                    pos = i;
+                    break;
+                }
+            }
+            if (pos == -1) {
+                throw new RuntimeException("Id da mãe não localizado: " + editingAnimal.getMother());
+            }
+            motherSpinner.setSelection(pos);
+        }
+        //
 
         //races
         if (action.equals(MeuRebanhoApp.ACTION_EDIT)) {
@@ -665,6 +729,24 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         }
         //
 
+        //Father_Parent
+        Animal father = (Animal) fatherSpinner.getSelectedItem();
+        if (father == null || father.getId() == 0) {
+            Toast.makeText(this, "Animal definido sem parente - pai", Toast.LENGTH_SHORT).show();
+        } else {
+            editingAnimal.setFather(father.getId());
+        }
+        //
+
+        //Father_Parent
+        Animal mother = (Animal) motherSpinner.getSelectedItem();
+        if (mother == null || mother.getId() == 0) {
+            Toast.makeText(this, "Animal definido sem parente - mãe", Toast.LENGTH_SHORT).show();
+        } else {
+            editingAnimal.setMother(mother.getId());
+        }
+        //
+
         //Name
         editingAnimal.setName(((EditText) findViewById(R.id.am_name)).getText().toString().trim());
         //
@@ -703,7 +785,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             //Aquisition value
             try {
                 double aquisitionValue = NumberFormat.getCurrencyInstance().parse(etAcquisitionValue.getText().toString()).doubleValue();
-                if (aquisitionValue <= 0) {
+                if (aquisitionValue < 0) {
                     Toast.makeText(this, R.string.aquisition_value_invalid, Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -768,6 +850,7 @@ public class AnimalMaintainActivity extends AppCompatActivity {
         return true;
     }
 
+<<<<<<< HEAD
 
 
 
@@ -790,4 +873,59 @@ public class AnimalMaintainActivity extends AppCompatActivity {
             }
 
         }}//end onRequestPermissionsResult
+=======
+    private void verifyPermissions()
+    {
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                        MY_PERMISSIONS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+>>>>>>> parental_relationship
 }

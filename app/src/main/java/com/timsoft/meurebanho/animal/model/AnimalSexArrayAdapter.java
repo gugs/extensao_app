@@ -40,7 +40,7 @@ public class AnimalSexArrayAdapter extends ArrayAdapter<Animal> {
                     R.layout.animal_sex_list,
                     null);
         ((TextView) convertView.findViewById(R.id.animal_sex_list_id)).
-                setText(String.valueOf(getItem(position).getId()));
+                setText(String.valueOf(getItem(position).getEarTag()));
         ((TextView) convertView.findViewById(R.id.animal_sex_list_name)).
                 setText(" - "+getItem(position).getName());
 

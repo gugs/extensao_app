@@ -63,6 +63,7 @@ public class Race extends IDDescription {
         r.add(new Race(104, "Saanen ", 1));
         r.add(new Race(105, "Savana ", 1));
         r.add(new Race(106, "Toggenburg", 1));
+        r.add(new Race(107, "Mestiço", 1));
 
 //        //Equinos - http://www.guiaderacas.com.br/cavalos/racas/
 //        r.add(new Race(301, "American Saddlebred", 3));
@@ -104,6 +105,7 @@ public class Race extends IDDescription {
         r.add(new Race(209, "Somalis Brasileira", 2));
         r.add(new Race(210, "Suffolk", 2));
         r.add(new Race(211, "Texel", 2));
+        r.add(new Race(212, "Mestiço", 2));
 
         //TODO: Suínos - http://tcpermaculture.com/site/2014/01/15/domestic-pigs-breeds-and-terminology/
         //TODO: Asininos - http://www.oocities.org/asininos/raca.html

@@ -136,6 +136,8 @@
     <string name="categories_cria">Cria</string>
     <string name="categories_recria">Recria</string>
     <string name="categories_terminacao">Terminação</string>
+    <string name="categories_matriz">Matriz</string>
+    <string name="categories_reprodutor">Reprodutor</string>
 
     <!-- Parental Relationship -->
     <string name="animal_parental_father_label">PAI</string>

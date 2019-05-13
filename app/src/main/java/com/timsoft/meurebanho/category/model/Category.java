@@ -32,6 +32,10 @@ public class Category extends IDDescription {
                 getString(R.string.categories_recria)));
         e.add(new Category(3, MeuRebanhoApp.getContext().getResources().
                 getString(R.string.categories_terminacao)));
+        e.add(new Category(4, MeuRebanhoApp.getContext().getResources().
+                getString(R.string.categories_matriz)));
+        e.add(new Category(5, MeuRebanhoApp.getContext().getResources().
+                getString(R.string.categories_reprodutor)));
         return e;
     }
 }

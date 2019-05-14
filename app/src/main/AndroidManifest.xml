@@ -159,6 +159,16 @@
                 android:value="com.timsoft.meurebanho.animal.activity.AnimalListActivity" />
         </activity>
 
+         <activity
+             android:name=".calving.activity.CalvingActivity"
+             android:label="Ciclo de Paridade"
+             android:parentActivityName="com.timsoft.meurebanho.calving.activity.CalvingActivity"
+             android:screenOrientation="portrait">
+             <meta-data
+                 android:name="android.support.PARENT_ACTIVITY"
+                 android:value="com.timsoft.meurebanho.animal.activity.AnimalDetailActivity" />
+         </activity>
+
         <activity
             android:name="com.timsoft.meurebanho.evolution.activity.EvolutionActivity"
             android:label="@string/evolution"

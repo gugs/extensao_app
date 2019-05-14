@@ -10,7 +10,8 @@ public enum EnumEventType {
     MILKING(true, R.drawable.milk_bottle_filled_hl, R.drawable.milk_bottle_filled_hd),
     SALE(true, R.drawable.money_bag_hl, R.drawable.money_bag_hd),
     TREATMENT(true, R.drawable.syringe_hl, R.drawable.syringe_hd),
-    WEIGHING(true, R.drawable.weight_filled_hl, R.drawable.weight_filled_hd);
+    WEIGHING(true, R.drawable.weight_filled_hl, R.drawable.weight_filled_hd),
+    CALVING(true, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
 
     private boolean selectable;
     private int resourceIconHL, resourceIconHD;

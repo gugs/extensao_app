@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!-- Ear Tag -->
+        <ImageView
+            android:id="@+id/animal_ear_tag_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingLeft="10dip"
+            android:src="@drawable/price_tag_hl" />
+
+        <TextView
+            android:id="@+id/ca_ear_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="002"
+            android:paddingEnd="5dip"
+            android:paddingTop="10dip"
+            android:paddingRight="25dip"
+            android:paddingLeft="10dip"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/animal_cake_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingLeft="10dip"
+            android:src="@drawable/ic_cake_hl" />
+
+        <TextView
+            android:id="@+id/ca_birth_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dip"
+            android:text="10/10/2010"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ca_days_after"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingLeft="10dip"
+            android:text="Pariu a 10 DIAS"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

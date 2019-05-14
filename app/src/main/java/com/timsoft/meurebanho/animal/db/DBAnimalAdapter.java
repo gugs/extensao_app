@@ -308,6 +308,36 @@ public class DBAnimalAdapter extends DBAdapter<Animal> {
         return listaAnimal;
     }
 
+    public List<Animal> getParentsFrom(String sexType, int idAnimal)
+    {
+        Log.d(LOG_TAG, "Obtendo filhos a partir");
+        List<Animal> animals = new ArrayList<>();
+        String query = "";
+        if(sexType.equalsIgnoreCase("M"))
+        {
+            query = "select * from "
+                    + TABLE_NAME
+                    + " where "
+                    + TABLE_NAME + "." +FATHER_ID +"= '"+idAnimal+
+                    "' ORDER BY "+BIRTH_DATE+" LIMIT 10;";
+        }
+        else if(sexType.equalsIgnoreCase("F"))
+        {
+            query = "select * from "
+                    + TABLE_NAME
+                    + " where "
+                    + TABLE_NAME + "." +MOTHER_ID +"= '"+idAnimal+
+                    "' ORDER BY "+BIRTH_DATE+" LIMIT 10;";
+        }
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                animals.add(cursorTo(cursor));
+            } while (cursor.moveToNext());
+        }
+        return animals;
+    }
+
     @Override
     public String getTableName() {
         return TABLE_NAME;

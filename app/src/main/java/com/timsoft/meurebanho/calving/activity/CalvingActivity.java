@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.animal.model.Animal;
@@ -42,10 +44,16 @@ public class CalvingActivity extends AppCompatActivity
             animal = animalDatasource.get(animalID);
             animals = animalDatasource.getParentsFrom(animal.getSex(), animal.getId());
             animalDatasource.close();
+            CalvingArrayAdapter adapter = new CalvingArrayAdapter(this, animals);
+            listViews.setAdapter(adapter);
         }
 
-        CalvingArrayAdapter adapter = new CalvingArrayAdapter(this, animals);
-        listViews.setAdapter(adapter);
+        if(animals.size() == 0)
+        {
+            Toast.makeText(getApplicationContext(),
+                    "Animal sem registro de parição!", Toast.LENGTH_LONG).show();
+            this.finish();
+        }
 
     }
 

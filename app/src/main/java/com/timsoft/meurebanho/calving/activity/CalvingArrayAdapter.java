@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.model.Animal;
@@ -26,6 +27,9 @@ public class CalvingArrayAdapter extends BaseAdapter
         this.act = act;
     }
 
+    public Activity getAct() {
+        return act;
+    }
 
     @Override
     public int getCount() {

@@ -211,6 +211,7 @@
     <string name="sale_add">Registrar Venda</string>
     <string name="sale_edit">Alterar Venda</string>
     <string name="sale_date_hint">Data da Venda</string>
+    <string name="observation_date_hint">Data da Observação</string>
     <string name="sale_value_hint">Valor da Venda</string>
     <string name="sale_buyer_hint">Comprador</string>
     <string name="sale_date_invalid">Data da venda inválida</string>
@@ -274,7 +275,10 @@
     <string name="weighting_date_label">DATA DA PESAGEM</string>
     <string name="weighting_weight_label">PESO (Kg)</string>
     <string name="milking_date_invalid">Data de ordenha inválida</string>
+    <string name="observation_date_invalid">Data da observação inválida</string>
     <string name="milking_weight_invalid">Peso da ordenha inválido</string>
+    <string name="observation_add">Incluir observação</string>
+    <string name="observation_edit">Alterar observação</string>
     <string name="milking_add">Incluir ordenha</string>
     <string name="milking_edit">Alterar ordenha</string>
     <string name="milking_date_hint">Data da Ordenha (Kg)</string>
@@ -283,6 +287,8 @@
     <string name="milking_date_label">DATA DA ORDENHA</string>
     <string name="milking_weight_m_label">PESO (Kg)*</string>
     <string name="milking_weight_label">PESO (Kg)</string>
+    <string name="observation_detail_label">Observação</string>
+    <string name="occurrence_observation_label">Data da Observação</string>
     <string name="milking_confirm_delete">Confirma a exclusão da ordenha?</string>
     <string name="weighting_confirm_delete">Confirma a exclusão da pesagem?</string>
     <string name="report">Relatório Analítico</string>

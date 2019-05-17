@@ -1,4 +1,4 @@
-package com.timsoft.meurebanho.milking.activity;
+package com.timsoft.meurebanho.observations.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,17 +15,17 @@ import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
-import com.timsoft.meurebanho.milking.model.Milking;
+import com.timsoft.meurebanho.observations.db.DBObservationAdapter;
+import com.timsoft.meurebanho.observations.model.Observation;
 
 import java.text.DecimalFormat;
 
-public class MilkingDetailActivity extends AppCompatActivity {
+public class ObservationDetailActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "ObservationDetailActivity";
-    private Milking milking;
-    private int milkingId;
-    private DBMilkingAdapter milkingDatasource;
+    private static final String LOG_TAG = "ObsDetailActivity";
+    private Observation observation;
+    private int observationId;
+    private DBObservationAdapter observationDatasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,28 +33,28 @@ public class MilkingDetailActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "onCreate");
 
-        setContentView(R.layout.milking_detail_activity);
+        setContentView(R.layout.observation_detail_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        milkingId = getIntent().getExtras().getInt(DBMilkingAdapter.ID);
-        milkingDatasource = DBMilkingAdapter.getInstance();
+        observationId = getIntent().getExtras().getInt(DBObservationAdapter.ID);
+        observationDatasource = DBObservationAdapter.getInstance();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        //Milking data
-        milkingDatasource.open();
-        milking = milkingDatasource.get(milkingId);
-        milkingDatasource.close();
+        //Observation data
+        observationDatasource.open();
+        observation = observationDatasource.get(observationId);
+        observationDatasource.close();
         //
 
-        ((TextView) findViewById(R.id.md_date))
-                .setText(MainActivity.getFormatedDate(milking.getDate()));
+        ((TextView) findViewById(R.id.ocd_date))
+                .setText(MainActivity.getFormatedDate(observation.getDateOccurrence()));
 
-        ((TextView) findViewById(R.id.md_weight))
-                .setText((new DecimalFormat("#,###.00 Kg").format(milking.getWeight())));
+        ((TextView) findViewById(R.id.ocd_observation))
+                .setText(observation.getObsDescription());
 
     }
 
@@ -88,10 +88,10 @@ public class MilkingDetailActivity extends AppCompatActivity {
     }
 
     private void actionEdit() {
-        Intent intent = new Intent(this, MilkingMaintainActivity.class);
+        Intent intent = new Intent(this, ObservationMaintainActivity.class);
 
         intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
-        intent.putExtra(DBAnimalAdapter.ID, milking.getId());
+        intent.putExtra(DBAnimalAdapter.ID, observation.getIdObservation());
 
         startActivity(intent);
     }
@@ -104,10 +104,10 @@ public class MilkingDetailActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        milkingDatasource.open();
-                        milkingDatasource.delete(milking);
-                        milkingDatasource.close();
-                        MilkingDetailActivity.this.finish();
+                        observationDatasource.open();
+                        observationDatasource.delete(observation);
+                        observationDatasource.close();
+                        ObservationDetailActivity.this.finish();
                     }
                 })
                 .setNegativeButton(R.string.no, null)

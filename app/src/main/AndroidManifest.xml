@@ -139,6 +139,11 @@
             android:label="@string/treatment_add"
             android:screenOrientation="portrait" />
 
+         <activity
+             android:name="com.timsoft.meurebanho.observations.activity.ObservationMaintainActivity"
+             android:label="Incluir Observação"
+             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.timsoft.meurebanho.milking.activity.MilkingDetailActivity"
             android:label="@string/treatment_detail"

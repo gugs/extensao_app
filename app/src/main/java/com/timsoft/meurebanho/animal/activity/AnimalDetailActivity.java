@@ -38,6 +38,7 @@ import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.milking.activity.MilkingDetailActivity;
 import com.timsoft.meurebanho.milking.activity.MilkingMaintainActivity;
 import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
+import com.timsoft.meurebanho.observations.activity.ObservationMaintainActivity;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
 import com.timsoft.meurebanho.sale.activity.SaleDetailActivity;
@@ -159,6 +160,19 @@ public class AnimalDetailActivity extends AppCompatActivity {
             }
         });
 
+        final FloatingActionButton btnObservationRegister = (FloatingActionButton)
+                findViewById(R.id.ad_btn_register_observation);
+        btnObservationRegister.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                famVisible = false;
+                Intent intent = new Intent(AnimalDetailActivity.this,
+                        ObservationMaintainActivity.class);
+                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_ADD);
+                intent.putExtra(DBAnimalAdapter.ID, animal.getId());
+                startActivity(intent);
+            }
+        });
+
         ((FloatingActionButton) findViewById(R.id.ad_toggle_fam))
                 .setOnClickListener(new View.OnClickListener() {
                                         public void onClick(View v) {
@@ -178,6 +192,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
         famElementsIds.add(R.id.ad_ll_register_death);
         famElementsIds.add(R.id.ad_ll_overlay);
         famElementsIds.add(R.id.ad_ll_register_calving);
+        famElementsIds.add(R.id.ad_ll_register_observation);
 
         updateFAM();
 
@@ -247,6 +262,11 @@ public class AnimalDetailActivity extends AppCompatActivity {
                         if (animal.getSex().equalsIgnoreCase("F")) {
                             findViewById(id).setVisibility(View.VISIBLE);
                         }
+                        break;
+
+                    case R.id.ad_ll_register_observation:
+                        findViewById(id).setVisibility(View.VISIBLE);
+
                         break;
 
                     default:
@@ -392,6 +412,14 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
                             case CALVING:
                                 intent = new Intent(AnimalDetailActivity.this, CalvingActivity.class);
+                                intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
+                                intent.putExtra(DBAnimalAdapter.ID, e.getEntityId());
+                                startActivity(intent);
+                                break;
+
+                            case OBSERVATION:
+                                intent = new Intent(AnimalDetailActivity.this,
+                                        ObservationMaintainActivity.class);
                                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
                                 intent.putExtra(DBAnimalAdapter.ID, e.getEntityId());
                                 startActivity(intent);

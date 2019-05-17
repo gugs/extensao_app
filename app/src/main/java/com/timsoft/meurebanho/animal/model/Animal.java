@@ -7,6 +7,8 @@ import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.infra.FileUtils;
 import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
 import com.timsoft.meurebanho.milking.model.Milking;
+import com.timsoft.meurebanho.observations.db.DBObservationAdapter;
+import com.timsoft.meurebanho.observations.model.Observation;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
 import com.timsoft.meurebanho.treatment.model.Treatment;
 import com.timsoft.meurebanho.weighting.db.DBWeightingAdapter;
@@ -358,21 +360,32 @@ public class Animal {
         DBTreatmentAdapter treatmentDatasource = DBTreatmentAdapter.getInstance();
         treatmentDatasource.open();
         for (Treatment t : treatmentDatasource.list(getId())) {
-            events.add(new Event(t.getId(), EnumEventType.TREATMENT, t.getDate(), t.getMedication()));
+            events.add(new Event(t.getId(), EnumEventType.TREATMENT, t.getDate(),
+                    t.getMedication()));
         }
         treatmentDatasource.close();
 
         DBWeightingAdapter weightingDatasource = DBWeightingAdapter.getInstance();
         weightingDatasource.open();
         for (Weighting w : weightingDatasource.list(getId())) {
-            events.add(new Event(w.getId(), EnumEventType.WEIGHING, w.getDate(), (new DecimalFormat("#,###.00 Kg")).format(w.getWeight())));
+            events.add(new Event(w.getId(), EnumEventType.WEIGHING, w.getDate(),
+                    (new DecimalFormat("#,###.00 Kg")).format(w.getWeight())));
         }
         weightingDatasource.close();
 
         DBMilkingAdapter milkingDatasource = DBMilkingAdapter.getInstance();
         milkingDatasource.open();
         for (Milking m : milkingDatasource.list(getId())) {
-            events.add(new Event(m.getId(), EnumEventType.MILKING, m.getDate(), (new DecimalFormat("#,###.00 Kg")).format(m.getWeight())));
+            events.add(new Event(m.getId(), EnumEventType.MILKING, m.getDate(),
+                    (new DecimalFormat("#,###.00 Kg")).format(m.getWeight())));
+        }
+        milkingDatasource.close();
+
+        DBObservationAdapter observationDbObservationAdapter = DBObservationAdapter.getInstance();
+        observationDbObservationAdapter.open();
+        for (Observation m : observationDbObservationAdapter.list(getId())) {
+            events.add(new Event(m.getIdObservation(), EnumEventType.OBSERVATION,
+                    m.getDateOccurrence(), m.getObsDescription()));
         }
         milkingDatasource.close();
 

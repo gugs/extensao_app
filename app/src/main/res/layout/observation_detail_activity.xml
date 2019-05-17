@@ -24,11 +24,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/milking_date_label"
+                android:text="@string/occurrence_observation_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/md_date"
+                android:id="@+id/ocd_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -39,15 +39,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/milking_weight_label"
+                android:text="@string/observation_detail_label"
                 android:textAppearance="@style/LabelTextAppearance" />
 
             <TextView
-                android:id="@+id/md_weight"
+                android:id="@+id/ocd_observation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="10,00"
+                android:text="Ocorreu um acidente com o animal."
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </LinearLayout>

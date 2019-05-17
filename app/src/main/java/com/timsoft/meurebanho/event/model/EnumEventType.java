@@ -11,7 +11,8 @@ public enum EnumEventType {
     SALE(true, R.drawable.money_bag_hl, R.drawable.money_bag_hd),
     TREATMENT(true, R.drawable.syringe_hl, R.drawable.syringe_hd),
     WEIGHING(true, R.drawable.weight_filled_hl, R.drawable.weight_filled_hd),
-    CALVING(true, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
+    CALVING(true, R.mipmap.ic_launcher, R.mipmap.ic_launcher),
+    OBSERVATION(true,  R.mipmap.ic_warning_fore, R.mipmap.ic_warning_fore);
 
     private boolean selectable;
     private int resourceIconHL, resourceIconHD;

@@ -8,6 +8,7 @@ import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
 import com.timsoft.meurebanho.category.db.DBCategoryAdapter;
 import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
+import com.timsoft.meurebanho.observations.db.DBObservationAdapter;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.specie.db.DBSpecieAdapter;
 import com.timsoft.meurebanho.treatment.db.DBTreatmentAdapter;
@@ -53,6 +54,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
         listTableCreate.add(DBMilkingAdapter.TABLE_CREATE);
         listTableName.add(DBMilkingAdapter.TABLE_NAME);
+
+        listTableCreate.add(DBObservationAdapter.TABLE_CREATE);
+        listTableName.add(DBObservationAdapter.TABLE_NAME);
     }
 
     public static DBHandler getInstance() {

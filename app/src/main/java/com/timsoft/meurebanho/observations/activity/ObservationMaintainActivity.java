@@ -16,7 +16,6 @@ import com.timsoft.meurebanho.MainActivity;
 import com.timsoft.meurebanho.MeuRebanhoApp;
 import com.timsoft.meurebanho.R;
 import com.timsoft.meurebanho.animal.db.DBAnimalAdapter;
-import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
 import com.timsoft.meurebanho.observations.db.DBObservationAdapter;
 import com.timsoft.meurebanho.observations.model.Observation;
 

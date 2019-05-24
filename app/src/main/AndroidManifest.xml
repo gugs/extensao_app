@@ -144,6 +144,11 @@
              android:label="Incluir Observação"
              android:screenOrientation="portrait" />
 
+         <activity
+             android:name="com.timsoft.meurebanho.observations.activity.ObservationDetailActivity"
+             android:label="Detalhar Observação"
+             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.timsoft.meurebanho.milking.activity.MilkingDetailActivity"
             android:label="@string/treatment_detail"

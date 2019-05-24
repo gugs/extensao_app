@@ -38,6 +38,7 @@ import com.timsoft.meurebanho.event.model.Event;
 import com.timsoft.meurebanho.milking.activity.MilkingDetailActivity;
 import com.timsoft.meurebanho.milking.activity.MilkingMaintainActivity;
 import com.timsoft.meurebanho.milking.db.DBMilkingAdapter;
+import com.timsoft.meurebanho.observations.activity.ObservationDetailActivity;
 import com.timsoft.meurebanho.observations.activity.ObservationMaintainActivity;
 import com.timsoft.meurebanho.race.db.DBRaceAdapter;
 import com.timsoft.meurebanho.race.model.Race;
@@ -419,7 +420,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
 
                             case OBSERVATION:
                                 intent = new Intent(AnimalDetailActivity.this,
-                                        ObservationMaintainActivity.class);
+                                        ObservationDetailActivity.class);
                                 intent.putExtra(MeuRebanhoApp.ACTION, MeuRebanhoApp.ACTION_EDIT);
                                 intent.putExtra(DBAnimalAdapter.ID, e.getEntityId());
                                 startActivity(intent);
